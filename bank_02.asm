@@ -3,7 +3,7 @@
 .include "val_copy.inc"
 
 .import _loc_07_C2E4
-.import _loc_07_C005
+.import _b07_вращение_рандома
 .import _loc_07_C00B
 .import _loc_07_C044
 .import _loc_07_C047
@@ -300,7 +300,7 @@ table_02_AA70_ABFE:
 	LDA #$80
 	STA флаг_демо
 	STA номер_команды
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	AND #$0F
 	ORA #$81
 	STA номер_команды + 1
@@ -524,7 +524,7 @@ _loc_02_ADA5:
 	LDA тип_экрана
 	CMP #$08
 	BCS bra_02_ADE2
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	AND #$03
 	STA сценка_кунио
 	TAY
@@ -727,7 +727,7 @@ table_02_AF09_AF2B:
 	BNE bra_02_AF28
 
 table_02_AF09_AF32:
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	LDA координата_Z_lo_мяча
 	CMP #$40
 	BCC bra_02_AF2A
@@ -736,7 +736,7 @@ table_02_AF09_AF32:
 	BCC bra_02_AF44
 	INC номер_кадра_анимации + 1
 bra_02_AF44:
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	AND #$03
 	ASL
 	TAY

@@ -6,7 +6,7 @@
 ; поинтеры в таблице еще не закончены
 
 .import _loc_07_C2E4
-.import _loc_07_C005
+.import _b07_вращение_рандома
 .import _loc_07_C011
 .import _loc_07_C017
 .import _b07_выключить_рендеринг
@@ -3120,7 +3120,7 @@ table_01_B9F6_BA2E:
 	STA длительность_погоды_ХЗ
 	STA скорость_X_lo_погоды_ХЗ
 	STA скорость_Y_lo_погоды_ХЗ
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	BPL bra_01_BA73
 	LDA #$01
 	JMP _loc_01_BA75
@@ -3128,7 +3128,7 @@ bra_01_BA73:
 	LDA #$FF
 _loc_01_BA75:
 	STA скорость_X_hi_погоды_ХЗ
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	BPL bra_01_BA82
 	LDA #$02
 	JMP _loc_01_BA84

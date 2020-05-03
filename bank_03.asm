@@ -4,7 +4,7 @@
 
 .import table_07_C080_byte_8000_8001
 .import _loc_07_C2E4
-.import _loc_07_C005
+.import _b07_вращение_рандома
 .import _loc_07_C020
 .import _loc_07_C026
 .import _loc_07_C029
@@ -702,7 +702,7 @@ _логика_интеллекта_08:		; бежать к сопернику и 
 	TXA
 	AND #$01
 	BEQ bra_03_84EE
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP #$30
 	BCC bra_03_84EE
 	JMP _логика_интеллекта_07_21
@@ -749,7 +749,7 @@ _логика_интеллекта_09:		; бежать к сопернику и 
 	TXA
 	AND #$01
 	BEQ bra_03_8546
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP #$30
 	BCC bra_03_8546
 	JMP _логика_интеллекта_07_21
@@ -962,10 +962,10 @@ _логика_интеллекта_01:
 	LDA смена_угла_движения,X
 	CMP #$FF
 	BNE bra_03_86E5
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP #$20
 	BCS bra_03_86E5
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	AND #$E0
 	STA смена_угла_движения,X
 	LDA #$20
@@ -1424,7 +1424,7 @@ _логика_интеллекта_0F:
 	LDA a: опция_режим_сложность
 	AND #$03
 	BNE bra_03_8AE5
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP #$04
 	BCS bra_03_8AE5
 	LDA #$0A
@@ -1774,7 +1774,7 @@ _loc_03_8D04:
 bra_03_8D2C:
 	LDA $2B
 	STA $1C
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	AND #$07
 	STA $1D
 	LDA $0668,X
@@ -2530,7 +2530,7 @@ _loc_03_929A:
 	STA номер_действия,X
 	LDA #$FF
 	STA смена_угла_движения,X
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP #$40
 	BCS bra_03_92AC
 	JMP _логика_интеллекта_11_12_13
@@ -2556,7 +2556,7 @@ _loc_03_92C7:
 	STA номер_действия,X
 	LDA #$FF
 	STA смена_угла_движения,X
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP #$40
 	BCS bra_03_92D9
 	JMP _логика_интеллекта_11_12_13
@@ -2614,7 +2614,7 @@ bra_03_9326:
 	JSR _loc_03_985F
 	RTS
 bra_03_9337:
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	BPL bra_03_931C
 	LDY #$0C
 	JSR _loc_07_C041
@@ -2743,7 +2743,7 @@ bra_03_941C:
 	BCC bra_03_9401
 	LDA a: адрес_рандома
 	BPL bra_03_9401
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP #$A0
 	BCS bra_03_9446
 	CMP #$50
@@ -3144,7 +3144,7 @@ bra_03_9743:
 bra_03_9746:
 	LDA номер_анимации,X
 	BPL bra_03_976F
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP #$40
 	BCS bra_03_976E
 	AND #$03
@@ -3229,7 +3229,7 @@ _loc_03_97DF:
 	LDA #$02
 	STA $068E
 bra_03_97EB:
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	AND #$03
 	BEQ bra_03_97FD
 	CMP #$01
@@ -4941,7 +4941,7 @@ _loc_03_A4A8:
 	JMP _loc_03_A4DE
 bra_03_A4BB:
 	LDY $2C
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP #$C0
 	BCC bra_03_A4C9
 	LDA #$08
@@ -5287,7 +5287,7 @@ bra_03_A750:
 	AND #$03
 	TAY
 _loc_03_A756:
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	AND table_03_A79E,Y
 	CLC
 	ADC $1C
@@ -5307,7 +5307,7 @@ bra_03_A772:
 	BNE bra_03_A789
 	CPX #$01
 	BNE bra_03_A789
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP #$A0
 	BCS bra_03_A789
 	LDA #$00
@@ -7651,7 +7651,7 @@ bra_03_BB1E:
 	LDA #$FF
 bra_03_BB36:
 	STA $1C
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP $1C
 	BCS bra_03_BB1B
 	LDA #ПОГОДА_ДОЖДЬ + $80
@@ -7670,7 +7670,7 @@ bra_03_BB51:
 	CLC
 	ADC #$F3
 	STA $1C
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP $1C
 	BCC bra_03_BB94
 	LDA #ПОГОДА_НЕТ
@@ -7679,7 +7679,7 @@ bra_03_BB51:
 	STA объем_дождя
 	JMP _loc_03_BB94
 bra_03_BB71:
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP #$A0
 	BCS bra_03_BB94
 	LDA #ПОГОДА_ДОЖДЬ + $80
@@ -7687,7 +7687,7 @@ bra_03_BB71:
 	LDA #$0C
 	STA объем_дождя
 	JMP _loc_03_BB94
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	BMI bra_03_BB94
 	LDA #ПОГОДА_НЕТ
 	STA номер_погодного_эффекта
@@ -7704,7 +7704,7 @@ bra_03_BB94:
 	LSR
 	LSR
 	STA $1C
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	AND #$03
 	SEC
 	SBC #$02
@@ -7729,7 +7729,7 @@ bra_03_BBCD:
 	LDA #$C0
 	STA сторона_ветра_дождя
 _loc_03_BBD2:
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	BMI bra_03_BBEC
 	LDY сторона_ветра_дождя
 	STY $1C
@@ -7766,18 +7766,18 @@ bra_03_BC08:
 _loc_03_BC19:
 	LDA сила_ветра
 	BNE bra_03_BC33
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP #$C0
 	BCS bra_03_BC40
 bra_03_BC25:
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	AND #$03
 	CLC
 	ADC #$06
 	STA сила_ветра
 	JMP _loc_03_BBB2
 bra_03_BC33:
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	BPL bra_03_BC25
 	LDA #$00
 	STA сила_ветра
@@ -7799,7 +7799,7 @@ bra_03_BC4F:
 	LSR
 	LSR
 	TAY
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP table_03_BC80,Y
 	BCC bra_03_BC68
 	LDA #ПОГОДА_СМЕРЧ + $80
@@ -7811,7 +7811,7 @@ bra_03_BC68:
 	LSR
 	LSR
 	TAY
-	JSR _loc_07_C005
+	JSR _b07_вращение_рандома
 	CMP table_03_BC80,Y
 	BCC bra_03_BC7F
 	LDA #ПОГОДА_МОЛНИЯ + $80
