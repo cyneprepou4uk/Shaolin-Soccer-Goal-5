@@ -5,10 +5,10 @@
 .import table_07_C080_byte_8000_8001
 .import _loc_07_C2E4
 .import _b07_вращение_рандома
-.import _loc_07_C00B
-.import _loc_07_C011
-.import _loc_07_C014
-.import _loc_07_C017
+.import _b07_запись_банков_спрайтов
+.import _b07_ECA9
+.import _b07_включить_NMI
+.import _b07_выключить_NMI
 .import _b07_включить_рендеринг
 .import _b07_выключить_рендеринг
 .import _loc_07_C044
@@ -530,7 +530,7 @@ _loc_05_8355:
 	STX банк_спрайтов + 2
 	LDX #$09
 	STX банк_спрайтов + 3
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDA #$02
 	JSR _loc_07_C2E4
 	LDX #$09
@@ -1014,7 +1014,7 @@ _loc_05_8731:
 	STX банк_спрайтов
 	INX
 	STX банк_спрайтов + 1
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	JSR _loc_05_8953
 	LDA #$0A
 	JSR _loc_07_C2E4
@@ -1276,13 +1276,13 @@ table_05_893F:
 .byte  $AA,$FA,$AF,$FA,$AF,$AA,$FF,$AA
 
 _loc_05_8947:
-	JSR _loc_07_C011
-	JSR _loc_07_C017
+	JSR _b07_ECA9
+	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
 	JMP _loc_05_899E
 _loc_05_8953:
-	JSR _loc_07_C011
-	JSR _loc_07_C017
+	JSR _b07_ECA9
+	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
 	LDX #$00
 bra_05_895E:
@@ -1346,7 +1346,7 @@ _loc_05_899E:
 	STA байт_2006_hi_атрибуты
 	JSR _loc_07_C06B
 	JSR _b07_включить_рендеринг
-	JSR _loc_07_C014
+	JSR _b07_включить_NMI
 	RTS
 
 table_05_89E1:		; байты для 2006
@@ -1509,7 +1509,7 @@ _loc_05_8AD5:
 	STX банк_спрайтов + 3
 	JSR _loc_05_BD38
 	JSR _loc_05_BDB0
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDX #$00
 bra_05_8B06:
 	LDA #$00
@@ -1657,7 +1657,7 @@ table_05_8BAE_8C16:
 _loc_05_8C2D:		; сюда 2 прыжка и 1 переход
 	JSR _loc_05_8041
 	JSR _loc_05_8014
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDA a: $66
 	STA банк_спрайтов + 1
 	LDA a: $67
@@ -1731,8 +1731,8 @@ table_05_8CFE:
 .byte $00,$0B,$09,$0E,$0D,$07,$00,$0B,$09,$0E,$0D,$07
 
 _loc_05_8D0A:
-	JSR _loc_07_C011
-	JSR _loc_07_C017
+	JSR _b07_ECA9
+	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
 	BIT опция_режим_сложность
 	BVS bra_05_8D22
@@ -1771,7 +1771,7 @@ bra_05_8D4A:
 	BPL bra_05_8D4A
 	JSR _loc_07_C06B
 	JSR _b07_включить_рендеринг
-	JSR _loc_07_C014
+	JSR _b07_включить_NMI
 	LDA #$02
 	JSR _loc_07_C2E4
 	RTS
@@ -1823,7 +1823,7 @@ _loc_05_8DD0:
 	STX банк_спрайтов + 2
 	INX
 	STX банк_спрайтов + 3
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDA #$00
 	STA лицо_игрока + 1
 	STA лицо_игрока + 3
@@ -2026,8 +2026,8 @@ _loc_05_8F73:
 	STA a: тип_экрана
 	RTS
 _loc_05_8F79:
-	JSR _loc_07_C011
-	JSR _loc_07_C017
+	JSR _b07_ECA9
+	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
 	LDX #$00
 	STX $1C
@@ -2046,7 +2046,7 @@ bra_05_8F86:
 	JSR _loc_05_BE9F
 	JSR _loc_05_BEFA
 	JSR _b07_включить_рендеринг
-	JSR _loc_07_C014
+	JSR _b07_включить_NMI
 	RTS
 
 table_05_8FAB:		; вероятно первые 4 байта не нужны
@@ -2145,7 +2145,7 @@ _loc_05_901C:
 	STX банк_спрайтов + 1
 	LDA #$11
 	STA банк_спрайтов + 3
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDA #$02
 	JSR _loc_07_C2E4
 	RTS
@@ -2581,11 +2581,11 @@ _loc_05_9396:
 	STX банк_спрайтов
 	INX
 	STX банк_спрайтов + 1
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDA счетчик_опций
 	PHA
-	JSR _loc_07_C011
-	JSR _loc_07_C017
+	JSR _b07_ECA9
+	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
 	LDA #$02
 	STA счетчик_опций
@@ -2598,7 +2598,7 @@ bra_05_93DD:
 	CMP #$0A
 	BCC bra_05_93DD
 	JSR _b07_включить_рендеринг
-	JSR _loc_07_C014
+	JSR _b07_включить_NMI
 	PLA
 	STA счетчик_опций
 	JSR _loc_05_955D
@@ -3130,7 +3130,7 @@ bra_05_9865:
 	STX банк_спрайтов + 1
 	LDA #$09
 	STA банк_спрайтов + 3
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDA #$02
 	JSR _loc_07_C2E4
 	RTS
@@ -4001,8 +4001,8 @@ table_05_9F8B:
 _loc_05_9FEB:
 	LDA счетчик_опций
 	PHA
-	JSR _loc_07_C011
-	JSR _loc_07_C017
+	JSR _b07_ECA9
+	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
 	JSR _loc_05_A0A0
 	LDA #$03
@@ -4037,7 +4037,7 @@ bra_05_A029:
 	CMP #$04
 	BCC bra_05_A029
 	JSR _b07_включить_рендеринг
-	JSR _loc_07_C014
+	JSR _b07_включить_NMI
 	PLA
 	STA счетчик_опций
 	RTS
@@ -4142,17 +4142,17 @@ _loc_05_A0F4:
 	STX банк_спрайтов
 	INX
 	STX банк_спрайтов + 1
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDA #$28
 	STA координата_X_lo
 	LDA #$B8
 	STA координата_Y_lo
-	JSR _loc_07_C011
-	JSR _loc_07_C017
+	JSR _b07_ECA9
+	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
 	JSR _loc_05_A16A
 	JSR _b07_включить_рендеринг
-	JSR _loc_07_C014
+	JSR _b07_включить_NMI
 	LDA #$02
 	JSR _loc_07_C2E4
 	RTS
@@ -4327,7 +4327,7 @@ _loc_05_A295:
 	LDA #$00
 	STA номер_команды
 	JSR _loc_05_BD38
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDA $05D1
 	STA лицо_игрока
 	LDA #$FF
@@ -4396,8 +4396,8 @@ _loc_05_A318:
 	STA a: тип_экрана
 	RTS
 _loc_05_A31F:
-	JSR _loc_07_C011
-	JSR _loc_07_C017
+	JSR _b07_ECA9
+	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
 	LDA $05D1
 	ASL
@@ -4499,7 +4499,7 @@ bra_05_A3D3:
 	BPL bra_05_A3D3
 bra_05_A406:
 	JSR _b07_включить_рендеринг
-	JSR _loc_07_C014
+	JSR _b07_включить_NMI
 	RTS
 _loc_05_A40D:
 	LDA #$FF
@@ -4597,7 +4597,7 @@ _loc_05_A58D:
 	STX банк_спрайтов + 2
 	INX
 	STX банк_спрайтов + 3
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDA #$28
 	STA координата_X_lo
 	LDA #$B8
@@ -4866,7 +4866,7 @@ bra_05_A7B4:
 	STX банк_спрайтов + 1
 	LDX #$11
 	STX банк_спрайтов + 3
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDX #$00
 bra_05_A7E3:
 	TXA
@@ -4883,8 +4883,8 @@ bra_05_A7E3:
 	BCC bra_05_A7E3
 	LDA $05D1
 	PHA
-	JSR _loc_07_C011
-	JSR _loc_07_C017
+	JSR _b07_ECA9
+	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
 	LDY #$00
 bra_05_A80B:
@@ -4908,7 +4908,7 @@ bra_05_A80B:
 	STA байт_2006_lo_графика
 	JSR _loc_07_C06B
 	JSR _b07_включить_рендеринг
-	JSR _loc_07_C014
+	JSR _b07_включить_NMI
 	PLA
 	STA $05D1
 	LDA #$FF
@@ -6131,7 +6131,7 @@ _loc_05_B2F0:
 	STX банк_спрайтов + 1
 	LDA #$2F
 	STA банк_спрайтов + 3
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDA #$C8
 	STA координата_X_lo_мяча
 	LDA #$A0
@@ -6372,7 +6372,7 @@ bra_05_B4D5:
 _loc_05_B4D6:
 	LDA #$2F
 	STA банк_спрайтов + 3
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	LDA #$04
 	STA a: $6D
 	LDA #$07
@@ -6508,8 +6508,8 @@ table_05_B5D4:
 .byte $0B,$09,$0D,$0E,$07,$00,$0B,$09,$0D,$00,$0E,$07,$0B,$09,$00,$0D,$0E,$07
 
 _loc_05_B5E6:
-	JSR _loc_07_C011
-	JSR _loc_07_C017
+	JSR _b07_ECA9
+	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
 	LDX #$00
 	LDA #$25
@@ -6610,7 +6610,7 @@ bra_05_B695:
 	JMP _loc_05_B679
 bra_05_B6AE:
 	JSR _b07_включить_рендеринг
-	JSR _loc_07_C014
+	JSR _b07_включить_NMI
 	RTS
 _loc_05_B6B5:
 	STA $1C
@@ -7567,7 +7567,7 @@ bra_05_BEA3:
 	JSR _loc_05_BE34
 	DEC $2B
 	BPL bra_05_BEA3
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	RTS
 
 table_05_BED6:
@@ -7609,7 +7609,7 @@ _loc_05_BEFA:
 	LDA #$02
 	STA $31
 	JSR _loc_05_BE34
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	RTS
 
 table_05_BF20:
@@ -7640,7 +7640,7 @@ _loc_05_BF2A:
 	LDA #$03
 	STA $31
 	JSR _loc_05_BE34
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	RTS
 
 table_05_BF55:
@@ -7684,7 +7684,7 @@ bra_05_BF81:
 	LDA #$02
 	STA $31
 	JSR _loc_05_BE34
-	JSR _loc_07_C00B
+	JSR _b07_запись_банков_спрайтов
 	RTS
 
 table_05_BFA2:

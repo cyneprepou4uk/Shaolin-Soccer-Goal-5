@@ -7,8 +7,8 @@
 
 .import _loc_07_C2E4
 .import _b07_вращение_рандома
-.import _loc_07_C011
-.import _loc_07_C017
+.import _b07_ECA9
+.import _b07_выключить_NMI
 .import _b07_выключить_рендеринг
 .import _loc_07_C050
 .import _loc_07_C068
@@ -2912,8 +2912,8 @@ _loc_01_B8A1:
 	CLC
 	ADC #$10
 	JSR _loc_07_C068
-	JSR _loc_07_C011
-	JSR _loc_07_C017
+	JSR _b07_ECA9
+	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
 	JSR _loc_01_B55C
 	JSR _loc_01_B955
