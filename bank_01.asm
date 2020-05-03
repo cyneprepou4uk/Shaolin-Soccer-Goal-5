@@ -3082,7 +3082,7 @@ table_01_B9F6_BA05:
 	STA длительность_погоды_ХЗ
 	LDA #$45
 	JSR _b07_C2E4
-	LDA a: адрес_рандома
+	LDA адрес_рандома
 	AND #$07
 	STA $05E4
 	JMP _loc_01_BA8B
@@ -3101,19 +3101,19 @@ table_01_B9F6_BA2E:
 	JSR _b07_C2E4
 	LDA #$00
 	STA сила_ветра
-	LDA a: адрес_рандома
+	LDA адрес_рандома
 	AND #$BF
 	CLC
-	ADC a: байт_для_2005_X
+	ADC байт_для_2005_X
 	STA $0321
-	LDA a: $ED
+	LDA $ED
 	ADC #$00
 	STA $0334
-	LDA a: байт_для_2005_Y
+	LDA байт_для_2005_Y
 	CLC
-	ADC a: адрес_рандома
+	ADC адрес_рандома
 	STA $035A
-	LDA a: $EF
+	LDA $EF
 	ADC #$00
 	STA $036D
 	LDA #$00
@@ -3150,23 +3150,23 @@ table_01_B9E8_BA8B:
 	STA $1C
 	LDA table_01_BA25,Y
 	STA $1D
-	LDA a: байт_для_2005_X
+	LDA байт_для_2005_X
 	CLC
 	ADC $1C
 	STA $0321
-	LDA a: $ED
+	LDA $ED
 	ADC #$00
 	STA $0334
-	LDA a: байт_для_2005_Y
+	LDA байт_для_2005_Y
 	CLC
 	ADC $1D
 	STA $035A
-	LDA a: $EF
+	LDA $EF
 	ADC #$00
 	STA $036D
 	JSR _loc_01_BBCB
 	LDA #$01
-	STA a: $E6
+	STA $E6
 	INC длительность_погоды_ХЗ
 	LDA длительность_погоды_ХЗ
 	CMP #$14
@@ -3179,7 +3179,7 @@ table_01_B9E8_BA8B:
 	LDA #$0C
 	STA объем_дождя
 	LDA #$00
-	STA a: $E6
+	STA $E6
 	JMP _loc_01_BB17
 bra_01_BAE8:
 	AND #$07
@@ -3277,13 +3277,13 @@ bra_01_BB8A:
 	BNE bra_01_BBAF
 	LDA #$00
 	STA объем_дождя
-	STA a: $E6
+	STA $E6
 	JMP _loc_01_BBB9
 bra_01_BBAF:
 	LDA #$0C
 	STA объем_дождя
 	LDA #$01
-	STA a: $E6
+	STA $E6
 _loc_01_BBB9:
 	RTS
 bra_01_BBBA:
@@ -3292,7 +3292,7 @@ bra_01_BBBA:
 	LDA #$0C
 	STA объем_дождя
 	LDA #$00
-	STA a: $E6
+	STA $E6
 	RTS
 
 table_01_B9E8_BBCA:
@@ -3300,16 +3300,16 @@ table_01_B9E8_BBCA:
 _loc_01_BBCB:
 	LDA $0321
 	SEC
-	SBC a: байт_для_2005_X
+	SBC байт_для_2005_X
 	LDA $0334
-	SBC a: $ED
+	SBC $ED
 	BNE bra_01_BBF6
 	LDA $035A
 	SEC
-	SBC a: байт_для_2005_Y
+	SBC байт_для_2005_Y
 	STA $1D
 	LDA $036D
-	SBC a: $EF
+	SBC $EF
 	BNE bra_01_BBF6
 	LDA $1D
 	CMP #$F0
@@ -3322,11 +3322,11 @@ _loc_01_BBF8:
 	STA $1C
 	LDA $0321
 	SEC
-	SBC a: байт_для_2005_X
+	SBC байт_для_2005_X
 	STA $013D
 	LDA $035A
 	SEC
-	SBC a: байт_для_2005_Y
+	SBC байт_для_2005_Y
 	SEC
 	SBC #$08
 	STA $013E
@@ -3648,7 +3648,7 @@ bra_01_BEBA:
 	ORA игрок_с_мячом
 	TAX
 	STX игрок_с_мячом
-	LDA a: режим_игры_на_поле
+	LDA режим_игры_на_поле
 	AND #$04
 	BNE bra_01_BF10
 	ASL $1C

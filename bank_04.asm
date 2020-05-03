@@ -288,7 +288,7 @@ bra_04_81BF:
 	LDA #$FC
 	STA $1C
 bra_04_81C5:
-	LDA a: приоритет_отрисовки_спрайта,X
+	LDA приоритет_отрисовки_спрайта,X
 	CMP #$0E
 	BCC bra_04_820C
 	AND #$1F
@@ -5599,17 +5599,17 @@ _loc_04_B204:
 _loc_04_B20D:
 	LDX #$00
 bra_04_B20F:
-	LDA a: приоритет_отрисовки_спрайта,X
+	LDA приоритет_отрисовки_спрайта,X
 	AND #$1F
 	TAY
 	SEC
 	LDA координата_Y_lo,Y
-	SBC a: байт_для_2005_Y
-	STA a: $C1,X
+	SBC байт_для_2005_Y
+	STA $C1,X
 	INX
 	CPX $F4
 	BCC bra_04_B20F
-	LDA a: $F4
+	LDA $F4
 	STA $2B
 	BEQ bra_04_B26D
 	DEC $2B
@@ -5619,21 +5619,21 @@ _loc_04_B22D:
 	LDX #$00
 	STX $1C
 bra_04_B235:
-	LDA a: $C1,X
-	CMP a: $C2,X
+	LDA $C1,X
+	CMP $C2,X
 	BCS bra_04_B25F
-	LDA a: приоритет_отрисовки_спрайта + 1,X
+	LDA приоритет_отрисовки_спрайта + 1,X
 	STA $1F
-	LDA a: приоритет_отрисовки_спрайта,X
-	STA a: приоритет_отрисовки_спрайта + 1,X
+	LDA приоритет_отрисовки_спрайта,X
+	STA приоритет_отрисовки_спрайта + 1,X
 	LDA $1F
-	STA a: приоритет_отрисовки_спрайта,X
-	LDA a: $C2,X
+	STA приоритет_отрисовки_спрайта,X
+	LDA $C2,X
 	STA $1F
-	LDA a: $C1,X
-	STA a: $C2,X
+	LDA $C1,X
+	STA $C2,X
 	LDA $1F
-	STA a: $C1,X
+	STA $C1,X
 	INC $1C
 bra_04_B25F:
 	INX
@@ -5652,18 +5652,18 @@ bra_04_B272:
 	STA флаг_видимости,X
 	DEX
 	BPL bra_04_B272
-	LDA a: $F3
+	LDA $F3
 	BEQ bra_04_B27E
 	LDA #$10
 bra_04_B27E:
-	STA a: $F5
+	STA $F5
 	LDA $F4
 	BNE bra_04_B288
 	JMP _loc_04_B315
 bra_04_B288:
 	LDX #$00
 _loc_04_B28A:
-	LDA a: приоритет_отрисовки_спрайта,X
+	LDA приоритет_отрисовки_спрайта,X
 	AND #$1F
 	TAY
 	LDA координата_X_lo,Y
@@ -5705,11 +5705,11 @@ _loc_04_B28A:
 bra_04_B2DF:
 	LDA #$01
 	STA флаг_видимости,Y
-	LDA a: приоритет_отрисовки_спрайта,X
+	LDA приоритет_отрисовки_спрайта,X
 	AND #$20
 	BEQ bra_04_B30D
 bra_04_B2EB:
-	LDA a: приоритет_отрисовки_спрайта,X
+	LDA приоритет_отрисовки_спрайта,X
 	AND #$20
 	BEQ bra_04_B2FB
 	LDA $2D
@@ -5720,12 +5720,12 @@ bra_04_B2FB:
 	TXA
 	TAY
 	DEX
-	DEC a: $F4
+	DEC $F4
 bra_04_B301:
 	LDA приоритет_отрисовки_спрайта + 1,Y
 	STA приоритет_отрисовки_спрайта,Y
 	INY
-	CPY a: $F4
+	CPY $F4
 	BCC bra_04_B301
 bra_04_B30D:
 	INX
@@ -5979,16 +5979,16 @@ bra_04_B4DB:
 bra_04_B4DE:
 	LDX $43
 	JSR _b07_FAEE
-	LDA a: удержанные_кнопки,X
-	STA a: $1D
-	LDA a: одноразовые_кнопки,X
-	STA a: $1E
+	LDA удержанные_кнопки,X
+	STA $1D
+	LDA одноразовые_кнопки,X
+	STA $1E
 	LDA $056C,X
-	STA a: $1F
+	STA $1F
 	LDA $0570,X
-	STA a: $20
+	STA $20
 	LDA $057C,X
-	STA a: $21
+	STA $21
 	LDA номер_управляемого,X
 	TAX
 	LDA режим_игры_на_поле
@@ -6088,19 +6088,19 @@ bra_04_B5A3:
 	AND #$7F
 	CMP #$58
 	BEQ bra_04_B5CF
-	LDA a: $1E
+	LDA $1E
 	AND #$C0
 	BEQ bra_04_B5CF
 	LDA #$45
 	JMP _loc_04_B721
 bra_04_B5CF:
-	LDA a: $1E
+	LDA $1E
 	LSR
 	JMP _loc_04_B614
 bra_04_B5D6:
-	LDA a: $20
+	LDA $20
 	BPL bra_04_B614
-	LDA a: $1D
+	LDA $1D
 	AND #$0C
 	BEQ bra_04_B5EB
 	LDY #$01
@@ -6108,7 +6108,7 @@ bra_04_B5D6:
 	BMI bra_04_B5EB
 	JMP _loc_04_B721
 bra_04_B5EB:
-	LDA a: $1D
+	LDA $1D
 	AND #$03
 	BEQ bra_04_B5FB
 	LDY #$00
@@ -6143,7 +6143,7 @@ bra_04_B614:
 	BMI bra_04_B62E
 	JMP _loc_04_B721
 bra_04_B62E:
-	LDA a: $1D
+	LDA $1D
 	AND #$0C
 	BEQ bra_04_B63E
 	LDY #$05
@@ -6167,7 +6167,7 @@ bra_04_B647:
 	BMI bra_04_B65C
 	JMP _loc_04_B721
 bra_04_B65C:
-	LDA a: $1D
+	LDA $1D
 	AND #$0F
 	BNE bra_04_B66C
 	LDY #$07
@@ -6175,7 +6175,7 @@ bra_04_B65C:
 	BMI bra_04_B66C
 	JMP _loc_04_B721
 bra_04_B66C:
-	LDA a: $1D
+	LDA $1D
 	AND #$0C
 	BEQ bra_04_B67C
 	LDY #$08
@@ -6184,7 +6184,7 @@ bra_04_B66C:
 	JMP _loc_04_B721
 bra_04_B67C:
 	TXA
-	EOR a: $1D
+	EOR $1D
 	AND #$01
 	BNE bra_04_B68D
 	LDY #$09
@@ -6203,10 +6203,10 @@ bra_04_B696:
 	AND #$7F
 	CMP #$03
 	BNE bra_04_B6BC
-	LDA a: $1D
+	LDA $1D
 	AND #$03
 	BNE bra_04_B6B7
-	LDA a: $1D
+	LDA $1D
 	AND #$0C
 	BEQ bra_04_B6BC
 	LDA #$27
@@ -6223,22 +6223,22 @@ bra_04_B6BC:
 	BEQ bra_04_B6FE
 	AND #$10
 	BNE bra_04_B6DA
-	LDA a: $21
+	LDA $21
 	AND #$0C
 	BEQ bra_04_B6FE
 	LDA #$24
 	JMP _loc_04_B70F
 bra_04_B6DA:
-	LDA a: $21
+	LDA $21
 	AND #$0C
 	BEQ bra_04_B6FE
 	LDA #$25
 	JMP _loc_04_B70F
 bra_04_B6E6:
-	LDA a: $21
+	LDA $21
 	AND #$0F
 	BNE bra_04_B70A
-	LDA a: $1D
+	LDA $1D
 	AND #$0F
 	BNE bra_04_B6F9
 	LDA #$01
@@ -6247,7 +6247,7 @@ bra_04_B6F9:
 	LDA #$20
 	JMP _loc_04_B70F
 bra_04_B6FE:
-	LDA a: $21
+	LDA $21
 	AND #$0F
 	BEQ bra_04_B712
 	LDA #$1D
@@ -6258,7 +6258,7 @@ bra_04_B70A:
 _loc_04_B70F:
 	STA номер_действия,X
 bra_04_B712:
-	LDA a: $1D
+	LDA $1D
 	AND #$0F
 	TAY
 	LDA table_04_B727,Y
@@ -6445,16 +6445,16 @@ bra_04_B8BB:
 bra_04_B8BE:
 	LDX $43
 	JSR _b07_FAEE
-	LDA a: удержанные_кнопки,X
-	STA a: $1D
-	LDA a: одноразовые_кнопки,X
-	STA a: $1E
+	LDA удержанные_кнопки,X
+	STA $1D
+	LDA одноразовые_кнопки,X
+	STA $1E
 	LDA $056C,X
-	STA a: $1F
+	STA $1F
 	LDA $0570,X
-	STA a: $20
+	STA $20
 	LDA $057C,X
-	STA a: $21
+	STA $21
 	LDA номер_управляемого,X
 	TAX
 	LDA #$00
@@ -6481,19 +6481,19 @@ bra_04_B902:
 	STA $2D
 	LDA номер_анимации,X
 	BPL bra_04_B91C
-	LDA a: $1E
+	LDA $1E
 	LSR
 	JMP _loc_04_B94F
 bra_04_B91C:
-	LDA a: $20
+	LDA $20
 	BPL bra_04_B94F
-	LDA a: $1D
+	LDA $1D
 	AND #$03
 	BEQ bra_04_B93E
 	LDA направление_движения,X
 	ROL
 	ROL
-	EOR a: $1D
+	EOR $1D
 	AND #$01
 	BEQ bra_04_B939
 	LDA #$09
@@ -6514,7 +6514,7 @@ _loc_04_B94F:
 bra_04_B94F:
 	ASL
 	BPL bra_04_B96B
-	LDA a: $1D
+	LDA $1D
 	AND #$0C
 	BEQ bra_04_B962
 	LDY #$05
@@ -6529,7 +6529,7 @@ bra_04_B962:
 bra_04_B96B:
 	ASL
 	BPL bra_04_B9A8
-	LDA a: $1D
+	LDA $1D
 	AND #$0F
 	BNE bra_04_B97E
 	LDY #$07
@@ -6537,7 +6537,7 @@ bra_04_B96B:
 	BMI bra_04_B97E
 	JMP _loc_04_B9DF
 bra_04_B97E:
-	LDA a: $1D
+	LDA $1D
 	AND #$0C
 	BEQ bra_04_B98E
 	LDY #$08
@@ -6546,7 +6546,7 @@ bra_04_B97E:
 	JMP _loc_04_B9DF
 bra_04_B98E:
 	TXA
-	EOR a: $1D
+	EOR $1D
 	AND #$01
 	BNE bra_04_B99F
 	LDY #$09
@@ -6561,10 +6561,10 @@ bra_04_B99F:
 bra_04_B9A8:
 	LDA номер_анимации,X
 	BMI bra_04_B9D0
-	LDA a: $21
+	LDA $21
 	AND #$0F
 	BNE bra_04_B9C3
-	LDA a: $1D
+	LDA $1D
 	AND #$0F
 	BNE bra_04_B9BF
 	LDA #$01
@@ -6582,7 +6582,7 @@ bra_04_B9CB:
 bra_04_B9CD:
 	STA номер_действия,X
 bra_04_B9D0:
-	LDA a: $1D
+	LDA $1D
 	AND #$0F
 	TAY
 	LDA table_04_B9E5,Y
@@ -7000,8 +7000,8 @@ bra_04_BD01:
 bra_04_BD03:
 	STA номер_супера
 	LDA #$00
-	STA a: таймер_кадра_анимации,X
-	STA a: номер_кадра_анимации,X
+	STA таймер_кадра_анимации,X
+	STA номер_кадра_анимации,X
 bra_04_BD0E:
 	RTS
 

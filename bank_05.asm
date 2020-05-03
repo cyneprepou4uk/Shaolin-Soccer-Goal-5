@@ -106,7 +106,7 @@ bra_05_8082:
 
 table_05_805A_8083:
 	LDA #$01
-	STA a: тип_экрана
+	STA тип_экрана
 	JMP _loc_05_807A
 
 table_05_805A_808B:
@@ -168,20 +168,20 @@ _loc_05_80DF:
 	LDA #$80
 	STA разновидность_NMI
 	LDA #$00		; сделать тут цикл для экономии байтов
-	STA a: байт_для_2005_X
-	STA a: $ED
-	STA a: байт_для_2005_Y
-	STA a: $EF
-	STA a: $F0
-	STA a: $F1
-	STA a: $F2
-	STA a: $F3
+	STA байт_для_2005_X
+	STA $ED
+	STA байт_для_2005_Y
+	STA $EF
+	STA $F0
+	STA $F1
+	STA $F2
+	STA $F3
 	STA скорость_игры
 	STA счетчик_опций
 	STA $05CE
 	LDA #$F0
-	STA a: ограничитель_Y_спрайтов
-	LDY a: тип_экрана
+	STA ограничитель_Y_спрайтов
+	LDY тип_экрана
 	LDA table_05_816E,Y
 	BMI bra_05_816D
 	JSR _b07_E828
@@ -393,11 +393,11 @@ _loc_05_828D:
 	BEQ bra_05_82AA
 	LDA $1C
 	ORA #$80
-	STA a: $74,X
+	STA $74,X
 	JMP _loc_05_82AF
 bra_05_82AA:
 	LDA #$7F
-	STA a: $74,X
+	STA $74,X
 _loc_05_82AF:
 	RTS
 _loc_05_82B0:
@@ -497,17 +497,17 @@ _loc_05_8355:
 	STA номер_опции
 	LDA #$00
 	STA счетчик_смен
-	STA a: $61
-	STA a: $62
+	STA $61
+	STA $62
 	STA флаг_владения_мячом_команды
 	STA флаг_владения_мячом_команды + 1
 	STA номер_команды
 	STA номер_команды + 1
 	STA лицо_игрока
 	LDA #$05
-	STA a: $63
+	STA $63
 	LDA #$01
-	STA a: $6D
+	STA $6D
 	STA номер_палитры_спрайтов
 	STA номер_палитры_спрайтов + 1
 	STA номер_движения
@@ -1004,7 +1004,7 @@ _loc_05_8731:
 	LDA #$FF
 	STA номер_опции
 	LDA #$05
-	STA a: $61
+	STA $61
 	LDA #$00
 	STA номер_команды
 	LDA #$01
@@ -1494,14 +1494,14 @@ table_05_8AD1:		; байты после JSR
 _loc_05_8AD5:
 	LDA #$00
 	STA номер_опции
-	STA a: $80
+	STA $80
 	LDA #$06
 	STA номер_опции + 1
 	LDA #$05
-	STA a: $63
-	STA a: $64
+	STA $63
+	STA $64
 	LDA #$01
-	STA a: $6D
+	STA $6D
 	STA номер_палитры_спрайтов
 	LDX #$08
 	STX банк_спрайтов
@@ -1513,7 +1513,7 @@ _loc_05_8AD5:
 	LDX #$00
 bra_05_8B06:
 	LDA #$00
-	STA a: $61,X
+	STA $61,X
 	STA координата_X_hi,X
 	STA координата_Y_hi,X
 	STA координата_Z_lo,X
@@ -1658,19 +1658,19 @@ _loc_05_8C2D:		; сюда 2 прыжка и 1 переход
 	JSR _loc_05_8041
 	JSR _loc_05_8014
 	JSR _b07_запись_банков_спрайтов
-	LDA a: $66
+	LDA $66
 	STA банк_спрайтов + 1
-	LDA a: $67
+	LDA $67
 	STA банк_спрайтов + 2
 	JSR _loc_05_BD38
-	LDA a: $66
+	LDA $66
 	PHA
-	LDA a: $67
+	LDA $67
 	PHA
 	LDA банк_спрайтов + 1
-	STA a: $66
+	STA $66
 	LDA банк_спрайтов + 2
-	STA a: $67
+	STA $67
 	PLA
 	STA банк_спрайтов + 2
 	PLA
@@ -2000,8 +2000,8 @@ table_05_8F05_8F40:
 	ORA #$80
 	STA номер_движения,X
 	LDA #$00
-	STA a: таймер_кадра_анимации,X
-	STA a: номер_кадра_анимации,X
+	STA таймер_кадра_анимации,X
+	STA номер_кадра_анимации,X
 bra_05_8F52:
 	JSR _loc_05_8FCF
 	LDA номер_движения,X
@@ -2023,7 +2023,7 @@ table_05_8F6D:
 
 _loc_05_8F73:
 	LDA #$04
-	STA a: тип_экрана
+	STA тип_экрана
 	RTS
 _loc_05_8F79:
 	JSR _b07_ECA9
@@ -2126,18 +2126,18 @@ _loc_05_901C:
 	LDA #$FF
 	STA номер_опции
 	LDA #$05
-	STA a: $61
-	STA a: $62
-	STA a: $64
+	STA $61
+	STA $62
+	STA $64
 	LDA #$00
-	STA a: байт_для_2005_X
-	STA a: $ED
-	STA a: байт_для_2005_Y
-	STA a: $EF
-	STA a: $F0
-	STA a: $F1
-	STA a: $F2
-	STA a: $F3
+	STA байт_для_2005_X
+	STA $ED
+	STA байт_для_2005_Y
+	STA $EF
+	STA $F0
+	STA $F1
+	STA $F2
+	STA $F3
 	JSR _loc_05_9102
 	LDX #$26
 	STX банк_спрайтов
@@ -2331,8 +2331,8 @@ _loc_05_91BB:
 	ORA #$80
 	STA номер_движения,X
 	LDA #$00
-	STA a: таймер_кадра_анимации,X
-	STA a: номер_кадра_анимации,X
+	STA таймер_кадра_анимации,X
+	STA номер_кадра_анимации,X
 	STA подтип_анимации,X
 	RTS
 
@@ -2436,7 +2436,7 @@ bra_05_9270:
 bra_05_9291:
 	STA тип_экрана
 	LDA #$04
-	STA a: $5B
+	STA $5B
 	JMP _loc_05_92BE
 bra_05_929B:
 	JSR _b07_C335
@@ -2538,14 +2538,14 @@ table_05_9313_9357:
 	JSR _loc_05_9396
 bra_05_9361:
 	JSR _loc_05_94C2
-	LDA a: $F0
-	STA a: байт_для_2005_X
-	LDA a: $F1
-	STA a: $ED
-	LDA a: $F2
-	STA a: байт_для_2005_Y
-	LDA a: $F3
-	STA a: $EF
+	LDA $F0
+	STA байт_для_2005_X
+	LDA $F1
+	STA $ED
+	LDA $F2
+	STA байт_для_2005_Y
+	LDA $F3
+	STA $EF
 	LDA счетчик_опций
 	JSR _b07_EC8F
 
@@ -2565,13 +2565,13 @@ _loc_05_9396:
 	LDA #$FF
 	STA номер_опции
 	LDA #$7F
-	STA a: $74
-	STA a: $75
-	STA a: $76
-	STA a: $77
+	STA $74
+	STA $75
+	STA $76
+	STA $77
 	LDA #$05
-	STA a: $61
-	STA a: $62
+	STA $61
+	STA $62
 	LDA #$01
 	STA номер_палитры_спрайтов
 	STA номер_палитры_спрайтов + 1
@@ -3049,7 +3049,7 @@ _loc_05_97C3:
 bra_05_97EF:
 	LDA #$03
 bra_05_97F1:
-	STA a: тип_экрана
+	STA тип_экрана
 	RTS
 _loc_05_97F5:
 	LDA тип_экрана
@@ -3058,14 +3058,14 @@ _loc_05_97F5:
 	JSR _loc_05_982C
 bra_05_97FF:
 	JSR _loc_05_9B1D
-	LDA a: $F0
-	STA a: байт_для_2005_X
-	LDA a: $F1
-	STA a: $ED
-	LDA a: $F2
-	STA a: байт_для_2005_Y
-	LDA a: $F3
-	STA a: $EF
+	LDA $F0
+	STA байт_для_2005_X
+	LDA $F1
+	STA $ED
+	LDA $F2
+	STA байт_для_2005_Y
+	LDA $F3
+	STA $EF
 	LDA счетчик_опций
 	JSR _b07_EC8F
 
@@ -3095,7 +3095,7 @@ bra_05_9841:
 	LDX #$00
 	LDA #$05
 bra_05_9850:
-	STA a: $61,X
+	STA $61,X
 	INX
 	CPX #$0D
 	BCC bra_05_9850
@@ -3527,51 +3527,51 @@ _loc_05_9C05:
 	LDA счетчик_опций
 	CMP #$05
 	BCC bra_05_9C32
-	LDA a: $F2
+	LDA $F2
 	BNE bra_05_9C18
-	LDA a: $F3
+	LDA $F3
 	CMP #$01
 	BEQ bra_05_9C6B
 bra_05_9C18:
 	CLC
-	LDA a: $F2
+	LDA $F2
 	ADC #$04
-	STA a: $F2
+	STA $F2
 	CMP #$F0
 	BCC bra_05_9C6B
 	LDA #$00
-	STA a: $F2
+	STA $F2
 	LDA #$01
-	STA a: $F3
+	STA $F3
 	JMP _loc_05_9C6B
 bra_05_9C32:
-	LDA a: $F2
+	LDA $F2
 	BNE bra_05_9C3C
-	LDA a: $F3
+	LDA $F3
 	BEQ bra_05_9C6B
 bra_05_9C3C:
 	SEC
-	LDA a: $F2
+	LDA $F2
 	SBC #$04
-	STA a: $F2
+	STA $F2
 	CMP #$F0
 	BCC bra_05_9C57
 	SBC #$10
-	STA a: $F2
+	STA $F2
 	SEC
-	LDA a: $F3
+	LDA $F3
 	SBC #$01
-	STA a: $F3
+	STA $F3
 bra_05_9C57:
-	LDA a: $F3
+	LDA $F3
 	BMI bra_05_9C63
 	BNE bra_05_9C6B
-	LDA a: $F2
+	LDA $F2
 	BNE bra_05_9C6B
 bra_05_9C63:
 	LDA #$00
-	STA a: $F2
-	STA a: $F3
+	STA $F2
+	STA $F3
 _loc_05_9C6B:
 bra_05_9C6B:
 	RTS
@@ -3793,14 +3793,14 @@ _loc_05_9DC2:
 	BNE bra_05_9E22
 	LDY $1C
 	LDA table_05_9EF6,Y
-	STA a: $74,X
+	STA $74,X
 	CMP #$88
 	BNE bra_05_9E05
 	LDA счетчик_опций
 	CMP #$03
 	BCS bra_05_9E05
 	LDA #$7F
-	STA a: $74,X
+	STA $74,X
 bra_05_9E05:
 	LDA счетчик_опций
 	CMP #$04
@@ -3813,7 +3813,7 @@ bra_05_9E05:
 	AND #$03
 	BNE bra_05_9E5F
 	LDA #$7F
-	STA a: $74,X
+	STA $74,X
 	JMP _loc_05_9E5F
 bra_05_9E22:
 	LDA #$00
@@ -3834,7 +3834,7 @@ bra_05_9E22:
 bra_05_9E42:
 	LDY $1D
 	LDA table_05_9EF3,Y
-	STA a: $74,X
+	STA $74,X
 	LDA счетчик_опций
 	CMP #$04
 	BNE bra_05_9E5F
@@ -3844,7 +3844,7 @@ bra_05_9E42:
 	BCC bra_05_9E5F
 	BEQ bra_05_9E5F
 	LDA #$7F
-	STA a: $74,X
+	STA $74,X
 _loc_05_9E5F:
 bra_05_9E5F:
 	RTS
@@ -4132,7 +4132,7 @@ table_05_A0F0:		; байты после JSR
 
 _loc_05_A0F4:
 	LDA #$05
-	STA a: $61
+	STA $61
 	LDA #$08
 	STA номер_движения
 	LDA #$01
@@ -4385,8 +4385,8 @@ _loc_05_A2F7:
 	RTS
 
 _loc_05_A318:
-	LDA a: $5B
-	STA a: тип_экрана
+	LDA $5B
+	STA тип_экрана
 	RTS
 _loc_05_A31F:
 	JSR _b07_ECA9
@@ -4570,10 +4570,10 @@ _loc_05_A58D:
 	LDA #$FF
 	STA номер_опции
 	LDA #$07
-	STA a: $61
+	STA $61
 	STA номер_движения
 	LDA #$05
-	STA a: $63
+	STA $63
 	LDA #$00
 	STA лицо_игрока
 	LDA #$01
@@ -4842,7 +4842,7 @@ _loc_05_A7A4:
 bra_05_A7B4:
 	STA $05E1
 	LDA #$05
-	STA a: $61
+	STA $61
 	LDA #$01
 	STA номер_палитры_спрайтов
 	STA номер_палитры_спрайтов + 1
@@ -4867,7 +4867,7 @@ bra_05_A7E3:
 	LDA table_05_A84A + 1,Y
 	STA координата_Y_lo + 1,X
 	LDA #$05
-	STA a: $62,X
+	STA $62,X
 	INX
 	CPX #$02
 	BCC bra_05_A7E3
@@ -4983,9 +4983,9 @@ _loc_05_A8C5:
 table_05_A874_A8C5:
 table_05_A9EC_A8C5:
 	LDA #$16
-	STA a: $75
+	STA $75
 	LDA #$7F
-	STA a: $76
+	STA $76
 	LDX #$00
 	JSR _loc_05_822A
 	LDA #$00
@@ -5086,9 +5086,9 @@ table_05_AA71_A97C:
 table_05_AAA9_A97C:
 	JSR _loc_05_AE22
 	LDA #$16
-	STA a: $75
+	STA $75
 	LDA #$96
-	STA a: $76
+	STA $76
 	LDA #$04
 	STA $05CE
 	LDX #$00
@@ -5458,7 +5458,7 @@ _loc_05_ACA7:
 	JSR _b07_поставить_флаг_уменьшения_яркости
 	JSR _b07_D062
 	LDA #$04
-	STA a: тип_экрана
+	STA тип_экрана
 	RTS
 
 table_05_ACB3:		; видимо нигде не используется
@@ -6100,14 +6100,14 @@ _loc_05_B2F0:
 	LDA #$FF
 	STA номер_опции
 	LDY #$04
-	STY a: $6D
+	STY $6D
 	INY
-	STY a: $61
+	STY $61
 	LDA #$00
 	STA номер_команды
 	LDA #$07
 	STA номер_палитры_спрайтов
-	STA a: $80
+	STA $80
 	LDX #$26
 	STX банк_спрайтов
 	INX
@@ -6357,9 +6357,9 @@ _loc_05_B4D6:
 	STA банк_спрайтов + 3
 	JSR _b07_запись_банков_спрайтов
 	LDA #$04
-	STA a: $6D
+	STA $6D
 	LDA #$07
-	STA a: $80
+	STA $80
 	STA номер_палитры_спрайтов
 	LDA #$C8
 	STA координата_X_lo_мяча
@@ -6834,7 +6834,7 @@ _loc_05_B913:
 	LDY #$09
 bra_05_B915:
 	LDA $046E,Y
-	STA a: $2C,Y
+	STA $2C,Y
 	DEY
 	BPL bra_05_B915
 	LDA #$00

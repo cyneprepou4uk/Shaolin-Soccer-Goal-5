@@ -126,7 +126,7 @@ table_02_BB62_AA95:
 	JSR _b07_E828
 	JSR _b07_EF54
 	LDA #$08
-	STA a: $6D
+	STA $6D
 	INC таймер_кадра_анимации_мяча
 	DEC номер_кадра_анимации_мяча
 	JSR _loc_02_AE01
@@ -231,7 +231,7 @@ table_02_AA70_AB78:
 	STA банк_спрайтов
 	JSR _b07_запись_банков_спрайтов
 	LDA #$09
-	STA a: $6D
+	STA $6D
 	INC таймер_кадра_анимации_мяча
 	DEC номер_кадра_анимации
 	LDA #$C0
@@ -290,7 +290,7 @@ bra_02_ABFD:
 
 table_02_AA70_ABFE:
 	LDA #$01
-	STA a: опция_режим_сложность
+	STA опция_режим_сложность
 	LDA #$00
 	STA $58
 	STA тип_экрана
@@ -513,7 +513,7 @@ _loc_02_ADA5:
 	STA номер_анимации,X
 	STA игрок_с_мячом
 	STA направление_движения,X
-	STA a: $61,X
+	STA $61,X
 	LDA #$A4
 	STA координата_Y_lo,X
 	LDA #$C0
@@ -533,7 +533,7 @@ bra_02_ADE2:
 	STA номер_движения,X
 	BNE bra_02_ADFC
 bra_02_ADEA:
-	INC a: $61,X
+	INC $61,X
 	LDA #$01
 	STA номер_движения,X
 	INC координата_X_hi,X
@@ -1178,8 +1178,8 @@ _loc_02_B263:
 bra_02_B263:
 	STA номер_движения,X
 	LDA #$00
-	STA a: номер_кадра_анимации,X
-	STA a: таймер_кадра_анимации,X
+	STA номер_кадра_анимации,X
+	STA таймер_кадра_анимации,X
 	STA подтип_анимации,X
 	RTS
 
@@ -1190,8 +1190,8 @@ _loc_02_B282:
 	ORA #$80
 	STA номер_движения,X
 	LDA #$00
-	STA a: таймер_кадра_анимации,X
-	STA a: номер_кадра_анимации,X
+	STA таймер_кадра_анимации,X
+	STA номер_кадра_анимации,X
 	STA подтип_анимации,X
 	RTS
 _loc_02_B293:
@@ -1420,7 +1420,7 @@ _loc_02_B429:
 	LDX #$12
 bra_02_B43C:
 	LDA #$7F
-	STA a: $74,X
+	STA $74,X
 	DEX
 	BPL bra_02_B43C
 	LDX #$00
@@ -1442,7 +1442,7 @@ _loc_02_B45E:
 	STA смена_угла_движения,X
 	STA номер_действия,X
 	LDA table_02_B525,X
-	STA a: $61,X
+	STA $61,X
 	LDA table_02_B529,X
 	STA номер_движения,X
 	LDA $58
@@ -1536,7 +1536,7 @@ _loc_02_B53D:
 	LDX #$12
 bra_02_B53F:
 	LDA #$7F
-	STA a: $74,X
+	STA $74,X
 	LDA #$00
 	STA координата_Y_hi,X
 	STA координата_Z_hi,X
@@ -1552,19 +1552,19 @@ bra_02_B53F:
 	LDA #$01
 	STA координата_X_hi,X
 	LDA #$07
-	STA a: $61,X
+	STA $61,X
 	DEX
 	BPL bra_02_B53F
 	LDA #$00
-	STA a: байт_для_2005_X
-	STA a: байт_для_2005_Y
-	STA a: $EF
-	STA a: $F0
-	STA a: $F2
-	STA a: $F3
+	STA байт_для_2005_X
+	STA байт_для_2005_Y
+	STA $EF
+	STA $F0
+	STA $F2
+	STA $F3
 	LDA #$01
-	STA a: $ED
-	STA a: $F1
+	STA $ED
+	STA $F1
 	LDX #$01
 bra_02_B592:
 	LDA флаг_владения_мячом_команды,X
@@ -1761,9 +1761,9 @@ bra_02_B763:
 	TAY
 	JSR _loc_02_B788
 	CLC
-	LDA a: $74,Y
+	LDA $74,Y
 	ADC #$02
-	STA a: $74,X
+	STA $74,X
 	RTS
 
 table_02_B6EF_B774:
@@ -1827,8 +1827,8 @@ _loc_02_B7E1:
 	JSR _loc_02_B8E5
 	LDA угол_движения,X
 	AND #$80
-	ORA a: $74,X
-	STA a: $74,X
+	ORA $74,X
+	STA $74,X
 	RTS
 
 table_02_B6EF_B7F8:
@@ -1922,8 +1922,8 @@ _loc_02_B8A3:
 bra_02_B8A3:
 	STA номер_движения,X
 	LDA #$00
-	STA a: номер_кадра_анимации,X
-	STA a: таймер_кадра_анимации,X
+	STA номер_кадра_анимации,X
+	STA таймер_кадра_анимации,X
 	STA подтип_анимации,X
 	RTS
 
@@ -2112,9 +2112,9 @@ _loc_02_BA66:
 	STA номер_палитры_спрайтов + 1
 	STA номер_палитры_спрайтов + 2
 	STA номер_палитры_спрайтов + 3
-	STA a: $61
-	STA a: $62
-	STA a: $6D
+	STA $61
+	STA $62
+	STA $6D
 	LDX #$2C
 	STX банк_спрайтов
 	INX
@@ -2232,7 +2232,7 @@ table_02_BB62:		; байты после JSR
 table_02_BB62_BB78:
 	JSR _b07_EF54
 	LDA #$F0
-	STA a: ограничитель_Y_спрайтов
+	STA ограничитель_Y_спрайтов
 	LDA #$80
 	STA разновидность_NMI
 	LDA #$03
@@ -2332,8 +2332,8 @@ bra_02_BC27:
 	STA координата_X_hi
 	STA координата_X_hi + 1
 	STA координата_X_hi_мяча
-	STA a: $F1
-	STA a: $ED
+	STA $F1
+	STA $ED
 	LDA #$1D
 	STA номер_палитры_спрайтов
 	LDA #$2B
@@ -2472,7 +2472,7 @@ bra_02_BDA9:
 	LDX #$0C
 	BNE bra_02_BD6A
 bra_02_BDB6:
-	INC a: $6D
+	INC $6D
 	JSR _loc_02_BED4
 	JSR _b07_поставить_флаг_увеличения_яркости
 	RTS

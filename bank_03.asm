@@ -196,7 +196,7 @@ bra_03_8146:
 	LDA тип_экрана
 	CMP #$01
 	BNE bra_03_8161
-	LDA a: режим_игры_на_поле
+	LDA режим_игры_на_поле
 	AND #$20
 	BEQ bra_03_816A
 	LDA флаг_владения_мячом_команды
@@ -245,7 +245,7 @@ _loc_03_8194:
 	RTS
 
 _loc_03_81A9:
-	LDA a: тип_экрана
+	LDA тип_экрана
 	CMP #$03
 	BEQ bra_03_81B7
 	CMP #$06
@@ -264,7 +264,7 @@ bra_03_81BE:
 	BCC bra_03_81BE
 	PLA
 	STA игрок_с_мячом
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$20
 	BEQ bra_03_81DC
 	LDA счетчик_смен
@@ -693,10 +693,10 @@ table_03_84CD:		; ??? судя по логгеру читалось нормал
 
 ; 84D1:
 _логика_интеллекта_08:		; бежать к сопернику и делать локоть
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$03
 	BNE bra_03_84EE
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$80
 	BEQ bra_03_84EE
 	TXA
@@ -740,10 +740,10 @@ table_03_8525:
 
 ; 8529:
 _логика_интеллекта_09:		; бежать к сопернику и делать подкат
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$03
 	BNE bra_03_8546
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$80
 	BEQ bra_03_8546
 	TXA
@@ -1292,7 +1292,7 @@ table_03_89DB:
 _логика_интеллекта_0E:		; кипер отбивает или ловит мяч понизу
 	JSR _получение_номера_поведения_игрока_в_Y
 	LDA table_03_8AC4,Y
-	CMP a: адрес_рандома
+	CMP адрес_рандома
 	BCS bra_03_89EB
 	JMP _логика_интеллекта_05
 bra_03_89EB:
@@ -1421,7 +1421,7 @@ table_03_8AC4:
 .byte $80,$C0,$C0,$FF
 
 _логика_интеллекта_0F:
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$03
 	BNE bra_03_8AE5
 	JSR _b07_вращение_рандома
@@ -1835,7 +1835,7 @@ _loc_03_8D9E:
 	STA номер_действия,X
 	RTS
 _loc_03_8DA2:
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$03
 	BNE bra_03_8DAC
 	JMP _loc_03_8BCE
@@ -2180,14 +2180,14 @@ _loc_03_8FE4:
 	STA $21
 	JSR _loc_03_B034
 	LDY #$00
-	LDA a: адрес_рандома
+	LDA адрес_рандома
 	BPL bra_03_8FF9
 	INY
 	INY
 	INY
 _loc_03_8FF9:
 bra_03_8FF9:
-	LDA a: $2C,Y
+	LDA $2C,Y
 	BMI bra_03_9025
 	STY $44
 	TAY
@@ -2213,7 +2213,7 @@ bra_03_901F:
 bra_03_9025:
 	JMP _логика_интеллекта_00
 _loc_03_9028:
-	LDA a: $2C,Y
+	LDA $2C,Y
 	STA $1C
 	TXA
 	AND #$01
@@ -2541,7 +2541,7 @@ bra_03_92AD:
 table_03_9263_92AD:
 	LDA номер_анимации,X
 	BPL bra_03_92DA
-	LDA a: адрес_рандома + 1
+	LDA адрес_рандома + 1
 	BMI bra_03_92C0
 	CMP #$40
 	BCC bra_03_92C5
@@ -2674,7 +2674,7 @@ bra_03_9387:
 	BCC bra_03_93F0
 	CMP #$38
 	BCS bra_03_93F0
-	LDA a: $74,X
+	LDA $74,X
 	BMI bra_03_93F0
 	LDA координата_Y_lo,X
 	CMP #$90
@@ -2688,7 +2688,7 @@ bra_03_93BD:
 	BCS bra_03_93F0
 	CMP #$C8
 	BCC bra_03_93F0
-	LDA a: $74,X
+	LDA $74,X
 	BPL bra_03_93F0
 	LDA координата_Y_lo,X
 	CMP #$90
@@ -2741,7 +2741,7 @@ bra_03_941C:
 	LDY #$0C
 	JSR _loc_03_AEBF
 	BCC bra_03_9401
-	LDA a: адрес_рандома
+	LDA адрес_рандома
 	BPL bra_03_9401
 	JSR _b07_вращение_рандома
 	CMP #$A0
@@ -3260,7 +3260,7 @@ _loc_03_9812:
 	LSR
 	LSR
 	STA $1F
-	LDA a: адрес_рандома
+	LDA адрес_рандома
 	AND #$07
 	SEC
 	SBC #$04
@@ -3641,7 +3641,7 @@ _loc_03_9AE1:
 	STA $2A
 	RTS
 _loc_03_9AE4:
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$03
 	BNE bra_03_9AF3
 	TXA
@@ -3733,10 +3733,10 @@ bra_03_9B6F:
 	STA номер_действия,X
 	RTS
 _loc_03_9B75:
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$03
 	BNE bra_03_9BC1
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	BPL bra_03_9BC1
 	TXA
 	AND #$01
@@ -3827,7 +3827,7 @@ _loc_03_9C22:
 	LDY $2C
 	LDA позиция_управление,Y
 	BPL bra_03_9C43
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$F0
 	BNE bra_03_9C36
 	LDA $2C
@@ -4112,14 +4112,14 @@ _loc_03_9E2F:
 	JSR _b07_F9DE
 	RTS
 _loc_03_9E3D:
-	LDA a: удержанные_кнопки,X
+	LDA удержанные_кнопки,X
 	AND #$0F
 	TAY
 	LDA table_03_A007,Y
 	STA флаг_кипера_в_штрафной - $0A,X
 	RTS
 _loc_03_9E4A:
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$03
 	BNE bra_03_9E56
 	LDA #$00
@@ -4181,7 +4181,7 @@ _loc_03_9E94:
 	LDA table_03_A003,Y
 	JMP _loc_03_9EFC
 bra_03_9EB3:
-	LDA a: адрес_рандома
+	LDA адрес_рандома
 	AND #$03
 	STA $1E
 	LDA $1C
@@ -4245,7 +4245,7 @@ _loc_03_9F0D:
 	LSR
 	ORA $1E
 	STA $1E
-	LDA a: адрес_рандома + 1
+	LDA адрес_рандома + 1
 	AND #$03
 	ORA $1E
 	TAY
@@ -4751,13 +4751,13 @@ _loc_03_A361:
 	STA $1C
 	LDA номер_анимации,Y
 	BPL bra_03_A379
-	LDA a: адрес_рандома
+	LDA адрес_рандома
 	ASL
 	CLC
 	LDA #$FF
 	JMP _loc_03_A37C
 bra_03_A379:
-	LDA a: адрес_рандома
+	LDA адрес_рандома
 _loc_03_A37C:
 	STA $1D
 	LDA защита_поведение,Y
@@ -5283,7 +5283,7 @@ bra_03_A746:
 	LDY #$01
 	JMP _loc_03_A756
 bra_03_A750:
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$03
 	TAY
 _loc_03_A756:
@@ -5302,7 +5302,7 @@ bra_03_A768:
 	JMP _loc_03_A790
 _loc_03_A772:
 bra_03_A772:
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$03
 	BNE bra_03_A789
 	CPX #$01
@@ -5338,7 +5338,7 @@ _loc_03_A7A1:
 	BEQ bra_03_A7B5
 	CMP #$03
 	BEQ bra_03_A7B5
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$20
 	BNE bra_03_A7B5
 	JMP _loc_03_A7B6
@@ -5629,7 +5629,7 @@ bra_03_A9A0:
 	RTS
 _loc_03_A9A9:
 	JSR _loc_03_AADC
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$20
 	BEQ bra_03_A9CA
 	TXA
@@ -5694,7 +5694,7 @@ bra_03_AA1C:
 	STA $2006
 	LDA table_03_AB5B,X
 	STA $2006
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$20
 	BNE bra_03_AA46
 	LDA номер_команды,X
@@ -5728,7 +5728,7 @@ bra_03_AA52:
 	STA $2006
 	LDA table_03_AB5F,X
 	STA $2006
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$20
 	BEQ bra_03_AAA1
 	TXA
@@ -5759,7 +5759,7 @@ _loc_03_AAA4:
 	INY
 	LDA table_03_AB80,Y
 	STA $2007
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$20
 	BNE bra_03_AAC3
 	LDA #$DC
@@ -6260,7 +6260,7 @@ _loc_03_AE77:
 bra_03_AE80:
 	STA $2A
 	LDA $28
-	EOR a: $74,X
+	EOR $74,X
 	STA $29
 	LDA $34
 	SEC
@@ -7457,7 +7457,7 @@ table_03_B76E_off_B998:
 .byte $FF
 
 _loc_03_B999:
-	LDA a: опция_режим_сложность
+	LDA опция_режим_сложность
 	AND #$20
 	BNE bra_03_B9A5
 	LDA номер_движения,X
@@ -7591,7 +7591,7 @@ _loc_03_BA81:
 	STA $2C
 	LDA table_03_BAA1 + 1,Y
 	STA $2D
-	LDA a: адрес_рандома
+	LDA адрес_рандома
 	AND #$03
 	ORA $1C
 	TAY
@@ -7717,7 +7717,7 @@ _loc_03_BBB2:
 	BEQ bra_03_BBCD
 	CMP #$02
 	BEQ bra_03_BBC2
-	LDA a: адрес_рандома
+	LDA адрес_рандома
 	BPL bra_03_BBCD
 bra_03_BBC2:
 	LDA #$40
@@ -7928,11 +7928,11 @@ bra_03_BD51:
 	LDA #$00
 	STA смещение_камеры
 _loc_03_BD56:
-	LDA a: байт_для_2005_X
+	LDA байт_для_2005_X
 	SEC
 	SBC $1C
 	STA $1C
-	LDA a: $ED
+	LDA $ED
 	SBC $1D
 	STA $1D
 	BPL bra_03_BD8F
@@ -7982,13 +7982,13 @@ bra_03_BDA0:
 bra_03_BDAF:
 	STA $1C
 _loc_03_BDB1:
-	LDA a: байт_для_2005_X
+	LDA байт_для_2005_X
 	SEC
 	SBC $1C
-	STA a: $F0
-	LDA a: $ED
+	STA $F0
+	LDA $ED
 	SBC $1D
-	STA a: $F1
+	STA $F1
 _loc_03_BDC2:
 	LDA координата_Y_lo,Y
 	SEC
@@ -7997,11 +7997,11 @@ _loc_03_BDC2:
 	LDA координата_Y_hi,Y
 	SBC #$00
 	STA $1D
-	LDA a: байт_для_2005_Y
+	LDA байт_для_2005_Y
 	SEC
 	SBC $1C
 	STA $1C
-	LDA a: $EF
+	LDA $EF
 	SBC $1D
 	STA $1D
 	BPL bra_03_BE0A
@@ -8051,84 +8051,84 @@ bra_03_BE1B:
 bra_03_BE2A:
 	STA $1C
 _loc_03_BE2C:
-	LDA a: байт_для_2005_Y
+	LDA байт_для_2005_Y
 	SEC
 	SBC $1C
-	STA a: $F2
-	LDA a: $EF
+	STA $F2
+	LDA $EF
 	SBC $1D
-	STA a: $F3
+	STA $F3
 	LDA тип_экрана
 	CMP #$05
 	BEQ bra_03_BE47
 	CMP #$08
 	BCC bra_03_BE7E
 bra_03_BE47:
-	LDA a: $F1
+	LDA $F1
 	CMP #$00
 	BNE bra_03_BE62
-	LDA a: $F0
+	LDA $F0
 	CMP #$30
 	BCS bra_03_BE73
 	LDA #$30
-	STA a: $F0
+	STA $F0
 	LDA #$00
-	STA a: $F1
+	STA $F1
 	JMP _loc_03_BE73
 bra_03_BE62:
-	LDA a: $F0
+	LDA $F0
 	CMP #$D0
 	BCC bra_03_BE73
 	LDA #$01
-	STA a: $F1
+	STA $F1
 	LDA #$D0
-	STA a: $F0
+	STA $F0
 _loc_03_BE73:
 bra_03_BE73:
 	LDA #$00
-	STA a: $F2
-	STA a: $F3
+	STA $F2
+	STA $F3
 	JMP _loc_03_BED3
 bra_03_BE7E:
-	LDA a: $F1
+	LDA $F1
 	CMP #$01
 	BCS bra_03_BE96
-	LDA a: $F0
+	LDA $F0
 	CMP #$40
 	BCS bra_03_BE96
 	LDA #$40
-	STA a: $F0
+	STA $F0
 	LDA #$00
-	STA a: $F1
+	STA $F1
 bra_03_BE96:
-	LDA a: $F1
+	LDA $F1
 	CMP #$02
 	BCC bra_03_BEAE
-	LDA a: $F0
+	LDA $F0
 	CMP #$C0
 	BCC bra_03_BEAE
 	LDA #$02
-	STA a: $F1
+	STA $F1
 	LDA #$C0
-	STA a: $F0
+	STA $F0
 bra_03_BEAE:
-	LDA a: $F3
+	LDA $F3
 	BPL bra_03_BEBB
 	LDA #$00
-	STA a: $F2
-	STA a: $F3
+	STA $F2
+	STA $F3
 bra_03_BEBB:
-	LDA a: $F3
+	LDA $F3
 	CMP #$01
 	BCS bra_03_BEC9
-	LDA a: $F2
+	LDA $F2
 	CMP #$AF
 	BCC bra_03_BED3
 bra_03_BEC9:
 	LDA #$AF
-	STA a: $F2
+	STA $F2
 	LDA #$00
-	STA a: $F3
+	STA $F3
 _loc_03_BED3:
 bra_03_BED3:
 	RTS
@@ -8155,7 +8155,7 @@ bra_03_BEF2:
 	AND #$7F
 	CMP #ПОГОДА_МОЛНИЯ
 	BEQ @молния_либо_совпадение_по_таблице
-	LDA a: $80
+	LDA $80
 	AND #$7F
 @цикл:
 	INY
@@ -8226,7 +8226,7 @@ bra_03_BF59:
 	LDX #$0C
 	LDY #$00
 bra_03_BF6E:
-	LDA a: флаг_видимости,X
+	LDA флаг_видимости,X
 	LSR
 	BCC bra_03_BF92
 	LDA координата_Y_lo,X
@@ -8258,7 +8258,7 @@ bra_03_BF95:
 bra_03_BFA2:
 	LDY $1C
 	DEY
-	LDA a: приоритет_отрисовки_спрайта,X
+	LDA приоритет_отрисовки_спрайта,X
 bra_03_BFA8:
 	CMP $002C,Y
 	BNE bra_03_BFBF
@@ -8269,7 +8269,7 @@ bra_03_BFA8:
 	STA $0038,Y
 	INC $1D
 	LDY $44
-	LDA a: приоритет_отрисовки_спрайта,X
+	LDA приоритет_отрисовки_спрайта,X
 bra_03_BFBF:
 	DEY
 	BPL bra_03_BFA8

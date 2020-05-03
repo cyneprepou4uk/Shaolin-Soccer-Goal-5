@@ -2476,7 +2476,7 @@ bra_00_BBBE:
 	LDA table_00_BDE3,Y
 	STA номер_движения,X
 	LDA #$03
-	STA a: $61,X
+	STA $61,X
 	INX
 	INY
 	CPY $5D
@@ -2595,11 +2595,11 @@ _loc_00_BCAC:
 	STA смена_угла_движения,X
 	STA номер_действия,X
 	LDA table_00_BDC9,X
-	STA a: $61,X
+	STA $61,X
 	LDA table_00_BDD6,X
 	STA номер_движения,X
 	LDA #$7F
-	STA a: $74,X
+	STA $74,X
 	LDA #$00
 	STA номер_анимации,X
 	STA скорость_X_hi,X
@@ -2697,18 +2697,18 @@ bra_00_BD6E:
 	LDY #$10
 bra_00_BD7D:
 	LDA table_00_BDA7,Y
-	STA a: байт_для_2005_X,X
-	STA a: $F0,X
+	STA байт_для_2005_X,X
+	STA $F0,X
 	INY
 	INX
 	CPX #$02
 	BCC bra_00_BD7D
 	LDA #$48
-	STA a: байт_для_2005_Y
-	STA a: $F2
+	STA байт_для_2005_Y
+	STA $F2
 	LDA #$00
-	STA a: $EF
-	STA a: $F3
+	STA $EF
+	STA $F3
 	LDY #$1B
 	LDA #$00
 bra_00_BDA0:
