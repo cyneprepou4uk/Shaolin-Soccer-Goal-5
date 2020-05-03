@@ -2,6 +2,9 @@
 .include "ram_copy.inc"
 .include "val_copy.inc"
 
+; !!! разрешено двигать код только начиная с _loc_01_B430
+; поинтеры в таблице еще не закончены
+
 .import _loc_07_C002
 .import _loc_07_C005
 .import _loc_07_C011

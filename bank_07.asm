@@ -74,11 +74,9 @@ _loc_07_C002:
 .export _loc_07_C005
 _loc_07_C005:		; в банке 05 в BA60 зачем-то читается первый байт 4C
 	JMP _b07_вращение_рандома
-	JMP _банксвич_PRG
 .export _loc_07_C00B
 _loc_07_C00B:
 	JMP _запись_банков_спрайтов
-	JMP _запись_банков_фона
 .export _loc_07_C011
 _loc_07_C011:
 	JMP _loc_07_ECA9
@@ -97,7 +95,6 @@ _b07_выключить_рендеринг:
 .export _loc_07_C020
 _loc_07_C020:
 	JMP _loc_07_F469
-	JMP _loc_07_F539
 .export _loc_07_C026
 _loc_07_C026:
 	JMP _loc_07_F4C1
@@ -107,15 +104,12 @@ _loc_07_C029:
 .export _loc_07_C02C
 _loc_07_C02C:
 	JMP _loc_07_F59B
-	JMP _loc_07_F5E4
 .export _loc_07_C032
 _loc_07_C032:
 	JMP _loc_07_F67D
 .export _loc_07_C035
 _loc_07_C035:
 	JMP _loc_07_F691
-	JMP _loc_07_F666
-	JMP _loc_07_F96A
 .export _loc_07_C03E
 _loc_07_C03E:
 	JMP _loc_07_F9DE
@@ -131,7 +125,6 @@ _loc_07_C047:
 .export _loc_07_C04A
 _loc_07_C04A:
 	JMP _loc_07_D062
-	JMP _loc_07_FA6D		; это копия прыжка выше, не используется
 .export _loc_07_C050
 _loc_07_C050:
 	JMP _loc_07_C344
@@ -147,7 +140,6 @@ _loc_07_C059:
 .export _loc_07_C05C
 _loc_07_C05C:
 	JMP _loc_07_D073
-	JMP _loc_07_D073		; это копия прыжка выше, не используется
 .export _loc_07_C062
 _loc_07_C062:
 	JMP _loc_07_EF54
@@ -166,9 +158,8 @@ _b03_яркость_палитры_и_запись_в_буфер:
 .export _loc_07_C071
 _loc_07_C071:
 	JMP _loc_07_C317
-	JMP _ручной_пропуск_демо_или_уменьшение_таймера		; не используется, удалить
 .export _b07_обнуление_ZP_с_X_до_F8
-_b07_обнуление_ZP_с_X_до_F8:		; удалить этот экспорт, заменить на конечную локацию
+_b07_обнуление_ZP_с_X_до_F8:
 	JMP _обнуление_ZP_с_X_до_F8
 .export _loc_07_C07A
 _loc_07_C07A:
@@ -6669,36 +6660,7 @@ bra_07_F534:
 	PLA
 	TAX
 	RTS
-_loc_07_F539:
-	PHA
-	TXA
-	PHA
-	LDA $1D
-	PHA
-	LDA #$00
-	STA $1D
-	LDX #$10
-	CLC
-	ROL $2C
-	ROL $2D
-bra_07_F54A:
-	ROL $1D
-	LDA $1D
-	CMP $1C
-	BCC bra_07_F556
-	SBC $1C
-	STA $1D
-bra_07_F556:
-	ROL $2C
-	ROL $2D
-	DEX
-	BNE bra_07_F54A
-	PLA
-	STA $1D
-	PLA
-	TAX
-	PLA
-	RTS
+
 _loc_07_F564:
 	TXA
 	PHA
@@ -6790,6 +6752,7 @@ bra_07_F5DE:
 	TAX
 	CLC
 	RTS
+
 _loc_07_F5E4:
 	TXA
 	PHA
@@ -6875,16 +6838,7 @@ bra_07_F656:
 	STA $1C
 	TYA
 	RTS
-_loc_07_F666:
-	LDA скорость_X_lo,X
-	STA $34
-	LDA скорость_X_hi,X
-	STA $35
-	LDA скорость_Y_lo,X
-	STA $36
-	LDA скорость_Y_hi,X
-	STA $37
-	JMP _loc_07_F6B3
+
 _loc_07_F67D:
 	LDA координата_X_lo,Y
 	STA $2E
