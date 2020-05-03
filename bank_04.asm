@@ -5823,7 +5823,7 @@ bra_04_B3AE:
 	INY
 	INY
 bra_04_B3BC:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BPL bra_04_B3C2
 	INY
 bra_04_B3C2:
@@ -5994,7 +5994,7 @@ bra_04_B4DE:
 	LDA режим_игры_на_поле
 	AND #$40
 	BNE bra_04_B536
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$01
 	BNE bra_04_B556
 	CPX #$0A
@@ -6002,7 +6002,7 @@ bra_04_B4DE:
 	LDY игрок_с_мячом
 	CPY #$0A
 	BCC bra_04_B529
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	AND #$40
 	BEQ bra_04_B529
 	LDA флаг_кипера_в_штрафной - $0A,Y
@@ -6026,7 +6026,7 @@ bra_04_B541:
 	BMI bra_04_B556
 	LDA #$04
 	STA $1C
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$40
 	BNE bra_04_B578
 	INC $1C
@@ -6044,7 +6044,7 @@ bra_04_B556:
 	LDA флаг_владения_мячом_команды,Y
 	BPL bra_04_B578
 	INC $1C
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$40
 	BNE bra_04_B578
 	INC $1C
@@ -6059,14 +6059,14 @@ bra_04_B578:
 	STA $2F
 	LDA #$00
 	STA $1C
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$B0
 	BEQ bra_04_B5A3
 	INC $1C
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BMI bra_04_B5A3
 	INC $1C
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	ASL
 	ASL
 	BMI bra_04_B5A3
@@ -6080,7 +6080,7 @@ bra_04_B5A3:
 	INY
 	LDA ($2E),Y
 	STA $2D
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BPL bra_04_B5D6
 	LDA таймер_действия,X
 	BEQ bra_04_B5CF
@@ -6116,7 +6116,7 @@ bra_04_B5EB:
 	BMI bra_04_B5EB
 	JMP _loc_04_B721
 bra_04_B5FB:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$08
 	BEQ bra_04_B60B
 	LDY #$02
@@ -6197,7 +6197,7 @@ bra_04_B68D:
 	BMI bra_04_B696
 	JMP _loc_04_B721
 bra_04_B696:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BMI bra_04_B712
 	LDA номер_движения,X
 	AND #$7F
@@ -6215,10 +6215,10 @@ bra_04_B6B7:
 	LDA #$2A
 	JMP _loc_04_B70F
 bra_04_B6BC:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$08
 	BEQ bra_04_B6E6
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$50
 	BEQ bra_04_B6FE
 	AND #$10
@@ -6459,14 +6459,14 @@ bra_04_B8BE:
 	TAX
 	LDA #$00
 	STA $1C
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$B0
 	BEQ bra_04_B902
 	INC $1C
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BMI bra_04_B902
 	INC $1C
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	ASL
 	ASL
 	BMI bra_04_B902
@@ -6479,7 +6479,7 @@ bra_04_B902:
 	STA $2C
 	LDA table_04_B9F5 + 1,Y
 	STA $2D
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BPL bra_04_B91C
 	LDA $1E
 	LSR
@@ -6502,7 +6502,7 @@ bra_04_B939:
 	LDA #$0A
 	JMP _loc_04_B9DF
 bra_04_B93E:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$08
 	BEQ bra_04_B94A
 	LDA #$09
@@ -6559,7 +6559,7 @@ bra_04_B99F:
 	BMI bra_04_B9A8
 	JMP _loc_04_B9DF
 bra_04_B9A8:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BMI bra_04_B9D0
 	LDA $21
 	AND #$0F
@@ -6707,7 +6707,7 @@ bra_04_BAD3:
 	LDY игрок_с_мячом
 	LDA сила_игрока,Y
 	JSR _loc_04_BB02
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	LSR
 	BCS bra_04_BAEF
 	LDA номер_движения,Y

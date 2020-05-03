@@ -2599,9 +2599,9 @@ _loc_00_BCAC:
 	LDA table_00_BDD6,X
 	STA номер_движения,X
 	LDA #$7F
-	STA $74,X
-	LDA #$00
 	STA номер_анимации,X
+	LDA #$00
+	STA состояние_игрока,X
 	STA скорость_X_hi,X
 	STA скорость_X_lo,X
 	STA скорость_Y_hi,X

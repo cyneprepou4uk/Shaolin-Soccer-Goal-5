@@ -673,7 +673,7 @@ bra_07_C5B0:
 	BEQ bra_07_C5C9
 	BNE bra_07_C612
 bra_07_C5C4:
-	BIT номер_анимации_мяча
+	BIT состояние_мяча
 	BVS bra_07_C612
 bra_07_C5C9:
 	INC тип_экрана
@@ -999,7 +999,7 @@ _loc_07_C87B:
 	LDA режим_игры_на_поле
 	AND #$20
 	BEQ bra_07_C89B
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	AND #$C0
 	BNE bra_07_C88D
 	INC таймер_катсцены
@@ -1451,9 +1451,9 @@ table_07_CBC7:
 .byte КНОПКА_А
 .byte КНОПКА_А
 
-.export _b07_CBD6_отображение_циферок_на_миникарте
-_b07_CBD6_отображение_циферок_на_миникарте:
-	LDA номер_циферки_миникарты - 14,X
+.export _b07_CBD6_отображение_циферок_на_экране
+_b07_CBD6_отображение_циферок_на_экране:
+	LDA номер_циферки - 14,X
 	ASL
 	TAY
 	LDA table_07_CBE8,Y
@@ -1471,92 +1471,92 @@ table_07_CBE8:
 .word table_07_CBE8_CC0B
 
 table_07_CBE8_CBF5:
-	LDA номер_циферки_миникарты - 14,X
+	LDA номер_циферки - 14,X
 	BMI bra_07_CBFF
-	ORA #$80
-	STA номер_циферки_миникарты - 14,X
+	ORA #$80		; запись +80, так как на разводке записано 01
+					; только пока что не понятно почему бы заранее +80 не написать. аналогично с циферками
+	STA номер_циферки - 14,X
 bra_07_CBFF:
 	LDA #$84
-	STA $74,X
+	STA номер_анимации,X
 	LDY #$0C
 	STY $44
-	JMP _loc_07_CC9C
+	JMP _CC9C_вывести_циферку_на_миникарту
 
 table_07_CBE8_CC0B:
-	LDA номер_циферки_миникарты - 14,X
+	LDA номер_циферки - 14,X
 	BMI bra_07_CC15
 	ORA #$80
-	STA номер_циферки_миникарты - 14,X
+	STA номер_циферки - 14,X
 bra_07_CC15:
-	LDA номер_циферки_миникарты - 14,X
+	LDA номер_циферки - 14,X
 	AND #$7F
 	TAY
 	LDA table_07_CD23,Y
-	STA $74,X
+	STA номер_анимации,X
 	LDA table_07_CD29,Y
 	BPL bra_07_CC48
 	AND #$7F
 	TAY
 	LDA номер_управляемого,Y
-	BMI bra_07_CC41
+	BMI @скрыть_циферку
 	STA $44
 	TAY
-	LDA позиция_управление,Y
-	BMI bra_07_CC41
+	LDA позиция_управление,Y		; проверка на бота
+	BMI @скрыть_циферку
 	LDA опция_режим_сложность
 	AND #$20
 	BEQ bra_07_CC4A
 	LDA флаг_видимости,Y
 	BNE bra_07_CC4A
-bra_07_CC41:
+@скрыть_циферку:
 	LDA #$7F
-	STA $74,X
+	STA номер_анимации,X		; предположительно тут можно выходить из кода, а он специально продолжает как будто это циферка 1
 	LDA #$00
 bra_07_CC48:
 	STA $44
 bra_07_CC4A:
 	LDY $44
 	LDA координата_X_lo,Y
-	STA координата_X_lo,X
+	STA координата_X_lo_циферки - 14,X
 	SBC $F0
 	STA $1C
 	LDA координата_X_hi,Y
-	STA координата_X_hi,X
+	STA координата_X_hi_циферки - 14,X
 	SBC $F1
-	BNE bra_07_CC9C
+	BNE _CC9C_вывести_циферку_на_миникарту
 	LDA $1C
 	CMP #$08
-	BCC bra_07_CC9C
+	BCC _CC9C_вывести_циферку_на_миникарту
 	LDA координата_Y_lo,Y
-	STA координата_Y_lo,X
+	STA координата_Y_lo_циферки - 14,X
 	SBC $F2
 	STA $1C
 	LDA координата_Y_hi,Y
-	STA координата_Y_hi,X
+	STA координата_Y_hi_циферки - 14,X
 	SBC $F3
-	BNE bra_07_CC9C
+	BNE _CC9C_вывести_циферку_на_миникарту
 	LDA $1C
 	CMP #$18
-	BCC bra_07_CC9C
+	BCC _CC9C_вывести_циферку_на_миникарту
 	CMP #$E0
-	BCS bra_07_CC9C
-	CLC
-	LDA координата_Z_lo,Y		; координата циферки относительно игрок
+	BCS _CC9C_вывести_циферку_на_миникарту
+	CLC		; вывести циферку над головой у игрока
+	LDA координата_Z_lo,Y
 	ADC #$20
-	STA координата_Z_lo,X
+	STA координата_Z_lo_циферки - 14,X
 	LDA координата_Z_hi,Y
 	ADC #$00
-	STA координата_Z_hi,X
+	STA координата_Z_hi_циферки - 14,X
 	RTS
-bra_07_CC9C:
-_loc_07_CC9C:
+_CC9C_вывести_циферку_на_миникарту:
 	LDA тип_экрана
-	CMP #$01
-	BNE bra_07_CCAB
+	CMP #ЭКРАН_KICKOFF
+	BNE @не_скрывать_циферку
 	LDA #$7F
-	STA $74,X
+	STA номер_анимации,X
 	RTS
-bra_07_CCAB:
+@не_скрывать_циферку:
 	LDA координата_X_lo,Y
 	STA $2C
 	LDA координата_X_hi,Y
@@ -1566,14 +1566,14 @@ bra_07_CCAB:
 	LDA координата_Y_hi,Y
 	STA $2F
 	LDY #$00
-bra_07_CCC1:
+@цикл:
 	LSR $2D
 	ROR $2C
 	LSR $2F
 	ROR $2E
 	INY
 	CPY #$04
-	BCC bra_07_CCC1
+	BCC @цикл
 	CLC
 	LDA $F0
 	ADC #$60
@@ -1831,7 +1831,7 @@ bra_07_CEE5:
 bra_07_CF1F:
 	INY
 	LDA ($2C),Y
-	STA $74,X
+	STA номер_анимации,X
 _loc_07_CF25:
 	RTS
 bra_07_CF26:
@@ -1845,11 +1845,11 @@ bra_07_CF30:
 	LDY $44
 	DEY
 	LDA ($2C),Y
-	STA $74,X
+	STA номер_анимации,X
 	JMP _loc_07_CF25
 bra_07_CF42:
 	INY
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$40
 	BEQ bra_07_CF4F
 	LDA ($2C),Y
@@ -2889,7 +2889,7 @@ _loc_07_D6E7:
 	LDY игрок_с_мячом
 	CPY #$0A
 	BCC bra_07_D70A
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	AND #$40
 	BEQ bra_07_D70A
 	LDA флаг_кипера_в_штрафной - $0A,Y
@@ -3293,9 +3293,8 @@ bra_07_D9F9:
 	TXA
 	BNE bra_07_DA01
 	LDX #$0C
-; думдей предупреждал об этом месте
 bra_07_DA01:
-	LDA a: $FF,X
+	LDA a: $FF,X		; думдей предупреждал об этом месте
 	CPX #$0C
 	BNE bra_07_DA0A
 	LDX #$00
@@ -5242,7 +5241,7 @@ _b07_EB8C:
 	BEQ bra_07_EBAD
 	CMP #$03
 	BEQ bra_07_EBAD
-	LDA $74,X
+	LDA номер_анимации,X
 	AND #$7F
 	CMP #$7F
 	BEQ bra_07_EBEC
@@ -5259,7 +5258,7 @@ bra_07_EBAD:
 	INC $F4
 	INC $1C
 bra_07_EBBF:
-	LDA $74,X
+	LDA номер_анимации,X
 	AND #$7F
 	CMP #$7F
 	BEQ bra_07_EBD6
@@ -5276,7 +5275,7 @@ bra_07_EBD6:
 	BNE bra_07_EBEC
 	CPX #$0D
 	BCS bra_07_EBEC
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BPL bra_07_EBEC
 	TXA
 	ORA #$20
@@ -7194,7 +7193,7 @@ bra_07_FA33:
 	JMP _loc_07_F9F3
 _loc_07_FA36:
 	LDY $2C
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	AND #$01
 	BEQ bra_07_FA68
 	LDX $2E

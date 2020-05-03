@@ -13,7 +13,7 @@
 .import _b07_C2CB
 .import _b07_C2D0
 .import _b07_C2E4
-.import _b07_CBD6_отображение_циферок_на_миникарте
+.import _b07_CBD6_отображение_циферок_на_экране
 .import _b07_CD2F
 .import _b07_CDCB
 .import _b07_CEBD
@@ -359,7 +359,7 @@ bra_06_824F:
 	BEQ bra_06_825B
 bra_06_8256:
 	LDA #$24
-	STA $74,X
+	STA номер_анимации,X
 _loc_06_825B:
 bra_06_825B:
 	JSR _loc_06_9D29
@@ -1502,7 +1502,7 @@ bra_06_8B88:
 	RTS
 bra_06_8B97:
 	LDY #$00
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$10
 	BNE bra_06_8B85
 	LDA координата_Z_hi,X
@@ -1513,7 +1513,7 @@ bra_06_8B97:
 	JMP _loc_06_8B85
 bra_06_8BAE:
 	LDY #$02
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$08
 	BEQ bra_06_8B85
 	INY
@@ -1521,7 +1521,7 @@ bra_06_8BAE:
 bra_06_8BBB:
 	LDY #$04
 _loc_06_8BBD:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$40
 	BEQ bra_06_8B85
 	INY
@@ -1580,7 +1580,7 @@ _loc_06_8C72:
 	STA скорость_Y_hi,X
 	RTS
 _loc_06_8C8B:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$01
 	BEQ bra_06_8C99
 	LDA #$43
@@ -1691,7 +1691,7 @@ table_06_8CAF_8D55:
 bra_06_8D60:
 	JSR _b07_C294
 	LDA направление_движения,X
-	STA $74,X
+	STA номер_анимации,X
 	RTS
 
 table_06_8CAF_8D6A:
@@ -1727,7 +1727,7 @@ bra_06_8DAD:
 	STA $2C
 	STA $2D
 	LDY игрок_с_мячом
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	BMI bra_06_8DE4
 	LDA номер_движения,Y
 	AND #$7F
@@ -1793,7 +1793,7 @@ bra_06_8E29:
 	STA скорость_Z_hi,X
 	STA скорость_Z_lo,X
 bra_06_8E42:
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	BPL bra_06_8E4C
 	LDA #$01
 	STA номер_действия_мяча
@@ -1808,7 +1808,7 @@ table_06_8CAF_8E50:
 bra_06_8E58:
 	JSR _loc_06_972F
 	LDA #$04
-	STA $74,X
+	STA номер_анимации,X
 	LDA таймер_мокрого_мяча
 	BEQ bra_06_8E79
 	INC таймер_кадра_анимации,X
@@ -1816,7 +1816,7 @@ bra_06_8E58:
 	CMP #$04
 	BCS bra_06_8E74
 	LDA #$05
-	STA $74,X
+	STA номер_анимации,X
 bra_06_8E74:
 	LDA #$00
 	STA таймер_мокрого_мяча
@@ -1829,7 +1829,7 @@ bra_06_8E79:
 	LDA #$11
 	STA номер_движения_мяча
 	LDA #$00
-	STA $74,X
+	STA номер_анимации,X
 bra_06_8E8E:
 	RTS
 
@@ -1999,9 +1999,9 @@ table_06_8CAF_8FEE:
 	BMI bra_06_900F
 	JSR _loc_06_9927
 	JSR _loc_06_9856
-	LDA $74,X
+	LDA номер_анимации,X
 	AND #$83
-	STA $74,X
+	STA номер_анимации,X
 	LDA #$00
 	STA скорость_Z_hi,X
 	STA скорость_Z_lo,X
@@ -2064,7 +2064,7 @@ bra_06_9071:
 	LDA таймер_мокрого_мяча
 	BPL bra_06_9083
 	LDA #$06
-	STA $74,X
+	STA номер_анимации,X
 	INY
 	INY
 bra_06_9083:
@@ -2747,14 +2747,14 @@ bra_06_961C:
 	JMP _loc_06_963B
 _loc_06_9630:
 bra_06_9630:
-	LDA $74,X
+	LDA номер_анимации,X
 	AND #$7F
 	CMP #$07
 	BNE bra_06_9641
 	AND #$03
 _loc_06_963B:
 	ORA направление_движения,X
-	STA $74,X
+	STA номер_анимации,X
 bra_06_9641:
 	RTS
 _loc_06_9642:
@@ -2762,7 +2762,7 @@ _loc_06_9642:
 	STA $1D
 	LDA номер_кадра_анимации,X
 	AND #$03
-	STA $74,X
+	STA номер_анимации,X
 	LDA скорость_X_hi,X
 	ORA скорость_X_lo,X
 	ORA скорость_Y_hi,X
@@ -2817,12 +2817,12 @@ bra_06_969E:
 	AND #$03
 	STA номер_кадра_анимации,X
 	LDA номер_кадра_анимации,X
-	STA $74,X
+	STA номер_анимации,X
 _loc_06_96C7:
 bra_06_96C7:
-	LDA $74,X
+	LDA номер_анимации,X
 	ORA $1D
-	STA $74,X
+	STA номер_анимации,X
 	RTS
 
 table_06_96D0:
@@ -2920,12 +2920,12 @@ bra_06_9787:
 	JSR _b07_E6F0
 	LDA $0130,X
 	BEQ bra_06_97B0
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	AND #$10
 	BNE bra_06_97B0
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	ASL
-	ORA номер_анимации_мяча
+	ORA состояние_мяча
 	BPL bra_06_97AD
 	LDA координата_Z_hi,X
 	BMI bra_06_97AD
@@ -3153,7 +3153,7 @@ _loc_06_994C:
 	AND #$7F
 	CMP #$21
 	BNE bra_06_9978
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$11
 	BNE bra_06_996E
 	LDY #$00
@@ -3539,7 +3539,7 @@ _loc_06_9C72:
 bra_06_9C7E:
 	CPX #$0C
 	BCC bra_06_9C9D
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$20
 	BNE bra_06_9CC8
 	LDA таймер_мокрого_мяча
@@ -3551,7 +3551,7 @@ bra_06_9C7E:
 bra_06_9C9A:
 	JMP _loc_06_9CA2
 bra_06_9C9D:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BPL bra_06_9CC8
 _loc_06_9CA2:
 	CLC
@@ -3624,10 +3624,10 @@ bra_06_9D25:
 	RTS
 
 _loc_06_9D29:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$40
 	BEQ bra_06_9D59
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BMI bra_06_9D39
 	AND #$08
 	BNE bra_06_9D59
@@ -3651,8 +3651,8 @@ bra_06_9D59:
 	LDA направление_движения,X
 	AND #$80
 bra_06_9D5E:
-	EOR $74,X
-	STA $74,X
+	EOR номер_анимации,X
+	STA номер_анимации,X
 	RTS
 _loc_06_9D65:
 	JSR _loc_06_B151
@@ -3722,7 +3722,7 @@ bra_06_9DC4:
 	JMP _loc_06_9DF8
 bra_06_9DE2:
 	LDY $1D
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	AND #$08
 	BEQ bra_06_9E6A
 	LDA #$36
@@ -3743,7 +3743,7 @@ _loc_06_9DF8:
 	BNE bra_06_9E4A
 	CPY игрок_с_мячом
 	BEQ bra_06_9E4A
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	ASL
 	BMI bra_06_9E4A
 	BIT режим_игры_на_поле
@@ -3797,7 +3797,7 @@ table_06_9E6D:
 .byte $01,$03,$02,$03
 
 _loc_06_9E71:
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	BMI bra_06_9E7A
 	LDA #$2D
 	BNE bra_06_9E7C
@@ -3853,7 +3853,7 @@ _loc_06_9EBF:
 	BPL bra_06_9EE2
 	LDA координата_Z_hi,X
 	BMI bra_06_9EE2
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$40
 	BNE bra_06_9EE2
 	JSR _loc_06_B19A
@@ -3873,7 +3873,7 @@ bra_06_9EF2:
 bra_06_9EF5:
 	LDA позиция_управление,Y
 	BPL bra_06_9F6F
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	BMI bra_06_9F6F
 	AND #$01
 	BNE bra_06_9F6F
@@ -3897,14 +3897,14 @@ bra_06_9EF5:
 	STA скорость_Y_hi,X
 	LDA скорость_Y_lo,Y
 	STA скорость_Y_lo,X
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$40
 	BNE bra_06_9F48
 _loc_06_9F3C:
 	LDA #$56
 	JMP _loc_06_9F64
 bra_06_9F41:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$40
 	BEQ bra_06_9F5A
 bra_06_9F48:
@@ -3916,9 +3916,9 @@ bra_06_9F48:
 	LDA #$56
 	JMP _loc_06_9F64
 bra_06_9F5A:
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	ORA #$01
-	STA номер_анимации,Y
+	STA состояние_игрока,Y
 	LDA #$14
 _loc_06_9F64:
 	STA номер_движения,X
@@ -3928,7 +3928,7 @@ _loc_06_9F64:
 _loc_06_9F6F:
 bra_06_9F6F:
 	RTS
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$20
 	BEQ bra_06_9F79
 	LDY #$02
@@ -3952,7 +3952,7 @@ table_06_9F98:
 .byte $10,$20,$08
 
 _loc_06_9F9B:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$10
 	BEQ bra_06_9FD5
 	LDA #$00
@@ -3985,7 +3985,7 @@ table_06_9FD6:
 .byte $09,$00
 
 _loc_06_9FDA:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	ASL
 	BPL bra_06_A00B
 _loc_06_9FE0:
@@ -4038,7 +4038,7 @@ _loc_06_A021:
 bra_06_A031:
 	LDA $0130,X
 	BEQ bra_06_A03E
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BMI bra_06_A03E
 	JSR _b07_D7F3
 bra_06_A03E:
@@ -4062,7 +4062,7 @@ bra_06_A04D:
 	BEQ bra_06_A080
 	CMP #$01
 	BNE bra_06_A068
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$08
 	BNE bra_06_A068
 	BEQ bra_06_A080
@@ -4103,7 +4103,7 @@ table_06_A06D_A08E:
 	JMP _loc_06_A07B
 
 table_06_A06D_A099:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$08
 	BEQ bra_06_A080
 	LDA $1C
@@ -4128,7 +4128,7 @@ table_06_A06D_A0B8:
 	JMP _loc_06_A07B
 
 table_06_A06D_A0C3:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$08
 	BEQ bra_06_A080
 	LDA $1C
@@ -4158,7 +4158,7 @@ table_06_A06D_A0F4:
 	LDA $1C
 	CMP #$30
 	BNE bra_06_A101
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$40
 	BNE bra_06_A104
 bra_06_A101:
@@ -4288,9 +4288,9 @@ table_06_A1E0:
 _loc_06_A1E9:
 	LDA скорость_Z_hi,X
 	BNE bra_06_A1F6
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	ORA #$02
-	STA номер_анимации,X
+	STA состояние_игрока,X
 bra_06_A1F6:
 	RTS
 _loc_06_A1F7:
@@ -4352,7 +4352,7 @@ bra_06_A248:
 	LDA #$01
 	JMP _loc_06_A2D1
 bra_06_A25A:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$11
 	BEQ bra_06_A26F
 	AND #$01
@@ -4385,7 +4385,7 @@ table_06_A287:
 
 table_06_A1FE_A28F:
 	LDY $44
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$20
 	BEQ bra_06_A29A
 	LDY #$03
@@ -4526,7 +4526,7 @@ bra_06_A391:
 	STA $31
 	LDA $06FC
 	BPL bra_06_A402
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	AND #$08
 	BEQ bra_06_A402
 	LDA игрок_с_мячом
@@ -4652,7 +4652,7 @@ bra_06_A4A4:
 	TAY
 	CPY #$05
 	BCS bra_06_A4B9
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	BMI bra_06_A4B9
 	LDA координата_Z_lo,X
 	BMI bra_06_A4B7
@@ -5397,7 +5397,7 @@ _loc_06_AA1B:
 	AND #$7F
 	CMP #ПОГОДА_МОЛНИЯ
 	BNE bra_06_AA47
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BMI bra_06_AA47
 	LDA номер_скилла,X
 	LSR
@@ -5418,7 +5418,7 @@ bra_06_AA4D:
 	BMI bra_06_AA55
 	JMP _loc_06_AA4C
 bra_06_AA55:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	ASL
 	BMI bra_06_AA64
 	JSR _loc_06_AAAC
@@ -5426,7 +5426,7 @@ bra_06_AA55:
 	BPL bra_06_AA64
 	JMP _loc_06_AAA4
 bra_06_AA64:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$20
 	BEQ bra_06_AA75
 	JSR _loc_06_AAAC
@@ -5434,7 +5434,7 @@ bra_06_AA64:
 	BNE bra_06_AA75
 	JMP _loc_06_AAA4
 bra_06_AA75:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BMI bra_06_AA8D
 bra_06_AA7A:
 	JSR _loc_06_AABD
@@ -5499,7 +5499,7 @@ _loc_06_AACA:
 	LDA #$20
 	STA $1C
 bra_06_AAE8:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$08
 	STA $1D
 	LDA номер_движения,X
@@ -5515,7 +5515,7 @@ bra_06_AAE8:
 	AND #$89
 	ORA $1C
 	ORA $1D
-	STA номер_анимации,X
+	STA состояние_игрока,X
 	RTS
 _loc_06_AB0B:
 	LDA номер_погодного_эффекта
@@ -5523,7 +5523,7 @@ _loc_06_AB0B:
 	CMP #ПОГОДА_МОЛНИЯ
 	BNE bra_06_AB2A
 	JSR _loc_06_9856
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	BMI bra_06_AB2A
 	LDA $0130,X
 	BEQ bra_06_AB2A
@@ -5539,7 +5539,7 @@ bra_06_AB2A:
 	LDA table_06_AC4D,Y
 	AND #$0F
 	STA $1C
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	AND #$0F
 	CMP $1C
 	BCC bra_06_AB46
@@ -5574,16 +5574,16 @@ bra_06_AB6E:
 	TAY
 	LDA table_06_AC4D,Y
 	ORA $1C
-	STA номер_анимации_мяча
-	BIT номер_анимации_мяча
+	STA состояние_мяча
+	BIT состояние_мяча
 	BVC bra_06_ABA0
 	LDY игрок_с_мячом
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	ORA #$40
-	STA номер_анимации,Y
+	STA состояние_игрока,Y
 	AND #$80
-	ORA номер_анимации_мяча
-	STA номер_анимации_мяча
+	ORA состояние_мяча
+	STA состояние_мяча
 	TYA
 	AND #$01
 	TAY
@@ -5591,13 +5591,13 @@ bra_06_AB6E:
 	ORA #$80
 	STA флаг_владения_мячом_команды,Y
 bra_06_ABA0:
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	AND #$10
 	BEQ bra_06_ABB2
 	LDY игрок_с_мячом
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	ORA #$10
-	STA номер_анимации,Y
+	STA состояние_игрока,Y
 bra_06_ABB2:
 	RTS
 _loc_06_ABB3:
@@ -5624,9 +5624,9 @@ bra_06_ABD8:
 _loc_06_ABDE:
 	LDX #$00
 bra_06_ABE0:
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	AND #$FE
-	STA номер_анимации,X
+	STA состояние_игрока,X
 	INX
 	CPX #$0C
 	BCC bra_06_ABE0
@@ -5637,10 +5637,10 @@ bra_06_ABEF:
 	CMP #$14
 	BNE bra_06_AC47
 	LDY $04CA,X
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	ORA #$01
-	STA номер_анимации,X
-	STA номер_анимации,Y
+	STA состояние_игрока,X
+	STA состояние_игрока,Y
 	LDA координата_X_lo,Y
 	STA координата_X_lo,X
 	LDA координата_X_hi,Y
@@ -5732,7 +5732,7 @@ _loc_06_AD8B:
 	STA номер_движения_мяча
 	TAY
 	LDA table_06_AC4D,Y
-	STA номер_анимации_мяча
+	STA состояние_мяча
 	JMP _loc_06_AD72
 
 table_06_AD62_AD98:
@@ -5774,7 +5774,7 @@ table_06_AD62_ADC9:
 	BEQ bra_06_ADEE
 	CMP #$15
 	BNE bra_06_AE0E
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	BMI bra_06_AE0E
 bra_06_ADEB:
 	JMP _loc_06_AD72
@@ -5791,14 +5791,14 @@ bra_06_ADF5:
 	BEQ bra_06_AE0E
 	CMP #$1D
 	BEQ bra_06_AE0E
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	BMI bra_06_AE0E
 	JMP _loc_06_AD72
 bra_06_AE0E:
 	STY игрок_с_мячом
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	BPL bra_06_AE40
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	BMI bra_06_AE3A
 	LDA скорость_Z_hi,Y
 	BPL bra_06_AE3A
@@ -5897,9 +5897,9 @@ bra_06_AEBE:
 	CMP table_06_B040,Y
 	BCC bra_06_AF25
 bra_06_AEE0:
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	ORA #$40
-	STA номер_анимации_мяча
+	STA состояние_мяча
 	LDA опция_режим_сложность
 	AND #$20
 	BEQ bra_06_AEF2
@@ -5907,7 +5907,7 @@ bra_06_AEE0:
 	STA режим_игры_на_поле
 bra_06_AEF2:
 	LDY $1D
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	BPL bra_06_AF06
 	LDA номер_движения,Y
 	AND #$7F
@@ -5925,7 +5925,7 @@ bra_06_AF11:
 	JSR _loc_06_B07B
 bra_06_AF14:
 	LDA #$40
-	STA номер_анимации_мяча
+	STA состояние_мяча
 	LDY $1D
 	LDA #$02
 	JSR _loc_06_A2D7
@@ -5933,7 +5933,7 @@ bra_06_AF14:
 	JMP _loc_06_AD8B
 bra_06_AF25:
 	LDY $1D
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	BMI bra_06_AF31
 	LDA #$11
 	JSR _loc_06_B07B
@@ -5968,7 +5968,7 @@ bra_06_AF62:
 _loc_06_AF63:
 	LDA таймер_электрического_мяча
 	BEQ bra_06_AF7A
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	BPL bra_06_AF7A
 	LDA сила_мяча
 	ORA таймер_действия_мяча
@@ -6144,9 +6144,9 @@ _loc_06_B151:
 bra_06_B167:
 	LDX $43
 	LDY $44
-	LDA номер_анимации,X
+	LDA состояние_игрока,X
 	BMI bra_06_B175
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	BMI bra_06_B18C
 bra_06_B175:
 	LDX $44
@@ -6666,7 +6666,7 @@ bra_06_B516:
 	LDY #$08
 	JMP _loc_06_B537
 bra_06_B524:
-	LDA номер_анимации,Y
+	LDA состояние_игрока,Y
 	AND #$98
 	LSR
 	LSR
@@ -7164,7 +7164,7 @@ bra_06_B995:
 bra_06_B998:
 	LDA #$00
 	STA $1C
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	BPL bra_06_B9A9
 	LDA координата_Z_lo,X
 	ORA координата_Z_hi,X
@@ -7234,11 +7234,11 @@ _loc_06_BA31:
 	LDA режим_игры_на_поле
 	AND #$40
 	BNE bra_06_BAB5
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	AND #$40
 	BNE bra_06_BAB5
 	LDA #$00
-	STA $80
+	STA номер_анимации_мяча
 	LDA номер_погодного_эффекта
 	AND #$7F
 	CMP #ПОГОДА_МОЛНИЯ
@@ -7678,7 +7678,7 @@ bra_06_BD7F:
 	JSR _loc_06_8C9D
 	JSR _loc_06_9609
 	JSR _loc_06_B8C5
-	LDA номер_анимации_мяча
+	LDA состояние_мяча
 	AND #$40
 	BEQ bra_06_BDB3
 	LDA номер_движения_мяча
@@ -7839,11 +7839,11 @@ _loc_06_BECC:
 	BNE bra_06_BEE7
 	LDX #$0E
 	LDA тип_экрана
-	CMP #$01
+	CMP #ЭКРАН_KICKOFF
 	BNE @цикл
 	INX
 @цикл:
-	JSR _b07_CBD6_отображение_циферок_на_миникарте
+	JSR _b07_CBD6_отображение_циферок_на_экране
 	JSR _b07_EB8C
 	INX
 	CPX #$13

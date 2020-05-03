@@ -191,7 +191,7 @@ _loc_05_80DF:
 bra_05_811E:
 	LDA #$00
 	STA номер_движения,X
-	STA номер_анимации,X
+	STA состояние_игрока,X
 	STA направление_движения,X
 	STA смена_угла_движения,X
 	STA скорость_X_lo,X
@@ -393,11 +393,11 @@ _loc_05_828D:
 	BEQ bra_05_82AA
 	LDA $1C
 	ORA #$80
-	STA $74,X
+	STA номер_анимации,X
 	JMP _loc_05_82AF
 bra_05_82AA:
 	LDA #$7F
-	STA $74,X
+	STA номер_анимации,X
 _loc_05_82AF:
 	RTS
 _loc_05_82B0:
@@ -1494,7 +1494,7 @@ table_05_8AD1:		; байты после JSR
 _loc_05_8AD5:
 	LDA #$00
 	STA номер_опции
-	STA $80
+	STA номер_анимации_мяча
 	LDA #$06
 	STA номер_опции + 1
 	LDA #$05
@@ -1990,8 +1990,8 @@ table_05_8F05_8F10:
 	LDA координата_Z_hi,Y
 	STA координата_Z_hi,X
 	LDA $0074,Y
-	STA $74,X
-	INC $74,X
+	STA номер_анимации,X
+	INC номер_анимации,X
 	RTS
 
 table_05_8F05_8F40:
@@ -2565,10 +2565,10 @@ _loc_05_9396:
 	LDA #$FF
 	STA номер_опции
 	LDA #$7F
-	STA $74
-	STA $75
-	STA $76
-	STA $77
+	STA номер_анимации
+	STA номер_анимации + 1
+	STA номер_анимации + 2
+	STA номер_анимации + 3
 	LDA #$05
 	STA $61
 	STA $62
@@ -3793,14 +3793,14 @@ _loc_05_9DC2:
 	BNE bra_05_9E22
 	LDY $1C
 	LDA table_05_9EF6,Y
-	STA $74,X
+	STA номер_анимации,X
 	CMP #$88
 	BNE bra_05_9E05
 	LDA счетчик_опций
 	CMP #$03
 	BCS bra_05_9E05
 	LDA #$7F
-	STA $74,X
+	STA номер_анимации,X
 bra_05_9E05:
 	LDA счетчик_опций
 	CMP #$04
@@ -3813,7 +3813,7 @@ bra_05_9E05:
 	AND #$03
 	BNE bra_05_9E5F
 	LDA #$7F
-	STA $74,X
+	STA номер_анимации,X
 	JMP _loc_05_9E5F
 bra_05_9E22:
 	LDA #$00
@@ -3834,7 +3834,7 @@ bra_05_9E22:
 bra_05_9E42:
 	LDY $1D
 	LDA table_05_9EF3,Y
-	STA $74,X
+	STA номер_анимации,X
 	LDA счетчик_опций
 	CMP #$04
 	BNE bra_05_9E5F
@@ -3844,7 +3844,7 @@ bra_05_9E42:
 	BCC bra_05_9E5F
 	BEQ bra_05_9E5F
 	LDA #$7F
-	STA $74,X
+	STA номер_анимации,X
 _loc_05_9E5F:
 bra_05_9E5F:
 	RTS
@@ -4375,7 +4375,7 @@ _loc_05_A2F6:
 _loc_05_A2F7:
 	LDA #$00
 	STA $61,X
-	STA $74,X
+	STA номер_анимации,X
 	LDA #$3C
 	STA координата_X_lo,X
 	LDA #$60
@@ -4983,9 +4983,9 @@ _loc_05_A8C5:
 table_05_A874_A8C5:
 table_05_A9EC_A8C5:
 	LDA #$16
-	STA $75
+	STA номер_анимации + 1
 	LDA #$7F
-	STA $76
+	STA номер_анимации + 2
 	LDX #$00
 	JSR _loc_05_822A
 	LDA #$00
@@ -5086,9 +5086,9 @@ table_05_AA71_A97C:
 table_05_AAA9_A97C:
 	JSR _loc_05_AE22
 	LDA #$16
-	STA $75
+	STA номер_анимации + 1
 	LDA #$96
-	STA $76
+	STA номер_анимации + 2
 	LDA #$04
 	STA $05CE
 	LDX #$00
@@ -6107,7 +6107,7 @@ _loc_05_B2F0:
 	STA номер_команды
 	LDA #$07
 	STA номер_палитры_спрайтов
-	STA $80
+	STA номер_анимации_мяча
 	LDX #$26
 	STX банк_спрайтов
 	INX
@@ -6359,7 +6359,7 @@ _loc_05_B4D6:
 	LDA #$04
 	STA $6D
 	LDA #$07
-	STA $80
+	STA номер_анимации_мяча
 	STA номер_палитры_спрайтов
 	LDA #$C8
 	STA координата_X_lo_мяча
