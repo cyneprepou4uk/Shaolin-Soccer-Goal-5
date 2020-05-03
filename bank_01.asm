@@ -13,6 +13,7 @@
 .import _b07_C344
 .import _b07_E828
 .import _b07_яркость_палитры_и_запись_в_буфер
+.import _общий_RTS
 
 .export _loc_01_8000
 _loc_01_8000:
@@ -3065,16 +3066,13 @@ table_01_B9E8:
 .word table_01_B9E8_BBCA
 
 table_01_B9F6:
-.word table_01_B9F6_BA04		; никогда не используется, так как 00 погода пропускается, надо удалить
+.word _общий_RTS				; никогда не используется, так как 00 погода пропускается, надо удалить
 .word table_01_B9F6_BA05
-.word table_01_B9F6_BA2D
+.word _общий_RTS
 .word table_01_B9F6_BA2E
 .word table_01_B9F6_BA8A
 .word table_01_B9F6_BA8A
 .word table_01_B9F6_BA8A
-
-table_01_B9F6_BA04:
-	RTS
 
 table_01_B9F6_BA05:
 	LDA #$00
@@ -3092,9 +3090,6 @@ table_01_BA1D:
 
 table_01_BA25:
 .byte $68,$68,$98,$98,$38,$38,$98,$98
-
-table_01_B9F6_BA2D:
-	RTS
 
 table_01_B9F6_BA2E:
 	LDA #$41

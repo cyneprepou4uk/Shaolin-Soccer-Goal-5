@@ -2009,17 +2009,18 @@ bra_05_8F52:
 	SBC #$02
 	ASL
 	TAY
-	LDA table_05_8F6D,Y
+	LDA table_05_8F6D_скорость_X,Y
 	STA скорость_X_lo,X
-	LDA table_05_8F6D + 1,Y
+	LDA table_05_8F6D_скорость_X + 1,Y
 	STA скорость_X_hi,X
 	JSR _loc_05_801E
 	RTS
 
-table_05_8F6D:
-.byte $80,$FF
-.byte $A0,$FF
-.byte $C0,$FF
+; 60fps
+table_05_8F6D_скорость_X:
+.word $FFD5
+.word $FFE0
+.word $FFEB
 
 _loc_05_8F73:
 	LDA #$04

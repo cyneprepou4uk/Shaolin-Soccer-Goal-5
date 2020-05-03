@@ -2,6 +2,8 @@
 .include "ram_copy.inc"
 .include "val_copy.inc"
 
+; банк с гравитацией и скоростями
+
 .import _b07_C276
 .import _b07_C28F
 .import _b07_C294
@@ -783,7 +785,7 @@ bra_06_85A6:
 	JSR _loc_06_99EB
 	LDY #$00
 bra_06_85BF:
-	ASL скорость_Y_lo,X
+	ASL скорость_Y_lo,X		; 60фпс возможно
 	ROL скорость_Y_hi,X
 	ASL скорость_X_lo,X
 	ROL скорость_X_hi,X
@@ -947,7 +949,7 @@ table_06_803F_8709:
 	LDA #$00
 	STA таймер_действия,X
 	STA гравитация_hi,X
-	LDA #$80
+	LDA #$0D		; 60fps
 	STA гравитация_lo,X
 bra_06_871E:
 	JMP _loc_06_8748
@@ -1547,6 +1549,7 @@ _loc_06_8C3C:
 	ROR скорость_Y_hi,X
 	ROR скорость_Y_lo,X
 	RTS
+
 _loc_06_8C47:
 	LDA позиция_управление,X
 	BPL bra_06_8C71
@@ -1569,6 +1572,7 @@ _loc_06_8C47:
 	STA направление_движения,X
 bra_06_8C71:
 	RTS
+
 _loc_06_8C72:
 	LDA скорость_X_lo,Y
 	STA скорость_X_lo,X
@@ -1579,6 +1583,7 @@ _loc_06_8C72:
 	LDA скорость_Y_hi,Y
 	STA скорость_Y_hi,X
 	RTS
+
 _loc_06_8C8B:
 	LDA состояние_игрока,X
 	AND #$01
@@ -2069,7 +2074,7 @@ bra_06_9071:
 	INY
 bra_06_9083:
 	SEC
-	ROR скорость_Z_hi,X
+	ROR скорость_Z_hi,X		; 60фпс код делит на 2, а надо делить на 6
 	ROR скорость_Z_lo,X
 	SEC
 	LDA скорость_Z_lo,X
@@ -2100,15 +2105,17 @@ bra_06_90C6:
 	JSR _loc_06_B1D3
 	RTS
 
+; 60fps отскок мяча при приземлении
 table_06_90CA:
-.byte $00,$01
-.byte $00,$02
-.byte $00,$02
-.byte $00,$04
-.byte $00,$08
-.byte $00,$10
-.byte $00,$08
-.byte $00,$10
+; скорость Z_lo, Z_hi
+.word $0055
+.word $00AB
+.word $00AB
+.word $0155
+.word $03AB
+.word $0555
+.word $03AB
+.word $0555
 
 table_06_8CAF_90DA:
 	LDA номер_движения,X
@@ -2122,7 +2129,7 @@ table_06_8CAF_90DA:
 	LDA скорость_Z_hi,Y
 	ADC #$00
 	STA скорость_Z_hi,X
-	JSR _loc_06_94B2
+	JSR _loc_06_94B2_запись_базовой_гравитации
 	JSR _loc_06_9856
 bra_06_90FC:
 	LDA #$00
@@ -2247,7 +2254,7 @@ bra_06_91DA:
 	STA скорость_Z_hi,X
 	LDA #$00
 	STA гравитация_hi,X
-	LDA #$80
+	LDA #$0D		; 60fps
 	STA гравитация_lo,X
 	LDA $1E
 	STA координата_X_lo,X
@@ -2278,7 +2285,7 @@ table_06_8CAF_9226:
 	STA скорость_Y_hi,X
 	LDA скорость_Y_lo,Y
 	STA скорость_Y_lo,X
-	JSR _loc_06_94B2
+	JSR _loc_06_94B2_запись_базовой_гравитации
 	JMP _loc_06_925F
 
 table_06_8CAF_924C:
@@ -2508,23 +2515,24 @@ bra_06_9428:
 	BNE bra_06_9402
 	RTS
 
+; 60fps
 table_06_9435:
-.byte $00,$00,$A0,$FF
-.byte $49,$00,$A8,$FF
-.byte $87,$00,$BD,$FF
-.byte $B1,$00,$DC,$FF
-.byte $C0,$00,$00,$00
-.byte $B1,$00,$24,$00
-.byte $87,$00,$43,$00
-.byte $49,$00,$58,$00
-.byte $00,$00,$60,$00
-.byte $B7,$FF,$58,$00
-.byte $79,$FF,$43,$00
-.byte $4F,$FF,$24,$00
-.byte $40,$FF,$00,$00
-.byte $4F,$FF,$DC,$FF
-.byte $79,$FF,$BD,$FF
-.byte $B7,$FF,$A8,$FF
+.word $0000,	$FFE0
+.word $0018,	$FFE3
+.word $002D,	$FFEA
+.word $003B,	$FFF4
+.word $0040,	$0000
+.word $003B,	$000C
+.word $002D,	$0016
+.word $0018,	$001D
+.word $0000,	$0020
+.word $FFE8,	$001D
+.word $FFD3,	$0016
+.word $FFC5,	$000C
+.word $FFC0,	$0000
+.word $FFC5,	$FFF4
+.word $FFD3,	$FFEA
+.word $FFE8,	$FFE3
 
 _loc_06_9475:
 	LDA разновидность_супера
@@ -2549,39 +2557,41 @@ bra_06_9498:
 	STA сила_мяча
 bra_06_949B:
 	RTS
+
 _loc_06_949C:
 	ASL
 	ASL
 	TAY
 	LDA таймер_мокрого_мяча
-	BPL bra_06_94A6
+	BPL @мяч_не_максимально_мокрый
 	INY
 	INY
-bra_06_94A6:
-	LDA table_06_94BF,Y
+@мяч_не_максимально_мокрый:
+	LDA table_06_94BF_скорость_Z,Y
 	STA скорость_Z_lo,X
-	LDA table_06_94BF + 1,Y
+	LDA table_06_94BF_скорость_Z + 1,Y
 	STA скорость_Z_hi,X
-_loc_06_94B2:
-	LDA #$80
+_loc_06_94B2_запись_базовой_гравитации:
+	LDA #$0E		; 60fps
 	STA гравитация_lo,X
 	LDA #$00
 	STA гравитация_hi,X
 	RTS
 
-table_06_94BF:
-.byte $00,$08
-.byte $00,$06
-.byte $00,$08
-.byte $00,$07
-.byte $00,$09
-.byte $00,$08
-.byte $80,$01
-.byte $00,$01
-.byte $00,$05
-.byte $00,$05
-.byte $00,$03
-.byte $00,$03
+; 60fps скорость Z
+table_06_94BF_скорость_Z:
+.word $02AB
+.word $0200
+.word $02AB
+.word $0255
+.word $0300
+.word $02AB
+.word $0080
+.word $0055
+.word $01AB
+.word $01AB
+.word $0100
+.word $0100
 
 _loc_06_94D9:
 	STA $1E
@@ -2663,7 +2673,7 @@ bra_06_954E:
 bra_06_956B:
 	CLC
 	LDA скорость_X_lo,X
-	ADC #$10
+	ADC #$10	; 60фпс возможно
 	STA скорость_X_lo,X
 	LDA скорость_X_hi,X
 	ADC #$00
@@ -2673,7 +2683,7 @@ bra_06_956B:
 bra_06_9581:
 	SEC
 	LDA скорость_X_lo,X
-	SBC #$10
+	SBC #$10	; 60фпс возможно
 	STA скорость_X_lo,X
 	LDA скорость_X_hi,X
 	SBC #$00
@@ -2700,7 +2710,7 @@ bra_06_959C:
 bra_06_95B9:
 	CLC
 	LDA скорость_Y_lo,X
-	ADC #$10
+	ADC #$10	; 60фпс возможно
 	STA скорость_Y_lo,X
 	LDA скорость_Y_hi,X
 	ADC #$00
@@ -2710,7 +2720,7 @@ bra_06_95B9:
 bra_06_95CF:
 	SEC
 	LDA скорость_Y_lo,X
-	SBC #$10
+	SBC #$10	; 60фпс возможно
 	STA скорость_Y_lo,X
 	LDA скорость_Y_hi,X
 	SBC #$00
@@ -2724,6 +2734,7 @@ _loc_06_95EA:
 bra_06_95EA:
 	RTS
 
+; 60фпс возможно
 table_06_95EB:
 .byte $18,$30,$10,$18,$18,$20,$18,$30,$10,$18,$18,$20,$18,$30,$10,$18,$18,$20,$30,$30,$20,$30,$40,$40,$30,$30,$20,$30,$40,$40
 
@@ -2846,7 +2857,7 @@ _loc_06_96DA:
 	LSR
 	AND #$FE
 	TAY
-	LDA table_06_971F + 1,Y
+	LDA table_06_971F_скорость_Y + 1,Y
 	EOR скорость_Y_hi,X
 	BMI bra_06_970B
 	LDA скорость_Y_hi,X
@@ -2860,23 +2871,24 @@ bra_06_9707:
 bra_06_970B:
 	CLC
 	LDA скорость_Y_lo,X
-	ADC table_06_971F,Y
+	ADC table_06_971F_скорость_Y,Y
 	STA скорость_Y_lo,X
 	LDA скорость_Y_hi,X
-	ADC table_06_971F + 1,Y
+	ADC table_06_971F_скорость_Y + 1,Y
 	STA скорость_Y_hi,X
 bra_06_971E:
 	RTS
 
-table_06_971F:
-.byte $80,$FF
-.byte $80,$FF
-.byte $00,$00
-.byte $80,$00
-.byte $80,$00
-.byte $80,$00
-.byte $00,$00
-.byte $80,$FF
+; 60fps
+table_06_971F_скорость_Y:
+.word $FFD5
+.word $FFD5
+.word $0000
+.word $002B
+.word $002B
+.word $002B
+.word $0000
+.word $FFD5
 
 _loc_06_972F:
 	JSR _loc_06_977B
@@ -2908,6 +2920,7 @@ bra_06_9742:
 	LDA скорость_Y_hi,Y
 	STA скорость_Y_hi,X
 	RTS
+
 _loc_06_977B:
 	LDA флаг_видимости,X
 	BNE bra_06_9787
@@ -2992,25 +3005,27 @@ bra_06_97F9:
 bra_06_981B:
 	CLC
 	LDA скорость_X_lo,X
-	ADC table_06_9837,Y
+	ADC table_06_9837_скорость_X,Y
 	STA скорость_X_lo,X
 	LDA скорость_X_hi,X
-	ADC table_06_9837 + 1,Y
+	ADC table_06_9837_скорость_X + 1,Y
 	STA скорость_X_hi,X
 bra_06_982E:
 	RTS
 
+; 60фпс возможно
 table_06_982F:
 .byte $0A,$00
 .byte $F6,$FF
 .byte $08,$00
 .byte $F8,$FF
 
-table_06_9837:
-.byte $80,$00
-.byte $80,$FF
-.byte $30,$00
-.byte $D0,$FF
+; 60fps походу скорость обычного удара
+table_06_9837_скорость_X:
+.word $002B
+.word $FFD5
+.word $0010
+.word $FFF0
 
 _loc_06_983F:
 	LDA координата_Z_hi,X
@@ -3087,6 +3102,7 @@ bra_06_98C3:
 	JMP _loc_06_9889
 bra_06_98D2:
 	RTS
+
 _loc_06_98D3:
 	LDA скорость_Z_lo,X
 	ORA скорость_Z_hi,X
@@ -3276,15 +3292,17 @@ bra_06_9A44:
 	BNE bra_06_9A1E
 	RTS
 
+; 60fps скорость движения
 table_06_9A57:
-.byte $00,$00,$00,$F8
-.byte $A8,$05,$58,$FA
-.byte $00,$08,$00,$00
-.byte $A8,$05,$A8,$05
-.byte $00,$00,$00,$08
-.byte $58,$FA,$A8,$05
-.byte $00,$F8,$00,$00
-.byte $58,$FA,$58,$FA
+; скорость X, Y
+.word $0000,	$FD00
+.word $01E3,	$FE1D
+.word $02AB,	$0000
+.word $01E3,	$01E3
+.word $0000,	$02AB
+.word $FE1D,	$01E3
+.word $FD55,	$0000
+.word $FE1D,	$FE1D
 
 _loc_06_9A77:
 	LDA $0493
@@ -3303,20 +3321,20 @@ bra_06_9A87:
 	BPL bra_06_9AA5
 	CLC
 	LDA скорость_X_lo,X
-	ADC table_06_9AFC,Y
+	ADC table_06_9AFC_скорость,Y
 	STA скорость_X_lo,X
 	LDA скорость_X_hi,X
-	ADC table_06_9AFC + 1,Y
+	ADC table_06_9AFC_скорость + 1,Y
 	STA скорость_X_hi,X
 	BPL bra_06_9ABA
 	BMI bra_06_9AC2
 bra_06_9AA5:
 	SEC
 	LDA скорость_X_lo,X
-	SBC table_06_9AFC,Y
+	SBC table_06_9AFC_скорость,Y
 	STA скорость_X_lo,X
 	LDA скорость_X_hi,X
-	SBC table_06_9AFC + 1,Y
+	SBC table_06_9AFC_скорость + 1,Y
 	STA скорость_X_hi,X
 	BPL bra_06_9AC2
 bra_06_9ABA:
@@ -3328,20 +3346,20 @@ bra_06_9AC2:
 	BPL bra_06_9ADE
 	CLC
 	LDA скорость_Y_lo,X
-	ADC table_06_9AFC,Y
+	ADC table_06_9AFC_скорость,Y
 	STA скорость_Y_lo,X
 	LDA скорость_Y_hi,X
-	ADC table_06_9AFC + 1,Y
+	ADC table_06_9AFC_скорость + 1,Y
 	STA скорость_Y_hi,X
 	BPL bra_06_9AF3
 	BMI bra_06_9AFB
 bra_06_9ADE:
 	SEC
 	LDA скорость_Y_lo,X
-	SBC table_06_9AFC,Y
+	SBC table_06_9AFC_скорость,Y
 	STA скорость_Y_lo,X
 	LDA скорость_Y_hi,X
-	SBC table_06_9AFC + 1,Y
+	SBC table_06_9AFC_скорость + 1,Y
 	STA скорость_Y_hi,X
 	BPL bra_06_9AFB
 bra_06_9AF3:
@@ -3351,35 +3369,36 @@ bra_06_9AF3:
 bra_06_9AFB:
 	RTS
 
-table_06_9AFC:
-.byte $50,$00
-.byte $10,$00
-.byte $60,$00
-.byte $60,$00
-.byte $A0,$00
-.byte $40,$00
-.byte $C0,$00
-.byte $C0,$00
-.byte $00,$01
-.byte $40,$00
-.byte $00,$01
-.byte $00,$01
-.byte $00,$01
-.byte $00,$01
-.byte $00,$03
-.byte $00,$03
-.byte $C0,$00
-.byte $80,$00
-.byte $00,$03
-.byte $00,$03
-.byte $80,$00
-.byte $20,$00
-.byte $C0,$00
-.byte $C0,$00
-.byte $00,$01
-.byte $10,$00
-.byte $00,$01
-.byte $00,$01
+; 60fps
+table_06_9AFC_скорость:
+.word $001B
+.word $0005
+.word $0020
+.word $0020
+.word $0035
+.word $0015
+.word $0040
+.word $0040
+.word $00FF
+.word $0015
+.word $00FF
+.word $00FF
+.word $00FF
+.word $00FF
+.word $0100
+.word $0100
+.word $0040
+.word $002B
+.word $0100
+.word $0100
+.word $002B
+.word $000B
+.word $0040
+.word $0040
+.word $00FF
+.word $0005
+.word $00FF
+.word $00FF
 
 _loc_06_9B34:
 	LDA #$00
@@ -3390,45 +3409,48 @@ _loc_06_9B34:
 	STA скорость_Y_hi,X
 	STA скорость_Y_lo,X
 	RTS
+
 _loc_06_9B49:
 	LDA скорость_X_hi,X
 	ORA скорость_X_lo,X
 	ORA скорость_Y_hi,X
 	ORA скорость_Y_lo,X
-	BNE bra_06_9B5C
+	BNE @RTS
 	JSR _loc_06_8B6C
 	PLA
 	PLA
-bra_06_9B5C:
+@RTS:
 	RTS
+
 _loc_06_9B5D:
 	LDA $0493
 _loc_06_9B60:
 	ASL
 	TAY
-	LDA table_06_9B7B,Y
+	LDA table_06_9B7B_скорость_Z,Y
 	STA скорость_Z_lo,X
-	LDA table_06_9B7B + 1,Y
+	LDA table_06_9B7B_скорость_Z + 1,Y
 	STA скорость_Z_hi,X
-	LDA #$80
+	LDA #$0D		; 60fps
 	STA гравитация_lo,X
 	LDA #$00
 	STA гравитация_hi,X
 	RTS
 
-table_06_9B7B:
-.byte $00,$04
-.byte $00,$04
-.byte $00,$03
-.byte $80,$01
-.byte $00,$05
-.byte $00,$05
-.byte $80,$04
-.byte $00,$04
-.byte $00,$03
-.byte $00,$02
-.byte $00,$06
-.byte $00,$0C
+; 60fps
+table_06_9B7B_скорость_Z:
+.word $0155
+.word $0155
+.word $0100
+.word $0080
+.word $01AB
+.word $01AB
+.word $0180
+.word $0155
+.word $0100
+.word $00AB
+.word $0200
+.word $0400
 
 _loc_06_9B95:
 	LDA координата_X_lo,X
@@ -4004,13 +4026,14 @@ bra_06_9FF7:
 bra_06_9FFC:
 	LDA #$00
 	STA гравитация_hi_мяча
-	LDA #$80
-	STA гравитация_lo_мяча
-	LDA #$06
+	LDA #$B8
+	STA гравитация_lo_мяча		; 60fps_мяч
+	LDA #$00
 _loc_06_A008:
 	STA номер_действия_мяча
 bra_06_A00B:
 	RTS
+
 _loc_06_A00C:
 	TXA
 	AND #$01
@@ -4201,30 +4224,31 @@ _loc_06_A133:
 	TAY
 	CLC
 	LDA скорость_X_lo,X
-	ADC table_06_A167,Y
+	ADC table_06_A167_скорость,Y
 	STA скорость_X_lo,X
 	LDA скорость_X_hi,X
-	ADC table_06_A167 + 1,Y
+	ADC table_06_A167_скорость + 1,Y
 	STA скорость_X_hi,X
 	CLC
 	LDA скорость_Y_lo,X
-	ADC table_06_A167 + 2,Y
+	ADC table_06_A167_скорость + 2,Y
 	STA скорость_Y_lo,X
 	LDA скорость_Y_hi,X
-	ADC table_06_A167 + 3,Y
+	ADC table_06_A167_скорость + 3,Y
 	STA скорость_Y_hi,X
 bra_06_A166:
 	RTS
 
-table_06_A167:
-.byte $00,$00,$F4,$FF
-.byte $08,$00,$F8,$FF
-.byte $0C,$00,$00,$00
-.byte $08,$00,$08,$00
-.byte $00,$00,$0C,$00
-.byte $F8,$FF,$08,$00
-.byte $F4,$FF,$00,$00
-.byte $F8,$FF,$F8,$FF
+; 60fps
+table_06_A167_скорость:
+.word $0000,	$FFFC
+.word $0003,	$FFFD
+.word $0004,	$0000
+.word $0003,	$0003
+.word $0000,	$0004
+.word $FFFD,	$0003
+.word $FFFC,	$0000
+.word $FFFD,	$FFFD
 
 _loc_06_A187:
 	LDY #$00
@@ -4239,16 +4263,16 @@ bra_06_A18F:
 	CLC
 	ADC #$01
 bra_06_A19B:
-	CMP table_06_A1D8 + 1,Y
+	CMP table_06_A1D8_скорость_X + 1,Y
 	BCC bra_06_A1B3
 	LDA скорость_X_hi,X
 	BPL bra_06_A1A7
 	INY
 	INY
 bra_06_A1A7:
-	LDA table_06_A1D8,Y
+	LDA table_06_A1D8_скорость_X,Y
 	STA скорость_X_lo,X
-	LDA table_06_A1D8 + 1,Y
+	LDA table_06_A1D8_скорость_X + 1,Y
 	STA скорость_X_hi,X
 bra_06_A1B3:
 	LDY $1D
@@ -4258,31 +4282,33 @@ bra_06_A1B3:
 	CLC
 	ADC #$01
 bra_06_A1BF:
-	CMP table_06_A1E0 + 1,Y
+	CMP table_06_A1E0_скорость_Y + 1,Y
 	BCC bra_06_A1D7
 	LDA скорость_Y_hi,X
 	BPL bra_06_A1CB
 	INY
 	INY
 bra_06_A1CB:
-	LDA table_06_A1E0,Y
+	LDA table_06_A1E0_скорость_Y,Y
 	STA скорость_Y_lo,X
-	LDA table_06_A1E0 + 1,Y
+	LDA table_06_A1E0_скорость_Y + 1,Y
 	STA скорость_Y_hi,X
 bra_06_A1D7:
 	RTS
 
-table_06_A1D8:
-.byte $00,$06
-.byte $00,$FA
-.byte $00,$08
-.byte $00,$F8
+; 60fps
+table_06_A1D8_скорость_X:
+.word $0200
+.word $FE00
+.word $02AB
+.word $FD55
 
-table_06_A1E0:
-.byte $00,$04
-.byte $00,$FC
-.byte $00,$08
-.byte $00,$F8
+; 60fps
+table_06_A1E0_скорость_Y:
+.word $0155
+.word $FEAB
+.word $02AB
+.word $FD55
 
 	RTS
 _loc_06_A1E9:
@@ -4777,7 +4803,7 @@ bra_06_A586:
 	LDA скорость_Z_hi,X
 	SBC $1C
 	STA скорость_Z_hi,X
-	LDA #$80
+	LDA #$0D		; 60fps
 	STA гравитация_lo,X
 	LDA #$00
 	STA гравитация_hi,X
@@ -6098,9 +6124,10 @@ bra_06_B057:
 bra_06_B059:
 	STA направление_движения,Y
 	RTS
+
 _loc_06_B05D:
 	LDA таймер_мокрого_мяча
-	BPL bra_06_B07A
+	BPL @RTS
 	LDA скорость_X_lo_мяча
 	STA скорость_X_lo,Y
 	LDA скорость_X_hi_мяча
@@ -6109,8 +6136,9 @@ _loc_06_B05D:
 	STA скорость_Y_lo,Y
 	LDA скорость_Y_hi_мяча
 	STA скорость_Y_hi,Y
-bra_06_B07A:
+@RTS:
 	RTS
+
 _loc_06_B07B:
 	STA $1E
 	LDA номер_движения,Y
@@ -7430,7 +7458,7 @@ bra_06_BBC9:
 _loc_06_BBCA:
 	LDA таймер_действия_мяча
 	BNE bra_06_BBD5
-	JSR _loc_06_BC7E
+	JSR _loc_06_BC7E_EOR_16bit_скорость_X_и_смена_направления_движения
 	JMP _loc_06_BC3B
 bra_06_BBD5:
 	LDA #$00
@@ -7443,10 +7471,10 @@ bra_06_BBD5:
 	AND #$0E
 	TAY
 	CLC
-	LDA table_06_BC3C,Y
+	LDA table_06_BC3C_скорость_Z,Y
 	ADC скорость_Z_lo,X
 	STA скорость_Z_lo,X
-	LDA table_06_BC3C + 1,Y
+	LDA table_06_BC3C_скорость_Z + 1,Y
 	ADC скорость_Z_hi,X
 	STA скорость_Z_hi,X
 	JMP _loc_06_BC1A
@@ -7457,10 +7485,10 @@ bra_06_BBFF:
 	AND #$0E
 	TAY
 	CLC
-	LDA table_06_BC4C,Y
+	LDA table_06_BC4C_скорость_Y,Y
 	ADC скорость_Y_lo,X
 	STA скорость_Y_lo,X
-	LDA table_06_BC4C + 1,Y
+	LDA table_06_BC4C_скорость_Y + 1,Y
 	ADC скорость_Y_hi,X
 	STA скорость_Y_hi,X
 _loc_06_BC1A:
@@ -7469,7 +7497,7 @@ _loc_06_BC1A:
 	TAY
 	LDA table_06_BC5C,Y
 	BPL bra_06_BC25
-	JSR _loc_06_BC7E
+	JSR _loc_06_BC7E_EOR_16bit_скорость_X_и_смена_направления_движения
 bra_06_BC25:
 	LDA table_06_BC5C,Y
 	AND #$7F
@@ -7486,25 +7514,27 @@ _loc_06_BC3B:
 bra_06_BC3B:
 	RTS
 
-table_06_BC3C:
-.byte $00,$F8
-.byte $00,$F6
-.byte $00,$FC
-.byte $00,$00
-.byte $00,$01
-.byte $00,$02
-.byte $00,$08
-.byte $00,$08
+; 60fps
+table_06_BC3C_скорость_Z:
+.word $FD55
+.word $FCAB
+.word $FEAB
+.word $0000
+.word $0055
+.word $00AB
+.word $02AB
+.word $02AB
 
-table_06_BC4C:
-.byte $00,$F8
-.byte $00,$F8
-.byte $00,$FC
-.byte $00,$00
-.byte $00,$00
-.byte $00,$04
-.byte $00,$08
-.byte $00,$08
+; 60fps
+table_06_BC4C_скорость_Y:
+.word $FD55
+.word $FD55
+.word $FEAB
+.word $0000
+.word $0000
+.word $0155
+.word $02AB
+.word $02AB
 
 table_06_BC5C:
 .byte $00,$81,$80,$80,$80,$80,$81,$00
@@ -7514,18 +7544,19 @@ _loc_06_BC64:
 	STA $1D
 	LSR $1D
 	BCC bra_06_BC6F
-	JSR _loc_06_BC7E
+	JSR _loc_06_BC7E_EOR_16bit_скорость_X_и_смена_направления_движения
 bra_06_BC6F:
 	LSR $1D
 	BCC bra_06_BC76
-	JSR _loc_06_BC9C
+	JSR _loc_06_BC9C_EOR_16bit_скорость_Y
 bra_06_BC76:
 	LSR $1D
 	BCC bra_06_BC7D
-	JSR _loc_06_BCB2
+	JSR _loc_06_BCB2_EOR_16bit_скорость_Z
 bra_06_BC7D:
 	RTS
-_loc_06_BC7E:
+
+_loc_06_BC7E_EOR_16bit_скорость_X_и_смена_направления_движения:
 	CLC
 	LDA скорость_X_lo,X
 	EOR #$FF
@@ -7539,7 +7570,8 @@ _loc_06_BC7E:
 	EOR #$80
 	STA направление_движения,X
 	RTS
-_loc_06_BC9C:
+
+_loc_06_BC9C_EOR_16bit_скорость_Y:
 	CLC
 	LDA скорость_Y_lo,X
 	EOR #$FF
@@ -7550,7 +7582,8 @@ _loc_06_BC9C:
 	ADC #$00
 	STA скорость_Y_hi,X
 	RTS
-_loc_06_BCB2:
+
+_loc_06_BCB2_EOR_16bit_скорость_Z:
 	CLC
 	LDA скорость_Z_lo,X
 	EOR #$FF
@@ -7561,6 +7594,7 @@ _loc_06_BCB2:
 	ADC #$00
 	STA скорость_Z_hi,X
 	RTS
+
 _loc_06_BCC8:
 	JSR _loc_06_BCF6
 	BIT $1D
@@ -7586,6 +7620,7 @@ bra_06_BCEB:
 	STA $05F5
 bra_06_BCF5:
 	RTS
+
 _loc_06_BCF6:
 	LDA объект_камеры
 	AND #$0F

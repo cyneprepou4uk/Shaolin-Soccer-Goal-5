@@ -4993,6 +4993,7 @@ _loc_03_A51A:
 	STA интеллект_бота,Y
 _loc_03_A51F:
 	RTS
+
 _loc_03_A520:
 	LDA скорость_X_hi,Y
 	ORA скорость_X_lo,Y
@@ -7900,7 +7901,7 @@ bra_03_BCFF:
 	CMP #$D0
 	BEQ bra_03_BD39
 	SEC
-	SBC #$08
+	SBC #$03		; 60fps
 	STA смещение_камеры
 	JMP _loc_03_BD39
 bra_03_BD2C:
@@ -7908,7 +7909,7 @@ bra_03_BD2C:
 	CMP #$30
 	BEQ bra_03_BD39
 	CLC
-	ADC #$08
+	ADC #$03		; 60fps
 	STA смещение_камеры
 _loc_03_BD39:
 bra_03_BD39:

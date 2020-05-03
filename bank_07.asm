@@ -1695,7 +1695,7 @@ _b07_CDCB:
 	BMI bra_07_CDE2
 	ORA координата_Z_lo,X
 	BEQ bra_07_CDE2
-	LDA #$80
+	LDA #$0D		; 60fps
 	STA гравитация_lo,X
 	LDA #$00
 	STA гравитация_hi,X
@@ -1818,6 +1818,13 @@ bra_07_CEE5:
 	BEQ bra_07_CF55
 	CMP #$F2
 	BEQ bra_07_CF6F
+
+; 60fps	утроение тайминга анимации, временное решение
+	STA $0190
+	ASL
+	CLC
+	ADC $0190
+
 	STA $1C
 	INC таймер_кадра_анимации,X
 	LDA таймер_кадра_анимации,X
@@ -1832,7 +1839,6 @@ bra_07_CF1F:
 	INY
 	LDA ($2C),Y
 	STA номер_анимации,X
-_loc_07_CF25:
 	RTS
 bra_07_CF26:
 	LDA #$00
@@ -1846,7 +1852,7 @@ bra_07_CF30:
 	DEY
 	LDA ($2C),Y
 	STA номер_анимации,X
-	JMP _loc_07_CF25
+	RTS
 bra_07_CF42:
 	INY
 	LDA состояние_игрока,X
@@ -7698,6 +7704,7 @@ bra_07_FDFF:
 	BCC bra_07_FDF2
 	JMP _loc_07_C3D4
 
+.export _общий_RTS
 _общий_RTS:
 	RTS
 

@@ -367,7 +367,7 @@ bra_02_AC5D:
 	RTS
 
 table_02_AA70_ACA9:
-	JSR _loc_02_AD91
+	JSR _loc_02_AD91_оставить_только_кнопки_старт_и_селект
 	JSR _loc_02_AA2F
 	JSR _loc_02_AA1B
 	JSR _b07_D073
@@ -425,7 +425,7 @@ table_02_AD11:		; байты после JSR
 .word table_02_AD11_AD3B
 
 table_02_AD11_AD17:
-	JSR _loc_02_AD91
+	JSR _loc_02_AD91_оставить_только_кнопки_старт_и_селект
 	LDA координата_X_hi
 	BNE bra_02_AD3A
 	LDA координата_X_lo
@@ -483,18 +483,20 @@ bra_02_AD76:
 	STX скорость_X_hi_мяча
 	LDA #$02
 	STA скорость_Z_hi_мяча
-	LDA #$80
-	STA гравитация_lo_мяча
-	LDA #$06
+	LDA #$B8
+	STA гравитация_lo_мяча		; 60fps_мяч
+	LDA #$00
 	STA номер_движения_мяча
 bra_02_AD90:
 	RTS
-_loc_02_AD91:
+
+_loc_02_AD91_оставить_только_кнопки_старт_и_селект:
 	LDA одноразовые_кнопки
 	AND #(КНОПКА_СТАРТ | КНОПКА_СЕЛЕКТ)
 	STA одноразовые_кнопки
 	STA удержанные_кнопки
 	RTS
+
 _loc_02_AD9A:
 	STA $1C
 	LDA одноразовые_кнопки
@@ -502,6 +504,7 @@ _loc_02_AD9A:
 	STA одноразовые_кнопки
 	STA удержанные_кнопки
 	RTS
+
 _loc_02_ADA5:
 	LDA #$FF
 	STA смена_угла_движения,X
@@ -1194,18 +1197,22 @@ _loc_02_B282:
 	STA номер_кадра_анимации,X
 	STA подтип_анимации,X
 	RTS
+
 _loc_02_B293:
 	STA $0493
 	JSR _loc_02_AA52
 	RTS
+
 _loc_02_B29A:
 	STA $0493
 	JSR _loc_02_AA57
 	RTS
+
 _loc_02_B2A1:
 	STA $0493
 	JSR _loc_02_AA5C
 	RTS
+
 _loc_02_B2A8:
 	LDA скорость_X_hi,X
 	ORA скорость_X_lo,X
@@ -1217,6 +1224,7 @@ _loc_02_B2A8:
 	PLA
 bra_02_B2BB:
 	RTS
+
 _loc_02_B2BC:
 	LDY #$00
 	LDA $58
