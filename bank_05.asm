@@ -4371,25 +4371,18 @@ bra_05_A2E8:
 	JSR _b07_D073
 _loc_05_A2F6:
 	RTS
+
 _loc_05_A2F7:
-	LDX #$00
 	LDA #$00
-	STA a: $74,X
-	STA a: $61,X
-	TXA
-	ASL
-	TAY
-	LDA table_05_A316,Y
+	STA $61,X
+	STA $74,X
+	LDA #$3C
 	STA координата_X_lo,X
-	LDA table_05_A316 + 1,Y
+	LDA #$60
 	STA координата_Y_lo,X
 	LDA #$09
 	STA номер_движения,X
 	RTS
-
-table_05_A316:		; заменить на absolute, а также проверить правильная ли таблица
-					; судя по логгеру следующие байты не зеленые
-.byte $3C,$60
 
 _loc_05_A318:
 	LDA a: $5B
@@ -4479,10 +4472,10 @@ bra_05_A3D3:
 	ADC table_05_A43C + 4,Y
 	ASL
 	ASL
-	ADC table_05_A490
+	ADC #< table_05_A490
 	STA $30
 	LDA #$00
-	ADC table_05_A490 + 1
+	ADC #> table_05_A490
 	STA $31
 	LDA #$0C
 	STA $1F
@@ -4538,10 +4531,7 @@ table_05_A43C:		; характеристики игроков японии на 
 .byte $41,$15,$14,$8B,$11,$00,$FF
 .byte $41,$18,$19,$8D,$12,$03,$06
 
-table_05_A490:		; заменить на absolute
-.word table_05_A490_A492
-
-table_05_A490_A492:
+table_05_A490:
 .byte $BC,$D0,$AC,$B3,$35,$C9,$3D,$CA,$FF,$FF,$FF,$FF
 .byte $3B,$A9,$CB,$B3,$A2,$B1,$D0,$A9,$FF,$FF,$FF,$FF
 .byte $B5,$CA,$B9,$D9,$35,$A8,$D0,$A9,$FF,$FF,$FF,$FF
@@ -5489,10 +5479,10 @@ _loc_05_ACC0:
 _loc_05_ACCF:
 	LDY $26
 	CLC
-	LDA table_05_AE35
+	LDA #< table_05_AE35
 	ADC table_05_AE37,Y
 	STA $34
-	LDA table_05_AE35 + 1
+	LDA #> table_05_AE35
 	ADC #$00
 	STA $35
 	LDY #$00
@@ -5606,10 +5596,7 @@ bra_05_ADB7:
 	BCC bra_05_AD93
 	RTS
 
-table_05_ADC0:		; заменить на absolute
-.word table_05_ADC0_ADC2
-
-table_05_ADC0_ADC2:		; отображение имени при выборе второй опции на экране с игроками
+table_05_ADC0:		; отображение имени при выборе второй опции на экране с игроками
 						; во время прохождения
 .byte $90,$AE,$6E,$E2,$AD,$D2,$D9,$2E
 .byte $91,$AE,$6E,$E2,$AC,$6F,$D9,$B1
@@ -5636,13 +5623,10 @@ _loc_05_AE30:
 	LDA #$04
 	JMP _loc_05_ACC0
 
-table_05_AE35:		; заменить на absolute
-.word table_05_AE35_AE5F
-
 table_05_AE37:		; добавляется к table_05_AE35
 .byte $00,$10,$10,$10,$20,$10,$30,$00,$00,$40,$10,$10,$20,$50,$30,$00,$60,$70,$80,$90,$A0,$B0,$C0,$00,$00,$10,$10,$10,$20,$10,$30,$00,$D0,$E0,$E0,$E0,$E0,$E0,$F0,$00
 
-table_05_AE35_AE5F:		; что-то связано с отрисовкой экрана на экране игроков
+table_05_AE35:		; что-то связано с отрисовкой экрана на экране игроков
 						; когда отменяешь опцию или когда ее действие заканчивается
 .byte $67,$05,$1D,$CB,$B7,$05,$68,$02,$02,$02,$02,$02,$02,$02,$02,$02
 .byte $5D,$02,$02,$02,$02,$02,$5E,$02,$02,$02,$02,$02,$02,$02,$02,$02
@@ -5859,10 +5843,10 @@ _loc_05_B0A8:
 	ASL
 	ASL
 	ASL
-	ADC table_05_B155
+	ADC #< table_05_B155
 	STA $32
 	LDA #$00
-	ADC table_05_B155 + 1
+	ADC #> table_05_B155
 	STA $33
 	LDY $05D1
 	LDA $05D5,Y
@@ -5929,10 +5913,7 @@ bra_05_B14F:
 	BMI bra_05_B14F
 	RTS
 
-table_05_B155:		; заменить на absolute
-.word table_05_B155_B157
-
-table_05_B155_B157:		; сввязано с выдачей предметов игрокам
+table_05_B155:		; сввязано с выдачей предметов игрокам
 						; вероятно влияет на реакцию получения предмета
 .byte $50,$11,$10,$11,$10,$11,$30,$31
 .byte $51,$13,$12,$13,$12,$13,$32,$33
@@ -5991,17 +5972,19 @@ _loc_05_B1FF:
 	ADC ($32),Y
 	STA $31
 	RTS
+
 _loc_05_B222:
 	ASL
 	ASL
 	ASL
 	CLC
-	ADC table_05_ADC0
+	ADC #< table_05_ADC0
 	STA $30
 	LDA #$00
-	ADC table_05_ADC0 + 1
+	ADC #> table_05_ADC0
 	STA $31
 	RTS
+
 _loc_05_B233:
 	JSR _loc_05_B1FF
 	LDY #$00

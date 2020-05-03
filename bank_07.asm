@@ -4886,10 +4886,10 @@ _b07_E828:
 	ASL $2C
 	ROL $2D
 	LDA $2C
-	ADC table_07_EA18
+	ADC #< table_07_EA18
 	STA $2C
 	LDA $2D
-	ADC table_07_EA18 + 1
+	ADC #> table_07_EA18
 	STA $2D
 	LDY #$00
 	LDA ($2C),Y
@@ -5152,10 +5152,7 @@ table_07_EA12:
 .byte $60,$22
 .byte $E0,$20
 
-table_07_EA18:		; заменить на absolute
-.word table_07_EA18_EA1A
-
-table_07_EA18_EA1A:
+table_07_EA18:
 .byte $76,$00,$00,$6E,$02,$44,$43,$FF
 .byte $76,$01,$00,$6C,$02,$3A,$3B,$FF
 .byte $76,$02,$00,$5E,$02,$15,$16,$FF

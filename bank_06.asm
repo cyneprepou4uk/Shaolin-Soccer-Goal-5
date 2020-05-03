@@ -901,7 +901,7 @@ table_06_803F_86AA:
 	LDA #$01
 	JSR _loc_06_A1F7
 	LDA направление_движения,X
-	ORA table_06_86E9
+	ORA #$48
 	STA угол_движения,X
 	LDA направление_движения,X
 	EOR #$80
@@ -924,9 +924,6 @@ bra_06_86D3:
 
 table_06_86E5:
 .byte $F0,$10,$10,$F0
-
-table_06_86E9:		; заменить на absolute
-.byte $48
 
 table_06_803F_86EA:
 	LDA номер_движения,X
@@ -1283,7 +1280,7 @@ table_06_803F_89C3:
 	LDA координата_Z_lo_мяча
 	SBC координата_Z_lo,X
 	BMI bra_06_89DF
-	CMP table_06_8A02
+	CMP #$10
 	BCC bra_06_89DF
 	INY
 bra_06_89DF:
@@ -1300,9 +1297,6 @@ bra_06_89DF:
 bra_06_89FC:
 	JSR _loc_06_A133
 	JMP _loc_06_8750
-
-table_06_8A02:		; заменить на absolute
-.byte $10
 
 table_06_8A03:
 .byte $39,$3A
@@ -1484,7 +1478,6 @@ bra_06_8B66:
 	JMP _loc_06_8750
 
 _loc_06_8B6C:
-table_06_A5C4_8B6C:
 	LDA номер_движения,X
 	AND #$7F
 	TAY
@@ -2570,9 +2563,9 @@ bra_06_94A6:
 	LDA table_06_94BF + 1,Y
 	STA скорость_Z_hi,X
 _loc_06_94B2:
-	LDA table_06_94D7
+	LDA #$80
 	STA гравитация_lo,X
-	LDA table_06_94D7 + 1
+	LDA #$00
 	STA гравитация_hi,X
 	RTS
 
@@ -2589,9 +2582,6 @@ table_06_94BF:
 .byte $00,$05
 .byte $00,$03
 .byte $00,$03
-
-table_06_94D7:		; заменить на absolute
-.byte $80,$00
 
 _loc_06_94D9:
 	STA $1E
@@ -3027,15 +3017,12 @@ _loc_06_983F:
 	BPL bra_06_9854
 	LDA #$FF
 	STA координата_Z_hi,X
-	LDA table_06_9855
+	LDA #$FC
 	CMP координата_Z_lo,X
 	BCC bra_06_9854
 	STA координата_Z_lo,X
 bra_06_9854:
 	RTS
-
-table_06_9855:		; заменить на absolute
-.byte $FC
 
 _loc_06_9856:
 	LDA #$00
@@ -3423,9 +3410,9 @@ _loc_06_9B60:
 	STA скорость_Z_lo,X
 	LDA table_06_9B7B + 1,Y
 	STA скорость_Z_hi,X
-	LDA table_06_9B93
+	LDA #$80
 	STA гравитация_lo,X
-	LDA table_06_9B93 + 1
+	LDA #$00
 	STA гравитация_hi,X
 	RTS
 
@@ -3442,9 +3429,6 @@ table_06_9B7B:
 .byte $00,$02
 .byte $00,$06
 .byte $00,$0C
-
-table_06_9B93:		; заменить на absolute
-.byte $80,$00
 
 _loc_06_9B95:
 	LDA координата_X_lo,X
@@ -4776,11 +4760,11 @@ bra_06_A542:
 	LDA $2C
 	STA скорость_Z_lo,X
 	LDA $2D
-	CMP table_06_A5A6
+	CMP #$10
 	BCC bra_06_A586
 	LDA #$00
 	STA скорость_Z_lo,X
-	LDA table_06_A5A6
+	LDA #$10
 bra_06_A586:
 	STA скорость_Z_hi,X
 	LDA координата_Z_lo,X
@@ -4800,29 +4784,20 @@ bra_06_A586:
 _loc_06_A5A5:
 	RTS
 
-table_06_A5A6:		; заменить на absolute в 2х местах
-.byte $10
-
 _loc_06_A5A7:
-	LDA table_06_A5C2
+	LDA #< table_06_A5C2
 	STA $30
-	LDA table_06_A5C2 + 1
+	LDA #> table_06_A5C2
 	STA $31
-	LDA table_06_A5C4
+	LDA #< _loc_06_8B6C
 	STA $32
-	LDA table_06_A5C4 + 1
+	LDA #> _loc_06_8B6C
 	STA $33
 	LDA номер_движения,X
 	JSR _b07_CEBD
 	RTS
 
-table_06_A5C2:		; заменить на absolute
-.word table_06_A5C2_A5C6
-
-table_06_A5C4:		; заменить на absolute
-.word table_06_A5C4_8B6C
-
-table_06_A5C2_A5C6:		; набор анимации в зависимости от движения игрока
+table_06_A5C2:		; набор анимации в зависимости от движения игрока
 .word animation_00
 .word animation_01
 .word animation_02
@@ -6391,9 +6366,9 @@ table_06_B2F9:
 .byte $FF,$FF,$06,$FE,$FF,$FF,$55,$16
 
 _loc_06_B301:
-	LDA table_06_B54B
+	LDA #< table_06_B54B
 	STA $2C
-	LDA table_06_B54B + 1
+	LDA #> table_06_B54B
 	STA $2D
 	LDA номер_движения,X
 	AND #$7F
@@ -6401,9 +6376,9 @@ _loc_06_B301:
 	TAY
 	RTS
 _loc_06_B313:
-	LDA table_06_B54D
+	LDA #< table_06_B54D
 	STA $2C
-	LDA table_06_B54D + 1
+	LDA #> table_06_B54D
 	STA $2D
 	LDA номер_движения_мяча
 	AND #$7F
@@ -6412,9 +6387,9 @@ _loc_06_B313:
 	RTS
 
 _loc_06_B325:
-	LDA table_06_B54F
+	LDA #< table_06_B54F
 	STA $2C
-	LDA table_06_B54F + 1
+	LDA #> table_06_B54F
 	STA $2D
 	LDA номер_погодного_эффекта
 	AND #$7F
@@ -6429,9 +6404,9 @@ _loc_06_B337:
 	BEQ bra_06_B37C
 	ASL
 	TAY
-	LDA table_06_B547
+	LDA #< table_06_B547
 	STA $32
-	LDA table_06_B547 + 1
+	LDA #> table_06_B547
 	STA $33
 	LDA ($32),Y
 	STA $2C
@@ -6446,9 +6421,9 @@ bra_06_B35B:
 	BPL bra_06_B380
 	AND #$7F
 	TAY
-	LDA table_06_B549
+	LDA #< table_06_B549
 	STA $32
-	LDA table_06_B549 + 1
+	LDA #> table_06_B549
 	STA $33
 	LDA ($32),Y
 	STA $2C
@@ -6464,9 +6439,9 @@ bra_06_B37C:
 	BEQ bra_06_B38B
 bra_06_B380:
 	TAY
-	LDA table_06_B545
+	LDA #< table_06_B545
 	STA $2C
-	LDA table_06_B545 + 1
+	LDA #> table_06_B545
 	STA $2D
 bra_06_B38B:
 	RTS
@@ -6710,114 +6685,96 @@ _loc_06_B537:
 table_06_B53B:
 .byte $06,$06,$0F,$0F,$06,$06,$06,$06,$08,$0A
 
-table_06_B545:		; заменить на absolute
-.word table_06_B545_B6BE
-
-table_06_B547:		; заменить на absolute
-.word table_06_B547_B643
-
-table_06_B549:		; заменить на absolute
-.word table_06_B549_B65C
-
-table_06_B54B:		; заменить на absolute
-.word table_06_B54B_B551
-
-table_06_B54D:		; заменить на absolute
-.word table_06_B54D_B60B
-
-table_06_B54F:		; заменить на absolute
-.word table_06_B54F_B639
-
-table_06_B54B_B551:		; 186 (BA) байтов
+table_06_B54B:		; 186 (BA) байтов
 .byte $01,$01,$83,$01,$01,$02,$03,$03,$FF,$FF,$FF,$FF,$FF,$FF,$80,$01,$81,$01,$FF,$01,$FF,$01,$FF,$01,$FF,$01,$82,$01,$01,$01,$15,$01,$FF,$01,$01,$01,$01,$01,$01,$01,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$0F,$0F,$FF,$FF,$FF,$FF,$FF,$FF,$01,$01,$FF,$FF,$FF,$FF,$01,$01,$01,$01,$0F,$0F,$10,$10,$FF,$01,$01,$01,$FF,$FF,$03,$03,$01,$20,$01,$20,$04,$04,$4D,$01,$01,$01,$FF,$FF,$FF,$FF,$FF,$21,$13,$01,$42,$42,$40,$01,$43,$01,$41,$01,$41,$01,$41,$01,$FF,$01,$FF,$01,$FF,$01,$FF,$01,$FF,$0F,$FF,$FF,$FF,$FF,$01,$20,$01,$20,$01,$01,$48,$48,$FF,$49,$4B,$4B,$01,$01,$13,$01,$FF,$01,$4B,$4B,$FF,$01,$4B,$4B,$FF,$01,$03,$03,$FF,$01,$4C,$4C,$FF,$01,$03,$03,$FF,$01,$FF,$01,$01,$01,$01,$01,$48,$48,$FF,$FF,$01,$01,$4E,$4E,$FF,$0F,$FF,$FF,$FF,$FF,$01,$01,$21,$21
 
-table_06_B54D_B60B:		; 46 (2E) байтов
+table_06_B54D:		; 46 (2E) байтов
 .byte $FF,$FF,$00,$00,$FF,$FF,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$FF,$00,$FF,$FF,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-table_06_B54F_B639:
+table_06_B54F:
 .byte $FF,$FF,$22,$22,$FF,$FF,$23,$23,$FF,$FF
 
-table_06_B547_B643:
-.word table_06_B547_B643_B64B
-.word table_06_B547_B643_B64E
-.word table_06_B547_B643_B651
-.word table_06_B547_B643_B654
+table_06_B547:
+.word table_06_B547_B64B
+.word table_06_B547_B64E
+.word table_06_B547_B651
+.word table_06_B547_B654
 
-table_06_B547_B643_B64B:
+table_06_B547_B64B:
 .byte $44,$45,$45
 
-table_06_B547_B643_B64E:
+table_06_B547_B64E:
 .byte $44,$4A,$4A
 
-table_06_B547_B643_B651:
+table_06_B547_B651:
 .byte $47,$46,$46
 
-table_06_B547_B643_B654:
+table_06_B547_B654:
 .byte $01,$1E,$1F,$01,$01,$01,$01,$01
 
-table_06_B549_B65C:
-.word table_06_B549_B65C_B67A
-.word table_06_B549_B65C_B682
-.word table_06_B549_B65C_B687
-.word table_06_B549_B65C_B68A
-.word table_06_B549_B65C_B690
-.word table_06_B549_B65C_B693
-.word table_06_B549_B65C_B697
-.word table_06_B549_B65C_B69A
-.word table_06_B549_B65C_B69E
-.word table_06_B549_B65C_B6A4
-.word table_06_B549_B65C_B6A8
-.word table_06_B549_B65C_B6AB
-.word table_06_B549_B65C_B6AE
-.word table_06_B549_B65C_B6B3
-.word table_06_B549_B65C_B6B6
+table_06_B549:
+.word table_06_B549_B67A
+.word table_06_B549_B682
+.word table_06_B549_B687
+.word table_06_B549_B68A
+.word table_06_B549_B690
+.word table_06_B549_B693
+.word table_06_B549_B697
+.word table_06_B549_B69A
+.word table_06_B549_B69E
+.word table_06_B549_B6A4
+.word table_06_B549_B6A8
+.word table_06_B549_B6AB
+.word table_06_B549_B6AE
+.word table_06_B549_B6B3
+.word table_06_B549_B6B6
 
-table_06_B549_B65C_B67A:
+table_06_B549_B67A:
 .byte $FF,$0A,$0B,$0C,$0D,$0E,$FF,$FF
 
-table_06_B549_B65C_B682:
+table_06_B549_B682:
 .byte $FF,$08,$09,$FF,$FF
 
-table_06_B549_B65C_B687:
+table_06_B549_B687:
 .byte $0F,$04,$FF
 
-table_06_B549_B65C_B68A:
+table_06_B549_B68A:
 .byte $FF,$05,$06,$07,$FF,$FF
 
-table_06_B549_B65C_B690:
+table_06_B549_B690:
 .byte $08,$09,$FF
 
-table_06_B549_B65C_B693:
+table_06_B549_B693:
 .byte $05,$06,$07,$FF
 
-table_06_B549_B65C_B697:
+table_06_B549_B697:
 .byte $11,$FF,$FF
 
-table_06_B549_B65C_B69A:
+table_06_B549_B69A:
 .byte $FF,$FF,$12,$FF
 
-table_06_B549_B65C_B69E:
+table_06_B549_B69E:
 .byte $01,$01,$01,$FF,$FF,$FF
 
-table_06_B549_B65C_B6A4:
+table_06_B549_B6A4:
 .byte $FF,$14,$FF,$FF
 
-table_06_B549_B65C_B6A8:
+table_06_B549_B6A8:
 .byte $16,$17,$FF
 
-table_06_B549_B65C_B6AB:
+table_06_B549_B6AB:
 .byte $18,$19,$FF
 
-table_06_B549_B65C_B6AE:
+table_06_B549_B6AE:
 .byte $1A,$1B,$1C,$1D,$FF
 
-table_06_B549_B65C_B6B3:
+table_06_B549_B6B3:
 .byte $FF,$01,$FF
 
-table_06_B549_B65C_B6B6:
+table_06_B549_B6B6:
 .byte $FF,$FF,$FF,$FF,$FF,$FF,$FF,$13
 
-table_06_B545_B6BE:
+table_06_B545:
 .word table_06_B545_B6BE_B706
 .word table_06_B545_B6BE_B70B
 .word table_06_B545_B6BE_B710

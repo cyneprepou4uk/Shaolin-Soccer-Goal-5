@@ -2577,9 +2577,9 @@ bra_00_BC6A:
 	STA $068E
 	JSR _b07_вращение_рандома
 	STA $068F
-	LDA table_00_BDF8
+	LDA #< table_00_BDF8
 	STA $2E
-	LDA table_00_BDF8 + 1
+	LDA #> table_00_BDF8
 	STA $2F
 	LDA #$00
 	STA номер_тайма
@@ -2742,10 +2742,7 @@ table_00_BDE8:		; читается из 2х мест
 .word table_00_BDE8_BEDA
 .word table_00_BDE8_BEBE
 
-table_00_BDF8:		; заменить на absolute
-.word table_00_BDF8_BDFA
-
-table_00_BDF8_BDFA:
+table_00_BDF8:
 .byte $E8,$00,$C0,$00,$E8,$00,$C0,$00,$E8,$00,$C0,$00,$E8,$00,$C0,$00,$E8,$00,$C0,$00,$68,$01,$C0,$00,$10,$01,$C1,$00
 
 table_00_BDE8_BE16:

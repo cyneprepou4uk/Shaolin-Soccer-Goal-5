@@ -6923,13 +6923,10 @@ bra_04_BC6F:
 	STA гравитация_lo,X
 	RTS
 
-table_04_BC7D:		; заменить на absolute
-.byte $B0,$00
-
 _loc_04_BC7F:
-	LDA table_04_BC7D
+	LDA #$B0
 	STA $2C
-	LDA table_04_BC7D + 1
+	LDA #$00
 	STA $2D
 	LDY #$00
 	LDA направление_движения,X
@@ -7055,13 +7052,13 @@ table_04_BDDD:
 .byte $20,$32,$38,$38,$32,$2C
 
 _loc_04_BDE3:
-	LDA table_04_BE08
+	LDA #< table_04_BE08
 	STA $30
-	LDA table_04_BE08 + 1
+	LDA #> table_04_BE08
 	STA $31
-	LDA table_04_BE0A
+	LDA #< _loc_04_BCE3
 	STA $32
-	LDA table_04_BE0A + 1
+	LDA #> _loc_04_BCE3
 	STA $33
 	LDA режим_игры_на_поле
 	AND #$40
@@ -7074,13 +7071,7 @@ bra_04_BE04:
 	JSR _b07_CEBD
 	RTS
 
-table_04_BE08:		; заменить на absolute
-.word table_04_BE08_BE0C
-
-table_04_BE0A:		; заменить на absolute
-.word _loc_04_050F
-
-table_04_BE08_BE0C:
+table_04_BE08:
 .word off_04_BE64
 .word off_04_BE6D
 .word off_04_BE6D
