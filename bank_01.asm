@@ -10,8 +10,8 @@
 .import _b07_ECA9
 .import _b07_выключить_NMI
 .import _b07_выключить_рендеринг
-.import _loc_07_C050
-.import _loc_07_C068
+.import _b07_C344
+.import _b07_E828
 .import _b03_яркость_палитры_и_запись_в_буфер
 
 .export _loc_01_8000
@@ -2911,7 +2911,7 @@ _loc_01_B8A1:
 	AND #$03
 	CLC
 	ADC #$10
-	JSR _loc_07_C068
+	JSR _b07_E828
 	JSR _b07_ECA9
 	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
@@ -3742,13 +3742,13 @@ table_01_BFAE:
 
 _loc_01_BFB2:
 	LDA #$1A
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_01_BFB7:
 	LDA #$2A
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_01_BFBC:
 	LDA #$06
-	JMP _loc_07_C050
+	JMP _b07_C344
 
 .segment "BANK_01_ID"
 .byte $01

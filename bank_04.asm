@@ -5,8 +5,8 @@
 .import _loc_07_C2E4
 .import _b07_F691
 .import _b07_FA6D
-.import _loc_07_C050
-.import _loc_07_C056
+.import _b07_C344
+.import _b07_CEBD
 .import _loc_07_C07A
 
 .export _loc_04_8000
@@ -49,10 +49,10 @@ _loc_04_8024:
 
 _loc_04_8027:
 	LDA #$06
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_04_802C:
 	LDA #$25
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_04_8031:
 	LDA $5C
 	BPL bra_04_8036
@@ -7071,7 +7071,7 @@ _loc_04_BDE3:
 bra_04_BE01:
 	LDA номер_супера
 bra_04_BE04:
-	JSR _loc_07_C056
+	JSR _b07_CEBD
 	RTS
 
 table_04_BE08:		; заменить на absolute

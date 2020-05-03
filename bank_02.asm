@@ -7,15 +7,15 @@
 .import _b07_запись_банков_спрайтов
 .import _b07_поставить_флаг_уменьшения_яркости
 .import _b07_D036
-.import _loc_07_C04A
-.import _loc_07_C050
-.import _loc_07_C053
-.import _loc_07_C056
-.import _loc_07_C059
-.import _loc_07_C05C
-.import _loc_07_C062
-.import _loc_07_C065
-.import _loc_07_C068
+.import _b07_D062
+.import _b07_C344
+.import _b07_EC8F
+.import _b07_CEBD
+.import _b07_поставить_флаг_увеличения_яркости
+.import _b07_D073
+.import _b07_EF54
+.import _b07_EB8C
+.import _b07_E828
 .import _b03_яркость_палитры_и_запись_в_буфер
 .import _loc_07_C071
 .import _b07_обнуление_ZP_с_X_до_F8
@@ -44,61 +44,61 @@ _loc_02_800F:
 
 _loc_02_AA11:
 	LDA #$1F
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA16:
 	LDA #$0F
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA1B:
 	LDA #$14
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA20:
 	LDA #$17
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA25:
 	LDA #$2B
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA2A:
 	LDA #$2C
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA2F:
 	LDA #$1C
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA34:
 	LDA #$06
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA39:
 	LDA #$07
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA3E:
 	LDA #$08
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA43:
 	LDA #$09
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA48:
 	LDA #$0A
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA4D:
 	LDA #$0B
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA52:
 	LDA #$26
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA57:
 	LDA #$27
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA5C:
 	LDA #$28
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA61:
 	LDA #$30
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA66:
 	LDA #$31
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_02_AA6B:
 	LDA тип_экрана
-	JSR _loc_07_C053
+	JSR _b07_EC8F
 
 table_02_AA70:		; байты после JSR
 .word table_02_AA70_AA88
@@ -123,8 +123,8 @@ table_02_AA70_AA88:
 
 table_02_BB62_AA95:
 	LDA #$00
-	JSR _loc_07_C068
-	JSR _loc_07_C062
+	JSR _b07_E828
+	JSR _b07_EF54
 	LDA #$08
 	STA a: $6D
 	INC таймер_кадра_анимации_мяча
@@ -145,7 +145,7 @@ table_02_BB62_AA95:
 	INX
 	STX банк_спрайтов + 1
 	JSR _b07_запись_банков_спрайтов
-	JSR _loc_07_C059
+	JSR _b07_поставить_флаг_увеличения_яркости
 	LDA #$04
 	STA скорость_яркости
 	INC тип_экрана
@@ -156,7 +156,7 @@ table_02_BB62_AAD9:
 	JSR _loc_02_AE01
 	BIT флаг_яркости
 	BMI bra_02_AAE4
-	JSR _loc_07_C05C
+	JSR _b07_D073
 bra_02_AAE4:
 	LDA номер_кадра_анимации_мяча
 	CMP #$02
@@ -226,7 +226,7 @@ table_02_AA70_AB78:
 	JSR _loc_02_AE3D_задержка
 	JSR _loc_02_AE49
 	LDA #$0E
-	JSR _loc_07_C068
+	JSR _b07_E828
 	LDA #$59
 	STA банк_спрайтов
 	JSR _b07_запись_банков_спрайтов
@@ -249,7 +249,7 @@ table_02_AA70_AB78:
 	JSR _loc_02_B033
 	LDA #$01
 	JSR _loc_07_C2E4
-	JSR _loc_07_C059
+	JSR _b07_поставить_флаг_увеличения_яркости
 	LDA #$04
 	STA скорость_яркости
 	LDA #$90
@@ -262,7 +262,7 @@ table_02_AA70_AB78:
 
 table_02_AA70_ABCE:
 	JSR _loc_02_B033
-	JSR _loc_07_C05C
+	JSR _b07_D073
 	BIT флаг_яркости
 	BPL bra_02_ABDD
 	LDA #$03
@@ -278,7 +278,7 @@ table_02_AA70_ABDE:
 	JSR _b07_поставить_флаг_уменьшения_яркости
 	LDA #$04
 	STA скорость_яркости
-	JSR _loc_07_C04A
+	JSR _b07_D062
 	INC тип_экрана
 	RTS
 bra_02_ABF6:
@@ -337,7 +337,7 @@ table_02_AA70_AC43:
 bra_02_AC5D:
 	STY флаг_демо
 	LDA #$01
-	JSR _loc_07_C068
+	JSR _b07_E828
 	LDX #$08
 	STX банк_спрайтов
 	INX
@@ -360,9 +360,9 @@ bra_02_AC5D:
 	JSR _loc_02_ADA5
 	LDX #$0C
 	JSR _loc_02_ADA5
-	JSR _loc_07_C062
+	JSR _b07_EF54
 	JSR _loc_02_AA1B
-	JSR _loc_07_C059
+	JSR _b07_поставить_флаг_увеличения_яркости
 	INC тип_экрана
 	RTS
 
@@ -370,7 +370,7 @@ table_02_AA70_ACA9:
 	JSR _loc_02_AD91
 	JSR _loc_02_AA2F
 	JSR _loc_02_AA1B
-	JSR _loc_07_C05C
+	JSR _b07_D073
 	BIT флаг_яркости
 	BPL bra_02_ACBC
 	INC тип_экрана
@@ -401,7 +401,7 @@ bra_02_ACE7:
 	JSR _b07_поставить_флаг_уменьшения_яркости
 	LDA #$04
 	STA скорость_яркости
-	JSR _loc_07_C04A
+	JSR _b07_D062
 	JSR _loc_02_AE3D_задержка
 bra_02_ACF7:
 	RTS
@@ -417,7 +417,7 @@ bra_02_AD07:
 	LDA #$80
 	STA таймер_демо_lo
 	LDA номер_кадра_анимации + 1
-	JSR _loc_07_C053
+	JSR _b07_EC8F
 
 table_02_AD11:		; байты после JSR
 .word table_02_AD11_AD17
@@ -565,7 +565,7 @@ bra_02_AE15:
 	STA таймер_кадра_анимации_мяча
 _loc_02_AE22:
 bra_02_AE22:
-	JSR _loc_07_C065
+	JSR _b07_EB8C
 	JSR _loc_02_AA1B
 	RTS
 
@@ -616,7 +616,7 @@ _loc_02_AE65:
 	JSR _b07_поставить_флаг_уменьшения_яркости
 	LDA #$04
 	STA скорость_яркости
-	JSR _loc_07_C04A
+	JSR _b07_D062
 	JSR _loc_02_AE3D_задержка
 bra_02_AE79:
 	INC тип_экрана
@@ -684,7 +684,7 @@ table_02_AEE5:
 
 _loc_02_AEF7:
 	LDA сценка_кунио
-	JSR _loc_07_C053
+	JSR _b07_EC8F
 
 table_02_AEFC:		; байты после JSR
 .word table_02_AEFC_AF04
@@ -694,7 +694,7 @@ table_02_AEFC:		; байты после JSR
 
 table_02_AEFC_AF04:
 	LDA номер_кадра_анимации + 1
-	JSR _loc_07_C053
+	JSR _b07_EC8F
 
 table_02_AF09:		; байты после JSR
 .word table_02_AF09_AF17
@@ -787,7 +787,7 @@ table_02_AF09_AF8A:
 
 table_02_AEFC_AF96:
 	LDA номер_кадра_анимации + 1
-	JSR _loc_07_C053
+	JSR _b07_EC8F
 
 table_02_AF9B:		; байты после JSR
 .word table_02_AF9B_AFA5
@@ -847,7 +847,7 @@ table_02_AF9B_AFE2:
 
 table_02_AEFC_AFF4:
 	LDA номер_кадра_анимации + 1
-	JSR _loc_07_C053
+	JSR _b07_EC8F
 
 table_02_AFF9:		; байты после JSR
 .word table_02_AFF9_AFFF
@@ -916,7 +916,7 @@ bra_02_B05F:
 	LDA table_02_B06F + 1,Y
 	STA таймер_кадра_анимации,X
 bra_02_B068:
-	JSR _loc_07_C065
+	JSR _b07_EB8C
 	JSR _loc_02_AA1B
 	RTS
 
@@ -1303,7 +1303,7 @@ bra_02_B350:
 	LDA table_02_B36F + 1
 	STA $33
 	LDA номер_движения,X
-	JSR _loc_07_C056
+	JSR _b07_CEBD
 	RTS
 
 table_02_B36B:
@@ -1676,7 +1676,7 @@ _loc_02_B6CE:
 	LDX #$01
 bra_02_B6D0:
 	JSR _loc_02_B6DD
-	JSR _loc_07_C065
+	JSR _b07_EB8C
 	INX
 	INX
 	CPX #$04
@@ -1943,7 +1943,7 @@ _loc_02_B8E5:
 	LDA table_B902 + 1
 	STA $33
 	LDA номер_движения,X
-	JSR _loc_07_C056
+	JSR _b07_CEBD
 	RTS
 
 table_B900:
@@ -2204,17 +2204,17 @@ _loc_02_BB3C:
 	JSR _loc_02_AA61
 	JSR _loc_02_B08B
 	JSR _loc_02_AA66
-	JSR _loc_07_C065
+	JSR _b07_EB8C
 	INX
 	JSR _loc_02_B6DD
-	JSR _loc_07_C065
+	JSR _b07_EB8C
 	LDX #$0C
 	JSR _loc_02_B6DD
-	JSR _loc_07_C065
+	JSR _b07_EB8C
 	RTS
 _loc_02_BB5D:
 	LDA тип_экрана
-	JSR _loc_07_C053
+	JSR _b07_EC8F
 
 table_02_BB62:		; байты после JSR
 .word table_02_BB62_BB78
@@ -2230,7 +2230,7 @@ table_02_BB62:		; байты после JSR
 .word table_02_BB62_BE95
 
 table_02_BB62_BB78:
-	JSR _loc_07_C062
+	JSR _b07_EF54
 	LDA #$F0
 	STA a: ограничитель_Y_спрайтов
 	LDA #$80
@@ -2250,7 +2250,7 @@ table_02_BB62_BB78:
 	JSR _loc_02_BA66
 	JSR _loc_02_BB3C
 	JSR _loc_02_AA1B
-	JSR _loc_07_C059
+	JSR _b07_поставить_флаг_увеличения_яркости
 	LDA #$0B
 	JSR _loc_07_C2E4
 _loc_02_BBAE:
@@ -2259,7 +2259,7 @@ bra_02_BBB0:
 	RTS
 
 table_02_BB62_BBB1:
-	JSR _loc_07_C05C
+	JSR _b07_D073
 	JSR _loc_02_BB3C
 	JSR _loc_02_AA1B
 	LDA $07E5
@@ -2276,10 +2276,10 @@ table_02_BB62_BBCE:
 	JSR _loc_02_AE7C
 	BVC bra_02_BBB0
 	JSR _b07_поставить_флаг_уменьшения_яркости
-	JSR _loc_07_C04A
+	JSR _b07_D062
 	JSR _loc_02_AE3D_задержка
 	LDA #$1C
-	JSR _loc_07_C068
+	JSR _b07_E828
 	LDA $061F
 	ASL
 	ASL
@@ -2372,7 +2372,7 @@ bra_02_BC27:
 	JSR _loc_02_BEBF
 	INC таймер_демо_hi
 	JSR _loc_02_BED4
-	JSR _loc_07_C059
+	JSR _b07_поставить_флаг_увеличения_яркости
 	LDA #$0E
 	JSR _loc_07_C2E4
 	LDA #$80
@@ -2387,18 +2387,18 @@ table_02_BCD0:
 
 table_02_BB62_BD00:
 	JSR _loc_02_BED4
-	JSR _loc_07_C05C
+	JSR _b07_D073
 	JSR _loc_02_AE7C
 	BVC bra_02_BCCF
 	JSR _b07_поставить_флаг_уменьшения_яркости
-	JSR _loc_07_C04A
+	JSR _b07_D062
 	JSR _loc_02_AE3D_задержка
 	INC $058C
 	LDA $058C
 	CMP #$07
 	BCS bra_02_BCCD
 	ADC #$1D
-	JSR _loc_07_C068
+	JSR _b07_E828
 	LDA $058C
 	ASL
 	TAY
@@ -2474,7 +2474,7 @@ bra_02_BDA9:
 bra_02_BDB6:
 	INC a: $6D
 	JSR _loc_02_BED4
-	JSR _loc_07_C059
+	JSR _b07_поставить_флаг_увеличения_яркости
 	RTS
 
 table_02_BB62_BDC0:
@@ -2518,12 +2518,12 @@ table_02_BB62_BDC0:
 	STA номер_палитры_спрайтов + 3
 	JSR _loc_02_BEC8
 	LDA #$24
-	JSR _loc_07_C068
+	JSR _b07_E828
 	LDA #$00
 	JSR _loc_02_BEBF
 	INC таймер_демо_hi
 	INC таймер_демо_hi
-	JSR _loc_07_C059
+	JSR _b07_поставить_флаг_увеличения_яркости
 bra_02_BE3F:
 	INC тип_экрана
 bra_02_BE41:
@@ -2531,7 +2531,7 @@ bra_02_BE41:
 
 table_02_BB62_BE42:
 	JSR _loc_02_BEC8
-	JSR _loc_07_C05C
+	JSR _b07_D073
 	JSR _loc_02_AE7C
 	BVC bra_02_BE41
 	LDA #$01
@@ -2560,7 +2560,7 @@ table_02_BB62_BE76:
 	LDA $0605
 	BMI bra_02_BE94
 	JSR _b07_поставить_флаг_уменьшения_яркости
-	JSR _loc_07_C04A
+	JSR _b07_D062
 	JSR _loc_02_AE3D_задержка
 	LDA #$00
 	STA скорость_игры
@@ -2571,7 +2571,7 @@ bra_02_BE94:
 
 table_02_BB62_BE95:
 	LDX #$0C
-	JSR _loc_07_C065
+	JSR _b07_EB8C
 	RTS
 _loc_02_BE9B:
 	JSR _loc_02_AE7C
@@ -2612,7 +2612,7 @@ _loc_02_BED4:
 bra_02_BEDB:
 	LDA координата_Z_hi,X
 	BNE bra_02_BEE3
-	JSR _loc_07_C065
+	JSR _b07_EB8C
 bra_02_BEE3:
 	INX
 	CPX #$0D

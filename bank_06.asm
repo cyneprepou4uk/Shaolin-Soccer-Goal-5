@@ -16,13 +16,13 @@
 .import _loc_07_CBD6
 .import _loc_07_CD2F
 .import _loc_07_CDCB
-.import _loc_07_CEBD
+.import _b07_CEBD
 .import _b07_поставить_флаг_уменьшения_яркости
 .import _loc_07_D5EF
 .import _loc_07_D7F3
 .import _loc_07_E6F0
-.import _loc_07_EB8C
-.import _loc_07_EC8F
+.import _b07_EB8C
+.import _b07_EC8F
 .import _b07_вращение_рандома
 .import _b07_F4C1
 .import _b07_F691
@@ -4084,7 +4084,7 @@ bra_06_A04D:
 	BEQ bra_06_A080
 bra_06_A068:
 	LDA $1D
-	JSR _loc_07_EC8F
+	JSR _b07_EC8F
 
 table_06_A06D:		; байты после JSR
 .word table_06_A06D_A083
@@ -4312,7 +4312,7 @@ bra_06_A1F6:
 _loc_06_A1F7:
 	STY $44
 	AND #$03
-	JSR _loc_07_EC8F
+	JSR _b07_EC8F
 
 table_06_A1FE:		; байты после JSR
 .word table_06_A1FE_A206
@@ -4813,7 +4813,7 @@ _loc_06_A5A7:
 	LDA table_06_A5C4 + 1
 	STA $33
 	LDA номер_движения,X
-	JSR _loc_07_CEBD
+	JSR _b07_CEBD
 	RTS
 
 table_06_A5C2:		; заменить на absolute
@@ -5725,7 +5725,7 @@ bra_06_AD52:
 	TAY
 	LDA table_06_B097,Y
 	BMI bra_06_AD72
-	JSR _loc_07_EC8F
+	JSR _b07_EC8F
 
 table_06_AD62:		; байты после JSR
 .word table_06_AD62_AD73
@@ -7748,7 +7748,7 @@ bra_06_BDB0:
 _loc_06_BDB3:
 bra_06_BDB3:
 	JSR _loc_06_AB52
-	JSR _loc_07_EB8C
+	JSR _b07_EB8C
 	JSR _loc_07_D5EF
 	JSR _loc_06_B2A4
 	JSR _loc_06_ABDE
@@ -7770,13 +7770,13 @@ _loc_06_BDDF:
 	LDX #$00
 	JSR _loc_06_AA19
 	JSR _loc_06_802D
-	JSR _loc_07_EB8C
+	JSR _b07_EB8C
 	JSR _loc_06_AAC8
 	LDX #$0C
 	JSR _loc_06_AB0B
 	JSR _loc_06_8C9D
 	JSR _loc_06_AB52
-	JSR _loc_07_EB8C
+	JSR _b07_EB8C
 	RTS
 _loc_06_BDFC:
 	INC таймер_катсцены
@@ -7789,7 +7789,7 @@ bra_06_BE01:
 	JSR _loc_06_802D
 	JSR _loc_06_AAC8
 bra_06_BE11:
-	JSR _loc_07_EB8C
+	JSR _b07_EB8C
 	DEX
 	BPL bra_06_BE01
 	LDX #$0C
@@ -7802,14 +7802,14 @@ bra_06_BE11:
 	JSR _loc_06_8C9D
 	JSR _loc_06_AB52
 bra_06_BE2E:
-	JSR _loc_07_EB8C
+	JSR _b07_EB8C
 	RTS
 _loc_06_BE32:
 	JSR _loc_06_AA19
 	JSR _loc_07_C276
 	JSR _loc_06_802D
 	JSR _loc_06_B2A4
-	JSR _loc_07_EB8C
+	JSR _b07_EB8C
 	RTS
 
 .export _loc_06_BE42
@@ -7846,7 +7846,7 @@ _loc_06_BE76:
 	JSR _loc_06_AA14
 	JSR _loc_07_C2D0
 	JSR _loc_06_AAC3
-	JSR _loc_07_EB8C
+	JSR _b07_EB8C
 	LDA координата_X_hi,X
 	BEQ bra_06_BE95
 	CMP #$02
@@ -7897,7 +7897,7 @@ _loc_06_BECC:
 	INX
 bra_06_BEDC:
 	JSR _loc_07_CBD6
-	JSR _loc_07_EB8C
+	JSR _b07_EB8C
 	INX
 	CPX #$13
 	BCC bra_06_BEDC

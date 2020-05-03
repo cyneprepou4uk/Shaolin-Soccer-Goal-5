@@ -4,8 +4,8 @@
 
 .import _loc_07_C2E4
 .import _b07_вращение_рандома
-.import _loc_07_C050
-.import _loc_07_C053
+.import _b07_C344
+.import _b07_EC8F
 
 ; !!! разрешено двигать код можно только начиная с _loc_00_BB13
 ; требуется поправить поинтеры внутри звуков после D0 и D1, это вроде как повторы с поинтерами, возможно есть и еще
@@ -2048,7 +2048,7 @@ bra_00_B058:
 _loc_00_B059:
 	SEC
 	SBC #$F0
-	JSR _loc_07_C053
+	JSR _b07_EC8F
 
 table_00_B05F:		; байты после JSR
 .word table_00_B05F_B073
@@ -2783,7 +2783,7 @@ bra_00_BF08:
 	STA $1C
 	LDA table_00_BF1F,X
 	AND #$03
-	JSR _loc_07_C053
+	JSR _b07_EC8F
 
 table_00_BF17:		; байты после JSR
 .word table_00_BF17_BF39
@@ -2907,10 +2907,10 @@ bra_00_BFF2:
 	RTS
 _loc_00_BFF3:
 	LDA #$19
-	JMP _loc_07_C050
+	JMP _b07_C344
 _loc_00_BFF8:
 	LDA #$1A
-	JMP _loc_07_C050
+	JMP _b07_C344
 
 .segment "BANK_00_ID"
 .byte $00
