@@ -3,8 +3,8 @@
 .include "val_copy.inc"
 
 .import _loc_07_C2E4
-.import _loc_07_C035
-.import _loc_07_C041
+.import _b07_F691
+.import _b07_FA6D
 .import _loc_07_C050
 .import _loc_07_C056
 .import _loc_07_C07A
@@ -5807,7 +5807,7 @@ bra_04_B396:
 _loc_04_B3A2:
 bra_04_B3A2:
 	LDY #$0D
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	CMP #$80
 	BCC bra_04_B3AE
 	JMP _loc_04_B445
@@ -6819,7 +6819,7 @@ _loc_04_BB80:
 	STA $2F
 	STA $051C
 bra_04_BBB3:
-	JSR _loc_07_C035
+	JSR _b07_F691
 	STA смена_угла_движения,X
 	RTS
 

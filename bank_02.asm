@@ -5,8 +5,8 @@
 .import _loc_07_C2E4
 .import _b07_вращение_рандома
 .import _b07_запись_банков_спрайтов
-.import _loc_07_C044
-.import _loc_07_C047
+.import _b07_поставить_флаг_уменьшения_яркости
+.import _b07_D036
 .import _loc_07_C04A
 .import _loc_07_C050
 .import _loc_07_C053
@@ -201,7 +201,7 @@ bra_02_AB28:
 	INC номер_палитры_спрайтов
 	INC номер_палитры_спрайтов + 1
 	INC номер_палитры_спрайтов + 2
-	JSR _loc_07_C047
+	JSR _b07_D036
 bra_02_AB3F:
 	RTS
 
@@ -275,7 +275,7 @@ table_02_AA70_ABDE:
 	JSR _loc_02_AE7C
 	BMI bra_02_ABF6
 	BVC bra_02_ABFD
-	JSR _loc_07_C044
+	JSR _b07_поставить_флаг_уменьшения_яркости
 	LDA #$04
 	STA скорость_яркости
 	JSR _loc_07_C04A
@@ -398,7 +398,7 @@ bra_02_ACD7:
 	LDA #$00
 bra_02_ACE7:
 	STA тип_экрана
-	JSR _loc_07_C044
+	JSR _b07_поставить_флаг_уменьшения_яркости
 	LDA #$04
 	STA скорость_яркости
 	JSR _loc_07_C04A
@@ -613,7 +613,7 @@ _loc_02_AE65:
 	LDA $58
 	CMP #$03
 	BEQ bra_02_AE79
-	JSR _loc_07_C044
+	JSR _b07_поставить_флаг_уменьшения_яркости
 	LDA #$04
 	STA скорость_яркости
 	JSR _loc_07_C04A
@@ -2275,7 +2275,7 @@ table_02_BB62_BBCE:
 	JSR _loc_02_BEC8
 	JSR _loc_02_AE7C
 	BVC bra_02_BBB0
-	JSR _loc_07_C044
+	JSR _b07_поставить_флаг_уменьшения_яркости
 	JSR _loc_07_C04A
 	JSR _loc_02_AE3D_задержка
 	LDA #$1C
@@ -2390,7 +2390,7 @@ table_02_BB62_BD00:
 	JSR _loc_07_C05C
 	JSR _loc_02_AE7C
 	BVC bra_02_BCCF
-	JSR _loc_07_C044
+	JSR _b07_поставить_флаг_уменьшения_яркости
 	JSR _loc_07_C04A
 	JSR _loc_02_AE3D_задержка
 	INC $058C
@@ -2559,7 +2559,7 @@ table_02_BB62_BE76:
 	JSR _loc_02_BEC8
 	LDA $0605
 	BMI bra_02_BE94
-	JSR _loc_07_C044
+	JSR _b07_поставить_флаг_уменьшения_яркости
 	JSR _loc_07_C04A
 	JSR _loc_02_AE3D_задержка
 	LDA #$00

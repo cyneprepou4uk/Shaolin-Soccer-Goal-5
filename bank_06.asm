@@ -24,8 +24,8 @@
 .import _loc_07_EB8C
 .import _loc_07_EC8F
 .import _b07_вращение_рандома
-.import _loc_07_F4C1
-.import _loc_07_F691
+.import _b07_F4C1
+.import _b07_F691
 .import _loc_07_F96A
 
 .export _loc_06_8000
@@ -4589,7 +4589,7 @@ bra_06_A3F3:
 	STA $2F
 _loc_06_A402:
 bra_06_A402:
-	JSR _loc_07_F691
+	JSR _b07_F691
 	STA смена_угла_движения,X
 	JSR _loc_06_A47D
 	JSR _loc_06_9867
@@ -4759,7 +4759,7 @@ bra_06_A542:
 	STA $1D
 	LDA $0039,Y
 	STA $1E
-	JSR _loc_07_F4C1
+	JSR _b07_F4C1
 	LDA #$00
 	STA $2C
 	LDA $1C

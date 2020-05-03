@@ -68,36 +68,6 @@
 table_07_C080_byte_8000_8001:
 .word table_07_C080
 
-.export _loc_07_C020
-_loc_07_C020:
-	JMP _loc_07_F469
-.export _loc_07_C026
-_loc_07_C026:
-	JMP _loc_07_F4C1
-.export _loc_07_C029
-_loc_07_C029:
-	JMP _loc_07_F564
-.export _loc_07_C02C
-_loc_07_C02C:
-	JMP _loc_07_F59B
-.export _loc_07_C032
-_loc_07_C032:
-	JMP _loc_07_F67D
-.export _loc_07_C035
-_loc_07_C035:
-	JMP _loc_07_F691
-.export _loc_07_C03E
-_loc_07_C03E:
-	JMP _loc_07_F9DE
-.export _loc_07_C041
-_loc_07_C041:
-	JMP _loc_07_FA6D
-.export _loc_07_C044
-_loc_07_C044:
-	JMP _b07_поставить_флаг_уменьшения_яркости
-.export _loc_07_C047
-_loc_07_C047:
-	JMP _loc_07_D036
 .export _loc_07_C04A
 _loc_07_C04A:
 	JMP _loc_07_D062
@@ -554,7 +524,7 @@ _loc_07_C3D4:
 	STA номер_палитры_спрайтов + 1
 	STA номер_палитры_спрайтов + 2
 	STA номер_палитры_спрайтов + 3
-	JSR _loc_07_D036
+	JSR _b07_D036
 	LDA #$22
 	STA $0607
 	STA $0610
@@ -2043,7 +2013,8 @@ _loc_07_D01F_палитра_статусбара_в_зависимости_от_
 	STA номер_палитры_фона + 1
 	RTS
 
-_loc_07_D036:
+.export _b07_D036
+_b07_D036:
 	LDA #$40
 	STA текущая_яркость
 	LDA #$01
@@ -6485,7 +6456,9 @@ bra_07_F3DE:
 	ADC #$00
 	STA $22
 	RTS
-_loc_07_F469:
+
+.export _b07_F469
+_b07_F469:
 	TXA
 	PHA
 	TYA
@@ -6544,8 +6517,8 @@ bra_07_F4BC:
 	TAX
 	RTS
 
-.export _loc_07_F4C1
-_loc_07_F4C1:
+.export _b07_F4C1
+_b07_F4C1:
 	TXA
 	PHA
 	TYA
@@ -6620,7 +6593,8 @@ bra_07_F534:
 	TAX
 	RTS
 
-_loc_07_F564:
+.export _b07_F564
+_b07_F564:
 	TXA
 	PHA
 	TYA
@@ -6661,7 +6635,9 @@ bra_07_F595:
 	TAX
 	CLC
 	RTS
-_loc_07_F59B:
+
+.export _b07_F59B
+_b07_F59B:
 	TXA
 	PHA
 	TYA
@@ -6769,7 +6745,7 @@ bra_07_F62B:
 	LDA #$00
 	STA $2D
 	STA $2F
-	JSR _loc_07_F564
+	JSR _b07_F564
 	RTS
 	LDA $1C
 	PHA
@@ -6798,7 +6774,8 @@ bra_07_F656:
 	TYA
 	RTS
 
-_loc_07_F67D:
+.export _b07_F67D
+_b07_F67D:
 	LDA координата_X_lo,Y
 	STA $2E
 	LDA координата_X_hi,Y
@@ -6807,8 +6784,8 @@ _loc_07_F67D:
 	STA $30
 	LDA координата_Y_hi,Y
 	STA $31
-.export _loc_07_F691
-_loc_07_F691:
+.export _b07_F691
+_b07_F691:
 	LDA #$00
 	STA $1C
 	LDA $2E
@@ -7020,7 +6997,7 @@ _loc_07_F813:
 	STA $2D
 	LDA $38
 	STA $2C
-	JSR _loc_07_F4C1
+	JSR _b07_F4C1
 	LDA $1C
 	CLC
 	ADC #$03
@@ -7068,7 +7045,7 @@ _loc_07_F86B:
 	STA $2D
 	LDA $3A
 	STA $2C
-	JSR _loc_07_F4C1
+	JSR _b07_F4C1
 	LDA $1C
 	CLC
 	ADC #$03
@@ -7154,7 +7131,7 @@ _loc_07_F974:
 	BNE bra_07_F97C
 	JMP _loc_07_F9CD
 bra_07_F97C:
-	JSR _loc_07_F67D
+	JSR _b07_F67D
 	SEC
 	SBC $2A
 	BPL bra_07_F989
@@ -7210,7 +7187,9 @@ bra_07_F9CD:
 bra_07_F9DA:
 	TAY
 	JMP _loc_07_F974
-_loc_07_F9DE:
+
+.export _b07_F9DE
+_b07_F9DE:
 	TXA
 	PHA
 	TYA
@@ -7227,7 +7206,7 @@ bra_07_F9E9:
 	LDX $22
 	LDY $23
 _loc_07_F9F3:
-	JSR _loc_07_FA6D
+	JSR _b07_FA6D
 	STY $2A
 	LDA $27
 	ASL
@@ -7293,7 +7272,9 @@ bra_07_FA68:
 	PLA
 	TAX
 	RTS
-_loc_07_FA6D:
+
+.export _b07_FA6D
+_b07_FA6D:
 	LDA координата_X_lo,Y
 	SEC
 	SBC координата_X_lo,X

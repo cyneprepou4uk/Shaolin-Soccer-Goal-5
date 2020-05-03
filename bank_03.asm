@@ -5,14 +5,14 @@
 .import table_07_C080_byte_8000_8001
 .import _loc_07_C2E4
 .import _b07_вращение_рандома
-.import _loc_07_C020
-.import _loc_07_C026
-.import _loc_07_C029
-.import _loc_07_C02C
-.import _loc_07_C032
-.import _loc_07_C035
-.import _loc_07_C03E
-.import _loc_07_C041
+.import _b07_F469
+.import _b07_F4C1
+.import _b07_F564
+.import _b07_F59B
+.import _b07_F67D
+.import _b07_F691
+.import _b07_F9DE
+.import _b07_FA6D
 
 .export _loc_03_8000
 _loc_03_8000:
@@ -74,7 +74,7 @@ bra_03_804F:
 	STA $28
 	LDA #$01
 	STA $29
-	JSR _loc_07_C03E
+	JSR _b07_F9DE
 	LDA номер_анимации_мяча
 	BPL bra_03_807B
 	PLA
@@ -626,7 +626,7 @@ bra_03_843C:
 _loc_03_8457:
 	LDA #$00
 	STA $1C
-	JSR _loc_07_C026
+	JSR _b07_F4C1
 	LDA $1C
 	STA $1F
 	LDA скорость_Y_hi_мяча
@@ -651,7 +651,7 @@ bra_03_8478:
 	ADC #$00
 	STA $1D
 _loc_03_848F:
-	JSR _loc_07_C02C
+	JSR _b07_F59B
 	LDA скорость_Y_hi_мяча
 	BMI bra_03_84A9
 	LDA координата_Y_lo_мяча
@@ -708,7 +708,7 @@ _логика_интеллекта_08:		; бежать к сопернику и 
 	JMP _логика_интеллекта_07_21
 bra_03_84EE:
 	LDY игрок_с_мячом
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	STA $1C
 	JSR _получение_номера_поведения_игрока_в_Y
 	LDA $1C
@@ -767,7 +767,7 @@ bra_03_8550:
 _loc_03_855A:
 bra_03_855A:
 	LDY игрок_с_мячом
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	STA $1C
 	JSR _получение_номера_поведения_игрока_в_Y
 	LDA $1C
@@ -859,7 +859,7 @@ _логика_интеллекта_06:
 	STA $28
 	LDA #$02
 	STA $29
-	JSR _loc_07_C03E
+	JSR _b07_F9DE
 	LDA $2D
 	CMP #$40
 	BCS bra_03_8630
@@ -1172,7 +1172,7 @@ _логика_интеллекта_0D:		; кипер бежит на ворот�
 	LDA table_03_89DB - $0A,X
 	STA координата_Y_hi,X
 	LDY #$0C
-	JSR _loc_07_C032
+	JSR _b07_F67D
 	STA $1C
 	PLA
 	STA координата_Y_hi,X
@@ -2244,7 +2244,7 @@ _логика_интеллекта_14:
 	INY
 	LDA table_03_90AF,Y
 	STA $31
-	JSR _loc_07_C035
+	JSR _b07_F691
 	STA $1C
 	TXA
 	AND #$01
@@ -2399,7 +2399,7 @@ _loc_03_9167:
 	LDA table_03_89DB,Y
 	STA $31
 	LDX $1C
-	JSR _loc_07_C035
+	JSR _b07_F691
 	LSR
 	LSR
 	LSR
@@ -2463,7 +2463,7 @@ _логика_интеллекта_23:
 	INY
 	LDA table_03_90AF,Y
 	STA $31
-	JSR _loc_07_C035
+	JSR _b07_F691
 	STA $1C
 	TXA
 	AND #$01
@@ -2584,7 +2584,7 @@ _логика_интеллекта_24:		; кипер бежит к мячу, н�
 	BCC bra_03_92FD
 	JMP _loc_03_930F
 bra_03_92FD:
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	LSR
 	LSR
 	LSR
@@ -2617,7 +2617,7 @@ bra_03_9337:
 	JSR _b07_вращение_рандома
 	BPL bra_03_931C
 	LDY #$0C
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	CMP #$30
 	BCS bra_03_931C
 	LDA #$0C
@@ -2655,7 +2655,7 @@ _логика_интеллекта_25:
 	BCC bra_03_9387
 	JMP _loc_03_93F4
 bra_03_9387:
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	LSR
 	LSR
 	LSR
@@ -2733,7 +2733,7 @@ bra_03_940B:
 	RTS
 bra_03_941C:
 	LDY #$0C
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	CMP #$40
 	BCS bra_03_9401
 	LDA номер_анимации,X
@@ -2890,7 +2890,7 @@ _логика_интеллекта_28:
 	BMI bra_03_9547
 	JMP _loc_03_95FE
 bra_03_9547:
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	LSR
 	LSR
 	LSR
@@ -3096,7 +3096,7 @@ bra_03_96E5:
 	CMP #$20
 	BCS bra_03_96E2
 _loc_03_96EC:
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	STA $1C
 	JSR _получение_номера_поведения_игрока_в_Y
 	LDA $1C
@@ -3391,7 +3391,7 @@ _loc_03_990A:
 	STA $2F
 	LDA $1C
 	STA $2E
-	JSR _loc_07_C029
+	JSR _b07_F564
 	LDA скорость_X_hi,Y
 	BPL bra_03_992C
 	LDA координата_X_lo,Y
@@ -3450,7 +3450,7 @@ bra_03_9987:
 	LDA $1C
 _loc_03_9989:
 	STA $2E
-	JSR _loc_07_C029
+	JSR _b07_F564
 	LDA скорость_Y_hi,Y
 	BPL bra_03_99A5
 	LDA координата_Y_lo,Y
@@ -3484,7 +3484,7 @@ bra_03_99C4:
 	BEQ bra_03_99CF
 	JMP _loc_03_99E2
 bra_03_99CF:
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	LSR
 	LSR
 	LSR
@@ -4042,7 +4042,7 @@ bra_03_9DB9:
 	LDA номер_управляемого,X
 	TAX
 	LDY #$0C
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	STA $2C
 	PLA
 	TAX
@@ -4067,7 +4067,7 @@ _loc_03_9DE5:
 	STA $28
 	LDA #$02
 	STA $29
-	JSR _loc_07_C03E
+	JSR _b07_F9DE
 _loc_03_9DF2:
 	PLA
 	STA координата_Y_hi_мяча
@@ -4084,7 +4084,7 @@ _loc_03_9E03:
 	LDA номер_управляемого,X
 	TAX
 	LDY игрок_с_мячом
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	STA $2C
 	PLA
 	TAX
@@ -4109,7 +4109,7 @@ _loc_03_9E2F:
 	STA $28
 	LDA #$02
 	STA $29
-	JSR _loc_07_C03E
+	JSR _b07_F9DE
 	RTS
 _loc_03_9E3D:
 	LDA a: удержанные_кнопки,X
@@ -4519,7 +4519,7 @@ bra_03_A1A6:
 	STA $2E
 	LDA #$00
 	STA $2F
-	JSR _loc_07_C020
+	JSR _b07_F469
 	LDA $2C
 	STA $1D
 	LDA координата_Y_lo,Y
@@ -4537,7 +4537,7 @@ bra_03_A1CA:
 	STA $2F
 	LDA #$22
 	STA $2E
-	JSR _loc_07_C020
+	JSR _b07_F469
 	LDY $2C
 	LDA table_03_A2F2,Y
 	CLC
@@ -4617,7 +4617,7 @@ bra_03_A253:
 	LDA table_03_90AF + 3,Y
 	STA $31
 	LDX игрок_с_мячом
-	JSR _loc_07_C035
+	JSR _b07_F691
 	STA $20
 	LDA #$10
 	STA $21
@@ -4707,7 +4707,7 @@ _loc_03_A301:
 	STA $31
 	TYA
 	TAX
-	JSR _loc_07_C035
+	JSR _b07_F691
 	STA $1C
 	PLA
 	TAX
@@ -4851,7 +4851,7 @@ bra_03_A408:
 	STA $28
 	LDA #$02
 	STA $29
-	JSR _loc_07_C03E
+	JSR _b07_F9DE
 bra_03_A41E:
 	JSR _loc_03_A4A8
 	LDA игрок_с_мячом
@@ -4889,7 +4889,7 @@ bra_03_A450:
 	TAY
 	LDA номер_ближайшего,Y
 	TAY
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	STA $1C
 	TXA
 	TAY
@@ -5096,7 +5096,7 @@ bra_03_A59F:
 	STA $29
 	LDA #$05
 	STA $27
-	JSR _loc_07_C03E
+	JSR _b07_F9DE
 	JSR _loc_03_821F
 	STY $1C
 	PLA
@@ -6522,7 +6522,7 @@ bra_03_B05F:
 	BCC bra_03_B068
 	JMP _loc_03_B0A7
 bra_03_B068:
-	JSR _loc_07_C041
+	JSR _b07_FA6D
 	STY $44
 	LDY #$0F
 bra_03_B06F:
