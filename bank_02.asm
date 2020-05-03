@@ -16,8 +16,8 @@
 .import _b07_EF54
 .import _b07_EB8C
 .import _b07_E828
-.import _b03_яркость_палитры_и_запись_в_буфер
-.import _loc_07_C071
+.import _b07_яркость_палитры_и_запись_в_буфер
+.import _b07_C317
 .import _b07_обнуление_ZP_с_X_до_F8
 
 .export _loc_02_8000
@@ -168,7 +168,7 @@ bra_02_AAE4:
 	TAY
 	LDA table_02_AB40,Y
 	STA номер_палитры_фона
-	JSR _b03_яркость_палитры_и_запись_в_буфер
+	JSR _b07_яркость_палитры_и_запись_в_буфер
 	LDA #$3F
 	STA байт_2006_hi_палитра
 bra_02_AB01:
@@ -2555,7 +2555,7 @@ table_02_BB62_BE59:
 	BNE bra_02_BE3F
 
 table_02_BB62_BE76:
-	JSR _loc_07_C071
+	JSR _b07_C317
 	JSR _loc_02_BEC8
 	LDA $0605
 	BMI bra_02_BE94

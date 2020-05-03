@@ -7,7 +7,7 @@
 .import _b07_FA6D
 .import _b07_C344
 .import _b07_CEBD
-.import _loc_07_C07A
+.import _b07_FAEE
 
 .export _loc_04_8000
 _loc_04_8000:
@@ -5978,7 +5978,7 @@ bra_04_B4DB:
 	JMP _loc_04_B724
 bra_04_B4DE:
 	LDX $43
-	JSR _loc_07_C07A
+	JSR _b07_FAEE
 	LDA a: удержанные_кнопки,X
 	STA a: $1D
 	LDA a: одноразовые_кнопки,X
@@ -6444,7 +6444,7 @@ bra_04_B8BB:
 	JMP _loc_04_B9E2
 bra_04_B8BE:
 	LDX $43
-	JSR _loc_07_C07A
+	JSR _b07_FAEE
 	LDA a: удержанные_кнопки,X
 	STA a: $1D
 	LDA a: одноразовые_кнопки,X

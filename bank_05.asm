@@ -21,10 +21,10 @@
 .import _b07_EF54
 .import _b07_EB8C
 .import _b07_E828
-.import _loc_07_C06B
-.import _b03_яркость_палитры_и_запись_в_буфер
-.import _loc_07_C071
-.import _loc_07_C07D
+.import _b07_EFAD
+.import _b07_яркость_палитры_и_запись_в_буфер
+.import _b07_C317
+.import _b07_C335
 
 .export _loc_05_8000
 _loc_05_8000:
@@ -1344,7 +1344,7 @@ _loc_05_899E:
 	STA байт_2006_lo_атрибуты
 	LDA #$23
 	STA байт_2006_hi_атрибуты
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	JSR _b07_включить_рендеринг
 	JSR _b07_включить_NMI
 	RTS
@@ -1677,7 +1677,7 @@ _loc_05_8C2D:		; сюда 2 прыжка и 1 переход
 	STA банк_спрайтов + 1
 	JSR _loc_05_8CC6
 	JSR _loc_05_BDB0
-	JSR _b03_яркость_палитры_и_запись_в_буфер
+	JSR _b07_яркость_палитры_и_запись_в_буфер
 	LDA #$3F
 	STA байт_2006_hi_палитра
 	RTS
@@ -1769,7 +1769,7 @@ bra_05_8D4A:
 	STA байт_2006_hi_палитра,Y
 	DEY
 	BPL bra_05_8D4A
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	JSR _b07_включить_рендеринг
 	JSR _b07_включить_NMI
 	LDA #$02
@@ -2439,7 +2439,7 @@ bra_05_9291:
 	STA a: $5B
 	JMP _loc_05_92BE
 bra_05_929B:
-	JSR _loc_07_C07D
+	JSR _b07_C335
 	LDA #$00
 	STA счетчик_смен
 	STA $58
@@ -2592,7 +2592,7 @@ _loc_05_9396:
 bra_05_93DD:
 	JSR _loc_05_955D
 	JSR _loc_05_96AA
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	INC счетчик_опций
 	LDA счетчик_опций
 	CMP #$0A
@@ -4020,7 +4020,7 @@ bra_05_A015:
 	LDX #$00
 	LDA #$00
 	JSR _loc_05_82B0
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	DEC счетчик_опций
 	BNE bra_05_A000
 	LDA #$00
@@ -4031,7 +4031,7 @@ bra_05_A029:
 	STA номер_опции
 	JSR _loc_05_9CB3
 	JSR _loc_05_9F64
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	INC счетчик_опций
 	LDA счетчик_опций
 	CMP #$04
@@ -4219,7 +4219,7 @@ _loc_05_A16A:
 	STA байт_2006_lo_графика
 	LDA #$22
 	STA байт_2006_hi_графика
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	LDA опция_дождь_ветер
 	AND #$70
 	LSR
@@ -4247,7 +4247,7 @@ bra_05_A1C1:
 	STA $2D
 	LDA #$D8
 	STA $2C
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	LDA опция_направление_молния_смерч
 	AND #$0C
 	BEQ bra_05_A20F
@@ -4282,7 +4282,7 @@ bra_05_A21E:
 	STA байт_2006_lo_атрибуты
 	LDA $2D
 	STA байт_2006_hi_атрибуты
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	RTS
 
 table_05_A23B:
@@ -4358,7 +4358,7 @@ table_05_A291_A2D0:
 	JSR _loc_05_A318
 	JMP _loc_05_A2F6
 bra_05_A2DD:
-	JSR _loc_07_C071
+	JSR _b07_C317
 	LDA $0605
 	BMI bra_05_A2E8
 	JSR _b07_поставить_флаг_уменьшения_яркости
@@ -4446,7 +4446,7 @@ _loc_05_A31F:
 	LDA #$21
 	STA байт_2006_hi_графика
 	STA байт_2006_hi_палитра
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	LDY $2B
 	LDA table_05_A43C + 3,Y
 	STA буфер_палитры
@@ -4521,7 +4521,7 @@ _loc_05_A40D:
 	STA байт_2006_hi_атрибуты
 	ADC #$00
 	STA байт_2006_hi_графика
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	RTS
 
 table_05_A43C:		; характеристики игроков японии на экране игроков при прохождении
@@ -4890,7 +4890,7 @@ bra_05_A7E3:
 bra_05_A80B:
 	STY $05D1
 	JSR _loc_05_B0A8
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	LDY $05D1
 	INY
 	CPY #$0C
@@ -4906,7 +4906,7 @@ bra_05_A80B:
 	LDA байт_2006_lo_графика
 	SBC #$0C
 	STA байт_2006_lo_графика
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	JSR _b07_включить_рендеринг
 	JSR _b07_включить_NMI
 	PLA
@@ -5323,7 +5323,7 @@ bra_05_AB28:
 	STA $0604
 _loc_05_AB32:
 bra_05_AB32:
-	JSR _loc_07_C071
+	JSR _b07_C317
 	LDA счетчик_опций
 	CMP #$09
 	BCC bra_05_AB3F
@@ -6558,7 +6558,7 @@ bra_05_B60B:
 	LDA $33
 	ADC #$00
 	STA $33
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	LDX $20
 	LDA $054B,X
 	AND #$0F
@@ -6594,7 +6594,7 @@ bra_05_B682:
 	JSR _loc_05_B6B5
 	LDA #$04
 	STA $0691
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 bra_05_B695:
 	LDX $21
 	INX
@@ -6604,7 +6604,7 @@ bra_05_B695:
 	LDA $054A
 	ADC #$08
 	JSR _loc_05_B6B5
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	LDX $20
 	INX
 	JMP _loc_05_B679
@@ -6676,7 +6676,7 @@ _loc_05_B6EF:
 bra_05_B73C:
 	LDA $22
 	STA $23
-	JSR _loc_07_C06B
+	JSR _b07_EFAD
 	RTS
 
 table_05_B744:
