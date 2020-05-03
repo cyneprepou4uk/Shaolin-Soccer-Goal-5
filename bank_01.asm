@@ -5,7 +5,7 @@
 ; !!! разрешено двигать код только начиная с _loc_01_B430
 ; поинтеры в таблице еще не закончены
 
-.import _loc_07_C002
+.import _loc_07_C2E4
 .import _loc_07_C005
 .import _loc_07_C011
 .import _loc_07_C017
@@ -3081,7 +3081,7 @@ table_01_B9F6_BA05:
 	STA сила_ветра
 	STA длительность_погоды_ХЗ
 	LDA #$45
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	LDA a: адрес_рандома
 	AND #$07
 	STA $05E4
@@ -3098,7 +3098,7 @@ table_01_B9F6_BA2D:
 
 table_01_B9F6_BA2E:
 	LDA #$41
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	LDA #$00
 	STA сила_ветра
 	LDA a: адрес_рандома

@@ -68,9 +68,6 @@
 table_07_C080_byte_8000_8001:
 .word table_07_C080
 
-.export _loc_07_C002
-_loc_07_C002:
-	JMP _loc_07_C2E4
 .export _loc_07_C005
 _loc_07_C005:		; в банке 05 в BA60 зачем-то читается первый байт 4C
 	JMP _b07_вращение_рандома
@@ -5933,6 +5930,7 @@ bra_07_EF94:
 	STA $2006
 	STA $2006
 	RTS
+
 _loc_07_EFAD:
 	LDA $58
 	BNE bra_07_EFE5
@@ -6071,9 +6069,9 @@ _loc_07_F0B4_рисовка_поля_при_скроллинге:
 	JMP _loc_07_F166
 bra_07_F0C5:
 	LDA вид_статусбара
-	BPL bra_07_F0CD
+	BPL @RTS
 	JMP _loc_07_E170
-bra_07_F0CD:
+@RTS:
 	RTS
 bra_07_F0CE:
 	LDA байт_для_2000

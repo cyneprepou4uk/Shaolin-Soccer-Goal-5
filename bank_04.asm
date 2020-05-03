@@ -2,7 +2,7 @@
 .include "ram_copy.inc"
 .include "val_copy.inc"
 
-.import _loc_07_C002
+.import _loc_07_C2E4
 .import _loc_07_C035
 .import _loc_07_C041
 .import _loc_07_C050
@@ -6884,7 +6884,7 @@ bra_04_BC07:
 	INY
 @чтение_таблицы:
 	LDA table_04_BC5F_красный_супер,Y
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	JSR _loc_04_8027
 	JSR _loc_04_8027
 bra_04_BC3D:

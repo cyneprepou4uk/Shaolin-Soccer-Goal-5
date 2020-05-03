@@ -2,7 +2,7 @@
 .include "ram_copy.inc"
 .include "val_copy.inc"
 
-.import _loc_07_C002
+.import _loc_07_C2E4
 .import _loc_07_C005
 .import _loc_07_C050
 .import _loc_07_C053
@@ -2046,7 +2046,7 @@ bra_00_B04C:
 	CMP #$FF
 	BEQ bra_00_B058
 	LDA #$35
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 bra_00_B058:
 	RTS
 _loc_00_B059:

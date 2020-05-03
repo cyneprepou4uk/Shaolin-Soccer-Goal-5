@@ -3,7 +3,7 @@
 .include "val_copy.inc"
 
 .import table_07_C080_byte_8000_8001
-.import _loc_07_C002
+.import _loc_07_C2E4
 .import _loc_07_C005
 .import _loc_07_C020
 .import _loc_07_C026
@@ -3936,12 +3936,12 @@ table_03_9CD9_9CE1:
 	AND #$01
 	BEQ bra_03_9CF4
 	LDA #$34
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	JSR _loc_03_9F02
 	RTS
 bra_03_9CF4:
 	LDA #$33
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	LDA $1C
 	STA приказ_боту,X
 	JSR _loc_03_9F09
@@ -3981,12 +3981,12 @@ table_03_9CD9_9D2C:
 	AND #$02
 	BEQ bra_03_9D4C
 	LDA #$34
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	JSR _loc_03_9F02
 	RTS
 bra_03_9D4C:
 	LDA #$33
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	LDA $1C
 	STA приказ_боту,X
 	JSR _loc_03_9F09
@@ -4000,7 +4000,7 @@ table_03_9CD9_9D60:
 	AND #$04
 	BEQ bra_03_9D4C
 	LDA #$34
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	JSR _loc_03_9F02
 	RTS
 
@@ -4010,7 +4010,7 @@ table_03_9CD9_9D73:
 	AND #$08
 	BEQ bra_03_9D4C
 	LDA #$34
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	JSR _loc_03_9F02
 	RTS
 _loc_03_9D86:
@@ -7789,7 +7789,7 @@ bra_03_BC40:
 	CMP #ПОГОДА_ВЕТЕР + $80
 	BNE bra_03_BC4F
 	LDA #$41
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 bra_03_BC4F:
 	LDA опция_направление_молния_смерч
 	AND #$30

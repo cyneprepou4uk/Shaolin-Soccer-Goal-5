@@ -2,7 +2,7 @@
 .include "ram_copy.inc"
 .include "val_copy.inc"
 
-.import _loc_07_C002
+.import _loc_07_C2E4
 .import _loc_07_C005
 .import _loc_07_C00B
 .import _loc_07_C044
@@ -248,7 +248,7 @@ table_02_AA70_AB78:
 	STX номер_палитры_спрайтов + 3
 	JSR _loc_02_B033
 	LDA #$01
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	JSR _loc_07_C059
 	LDA #$04
 	STA скорость_яркости
@@ -392,7 +392,7 @@ bra_02_ACD7:
 	LDA #$00
 	STA флаг_демо
 	LDA #$33
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	LDA #$02
 	STA $58
 	LDA #$00
@@ -1077,7 +1077,7 @@ table_02_B09D_B18A:
 	STA угол_движения,X
 _loc_02_B19A:
 	LDA #$2B
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	LDA #$0A
 	JSR _loc_02_B2A1
 _loc_02_B1A4:
@@ -1096,7 +1096,7 @@ bra_02_B1BA:
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
 	LDA #$2C
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	JSR _loc_02_B24A
 bra_02_B1CD:
 	RTS
@@ -1860,7 +1860,7 @@ table_02_B6EF_B82C:
 	BMI bra_02_B83E
 	JSR _loc_02_B282
 	LDA #$2B
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	LDA #$00
 _loc_02_B83B:
 	JSR _loc_02_B2A1
@@ -1882,7 +1882,7 @@ bra_02_B851:
 	CMP #$03
 	BEQ bra_02_B86A
 	LDA #$2C
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 bra_02_B86A:
 	RTS
 
@@ -2252,7 +2252,7 @@ table_02_BB62_BB78:
 	JSR _loc_02_AA1B
 	JSR _loc_07_C059
 	LDA #$0B
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 _loc_02_BBAE:
 	INC тип_экрана
 bra_02_BBB0:
@@ -2266,7 +2266,7 @@ table_02_BB62_BBB1:
 	AND #$02
 	BNE bra_02_BBB0
 	LDA #$44
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	LDA #$10
 	JSR _loc_02_BEBF
 	JMP _loc_02_BBAE
@@ -2374,7 +2374,7 @@ bra_02_BC27:
 	JSR _loc_02_BED4
 	JSR _loc_07_C059
 	LDA #$0E
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	LDA #$80
 	STA флаг_демо
 bra_02_BCCD:
@@ -2584,11 +2584,11 @@ _loc_02_BE9B:
 	LDA #$40
 	JSR _loc_02_BEBF
 	LDA #$4C
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	CLC
 	BCC bra_02_BEBE
 	LDA #$4E
-	JSR _loc_07_C002
+	JSR _loc_07_C2E4
 	SEC
 bra_02_BEBE:
 	RTS
