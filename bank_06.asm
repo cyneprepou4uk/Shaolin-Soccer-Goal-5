@@ -2,31 +2,31 @@
 .include "ram_copy.inc"
 .include "val_copy.inc"
 
-.import _loc_07_C276
-.import _loc_07_C28F
-.import _loc_07_C294
-.import _loc_07_C2B2
-.import _loc_07_C2B7
-.import _loc_07_C2BC
-.import _loc_07_C2C1
-.import _loc_07_C2C6
-.import _loc_07_C2CB
-.import _loc_07_C2D0
-.import _loc_07_C2E4
-.import _loc_07_CBD6
-.import _loc_07_CD2F
-.import _loc_07_CDCB
+.import _b07_C276
+.import _b07_C28F
+.import _b07_C294
+.import _b07_C2B2
+.import _b07_C2B7
+.import _b07_C2BC
+.import _b07_C2C1
+.import _b07_C2C6
+.import _b07_C2CB
+.import _b07_C2D0
+.import _b07_C2E4
+.import _b07_CBD6_отображение_циферок_на_миникарте
+.import _b07_CD2F
+.import _b07_CDCB
 .import _b07_CEBD
 .import _b07_поставить_флаг_уменьшения_яркости
-.import _loc_07_D5EF
-.import _loc_07_D7F3
-.import _loc_07_E6F0
+.import _b07_D5EF
+.import _b07_D7F3
+.import _b07_E6F0
 .import _b07_EB8C
 .import _b07_EC8F
 .import _b07_вращение_рандома
 .import _b07_F4C1
 .import _b07_F691
-.import _loc_07_F96A
+.import _b07_F96A
 
 .export _loc_06_8000
 _loc_06_8000:
@@ -195,10 +195,10 @@ bra_06_8105:
 _loc_06_810F:
 	JSR _loc_06_9A7A
 	JSR _loc_06_A021
-	JSR _loc_07_CDCB
+	JSR _b07_CDCB
 	JSR _loc_06_9B95
 	JSR _loc_06_9F9B
-	JSR _loc_07_CD2F
+	JSR _b07_CD2F
 	JSR _loc_06_B7BA
 	JSR _loc_06_B8AC
 	JSR _loc_06_A5A7
@@ -212,7 +212,7 @@ table_06_803F_812E:
 bra_06_8136:
 	LDY $04CA,X
 	JSR _loc_06_8C72
-	BIT $5C
+	BIT режим_игры_на_поле
 	BVS bra_06_8170
 	LDA номер_движения,Y
 	AND #$7F
@@ -342,7 +342,7 @@ table_06_803F_8225:
 	JSR _loc_06_9CC9
 	JSR _loc_06_9FDA
 	LDA #$46
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_06_8238:
 	JSR _loc_06_A5A7
 	LDA номер_погодного_эффекта
@@ -464,10 +464,10 @@ bra_06_831F:
 	LDA #$03
 	JSR _loc_06_9A7A
 	JSR _loc_06_A021
-	JSR _loc_07_CDCB
+	JSR _b07_CDCB
 	JSR _loc_06_9B95
 	JSR _loc_06_9F9B
-	JSR _loc_07_CD2F
+	JSR _b07_CD2F
 	JSR _loc_06_B7BA
 	JSR _loc_06_B8AC
 	JSR _loc_06_A5A7
@@ -500,7 +500,7 @@ table_06_803F_8363:
 	JSR _loc_06_A1F7
 	JSR _loc_06_9B34
 	LDA #$3B
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_06_8378:
 	LDA #$03
 	JMP _loc_06_810F
@@ -580,10 +580,10 @@ bra_06_83FB:
 	JSR _loc_06_9CF8
 _loc_06_8409:
 	JSR _loc_06_A021
-	JSR _loc_07_CDCB
+	JSR _b07_CDCB
 	JSR _loc_06_9B95
 	JSR _loc_06_9F9B
-	JSR _loc_07_CD2F
+	JSR _b07_CD2F
 	JSR _loc_06_B7BA
 	LDA $1C
 	BEQ bra_06_842D
@@ -701,7 +701,7 @@ table_06_803F_84F5:
 _loc_06_8502:
 	JSR _loc_06_9927
 	LDA #$3B
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA смена_угла_движения,X
 	CMP #$FF
 	BEQ bra_06_851C
@@ -714,9 +714,9 @@ bra_06_851C:
 	JSR _loc_06_9A7A
 _loc_06_8521:
 	JSR _loc_06_A021
-	JSR _loc_07_CDCB
+	JSR _b07_CDCB
 	JSR _loc_06_9B95
-	JSR _loc_07_CD2F
+	JSR _b07_CD2F
 	JSR _loc_06_B7BA
 	JSR _loc_06_B8AC
 	JSR _loc_06_9D65
@@ -732,7 +732,7 @@ table_06_803F_853D:
 	JSR _loc_06_9927
 	JSR _loc_06_9CE4
 	LDA #$3B
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA смена_угла_движения,X
 	CMP #$FF
 	BNE bra_06_855E
@@ -794,7 +794,7 @@ bra_06_85BF:
 bra_06_85D3:
 	JSR _loc_06_9CC9
 	LDA #$3B
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 _loc_06_85DB:
 bra_06_85DB:
 	JMP _loc_06_8521
@@ -804,7 +804,7 @@ table_06_803F_85DE:
 	BMI bra_06_8605
 	JSR _loc_06_9927
 	LDA #$3C
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	JSR _loc_06_9D19
 	JSR _loc_06_8608
 	LDA #$01
@@ -964,7 +964,7 @@ table_06_803F_8721:
 	JSR _loc_06_A03F
 	JSR _loc_06_9927
 	LDA #$2B
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA направление_движения,X
 	ORA #$40
 	STA угол_движения,X
@@ -979,7 +979,7 @@ bra_06_8748:
 _loc_06_8750:
 	JSR _loc_06_A187
 	JSR _loc_06_9B95
-	JSR _loc_07_CD2F
+	JSR _b07_CD2F
 	JSR _loc_06_B7BA
 	JSR _loc_06_B8AC
 	JSR _loc_06_9EBF
@@ -1009,7 +1009,7 @@ bra_06_878B:
 	STA координата_Z_hi,X
 _loc_06_8796:
 	LDA #$2C
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	JSR _loc_06_8B6C
 bra_06_879E:
 	RTS
@@ -1019,7 +1019,7 @@ table_06_803F_879F:
 	BMI bra_06_87B1
 	JSR _loc_06_9927
 	LDA #$2B
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$00
 	JSR _loc_06_9B60
 bra_06_87B1:
@@ -1037,7 +1037,7 @@ table_06_803F_87C2:
 	JSR _loc_06_A03F
 	JSR _loc_06_9927
 	LDA #$2B
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$06
 	JSR _loc_06_9B60
 bra_06_87D9:
@@ -1049,7 +1049,7 @@ table_06_803F_87DF:
 	BMI bra_06_87F9
 	JSR _loc_06_9927
 	LDA #$2B
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA направление_движения,X
 	ORA #$40
 	STA угол_движения,X
@@ -1109,7 +1109,7 @@ table_06_803F_884E:
 	JSR _loc_06_9B60
 	JSR _loc_06_9FDA
 	LDA #$39
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_06_8868:
 	LDA скорость_Z_hi,X
 	BMI bra_06_88A4
@@ -1235,7 +1235,7 @@ table_06_803F_896C:
 	BMI bra_06_898C
 	JSR _loc_06_9927
 	LDA #$3C
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$00
 	STA скорость_Z_lo,X
 	STA скорость_Z_hi,X
@@ -1314,7 +1314,7 @@ table_06_803F_8A05:
 	JSR _loc_06_A03F
 	JSR _loc_06_9927
 	LDA #$3B
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$03
 	JSR _loc_06_9B60
 bra_06_8A1C:
@@ -1340,7 +1340,7 @@ table_06_803F_8A40:
 	JSR _loc_06_9927
 	JSR _loc_06_A00C
 	LDA #$38
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$04
 	JSR _loc_06_9B60
 bra_06_8A55:
@@ -1355,7 +1355,7 @@ table_06_803F_8A58:
 	JSR _loc_06_9CE4
 	JSR _loc_06_9D19
 	LDA #$38
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$07
 	JSR _loc_06_99EB
 	LDA #$09
@@ -1469,7 +1469,7 @@ _loc_06_8B44:
 	LDA #$05
 	JSR _loc_06_99EB
 	LDA #$38
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_06_8B56:
 	JMP _loc_06_8A1F
 
@@ -1686,7 +1686,7 @@ table_06_8CAF_8D43:
 	JSR _loc_06_9927
 	JSR _loc_06_9856
 bra_06_8D4E:
-	JSR _loc_07_C28F
+	JSR _b07_C28F
 	JSR _loc_06_9642
 	RTS
 
@@ -1696,7 +1696,7 @@ table_06_8CAF_8D55:
 	JSR _loc_06_9927
 	JSR _loc_06_9856
 bra_06_8D60:
-	JSR _loc_07_C294
+	JSR _b07_C294
 	LDA направление_движения,X
 	STA a: $74,X
 	RTS
@@ -1712,7 +1712,7 @@ bra_06_8D72:
 	STA $0513
 	LDA координата_Z_hi,X
 	STA $0514
-	JSR _loc_07_C28F
+	JSR _b07_C28F
 	LDA #$00
 	STA скорость_Z_lo,X
 	STA скорость_Z_hi,X
@@ -1754,7 +1754,7 @@ bra_06_8DAD:
 	STA $2C
 	BNE bra_06_8DE4
 	LDA #$24
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_06_8DE4:
 	LDA направление_движения,X
 	BPL bra_06_8DF5
@@ -1884,22 +1884,22 @@ table_06_8CAF_8EE9:
 	LDA номер_движения,X
 	BMI bra_06_8EF4
 	JSR _loc_06_9927
-	JSR _loc_07_C2BC
+	JSR _b07_C2BC
 bra_06_8EF4:
 	LDA номер_супера
 	BMI bra_06_8F0A
 	ORA #$80
 	STA номер_супера
-	JSR _loc_07_C2C1
+	JSR _b07_C2C1
 	JSR _loc_06_9CC9
-	JSR _loc_07_C2C6
+	JSR _b07_C2C6
 	JSR _loc_06_98D3
 bra_06_8F0A:
-	BIT $5C
+	BIT режим_игры_на_поле
 	BVC bra_06_8F11
 	JSR _loc_06_9856
 bra_06_8F11:
-	JSR _loc_07_C2B7
+	JSR _b07_C2B7
 	JSR _loc_06_9D29
 	JSR _loc_06_96DA
 	JSR _loc_06_9B95
@@ -1912,7 +1912,7 @@ bra_06_8F2A:
 	JSR _loc_06_B1D3
 	LDA таймер_действия_мяча
 	BNE bra_06_8F4A
-	JSR _loc_07_C2CB
+	JSR _b07_C2CB
 	LDA сила_мяча
 	ORA разновидность_супера
 	BNE bra_06_8F4A
@@ -1928,9 +1928,9 @@ bra_06_8F4A:
 	LDA #$00
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
-	JSR _loc_07_C2CB
+	JSR _b07_C2CB
 	LDA #$3E
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA $0130,X
 	CMP #$02
 	BCC bra_06_8F7A
@@ -2060,7 +2060,7 @@ table_06_8CAF_905F:
 	BMI bra_06_9071
 	JSR _loc_06_9927
 	LDA #$3D
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$01
 	JSR _loc_06_94D9
 bra_06_9071:
@@ -2183,7 +2183,7 @@ bra_06_914F:
 	STA $22
 	LDA координата_Z_hi,X
 	STA $23
-	JSR _loc_07_C28F
+	JSR _b07_C28F
 	SEC
 	LDA $1E
 	SBC координата_X_lo,X
@@ -2740,7 +2740,7 @@ table_06_95EB:
 _loc_06_9609:
 	LDA таймер_электрического_мяча
 	BEQ bra_06_9630
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$40
 	BEQ bra_06_961C
 	LDA #$00
@@ -2927,7 +2927,7 @@ _loc_06_977B:
 bra_06_9787:
 	LDA $58
 	BNE bra_06_97B0
-	JSR _loc_07_E6F0
+	JSR _b07_E6F0
 	LDA $0130,X
 	BEQ bra_06_97B0
 	LDA номер_анимации_мяча
@@ -2942,7 +2942,7 @@ bra_06_9787:
 	ORA координата_Z_lo,X
 	BNE bra_06_97B0
 bra_06_97AD:
-	JSR _loc_07_D7F3
+	JSR _b07_D7F3
 bra_06_97B0:
 	RTS
 _loc_06_97B1:
@@ -3715,7 +3715,7 @@ bra_06_9DAC:
 	TAY
 	LDA table_06_9E9D + 3,Y
 	BMI bra_06_9DB9
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_06_9DB9:
 	CLC
 	LDA сила_игрока,X
@@ -3742,7 +3742,7 @@ bra_06_9DE2:
 	AND #$08
 	BEQ bra_06_9E6A
 	LDA #$36
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$2D
 	JSR _loc_06_9E7C
 	JMP _loc_06_9E62
@@ -3762,7 +3762,7 @@ _loc_06_9DF8:
 	LDA номер_анимации,Y
 	ASL
 	BMI bra_06_9E4A
-	BIT $5C
+	BIT режим_игры_на_поле
 	BVS bra_06_9E4A
 	LDY #$00
 	LDA координата_Y_hi,X
@@ -3781,11 +3781,11 @@ bra_06_9E2A:
 	LDA флаг_владения_мячом_команды,Y
 	ORA #$01
 	STA флаг_владения_мячом_команды,Y
-	LDA $5C
+	LDA режим_игры_на_поле
 	ORA #$60
-	STA $5C
+	STA режим_игры_на_поле
 	LDA #$2D
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_06_9E4A:
 	LDY $1D
 	LDA #$3C
@@ -3859,7 +3859,7 @@ _loc_06_9EB5:
 	LDA #$FF
 	BMI bra_06_9EB1
 _loc_06_9EBF:
-	BIT $5C
+	BIT режим_игры_на_поле
 	BVS bra_06_9EE2
 	CPX #$0A
 	BCS bra_06_9EE2
@@ -4050,13 +4050,13 @@ _loc_06_A021:
 	BNE bra_06_A03E
 	LDA флаг_видимости,X
 	BEQ bra_06_A031
-	JSR _loc_07_E6F0
+	JSR _b07_E6F0
 bra_06_A031:
 	LDA $0130,X
 	BEQ bra_06_A03E
 	LDA номер_анимации,X
 	BMI bra_06_A03E
-	JSR _loc_07_D7F3
+	JSR _b07_D7F3
 bra_06_A03E:
 	RTS
 _loc_06_A03F:
@@ -4196,7 +4196,7 @@ bra_06_A116:
 	EOR игрок_с_мячом
 	AND #$01
 	BEQ bra_06_A113
-	BIT $5C
+	BIT режим_игры_на_поле
 	BVS bra_06_A113
 	LDY игрок_с_мячом
 	CPY #$0A
@@ -4321,12 +4321,12 @@ table_06_A1FE:		; байты после JSR
 .word table_06_A1FE_A206
 
 table_06_A1FE_A206:
-	LDA $5C
+	LDA режим_игры_на_поле
 	ASL
 	BPL bra_06_A248
 	ASL
 	BMI bra_06_A248
-	LDA a: $5C
+	LDA a: режим_игры_на_поле
 	AND #$0F
 	BNE bra_06_A21C
 	LDA номер_тайма
@@ -4363,7 +4363,7 @@ bra_06_A248:
 	BCC bra_06_A25A
 	LDA флаг_кипера_в_штрафной - $0A,X
 	BMI bra_06_A25A
-	BIT $5C
+	BIT режим_игры_на_поле
 	BVS bra_06_A25A
 	LDA #$01
 	JMP _loc_06_A2D1
@@ -4499,7 +4499,7 @@ bra_06_A33B:
 	LDA направление_паса,Y
 	AND #$E0
 	STA $2A
-	JSR _loc_07_F96A
+	JSR _b07_F96A
 	CPY #$FF
 	BNE bra_06_A391
 bra_06_A35A:
@@ -5762,7 +5762,7 @@ _loc_06_AD8B:
 
 table_06_AD62_AD98:
 	LDA #$20
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDY $1D
 	JSR _loc_06_AF63
 	STY игрок_с_мячом
@@ -5771,7 +5771,7 @@ table_06_AD62_AD98:
 
 table_06_AD62_ADAA:
 	LDA #$23
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDY $1D
 	JSR _loc_06_AF63
 	STY игрок_с_мячом
@@ -5828,10 +5828,10 @@ bra_06_AE0E:
 	LDA скорость_Z_hi,Y
 	BPL bra_06_AE3A
 	LDA #$43
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$02
 	JSR _loc_06_B07B
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$40
 	BEQ bra_06_AE35
 	LDA #$11
@@ -5882,7 +5882,7 @@ bra_06_AE7F:
 	JSR _loc_06_B07B
 _loc_06_AE87:
 	LDA #$23
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$09
 	JMP _loc_06_AD8B
 bra_06_AE91:
@@ -5891,7 +5891,7 @@ bra_06_AE91:
 	BEQ bra_06_AE7A
 	JSR _loc_06_B05D
 	LDA #$23
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$26
 	JSR _loc_06_B07B
 	LDA #$15
@@ -5902,13 +5902,13 @@ table_06_AD62_AEAA:
 	JSR _loc_06_AF63
 	STY игрок_с_мячом
 	JSR _loc_06_AF50
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$40
 	BEQ bra_06_AEBE
 	JMP _loc_06_AD72
 bra_06_AEBE:
 	LDA #$26
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDY $1D
 	STY игрок_с_мячом
 	JSR _loc_06_B05D
@@ -5929,7 +5929,7 @@ bra_06_AEE0:
 	AND #$20
 	BEQ bra_06_AEF2
 	LDA #$40
-	STA $5C
+	STA режим_игры_на_поле
 bra_06_AEF2:
 	LDY $1D
 	LDA номер_анимации,Y
@@ -5975,11 +5975,11 @@ table_06_AD62_AF36:
 bra_06_AF43:
 	STY игрок_с_мячом
 	LDA #$26
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$10
 	JMP _loc_06_AD8B
 _loc_06_AF50:
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$0C
 	BEQ bra_06_AF62
 	PLA
@@ -6074,7 +6074,7 @@ bra_06_AFF9:
 bra_06_B004:
 	LDY $1E
 	LDA table_06_B030 + 2,Y
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA table_06_B030 + 1,Y
 	LDY $1D
 	JSR _loc_06_B07B
@@ -6231,7 +6231,7 @@ bra_06_B1D0:
 _loc_06_B1D3:
 	STX $43
 	LDY #$00
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$0C
 	BEQ bra_06_B1E0
 	LDY игрок_с_мячом
@@ -6253,7 +6253,7 @@ bra_06_B1ED:
 	SEC
 	BCS bra_06_B214
 bra_06_B205:
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$0C
 	BNE bra_06_B213
 	INC $44
@@ -6488,7 +6488,7 @@ _loc_06_B396:
 _loc_06_B3A0:
 	LDX $43
 	LDY $44
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$0C
 	BNE bra_06_B3B6
 	LDA флаг_видимости,X
@@ -7070,7 +7070,7 @@ bra_06_B873:
 	INC $1C
 	INC $1C
 bra_06_B886:
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$0C
 	BEQ bra_06_B89B
 	CPX игрок_с_мячом
@@ -7119,7 +7119,7 @@ bra_06_B8CF:
 	BNE bra_06_B8D6
 	JMP _loc_06_B9F5
 bra_06_B8D6:
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$0C
 	BEQ bra_06_B8E5
 	LDA опция_режим_сложность
@@ -7141,7 +7141,7 @@ bra_06_B8F6:
 	BEQ bra_06_B91A
 	JSR _loc_06_BCC8
 	LDA #$27
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA таймер_действия_мяча
 	LSR
 	AND #$1F
@@ -7192,7 +7192,7 @@ bra_06_B96F:
 	ORA скорость_X_lo,X
 	BEQ bra_06_B995
 	LDA #$27
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	JSR _loc_06_BBCA
 	JSR _loc_06_A187
 	LDA #$00
@@ -7213,7 +7213,7 @@ bra_06_B998:
 	ORA координата_Z_hi,X
 	BNE bra_06_B9B3
 bra_06_B9A9:
-	LDA a: $5C
+	LDA a: режим_игры_на_поле
 	AND #$02
 	BNE bra_06_B9B8
 	JSR _loc_06_BA31
@@ -7223,7 +7223,7 @@ bra_06_B9B3:
 bra_06_B9B8:
 	JMP _loc_06_BA30
 _loc_06_B9BB:
-	LDA a: $5C
+	LDA a: режим_игры_на_поле
 	AND #$40
 	BNE bra_06_B9EB
 	LDA флаг_прозрачного_мяча
@@ -7232,7 +7232,7 @@ _loc_06_B9BB:
 	LDA #$00
 	JSR _loc_06_BD55
 	LDA #$2D
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA координата_X_lo,X
 	STA координата_подающего_X_lo
 	LDA координата_X_hi,X
@@ -7247,7 +7247,7 @@ bra_06_B9EB:
 	STA флаг_прозрачного_мяча
 	JMP _loc_06_BA30
 _loc_06_B9F5:
-	LDA a: $5C
+	LDA a: режим_игры_на_поле
 	AND #$40
 	BNE bra_06_BA23
 	LDA флаг_прозрачного_мяча
@@ -7255,7 +7255,7 @@ _loc_06_B9F5:
 	LDA #$01
 	JSR _loc_06_BD55
 	LDA #$2D
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA координата_X_lo,X
 	STA координата_подающего_X_lo
 	LDA координата_X_hi,X
@@ -7274,7 +7274,7 @@ _loc_06_BA2B:
 _loc_06_BA30:
 	RTS
 _loc_06_BA31:
-	LDA a: $5C
+	LDA a: режим_игры_на_поле
 	AND #$40
 	BNE bra_06_BAB5
 	LDA номер_анимации_мяча
@@ -7293,7 +7293,7 @@ bra_06_BA54:
 	LDA #ПОГОДА_НЕТ
 	STA номер_погодного_эффекта
 bra_06_BA59:
-	BIT $5C
+	BIT режим_игры_на_поле
 	BVS bra_06_BAB5
 	LDA #$02
 	JSR _loc_06_BD55
@@ -7338,24 +7338,24 @@ bra_06_BAA5:
 	LDA #$14
 	JSR _loc_06_9EB5
 	LDA #$2E
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_06_BAB5:
 	RTS
 _loc_06_BAB6:
 	LDA #$00
 	STA $1C
 	SEC
-	LDA table_06_BB89
+	LDA #$70
 	STA $2E
 	SBC координата_X_lo,X
-	LDA table_06_BB89 + 1
+	LDA #$00
 	SBC координата_X_hi,X
 	BCS bra_06_BADF
 	SEC
-	LDA table_06_BB89 + 2
+	LDA #$90
 	STA $2E
 	SBC координата_X_lo,X
-	LDA table_06_BB89 + 3
+	LDA #$03		; возможно баг, может быть тут должно быть 00
 	SBC координата_X_hi,X
 	BCC bra_06_BADF
 	JMP _loc_06_BAE1
@@ -7363,18 +7363,18 @@ bra_06_BADF:
 	INC $1C
 _loc_06_BAE1:
 	SEC
-	LDA table_06_BB89 + 4
+	LDA #$A4
 	STA $30
 	SBC координата_Y_lo,X
-	LDA table_06_BB89 + 5
+	LDA #$00
 	STA $31
 	SBC координата_Y_hi,X
 	BCS bra_06_BB20
 	SEC
-	LDA table_06_BB89 + 8
+	LDA #$E4
 	STA $30
 	SBC координата_Y_lo,X
-	LDA table_06_BB89 + 9
+	LDA #$00
 	STA $31
 	SBC координата_Y_hi,X
 	BCC bra_06_BB33
@@ -7384,26 +7384,26 @@ _loc_06_BAE1:
 	INC $30
 	JMP _loc_06_BB50
 bra_06_BB13:
-	LDA table_06_BB89 + 4
+	LDA #$A4
 	STA $30
-	LDA table_06_BB89 + 5
+	LDA #$00
 	STA $31
 	JMP _loc_06_BB50
 bra_06_BB20:
 	SEC
-	LDA table_06_BB89 + 6
+	LDA #$95
 	SBC координата_Y_lo,X
 	STA $20
-	LDA table_06_BB89 + 7
+	LDA #$00
 	SBC координата_Y_hi,X
 	BCS bra_06_BB4A
 	BCC bra_06_BB44
 bra_06_BB33:
 	SEC
-	LDA table_06_BB89 + 10
+	LDA #$F3
 	SBC координата_Y_lo,X
 	STA $20
-	LDA table_06_BB89 + 11
+	LDA #$00
 	SBC координата_Y_hi,X
 	BCC bra_06_BB4A
 bra_06_BB44:
@@ -7416,19 +7416,19 @@ bra_06_BB4A:
 	STA $1C
 _loc_06_BB50:
 	SEC
-	LDA table_06_BB89 + 12
+	LDA #$2F
 	STA $32
 	SBC координата_Z_lo,X
-	LDA table_06_BB89 + 13
+	LDA #$00
 	STA $33
 	SBC координата_Z_hi,X
 	BMI bra_06_BB66
 	JMP _loc_06_BB88
 bra_06_BB66:
 	SEC
-	LDA table_06_BB89 + 14
+	LDA #$3F
 	SBC координата_Z_lo,X
-	LDA table_06_BB89 + 15
+	LDA #$00
 	SBC координата_Z_hi,X
 	BMI bra_06_BB80
 	LDA $1C
@@ -7443,16 +7443,6 @@ bra_06_BB80:
 	STA $1C
 _loc_06_BB88:
 	RTS
-
-table_06_BB89:		; заменить на absolute
-.byte $70,$00
-.byte $90,$03
-.byte $A4,$00
-.byte $95,$00
-.byte $E4,$00
-.byte $F3,$00
-.byte $2F,$00
-.byte $3F,$00
 
 _loc_06_BB99:
 	LDA $1C
@@ -7677,7 +7667,7 @@ _loc_06_BD2B:
 	INY
 bra_06_BD37:
 	LDA #$27
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$02
 	ORA $1D
 	STA $1D
@@ -7695,12 +7685,12 @@ table_06_BD53:
 
 _loc_06_BD55:
 	TAY
-	BIT a: $5C
+	BIT a: режим_игры_на_поле
 	BVS bra_06_BD66
-	LDA a: $5C
+	LDA a: режим_игры_на_поле
 	AND #$80
 	ORA table_06_BD67,Y
-	STA a: $5C
+	STA a: режим_игры_на_поле
 bra_06_BD66:
 	RTS
 
@@ -7749,7 +7739,7 @@ _loc_06_BDB3:
 bra_06_BDB3:
 	JSR _loc_06_AB52
 	JSR _b07_EB8C
-	JSR _loc_07_D5EF
+	JSR _b07_D5EF
 	JSR _loc_06_B2A4
 	JSR _loc_06_ABDE
 	RTS
@@ -7806,7 +7796,7 @@ bra_06_BE2E:
 	RTS
 _loc_06_BE32:
 	JSR _loc_06_AA19
-	JSR _loc_07_C276
+	JSR _b07_C276
 	JSR _loc_06_802D
 	JSR _loc_06_B2A4
 	JSR _b07_EB8C
@@ -7842,9 +7832,9 @@ bra_06_BE70:
 	ORA #$40
 	STA объект_камеры
 _loc_06_BE76:
-	JSR _loc_07_C2B2
+	JSR _b07_C2B2
 	JSR _loc_06_AA14
-	JSR _loc_07_C2D0
+	JSR _b07_C2D0
 	JSR _loc_06_AAC3
 	JSR _b07_EB8C
 	LDA координата_X_hi,X
@@ -7881,26 +7871,26 @@ bra_06_BEBA:
 	BPL bra_06_BECB
 	LDA #$40
 bra_06_BEC8:
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_06_BECB:
 	RTS
 
 .export _loc_06_BECC
 _loc_06_BECC:
-	LDA a: $5C
+	LDA a: режим_игры_на_поле
 	AND #$02
 	BNE bra_06_BEE7
 	LDX #$0E
 	LDA тип_экрана
 	CMP #$01
-	BNE bra_06_BEDC
+	BNE @цикл
 	INX
-bra_06_BEDC:
-	JSR _loc_07_CBD6
+@цикл:
+	JSR _b07_CBD6_отображение_циферок_на_миникарте
 	JSR _b07_EB8C
 	INX
 	CPX #$13
-	BCC bra_06_BEDC
+	BCC @цикл
 bra_06_BEE7:
 	RTS
 

@@ -225,8 +225,8 @@ _loc_07_C26C:
 _loc_07_C271:
 	LDA #$00
 	JMP _b07_C344
-.export _loc_07_C276
-_loc_07_C276:
+.export _b07_C276
+_b07_C276:
 	LDA #$02
 	JMP _b07_C344
 _loc_07_C27B:
@@ -241,12 +241,12 @@ _loc_07_C285:
 _loc_07_C28A:
 	LDA #$01
 	JMP _b07_C344
-.export _loc_07_C28F
-_loc_07_C28F:
+.export _b07_C28F
+_b07_C28F:
 	LDA #$0C
 	JMP _b07_C344
-.export _loc_07_C294
-_loc_07_C294:
+.export _b07_C294
+_b07_C294:
 	LDA #$0D
 	JMP _b07_C344
 _loc_07_C299:
@@ -264,32 +264,32 @@ _loc_07_C2A8:
 _loc_07_C2AD:
 	LDA #$17
 	JMP _b07_C344
-.export _loc_07_C2B2
-_loc_07_C2B2:
+.export _b07_C2B2
+_b07_C2B2:
 	LDA #$0F
 	JMP _b07_C344
-.export _loc_07_C2B7
-_loc_07_C2B7:
+.export _b07_C2B7
+_b07_C2B7:
 	LDA #$20
 	JMP _b07_C344
-.export _loc_07_C2BC
-_loc_07_C2BC:
+.export _b07_C2BC
+_b07_C2BC:
 	LDA #$21
 	JMP _b07_C344
-.export _loc_07_C2C1
-_loc_07_C2C1:
+.export _b07_C2C1
+_b07_C2C1:
 	LDA #$22
 	JMP _b07_C344
-.export _loc_07_C2C6
-_loc_07_C2C6:
+.export _b07_C2C6
+_b07_C2C6:
 	LDA #$23
 	JMP _b07_C344
-.export _loc_07_C2CB
-_loc_07_C2CB:
+.export _b07_C2CB
+_b07_C2CB:
 	LDA #$24
 	JMP _b07_C344
-.export _loc_07_C2D0
-_loc_07_C2D0:
+.export _b07_C2D0
+_b07_C2D0:
 	LDA #$0E
 	JMP _b07_C344
 _loc_07_C2D5:
@@ -301,8 +301,8 @@ _loc_07_C2DA:
 	LDA #$1A
 	JMP _b07_C344
 
-.export _loc_07_C2E4
-_loc_07_C2E4:
+.export _b07_C2E4
+_b07_C2E4:
 	BIT флаг_демо
 	BVS bra_07_C307
 	BPL bra_07_C2EF
@@ -454,7 +454,7 @@ _loc_07_C3D4:
 	STA $0588
 	JSR _очистка_ppu_спрайтов
 	LDA #$00
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$00
 	STA a: $52
 	LDA #$C0
@@ -664,11 +664,11 @@ table_07_C51F_C57D:
 	STA $05F7
 bra_07_C5B0:
 	JSR _loc_07_C2AD
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$20
 	BEQ bra_07_C5C4
 	JSR _loc_07_C87B
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$20
 	BEQ bra_07_C5C9
 	BNE bra_07_C612
@@ -678,7 +678,7 @@ bra_07_C5C4:
 bra_07_C5C9:
 	INC тип_экрана
 	LDA #$00
-	STA $5C
+	STA режим_игры_на_поле
 	STA флаг_владения_мячом_команды
 	STA флаг_владения_мячом_команды + 1
 	JSR _loc_07_D01F_палитра_статусбара_в_зависимости_от_команд
@@ -716,22 +716,22 @@ table_07_C51F_C615:
 	LDA a: одноразовые_кнопки
 	AND #КНОПКА_СТАРТ
 	BEQ bra_07_C63A
-	LDA $5C
+	LDA режим_игры_на_поле
 	EOR #$80
-	STA $5C
+	STA режим_игры_на_поле
 	BMI bra_07_C62D
 	LDA номер_музыки
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	JMP _loc_07_C63A
 bra_07_C62D:
 	LDA #$00
 	STA $06FD
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$2D
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 _loc_07_C63A:
 bra_07_C63A:
-	LDA $5C
+	LDA режим_игры_на_поле
 	BPL bra_07_C66B
 	JSR _loc_07_DE47
 	JSR _loc_07_CAEE
@@ -790,7 +790,7 @@ table_07_C51F_C699:
 	LDA таймер_катсцены
 	CMP #$20
 	BCC bra_07_C6DC
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$02
 	BEQ bra_07_C6DC
 	LDA игрок_с_мячом
@@ -812,7 +812,7 @@ bra_07_C6F0:
 bra_07_C6F4:
 	JSR _b07_поставить_флаг_уменьшения_яркости
 	LDA #$00
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$FF
 	STA таймер_катсцены
 	LDA #ПОГОДА_НЕТ
@@ -825,7 +825,7 @@ bra_07_C706:
 	BVC bra_07_C71B
 	JSR _loc_07_C91A
 	LDA #$00
-	STA a: $5C
+	STA a: режим_игры_на_поле
 	STA таймер_катсцены
 bra_07_C71B:
 	JMP _loc_07_C698
@@ -838,7 +838,7 @@ table_07_C51F_C71E:
 	JSR _b07_включить_рендеринг
 	JSR _b07_включить_NMI
 	LDA #$0C
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 _loc_07_C735:
 	LDA #$00
 	STA таймер_катсцены
@@ -855,7 +855,7 @@ table_07_C51F_C743:
 	JSR _b07_включить_рендеринг
 	JSR _b07_включить_NMI
 	LDA #$09
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	JMP _loc_07_C735
 
 table_07_C51F_C75D:
@@ -866,7 +866,7 @@ table_07_C51F_C75D:
 	JSR _b07_включить_рендеринг
 	JSR _b07_включить_NMI
 	LDA #$09
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	JMP _loc_07_C735
 
 table_07_C51F_C777:
@@ -910,7 +910,7 @@ bra_07_C7C2:
 	JSR _b07_поставить_флаг_уменьшения_яркости
 	LDA #$00
 	STA $05E8
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 _loc_07_C7CD:
 bra_07_C7CD:
 	JMP _loc_07_C698
@@ -929,7 +929,7 @@ table_07_C51F_C7D0:
 	JSR _loc_07_C285
 	JSR _loc_06_BECC
 	JSR _loc_07_C29E
-	LDA $5C
+	LDA режим_игры_на_поле
 	BNE bra_07_C808
 	LDA #$02
 	STA a: тип_экрана
@@ -947,7 +947,7 @@ _loc_07_C80B:
 	STA скорость_Y_hi_мяча
 	STA скорость_Y_lo_мяча
 bra_07_C81F:
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$04
 	BEQ bra_07_C830
 	LDA объект_камеры
@@ -956,26 +956,26 @@ bra_07_C81F:
 	JMP _loc_07_C872
 bra_07_C830:
 	LDA a: $F1
-	CMP table_07_C873 + 1
+	CMP #$00
 	BEQ bra_07_C83C
 	BCC bra_07_C844
 	BCS bra_07_C849
 bra_07_C83C:
 	LDA a: $F0
-	CMP table_07_C873
+	CMP #$80
 	BCS bra_07_C849
 bra_07_C844:
 	LDY #$00
 	JMP _loc_07_C85F
 bra_07_C849:
 	LDA a: $F1
-	CMP table_07_C873 + 3
+	CMP #$02
 	BEQ bra_07_C855
 	BCS bra_07_C85D
 	BCC bra_07_C872
 bra_07_C855:
 	LDA a: $F0
-	CMP table_07_C873 + 2
+	CMP #$80
 	BCC bra_07_C872
 bra_07_C85D:
 	LDY #$02
@@ -991,15 +991,12 @@ _loc_07_C872:
 bra_07_C872:
 	RTS
 
-table_07_C873:		; заменить на absolute
-.byte $80,$00,$80,$02
-
 table_07_C877:
 .byte $08,$00
 .byte $F8,$FF
 
 _loc_07_C87B:
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$20
 	BEQ bra_07_C89B
 	LDA номер_анимации_мяча
@@ -1008,21 +1005,21 @@ _loc_07_C87B:
 	INC таймер_катсцены
 	BPL bra_07_C89B
 bra_07_C88D:
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$DF
-	STA $5C
+	STA режим_игры_на_поле
 	LDA #$00
 	STA $055B
 	STA таймер_катсцены
 bra_07_C89B:
 	RTS
 _loc_07_C89C:
-	BIT $5C
+	BIT режим_игры_на_поле
 	BVC bra_07_C919
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$20
 	BNE bra_07_C8F5
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$0F
 	BEQ bra_07_C8C8
 	AND #$02
@@ -1113,14 +1110,14 @@ bra_07_C952:
 	AND #$20
 	BEQ bra_07_C968
 	INC счетчик_смен
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$02
 	BNE bra_07_C97B
 	LDA #$00
 	STA тип_экрана
 	JMP _loc_07_CA1E
 bra_07_C968:
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$20
 	BEQ bra_07_C975
 	LDA #$00
@@ -1128,7 +1125,7 @@ bra_07_C970:
 	STA тип_экрана
 	JMP _loc_07_CA1E
 bra_07_C975:
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$0F
 	BEQ bra_07_C97F
 bra_07_C97B:
@@ -1404,7 +1401,7 @@ _loc_07_CB5F:
 	CMP #$0F
 	BNE bra_07_CB82
 	LDA #$38
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_07_CB82:
 	JMP _loc_07_CB8F
 bra_07_CB85:
@@ -1454,9 +1451,9 @@ table_07_CBC7:
 .byte КНОПКА_А
 .byte КНОПКА_А
 
-.export _loc_07_CBD6
-_loc_07_CBD6:
-	LDA номер_движения,X
+.export _b07_CBD6_отображение_циферок_на_миникарте
+_b07_CBD6_отображение_циферок_на_миникарте:
+	LDA номер_циферки_миникарты - 14,X
 	ASL
 	TAY
 	LDA table_07_CBE8,Y
@@ -1466,21 +1463,18 @@ _loc_07_CBD6:
 	JMP ($002C)
 
 table_07_CBE8:
-.word table_07_CBE8_CBF4
+.word _общий_RTS
 .word table_07_CBE8_CBF5
 .word table_07_CBE8_CC0B
 .word table_07_CBE8_CC0B
 .word table_07_CBE8_CC0B
 .word table_07_CBE8_CC0B
 
-table_07_CBE8_CBF4:
-	RTS
-
 table_07_CBE8_CBF5:
-	LDA номер_движения,X
+	LDA номер_циферки_миникарты - 14,X
 	BMI bra_07_CBFF
 	ORA #$80
-	STA номер_движения,X
+	STA номер_циферки_миникарты - 14,X
 bra_07_CBFF:
 	LDA #$84
 	STA a: $74,X
@@ -1489,12 +1483,12 @@ bra_07_CBFF:
 	JMP _loc_07_CC9C
 
 table_07_CBE8_CC0B:
-	LDA номер_движения,X
+	LDA номер_циферки_миникарты - 14,X
 	BMI bra_07_CC15
 	ORA #$80
-	STA номер_движения,X
+	STA номер_циферки_миникарты - 14,X
 bra_07_CC15:
-	LDA номер_движения,X
+	LDA номер_циферки_миникарты - 14,X
 	AND #$7F
 	TAY
 	LDA table_07_CD23,Y
@@ -1553,15 +1547,15 @@ bra_07_CC4A:
 	LDA координата_Z_hi,Y
 	ADC #$00
 	STA координата_Z_hi,X
-	JMP _loc_07_CD1E
-_loc_07_CC9C:
+	RTS
 bra_07_CC9C:
+_loc_07_CC9C:
 	LDA a: тип_экрана
 	CMP #$01
 	BNE bra_07_CCAB
 	LDA #$7F
 	STA a: $74,X
-	JMP _loc_07_CD1E
+	RTS
 bra_07_CCAB:
 	LDA координата_X_lo,Y
 	STA $2C
@@ -1582,10 +1576,10 @@ bra_07_CCC1:
 	BCC bra_07_CCC1
 	CLC
 	LDA a: $F0
-	ADC table_07_CD1F
+	ADC #$60
 	STA координата_X_lo,X
 	LDA a: $F1
-	ADC table_07_CD1F + 1
+	ADC #$00
 	STA координата_X_hi,X
 	CLC
 	LDA координата_X_lo,X
@@ -1596,10 +1590,10 @@ bra_07_CCC1:
 	STA координата_X_hi,X
 	CLC
 	LDA a: $F2
-	ADC table_07_CD1F + 2
+	ADC #$CD
 	STA координата_Y_lo,X
 	LDA a: $F3
-	ADC table_07_CD1F + 3
+	ADC #$00
 	STA координата_Y_hi,X
 	CLC
 	LDA координата_Y_lo,X
@@ -1611,11 +1605,7 @@ bra_07_CCC1:
 	LDA #$00
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
-_loc_07_CD1E:
 	RTS
-
-table_07_CD1F:		; заменить на absolute
-.byte $60,$00,$CD,$00
 
 table_07_CD23:
 .byte $00,$84,$80,$81,$82,$83
@@ -1623,15 +1613,15 @@ table_07_CD23:
 table_07_CD29:
 .byte $00,$0C,$80,$81,$82,$83
 
-.export _loc_07_CD2F
-_loc_07_CD2F:
+.export _b07_CD2F
+_b07_CD2F:
 	LDA координата_Z_hi,X
 	BMI bra_07_CD37
 	JMP _loc_07_CDC6
 bra_07_CD37:
 	LDA $0130,X
 	BNE bra_07_CD3F
-	JSR _loc_07_E6F0
+	JSR _b07_E6F0
 bra_07_CD3F:
 	LDA $0130,X
 	BEQ bra_07_CD4A
@@ -1668,7 +1658,7 @@ bra_07_CD79:
 	ORA скорость_Y_hi,X
 	ORA скорость_Y_lo,X
 	BEQ bra_07_CDC6
-	JSR _loc_07_E6F0
+	JSR _b07_E6F0
 	LDA $0130,X
 	CMP #$02
 	BEQ bra_07_CDC6
@@ -1699,8 +1689,8 @@ table_07_CDC7:
 table_07_CDC9:
 .byte $EE,$FA
 
-.export _loc_07_CDCB
-_loc_07_CDCB:
+.export _b07_CDCB
+_b07_CDCB:
 	LDA координата_Z_hi,X
 	BMI bra_07_CDE2
 	ORA координата_Z_lo,X
@@ -1728,7 +1718,7 @@ bra_07_CDF7:
 	BEQ bra_07_CE04
 	INY
 bra_07_CE04:
-	BIT $5C
+	BIT режим_игры_на_поле
 	BVC bra_07_CE0D
 	LDY #$0C
 	JMP _loc_07_CE14
@@ -1870,7 +1860,7 @@ bra_07_CF4F:
 bra_07_CF55:
 	INY
 	LDA ($2C),Y
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	INC a: номер_кадра_анимации,X
 	JMP _loc_07_CEE5
 bra_07_CF61:
@@ -1883,7 +1873,7 @@ bra_07_CF61:
 bra_07_CF6F:
 	INY
 	LDA ($2C),Y
-	STA $5C
+	STA режим_игры_на_поле
 	LDA позиция_управление + $0A
 	AND #$7F
 	ORA управление_кипером
@@ -1948,7 +1938,7 @@ bra_07_D004:
 	LDA #$00
 	STA $05F9
 	LDA номер_музыки
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA #$03
 	STA скорость_игры
 	JSR _b07_включить_NMI
@@ -2769,8 +2759,8 @@ off_07_D5E7:
 off_07_D5EB:
 .byte $2A,$30,$0F,$27
 
-.export _loc_07_D5EF
-_loc_07_D5EF:
+.export _b07_D5EF
+_b07_D5EF:
 	LDA номер_погодного_эффекта
 	AND #$7F
 	CMP #ПОГОДА_МОЛНИЯ
@@ -2980,9 +2970,9 @@ _loc_07_D794:
 	CMP #$06
 	BEQ bra_07_D7A3
 	LDA #$40
-	STA $5C
+	STA режим_игры_на_поле
 	LDA #$31
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_07_D7A3:
 	RTS
 _loc_07_D7A4:
@@ -3024,8 +3014,8 @@ _loc_07_D7F2:
 bra_07_D7F2:
 	RTS
 
-.export _loc_07_D7F3
-_loc_07_D7F3:
+.export _b07_D7F3
+_b07_D7F3:
 	LDA $05F0
 	CMP #$04
 	BCS bra_07_D831
@@ -3522,7 +3512,7 @@ bra_07_DB98:
 	LDA #ПОГОДА_СМЕРЧ
 	STA номер_погодного_эффекта
 bra_07_DBBA:
-	LDA $5C
+	LDA режим_игры_на_поле
 	BPL bra_07_DBC1
 	JMP _loc_07_DC64
 bra_07_DBC1:
@@ -3701,7 +3691,7 @@ _loc_07_DD17:
 	LDA #$00
 	STA длительность_погоды_ХЗ
 bra_07_DD1C:
-	LDA $5C
+	LDA режим_игры_на_поле
 	BPL bra_07_DD23
 	JMP _loc_07_DD91
 bra_07_DD23:
@@ -4729,8 +4719,8 @@ table_07_E610:
 .byte $0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F
 .byte $0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F
 
-.export _loc_07_E6F0
-_loc_07_E6F0:
+.export _b07_E6F0
+_b07_E6F0:
 	LDA $BFFF
 	PHA
 	LDA $05F3
@@ -4932,7 +4922,7 @@ _b07_E828:
 	LDA table_07_EA12 + 1,Y
 	STA $2F
 	LDA #$00
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	JSR _b07_ECA9
 	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
@@ -5157,7 +5147,6 @@ _loc_07_E9F9:
 bra_07_EA11:
 	RTS
 
-
 table_07_EA12:
 .byte $00,$20
 .byte $60,$22
@@ -5305,15 +5294,15 @@ _loc_07_EBED:
 	BNE bra_07_EC13
 	SEC
 	LDA координата_X_lo,X
-	SBC table_07_EC85
+	SBC #$88
 	LDA координата_X_hi,X
-	SBC table_07_EC85 + 1
+	SBC #$00
 	BMI bra_07_EC7E
 	SEC
 	LDA координата_X_lo,X
-	SBC table_07_EC85 + 2
+	SBC #$78
 	LDA координата_X_hi,X
-	SBC table_07_EC85 + 3
+	SBC #$03
 	BPL bra_07_EC7E
 	JMP _loc_07_EC84
 bra_07_EC13:
@@ -5325,9 +5314,9 @@ bra_07_EC13:
 	BEQ bra_07_EC82
 	SEC
 	LDA координата_Y_lo,X
-	SBC table_07_EC85 + 8
+	SBC #$E4
 	LDA координата_Y_hi,X
-	SBC table_07_EC85 + 9
+	SBC #$00
 	BCS bra_07_EC84
 	SEC
 	LDA координата_Y_lo,X
@@ -5338,29 +5327,29 @@ bra_07_EC13:
 	STA $2D
 	SEC
 	LDA $2C
-	SBC table_07_EC85 + 4
+	SBC #$70
 	LDA $2D
-	SBC table_07_EC85 + 5
+	SBC #$00
 	BMI bra_07_EC5D
 	SEC
 	LDA $2C
-	SBC table_07_EC85 + 6
+	SBC #$A5
 	LDA $2D
-	SBC table_07_EC85 + 7
+	SBC #$00
 	BPL bra_07_EC84
 	JMP _loc_07_EC7E
 bra_07_EC5D:
 	SEC
 	LDA координата_Y_lo,X
-	SBC table_07_EC85 + 4
+	SBC #$70
 	LDA координата_Y_hi,X
-	SBC table_07_EC85 + 5
+	SBC #$00
 	BMI bra_07_EC84
 	SEC
 	LDA координата_Y_lo,X
-	SBC table_07_EC85 + 8
+	SBC #$E4
 	LDA координата_Y_hi,X
-	SBC table_07_EC85 + 9
+	SBC #$00
 	BPL bra_07_EC84
 	JMP _loc_07_EC82
 _loc_07_EC7E:
@@ -5373,9 +5362,6 @@ bra_07_EC82:
 _loc_07_EC84:
 bra_07_EC84:
 	RTS
-
-table_07_EC85:		; заменить на absolute
-.byte $88,$00,$78,$03,$70,$00,$A5,$00,$E4,$00
 
 .export _b07_EC8F
 _b07_EC8F:
@@ -7086,8 +7072,8 @@ table_07_F928:		; читается по 2 раза
 table_07_F949:		; читается по 2 раза
 .byte $00,$00,$00,$00,$00,$01,$02,$03,$04,$05,$07,$08,$0A,$0F,$10,$14,$15,$18,$1A,$1C,$21,$24,$26,$2D,$31,$38,$3C,$40,$49,$4D,$58,$63,$69
 
-.export _loc_07_F96A
-_loc_07_F96A:
+.export _b07_F96A
+_b07_F96A:
 	LDA #$FF
 	STA $3C
 	STA $3E
@@ -7364,7 +7350,7 @@ bra_07_FB36:
 	BEQ bra_07_FB52
 	INC $0578,X
 	LDA $0578,X
-	CMP table_07_FBA9
+	CMP #$02
 	BCC bra_07_FB15
 	LDA $0574,X
 	AND $1C
@@ -7387,7 +7373,7 @@ _loc_07_FB5F:
 	BEQ bra_07_FB89
 	STA $1C
 	LDA $0584,X
-	CMP table_07_FBA9 + 1
+	CMP #$06
 	BCS bra_07_FB89
 	LDA $057C,X
 	AND #$F0
@@ -7411,9 +7397,6 @@ bra_07_FB9B:
 _loc_07_FBA8:
 bra_07_FBA8:
 	RTS
-
-table_07_FBA9:		; заменить на absolute
-.byte $02,$06
 
 ; FBAB		вероятно не используется, такие же байты есть в table_04_B727
 .byte $FF,$40,$C0,$00,$80,$60,$A0,$00,$00,$20,$E0,$00,$00,$00,$00,$00
@@ -7584,7 +7567,7 @@ _обработчик_IRQ:
 	BEQ bra_07_FD0F
 	CMP #$03
 	BNE _loc_07_FD4C
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$03
 	ORA номер_тайма
 	ORA $055B
@@ -7719,7 +7702,8 @@ bra_07_FDFF:
 	BCC bra_07_FDF2
 	JMP _loc_07_C3D4
 
-; FE10 fill FF
+_общий_RTS:
+	RTS
 
 .segment "DMC_DATA"
 .byte $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$B6,$42,$04,$00,$00,$00,$00,$00,$20,$49,$B5,$AA,$AA,$4A,$24,$01,$51,$DA,$B6,$AA,$6D,$F7,$FF,$FF,$FF,$FF,$FF,$F6,$76,$DB,$AB,$55,$A5,$44,$10,$20,$00,$00,$04,$08,$90,$28,$51,$AA,$5A,$B5,$6D,$7B,$F7,$EE,$DD,$B7,$77,$5B,$5B,$B5,$52,$49,$12,$12,$09,$12,$22,$49,$48,$A5,$2A,$55,$65,$B5,$B5,$AD,$B6,$6D,$DB,$B6,$6D,$DB,$B6,$B5,$AD,$D6,$AA,$2A,$55,$4A,$A5,$24,$49,$2A,$09,$95,$A2,$54,$49,$53,$B5,$44,$6A,$D5,$6A,$AD,$D6,$44,$00,$AB,$6A,$D5,$44,$44,$AD,$44,$44,$44,$54,$44,$95,$44,$52,$00,$00,$FF,$B7,$20,$0B,$00,$00,$00,$00,$C0,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$00,$00,$00,$00,$00,$00,$C0,$0B,$00,$00,$80,$FD,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$17,$00,$00,$00,$00,$00,$00,$00,$F0,$FF,$FF,$FF,$FF,$FF,$7E,$51,$ED,$44,$81,$10,$01,$82,$18,$2B,$42,$53,$81,$6F,$D8,$DB,$EB,$E7,$BF,$EB,$1F,$FB,$95,$24,$48,$00,$02,$00,$E0,$C5,$C0,$BF,$F8,$FF,$FF,$BA,$0E,$7E,$C4,$50,$68,$2A,$56,$02,$6F,$77,$4E,$F8,$45,$95,$20,$56,$50,$63,$3F,$F4,$FF,$F0,$9D,$F8,$21,$B2,$20,$8E,$0D,$18,$CF,$82,$AF,$8A,$E3,$3F,$78,$FD,$18,$CE,$02,$87,$58,$E0,$C4,$47,$E9,$DF,$F1,$53,$3B,$8A,$97,$38,$08,$A9,$03,$DE,$E2,$F8,$0F,$9E,$EC,$89,$B2,$07,$38,$E2,$63,$F1,$E3,$C3,$7B,$42,$AF,$28,$8E,$2A,$8E,$42,$83,$5A,$1D,$FA,$B1,$EB,$AB,$D6,$62,$DA,$A1,$E2,$D0,$34,$9C,$85,$8E,$AE,$C4,$7A,$72,$1D,$A6,$55,$1C,$B9,$52,$3D,$8B,$9E,$9D,$4E,$96,$2A,$0B,$E2,$A8,$A4,$95,$2D,$BB,$72,$AD,$F4,$91,$5A,$8B,$52,$25,$4E,$9C,$5A,$79,$6A,$D7,$A4,$8E,$9C,$74,$B0,$A2,$B4,$89,$67,$35,$6D,$2B,$37,$B6,$45,$A5,$A9,$C5,$A4,$42,$34,$26,$54,$44,$44,$04,$44,$00,$4A,$44,$00,$00,$00,$00,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$00

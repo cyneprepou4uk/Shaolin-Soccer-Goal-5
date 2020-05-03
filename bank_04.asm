@@ -2,7 +2,7 @@
 .include "ram_copy.inc"
 .include "val_copy.inc"
 
-.import _loc_07_C2E4
+.import _b07_C2E4
 .import _b07_F691
 .import _b07_FA6D
 .import _b07_C344
@@ -54,7 +54,7 @@ _loc_04_802C:
 	LDA #$25
 	JMP _b07_C344
 _loc_04_8031:
-	LDA $5C
+	LDA режим_игры_на_поле
 	BPL bra_04_8036
 	RTS
 bra_04_8036:
@@ -5951,7 +5951,7 @@ table_04_B492:
 .byte $5A,$FF,$AD,$FF
 
 _loc_04_B4B2:
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$01
 	BEQ bra_04_B4BE
 	JSR _loc_04_B850
@@ -5991,7 +5991,7 @@ bra_04_B4DE:
 	STA a: $21
 	LDA номер_управляемого,X
 	TAX
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$40
 	BNE bra_04_B536
 	LDA номер_анимации,X
@@ -6884,7 +6884,7 @@ bra_04_BC07:
 	INY
 @чтение_таблицы:
 	LDA table_04_BC5F_красный_супер,Y
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	JSR _loc_04_8027
 	JSR _loc_04_8027
 bra_04_BC3D:
@@ -7063,7 +7063,7 @@ _loc_04_BDE3:
 	STA $32
 	LDA table_04_BE0A + 1
 	STA $33
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$40
 	BEQ bra_04_BE01
 	LDA #$00

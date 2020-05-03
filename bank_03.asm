@@ -3,7 +3,7 @@
 .include "val_copy.inc"
 
 .import table_07_C080_byte_8000_8001
-.import _loc_07_C2E4
+.import _b07_C2E4
 .import _b07_вращение_рандома
 .import _b07_F469
 .import _b07_F4C1
@@ -196,7 +196,7 @@ bra_03_8146:
 	LDA тип_экрана
 	CMP #$01
 	BNE bra_03_8161
-	LDA a: $5C
+	LDA a: режим_игры_на_поле
 	AND #$20
 	BEQ bra_03_816A
 	LDA флаг_владения_мячом_команды
@@ -420,7 +420,7 @@ _loc_03_82C4:
 	CPY #$0C
 	BCC bra_03_82B9
 	LDX игрок_с_мячом
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$04
 	BNE bra_03_8319
 	LDA координата_подающего_Y_hi
@@ -3936,12 +3936,12 @@ table_03_9CD9_9CE1:
 	AND #$01
 	BEQ bra_03_9CF4
 	LDA #$34
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	JSR _loc_03_9F02
 	RTS
 bra_03_9CF4:
 	LDA #$33
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA $1C
 	STA приказ_боту,X
 	JSR _loc_03_9F09
@@ -3981,12 +3981,12 @@ table_03_9CD9_9D2C:
 	AND #$02
 	BEQ bra_03_9D4C
 	LDA #$34
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	JSR _loc_03_9F02
 	RTS
 bra_03_9D4C:
 	LDA #$33
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	LDA $1C
 	STA приказ_боту,X
 	JSR _loc_03_9F09
@@ -4000,7 +4000,7 @@ table_03_9CD9_9D60:
 	AND #$04
 	BEQ bra_03_9D4C
 	LDA #$34
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	JSR _loc_03_9F02
 	RTS
 
@@ -4010,7 +4010,7 @@ table_03_9CD9_9D73:
 	AND #$08
 	BEQ bra_03_9D4C
 	LDA #$34
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 	JSR _loc_03_9F02
 	RTS
 _loc_03_9D86:
@@ -7618,7 +7618,7 @@ table_03_BAA1_BAE5:
 .byte $00,$02,$2C,$39,$07,$2F,$30,$32,$10,$19,$31,$33,$13,$18,$33,$2F,$37,$2A,$3E,$3F
 
 _loc_03_BAF9:
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$40
 	BNE @RTS
 	LDA номер_погодного_эффекта
@@ -7789,7 +7789,7 @@ bra_03_BC40:
 	CMP #ПОГОДА_ВЕТЕР + $80
 	BNE bra_03_BC4F
 	LDA #$41
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_03_BC4F:
 	LDA опция_направление_молния_смерч
 	AND #$30
@@ -8135,9 +8135,9 @@ bra_03_BED3:
 _loc_03_BED4:
 	LDA $58
 	BNE bra_03_BF12
-	BIT $5C
+	BIT режим_игры_на_поле
 	BVC bra_03_BEF2
-	LDA $5C
+	LDA режим_игры_на_поле
 	AND #$0F
 	BNE bra_03_BEE9
 	LDA номер_тайма

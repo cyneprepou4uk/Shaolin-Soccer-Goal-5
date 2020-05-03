@@ -2,7 +2,7 @@
 .include "ram_copy.inc"
 .include "val_copy.inc"
 
-.import _loc_07_C2E4
+.import _b07_C2E4
 .import _b07_вращение_рандома
 .import _b07_C344
 .import _b07_EC8F
@@ -2042,7 +2042,7 @@ bra_00_B04C:
 	CMP #$FF
 	BEQ bra_00_B058
 	LDA #$35
-	JSR _loc_07_C2E4
+	JSR _b07_C2E4
 bra_00_B058:
 	RTS
 _loc_00_B059:
@@ -2461,14 +2461,14 @@ bra_00_BB6C:
 	LDA $055B
 	BEQ bra_00_BBB4
 	LDA #$20
-	STA $5C
+	STA режим_игры_на_поле
 	LDA #$01
 	STA тип_экрана
 	BNE bra_00_BBBA
 bra_00_BBB4:
 	LDA #$01
 	STA тип_экрана
-	STA $5C
+	STA режим_игры_на_поле
 bra_00_BBBA:
 	LDY #$00
 	LDX #$0E
