@@ -7955,9 +7955,11 @@ bra_03_BD78:
 	ROR
 	SEC
 	ROR
-	CMP #$F8
+	SEC		; 60fps
+	ROR
+	CMP #$FD
 	BCS bra_03_BD8A
-	LDA #$F8
+	LDA #$FD
 bra_03_BD8A:
 	STA $1C
 	JMP _loc_03_BDB1
@@ -7977,9 +7979,10 @@ bra_03_BDA0:
 	LSR
 	LSR
 	LSR
-	CMP #$08
+	LSR		; 60fps
+	CMP #$03
 	BCC bra_03_BDAF
-	LDA #$08
+	LDA #$03
 bra_03_BDAF:
 	STA $1C
 _loc_03_BDB1:
