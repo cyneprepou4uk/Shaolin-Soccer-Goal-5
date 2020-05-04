@@ -422,7 +422,7 @@ bra_02_AD07:
 table_02_AD11:		; байты после JSR
 .word table_02_AD11_AD17
 .word table_02_AD11_AD28
-.word table_02_AD11_AD3B
+.word table_02_AD11_AD3B_физика_отскока_мяча_от_стены_на_экране_с_кунио
 
 table_02_AD11_AD17:
 	JSR _loc_02_AD91_оставить_только_кнопки_старт_и_селект
@@ -446,7 +446,7 @@ bra_02_AD38:
 bra_02_AD3A:
 	RTS
 
-table_02_AD11_AD3B:
+table_02_AD11_AD3B_физика_отскока_мяча_от_стены_на_экране_с_кунио:
 	LDY #$E0
 	LDA координата_X_lo
 	CMP #$E0
@@ -466,7 +466,8 @@ bra_02_AD5B:
 	LDA состояние_мяча
 	AND #$40
 	BNE bra_02_AD90
-	LDX #$02
+	LDX #$00		; 60fps_мяч, отскок от стены
+	LDY #$AB
 	LDA координата_X_hi_мяча
 	BNE bra_02_AD72
 	LDA координата_X_lo_мяча
@@ -475,18 +476,21 @@ bra_02_AD5B:
 	BCC bra_02_AD76
 bra_02_AD72:
 	BMI bra_02_AD76
-	LDX #$FE
+	LDX #$FF		; 60fps_мяч, чуть ниже тоже изменения
+	LDY #$55
 bra_02_AD76:
+	STY скорость_X_lo_мяча
+	STX скорость_X_hi_мяча
+	LDA #$06
+	STA номер_движения_мяча
+	LDA #$AB
+	STA скорость_Z_lo_мяча		; в оригинале скорость Z lo не была указана
+	LDA #$00
+	STA скорость_Z_hi_мяча
+	LDA #$0D
+	STA гравитация_lo_мяча
 	LDA #$00
 	STA гравитация_hi_мяча
-	STA скорость_X_lo_мяча
-	STX скорость_X_hi_мяча
-	LDA #$02
-	STA скорость_Z_hi_мяча
-	LDA #$B9
-	STA гравитация_lo_мяча		; 60fps_мяч
-	LDA #$00
-	STA номер_движения_мяча
 bra_02_AD90:
 	RTS
 
