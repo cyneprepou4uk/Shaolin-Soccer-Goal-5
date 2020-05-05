@@ -639,7 +639,7 @@ table_07_C51F_C539:
 	JSR _loc_06_BECC
 	JSR _loc_07_C29E
 bra_07_C57A:
-	JMP _loc_07_C698
+	RTS
 
 table_07_C51F_C57D:
 	JSR _loc_07_C271
@@ -710,7 +710,7 @@ bra_07_C607:
 	CPX #$0B
 	BCC bra_07_C607
 bra_07_C612:
-	JMP _loc_07_C698
+	RTS
 
 table_07_C51F_C615:
 	LDA одноразовые_кнопки
@@ -741,7 +741,7 @@ _loc_07_C647:
 	AND #$01
 	BNE bra_07_C654
 	JSR _loc_07_CB07
-	JMP _loc_07_C668
+	RTS
 bra_07_C654:
 	LDA #$0F
 	STA тайл_статусбара
@@ -750,8 +750,7 @@ bra_07_C654:
 	STA тайл_статусбара + 3
 	STA тайл_статусбара + 4
 	STA тайл_статусбара + 5
-_loc_07_C668:
-	JMP _loc_07_C698
+	RTS
 bra_07_C66B:
 	JSR _loc_07_DE0B
 	JSR _loc_07_D6E7
@@ -768,7 +767,6 @@ bra_07_C66B:
 	JSR _loc_07_C29E
 	JSR _loc_07_C299
 	JSR _b07_D073
-_loc_07_C698:
 	RTS
 
 table_07_C51F_C699:
@@ -828,7 +826,7 @@ bra_07_C706:
 	STA режим_игры_на_поле
 	STA таймер_катсцены
 bra_07_C71B:
-	JMP _loc_07_C698
+	RTS
 
 table_07_C51F_C71E:
 	JSR _loc_07_C2D5
@@ -845,7 +843,7 @@ _loc_07_C735:
 	JSR _b07_поставить_флаг_увеличения_яркости
 	INC тип_экрана
 	SEI
-	JMP _loc_07_C698
+	RTS
 
 table_07_C51F_C743:
 	JSR _loc_07_C2D5
@@ -913,7 +911,7 @@ bra_07_C7C2:
 	JSR _b07_C2E4
 _loc_07_C7CD:
 bra_07_C7CD:
-	JMP _loc_07_C698
+	RTS
 
 table_07_C51F_C7D0:
 	JSR _loc_07_DE0B
@@ -937,7 +935,7 @@ table_07_C51F_C7D0:
 	AND #$7F
 	STA объект_камеры
 bra_07_C808:
-	JMP _loc_07_C698
+	RTS
 _loc_07_C80B:
 	LDY игрок_с_мячом
 	LDA флаг_видимости_мяча
@@ -1432,7 +1430,7 @@ bra_07_CB92:
 	STA $04F7
 	STA $04F9
 	STA $04FB
-	JMP _loc_07_C698
+	RTS
 
 table_07_CBC7:
 .byte КНОПКА_А
@@ -7375,7 +7373,7 @@ _loc_07_FB5F:
 	BEQ bra_07_FB89
 	STA $1C
 	LDA $0584,X
-	CMP #$06
+	CMP #$12		; 60fps интервал между нажатием вперед + вперед или вверх + вверх
 	BCS bra_07_FB89
 	LDA $057C,X
 	AND #$F0
@@ -7773,7 +7771,7 @@ _деление:
 	RTS
 
 таблица_остаток_деления:
-.byte $00,$55,$AA
+.byte $00,$55,$AB
 
 _умножение:
 	LDA старший_байт
