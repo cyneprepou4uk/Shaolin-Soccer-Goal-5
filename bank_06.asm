@@ -30,6 +30,7 @@
 .import _b07_F691
 .import _b07_F96A
 .import _b07_деление_и_умножение_скоростей_16bit_на_3
+.import _общий_RTS
 
 .export _loc_06_8000
 _loc_06_8000:
@@ -88,7 +89,7 @@ _loc_06_802D:
 	JMP ($002C)
 
 table_06_803F:
-.word table_06_803F_80F9
+.word _общий_RTS
 .word table_06_803F_80FA
 .word table_06_803F_81A7
 .word table_06_803F_8215
@@ -107,19 +108,19 @@ table_06_803F:
 .word table_06_803F_8363
 .word table_06_803F_837D
 .word table_06_803F_84CB
-.word table_06_803F_80F9
+.word _общий_RTS
 .word table_06_803F_812E
 .word table_06_803F_82B0
 .word table_06_803F_838D
-.word table_06_803F_80F9
-.word table_06_803F_80F9
+.word _общий_RTS
+.word _общий_RTS
 .word table_06_803F_84E8
 .word table_06_803F_817F
 .word table_06_803F_83C1
 .word table_06_803F_83DB
 .word table_06_803F_8437
-.word table_06_803F_80F9
-.word table_06_803F_80F9
+.word _общий_RTS
+.word _общий_RTS
 .word table_06_803F_83F3
 .word table_06_803F_844D
 .word table_06_803F_84F5
@@ -132,7 +133,7 @@ table_06_803F:
 .word table_06_803F_84A8
 .word table_06_803F_8651
 .word table_06_803F_869A
-.word table_06_803F_80F9
+.word _общий_RTS
 .word table_06_803F_81BA
 .word table_06_803F_81EA
 .word table_06_803F_85DE
@@ -181,9 +182,6 @@ table_06_803F:
 .word table_06_803F_8835
 .word table_06_803F_8A40
 .word table_06_803F_8ADF
-
-table_06_803F_80F9:
-	RTS
 
 table_06_803F_80FA:
 	LDA номер_движения,X
@@ -244,11 +242,10 @@ bra_06_8169:
 bra_06_8170:
 	LDA #$30
 	STA номер_движения,X
-	JMP _loc_06_817E
+	RTS
 bra_06_8178:
 	JSR _loc_06_A5A7
 	JSR _loc_06_9D29
-_loc_06_817E:
 bra_06_817E:
 	RTS
 
@@ -600,7 +597,6 @@ bra_06_842D:
 	JSR _loc_06_B8AC
 	JSR _loc_06_A5A7
 	JSR _loc_06_9D29
-_loc_06_8436:
 	RTS
 
 table_06_803F_8437:
@@ -646,7 +642,7 @@ _loc_06_8482:
 	BPL bra_06_848F
 	LDA #$0F
 	STA номер_движения,X
-	JMP _loc_06_8436
+	RTS
 bra_06_848F:
 	JSR _loc_06_994C
 	JSR _loc_06_9CE4
@@ -1004,7 +1000,7 @@ bra_06_8783:
 	JMP _loc_06_8796
 bra_06_878B:
 	LDA #$00
-	STA $0373,X
+	STA координата_Z_sub,X
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
 _loc_06_8796:
@@ -1596,6 +1592,7 @@ _loc_06_8C8B:
 bra_06_8C99:
 	LDA номер_движения,X
 	RTS
+
 _loc_06_8C9D:
 	LDA номер_движения,X
 	ASL
@@ -1607,7 +1604,7 @@ _loc_06_8C9D:
 	JMP ($002C)
 
 table_06_8CAF:
-.word table_06_8CAF_8CE1
+.word _общий_RTS
 .word table_06_8CAF_8FC8
 .word table_06_8CAF_8D43
 .word table_06_8CAF_8D6A
@@ -1632,9 +1629,6 @@ table_06_8CAF:
 .word table_06_8CAF_8CE2
 .word table_06_8CAF_926B
 .word table_06_8CAF_903B
-
-table_06_8CAF_8CE1:
-	RTS
 
 table_06_8CAF_8CE2:
 	LDA номер_движения,X
@@ -1777,7 +1771,7 @@ bra_06_8DF5:
 	LDA координата_Z_hi,X
 	BPL bra_06_8E1D
 	LDA #$00
-	STA $0373,X
+	STA координата_Z_sub,X
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
 bra_06_8E1D:
@@ -1795,7 +1789,7 @@ bra_06_8E29:
 	LDA #$00
 	STA координата_Z_hi,X
 	STA координата_Z_lo,X
-	STA $0373,X
+	STA координата_Z_sub,X
 	STA скорость_Z_hi,X
 	STA скорость_Z_lo,X
 bra_06_8E42:
@@ -2732,7 +2726,7 @@ bra_06_959C:
 	LDA скорость_Y_hi,X
 	SBC $33
 	STA скорость_Y_hi,X
-	JMP _loc_06_95EA
+	RTS
 bra_06_95B9:
 	CLC
 	LDA скорость_Y_lo,X
@@ -2742,7 +2736,7 @@ bra_06_95B9:
 	ADC #$00
 	STA скорость_Y_hi,X
 	BPL bra_06_95E2
-	JMP _loc_06_95EA
+	RTS
 bra_06_95CF:
 	SEC
 	LDA скорость_Y_lo,X
@@ -2756,7 +2750,6 @@ bra_06_95E2:
 	LDA #$00
 	STA скорость_Y_lo,X
 	STA скорость_Y_hi,X
-_loc_06_95EA:
 bra_06_95EA:
 	RTS
 
@@ -2820,6 +2813,7 @@ _loc_06_963B:
 	STA номер_анимации,X
 bra_06_9641:
 	RTS
+
 _loc_06_9642:
 	LDA направление_движения,X
 	STA $1D
@@ -2959,7 +2953,7 @@ _loc_06_972F:
 	LDA $0130,X
 	BNE bra_06_9742
 	LDA #$00
-	STA $0373,X
+	STA координата_Z_sub,X
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
 bra_06_9742:
@@ -3012,6 +3006,7 @@ bra_06_97AD:
 	JSR _b07_D7F3
 bra_06_97B0:
 	RTS
+
 _loc_06_97B1:
 	LDA $0130,X
 	CMP #$01
@@ -3025,6 +3020,7 @@ bra_06_97C2:
 	STA таймер_мокрого_мяча
 bra_06_97C5:
 	RTS
+
 _loc_06_97C6:
 	ASL
 	ASL
@@ -3188,7 +3184,7 @@ _loc_06_98D3:
 	ROL $2D
 	LDA $2D
 	STA $0524
-	LDA $0373,X
+	LDA координата_Z_sub,X
 	STA $30
 	LDA координата_Z_lo,X
 	STA $31
@@ -3232,6 +3228,7 @@ _loc_06_9927:
 	STA подтип_анимации,X
 bra_06_994B:
 	RTS
+
 _loc_06_994C:
 	LDY #$00
 	LDA номер_движения,X
@@ -3532,8 +3529,8 @@ _loc_06_9B95:
 	STA $0516
 	CLC
 	LDA скорость_X_lo,X
-	ADC $0301,X
-	STA $0301,X
+	ADC координата_X_sub,X
+	STA координата_X_sub,X
 	LDA скорость_X_hi,X
 	BPL bra_06_9BC2
 	DEC координата_X_hi,X
@@ -3551,8 +3548,8 @@ bra_06_9BC2:
 	BEQ bra_06_9BFD
 	CLC
 	LDA скорость_Y_lo,X
-	ADC $033A,X
-	STA $033A,X
+	ADC координата_Y_sub,X
+	STA координата_Y_sub,X
 	LDA скорость_Y_hi,X
 	BPL bra_06_9BEF
 	DEC координата_Y_hi,X
@@ -3566,12 +3563,12 @@ bra_06_9BEF:
 bra_06_9BFD:
 	CPX #$0D
 	BCC bra_06_9C04
-	JMP _loc_06_9CC8
+	RTS
 bra_06_9C04:
 	CLC
 	LDA скорость_Z_lo,X
-	ADC $0373,X
-	STA $0373,X
+	ADC координата_Z_sub,X
+	STA координата_Z_sub,X
 	LDA скорость_Z_hi,X
 	BPL bra_06_9C19
 	DEC координата_Z_hi,X
@@ -3626,7 +3623,7 @@ _loc_06_9C72:
 	BNE bra_06_9CC8
 	LDA $05FC
 	BNE bra_06_9C7E
-	JMP _loc_06_9CC8
+	RTS
 bra_06_9C7E:
 	CPX #$0C
 	BCC bra_06_9C9D
@@ -3659,9 +3656,9 @@ _loc_06_9CA2:
 	LDA скорость_Y_hi,X
 	ADC $0601
 	STA скорость_Y_hi,X
-_loc_06_9CC8:
 bra_06_9CC8:
 	RTS
+
 _loc_06_9CC9:
 	LDA #$00
 	STA скорость_X_hi,X
@@ -3684,12 +3681,13 @@ _loc_06_9CE4:
 	STA направление_движения,X
 bra_06_9CF7:
 	RTS
+
 _loc_06_9CF8:
 	LDA подтип_анимации,X
 	CMP #$01
 	BEQ bra_06_9D05
 	JSR _loc_06_9CE4
-	JMP _loc_06_9D18
+	RTS
 bra_06_9D05:
 	TXA
 	ROR
@@ -3701,9 +3699,9 @@ bra_06_9D05:
 	BEQ bra_06_9D18
 	LDA #$80
 	STA направление_движения,X
-_loc_06_9D18:
 bra_06_9D18:
 	RTS
+
 _loc_06_9D19:
 	LDA смена_угла_движения,X
 	CMP #$FF
@@ -3748,7 +3746,7 @@ bra_06_9D5E:
 _loc_06_9D65:
 	JSR _loc_06_B151
 	BCS bra_06_9D6D
-	JMP _loc_06_9E6A
+	RTS
 bra_06_9D6D:
 	STX $1C
 	STY $1D
@@ -3877,7 +3875,6 @@ _loc_06_9E62:
 	JSR _loc_06_9E8B
 	LDA #$FF
 	JSR _loc_06_A2D7
-_loc_06_9E6A:
 bra_06_9E6A:
 	RTS
 
@@ -3950,7 +3947,7 @@ _loc_06_9EBF:
 	JSR _loc_06_B19A
 	BCS bra_06_9EE5
 bra_06_9EE2:
-	JMP _loc_06_9F6F
+	RTS
 bra_06_9EE5:
 	CPY #$0A
 	BCS bra_06_9EF2
@@ -4016,31 +4013,8 @@ _loc_06_9F64:
 	LDA #$00
 	STA номер_кадра_анимации,X
 	STA таймер_кадра_анимации,X
-_loc_06_9F6F:
 bra_06_9F6F:
 	RTS
-	LDA состояние_игрока,X
-	AND #$20
-	BEQ bra_06_9F79
-	LDY #$02
-bra_06_9F79:
-	SEC
-	LDA координата_Z_lo_мяча
-	SBC координата_Z_lo,X
-	STA $1C
-	LDA координата_Z_hi_мяча
-	SBC координата_Z_hi,X
-	BMI bra_06_9F94
-	LDA $1C
-	CMP table_06_9F98,Y
-	BCC bra_06_9F94
-	INC номер_движения,X
-bra_06_9F94:
-	LDA номер_движения,X
-	RTS
-
-table_06_9F98:
-.byte $10,$20,$08
 
 _loc_06_9F9B:
 	LDA состояние_игрока,X
@@ -4135,15 +4109,16 @@ bra_06_A031:
 	JSR _b07_D7F3
 bra_06_A03E:
 	RTS
+
 _loc_06_A03F:
 	STA $1C
 	STY $1D
 	LDA номер_скилла,X
-_loc_06_A046:
+@повторить:
 	DEY
 	BMI bra_06_A04D
 	ASL
-	JMP _loc_06_A046
+	JMP @повторить
 bra_06_A04D:
 	ASL
 	BCS bra_06_A068
@@ -4382,12 +4357,13 @@ table_06_A1E0_скорость_Y:
 
 _loc_06_A1E9:
 	LDA скорость_Z_hi,X
-	BNE bra_06_A1F6
+	BNE @RTS
 	LDA состояние_игрока,X
 	ORA #$02
 	STA состояние_игрока,X
-bra_06_A1F6:
+@RTS:
 	RTS
+
 _loc_06_A1F7:
 	STY $44
 	AND #$03
@@ -4504,7 +4480,7 @@ bra_06_A29A:
 	EOR направление_движения,X
 	BMI bra_06_A2D6
 	INC подтип_анимации,X
-	JMP _loc_06_A2D6
+	RTS
 
 table_06_A2CD:
 .byte $10,$20,$30,$08
@@ -4512,9 +4488,9 @@ table_06_A2CD:
 _loc_06_A2D1:
 	BMI bra_06_A2D6
 	STA подтип_анимации,X
-_loc_06_A2D6:
 bra_06_A2D6:
 	RTS
+
 _loc_06_A2D7:
 	STA $1C
 	LDA позиция_управление,Y
@@ -5534,12 +5510,11 @@ _loc_06_AA1B:
 bra_06_AA47:
 	LDA номер_действия,X
 	BPL bra_06_AA4D
-_loc_06_AA4C:
 	RTS
 bra_06_AA4D:
 	LDA номер_движения,X
 	BMI bra_06_AA55
-	JMP _loc_06_AA4C
+	RTS
 bra_06_AA55:
 	LDA состояние_игрока,X
 	ASL
@@ -5584,7 +5559,7 @@ _loc_06_AAA4:
 bra_06_AAA4:
 	LDA #$FF
 	STA номер_действия,X
-	JMP _loc_06_AA4C
+	RTS
 _loc_06_AAAC:
 	LDA номер_действия,X
 	ASL
@@ -5676,6 +5651,7 @@ bra_06_AB4C:
 	STA номер_действия_мяча
 bra_06_AB51:
 	RTS
+
 _loc_06_AB52:
 	LDY #$00
 bra_06_AB54:
@@ -5723,6 +5699,7 @@ bra_06_ABA0:
 	STA состояние_игрока,Y
 bra_06_ABB2:
 	RTS
+
 _loc_06_ABB3:
 	LDX #$00
 bra_06_ABB5:
@@ -5835,7 +5812,6 @@ table_06_AD62:		; байты после JSR
 .word table_06_AD62_AEAA
 .word table_06_AD62_AF36
 
-_loc_06_AD72:
 bra_06_AD72:
 	RTS
 
@@ -5856,7 +5832,7 @@ _loc_06_AD8B:
 	TAY
 	LDA table_06_AC4D,Y
 	STA состояние_мяча
-	JMP _loc_06_AD72
+	RTS
 
 table_06_AD62_AD98:
 	LDA #$20
@@ -5900,7 +5876,7 @@ table_06_AD62_ADC9:
 	LDA состояние_игрока,Y
 	BMI bra_06_AE0E
 bra_06_ADEB:
-	JMP _loc_06_AD72
+	RTS
 bra_06_ADEE:
 	CPY игрок_с_мячом
 	BNE bra_06_AE0E
@@ -5916,7 +5892,7 @@ bra_06_ADF5:
 	BEQ bra_06_AE0E
 	LDA состояние_игрока,Y
 	BMI bra_06_AE0E
-	JMP _loc_06_AD72
+	RTS
 bra_06_AE0E:
 	STY игрок_с_мячом
 	LDA состояние_игрока,Y
@@ -6003,7 +5979,7 @@ table_06_AD62_AEAA:
 	LDA режим_игры_на_поле
 	AND #$40
 	BEQ bra_06_AEBE
-	JMP _loc_06_AD72
+	RTS
 bra_06_AEBE:
 	LDA #$26
 	JSR _b07_C2E4_запись_номера_звука
@@ -6069,7 +6045,7 @@ table_06_AD62_AF36:
 	LDA скорость_X_hi,X
 	EOR направление_движения,Y
 	BMI bra_06_AF43
-	JMP _loc_06_AD72
+	RTS
 bra_06_AF43:
 	STY игрок_с_мячом
 	LDA #$26
@@ -6088,6 +6064,7 @@ _loc_06_AF50:
 	JMP _loc_06_AD8B
 bra_06_AF62:
 	RTS
+
 _loc_06_AF63:
 	LDA таймер_электрического_мяча
 	BEQ bra_06_AF7A
@@ -6102,7 +6079,7 @@ bra_06_AF7A:
 	LDA сила_мяча
 	ORA таймер_действия_мяча
 	BNE bra_06_AF85
-	JMP _loc_06_B02F
+	RTS
 bra_06_AF85:
 	LDY $1D
 	CPY игрок_с_мячом
@@ -6190,8 +6167,7 @@ _loc_06_B02A:
 bra_06_B02A:
 	PLA
 	PLA
-	JMP _loc_06_AD72
-_loc_06_B02F:
+	RTS
 bra_06_B02F:
 	RTS
 
@@ -6570,6 +6546,7 @@ bra_06_B380:
 	STA $2D
 bra_06_B38B:
 	RTS
+
 _loc_06_B38C:
 	LDA ($2C),Y
 	STA $2E
@@ -6752,11 +6729,11 @@ bra_06_B4DE:
 bra_06_B4E1:
 	SEC
 	LDY $44
-	JMP _loc_06_B4E8
+	RTS
 _loc_06_B4E7:
 	CLC
-_loc_06_B4E8:
 	RTS
+
 _loc_06_B4E9:
 	STY $1C
 	LDY игрок_с_мячом
@@ -7050,7 +7027,7 @@ _loc_06_B7BA:
 	STA $1C
 	LDA $58
 	BEQ bra_06_B7C5
-	JMP _loc_06_B89B
+	RTS
 bra_06_B7C5:
 	CPX #$0C
 	BNE bra_06_B7CB
@@ -7162,7 +7139,6 @@ bra_06_B886:
 	BNE bra_06_B89B
 	LDA #$00
 	STA $1C
-_loc_06_B89B:
 bra_06_B89B:
 	RTS
 
@@ -7191,6 +7167,7 @@ _loc_06_B8AC:
 	STA координата_X_hi,X
 bra_06_B8C4:
 	RTS
+
 _loc_06_B8C5:
 	JSR _loc_06_B7BA
 	LDA $1C
@@ -7207,7 +7184,7 @@ bra_06_B8D6:
 	LDA опция_режим_сложность
 	AND #$20
 	BNE bra_06_B8E5
-	JMP _loc_06_BA30
+	RTS
 bra_06_B8E5:
 	JSR _loc_06_BAB6
 	LDA $1C
@@ -7237,7 +7214,7 @@ bra_06_B91A:
 	LDA скорость_Z_hi,X
 	BEQ bra_06_B92A
 	JSR _loc_06_BD2B
-	JMP _loc_06_BA30
+	RTS
 bra_06_B92A:
 	JSR _loc_06_BCD9
 	LDA $0523
@@ -7263,7 +7240,7 @@ bra_06_B94A:
 	JSR _loc_06_A187_ограничение_максимальной_скорости
 	JSR _loc_06_9856
 	JSR _loc_06_BA31
-	JMP _loc_06_BA30
+	RTS
 bra_06_B965:
 	LDA флаг_прозрачного_мяча
 	BEQ bra_06_B8F6
@@ -7285,7 +7262,7 @@ bra_06_B96F:
 	JSR _loc_06_B7BA
 	JSR _loc_06_B8AC
 bra_06_B995:
-	JMP _loc_06_BA30
+	RTS
 bra_06_B998:
 	LDA #$00
 	STA $1C
@@ -7303,7 +7280,7 @@ bra_06_B9B3:
 	LDA $1C
 	STA флаг_прозрачного_мяча
 bra_06_B9B8:
-	JMP _loc_06_BA30
+	RTS
 _loc_06_B9BB:
 	LDA режим_игры_на_поле
 	AND #$40
@@ -7327,7 +7304,7 @@ bra_06_B9EB:
 	LDA $1C
 	AND #$7F
 	STA флаг_прозрачного_мяча
-	JMP _loc_06_BA30
+	RTS
 _loc_06_B9F5:
 	LDA режим_игры_на_поле
 	AND #$40
@@ -7349,12 +7326,12 @@ _loc_06_B9F5:
 bra_06_BA23:
 	LDA $1C
 	STA флаг_прозрачного_мяча
-	JMP _loc_06_BA30
+	RTS
 _loc_06_BA2B:
 	LDA #$FF
 	STA флаг_прозрачного_мяча
-_loc_06_BA30:
 	RTS
+
 _loc_06_BA31:
 	LDA режим_игры_на_поле
 	AND #$40
@@ -7423,6 +7400,7 @@ bra_06_BAA5:
 	JSR _b07_C2E4_запись_номера_звука
 bra_06_BAB5:
 	RTS
+
 _loc_06_BAB6:
 	LDA #$00
 	STA $1C
@@ -7505,7 +7483,7 @@ _loc_06_BB50:
 	STA $33
 	SBC координата_Z_hi,X
 	BMI bra_06_BB66
-	JMP _loc_06_BB88
+	RTS
 bra_06_BB66:
 	SEC
 	LDA #$3F
@@ -7517,13 +7495,12 @@ bra_06_BB66:
 	BNE bra_06_BB80
 	ORA #$84
 	STA $1C
-	JMP _loc_06_BB88
+	RTS
 bra_06_BB80:
 	LDA $1C
 	AND #$7F
 	ORA #$04
 	STA $1C
-_loc_06_BB88:
 	RTS
 
 _loc_06_BB99:
@@ -7552,11 +7529,12 @@ bra_06_BBB9:
 	STA координата_Z_hi,X
 bra_06_BBC9:
 	RTS
+
 _loc_06_BBCA:
 	LDA таймер_действия_мяча
 	BNE bra_06_BBD5
 	JSR _loc_06_BC7E_EOR_16bit_скорость_X_и_смена_направления_движения
-	JMP _loc_06_BC3B
+	RTS
 bra_06_BBD5:
 	LDA #$00
 	STA таймер_действия_мяча
@@ -7607,7 +7585,6 @@ _loc_06_BC2B:
 	ROR скорость_X_hi,X
 	ROR скорость_X_lo,X
 	JMP _loc_06_BC2B
-_loc_06_BC3B:
 bra_06_BC3B:
 	RTS
 

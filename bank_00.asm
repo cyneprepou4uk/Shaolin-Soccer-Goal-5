@@ -2610,9 +2610,9 @@ _loc_00_BCAC:
 	STA скорость_Z_lo,X
 	STA гравитация_hi,X
 	STA гравитация_lo,X
-	STA $0301,X
-	STA $033A,X
-	STA $0373,X
+	STA координата_X_sub,X
+	STA координата_Y_sub,X
+	STA координата_Z_sub,X
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
 	LDA опция_режим_сложность

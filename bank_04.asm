@@ -5645,6 +5645,7 @@ bra_04_B25F:
 	JMP _loc_04_B22D
 bra_04_B26D:
 	RTS
+
 _loc_04_B26E:
 	LDX #$12
 	LDA #$00
@@ -5659,7 +5660,7 @@ bra_04_B27E:
 	STA $F5
 	LDA $F4
 	BNE bra_04_B288
-	JMP _loc_04_B315
+	RTS
 bra_04_B288:
 	LDX #$00
 _loc_04_B28A:
@@ -5732,7 +5733,6 @@ bra_04_B30D:
 	CPX $F4
 	BCS bra_04_B315
 	JMP _loc_04_B28A
-_loc_04_B315:
 bra_04_B315:
 	RTS
 
@@ -5803,7 +5803,7 @@ bra_04_B396:
 	LDA номер_погодного_эффекта
 	CMP #ПОГОДА_СМЕРЧ
 	BEQ bra_04_B3A2
-	JMP _loc_04_B44D
+	RTS
 _loc_04_B3A2:
 bra_04_B3A2:
 	LDY #$0D
@@ -5899,7 +5899,6 @@ bra_04_B445:
 	CPX #$0D
 	BCS bra_04_B44D
 	JMP _loc_04_B3A2
-_loc_04_B44D:
 bra_04_B44D:
 	RTS
 
@@ -5955,7 +5954,7 @@ _loc_04_B4B2:
 	AND #$01
 	BEQ bra_04_B4BE
 	JSR _loc_04_B850
-	JMP _loc_04_B4C8
+	RTS
 bra_04_B4BE:
 	LDX #$00
 bra_04_B4C0:
@@ -5963,8 +5962,8 @@ bra_04_B4C0:
 	INX
 	CPX #$04
 	BCC bra_04_B4C0
-_loc_04_B4C8:
 	RTS
+
 _loc_04_B4C9:
 	STX $43
 	LDA номер_управляемого,X
@@ -6416,7 +6415,7 @@ bra_04_B87E:
 	LDX игрок_с_мячом
 	LDA table_04_B8A8,Y
 	STA смена_угла_движения,X
-	JMP _loc_04_B8A7
+	RTS
 bra_04_B89E:
 	LDA #$09
 	BNE bra_04_B8A4
@@ -6425,7 +6424,6 @@ bra_04_B8A2:
 	LDA #$0A
 bra_04_B8A4:
 	STA номер_действия,X
-_loc_04_B8A7:
 bra_04_B8A7:
 	RTS
 
@@ -6727,6 +6725,7 @@ bra_04_BAF4:
 	JSR _loc_04_BB02
 bra_04_BB01:
 	RTS
+
 _loc_04_BB02:
 	CLC
 	ADC сила_мяча
@@ -6893,7 +6892,7 @@ bra_04_BC3D:
 	LDA #$00
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
-	JMP _loc_04_BC5E
+	RTS
 bra_04_BC4D:
 	LDA разновидность_супера
 	BNE bra_04_BC5E
@@ -6902,7 +6901,6 @@ bra_04_BC4D:
 	BCS bra_04_BC5E
 	LDA #$08
 	STA координата_Z_lo,X
-_loc_04_BC5E:
 bra_04_BC5E:
 	RTS
 

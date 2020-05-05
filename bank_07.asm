@@ -437,7 +437,43 @@ table_07_C370_младший_байт_непрямого_прыжка:
 .byte $06, < _loc_06_8027		; $30
 .byte $06, < _loc_06_802A		; $31
 
-_loc_07_C3D4:
+_обработчик_RESET:
+	SEI
+	CLD
+	LDA #$08
+	STA $2000
+	STA байт_для_2000
+	LDA #$06
+	STA $2001
+	STA байт_для_2001
+	LDX #$FF
+	TXS
+@ожидание_vblank_1:
+	BIT $2002
+	BPL @ожидание_vblank_1
+@ожидание_vblank_2:
+	BIT $2002
+	BPL @ожидание_vblank_2
+	LDA #$00
+	STA байт_для_2005_X
+	STA $ED
+	STA байт_для_2005_Y
+	STA $EF
+	STA $4016
+	LDA #$40
+	STA $4017
+	LDA #$0F
+	STA $4015
+	JSR _очистка_ppu_спрайтов
+	LDA #$06
+	JSR _банксвич_PRG
+	LDA #$C0
+	STA разновидность_NMI
+	LDA #$00
+	STA $A000
+	LDA #$25
+	STA адрес_рандома
+	STA адрес_рандома + 1
 	JSR _b07_выключить_NMI
 	LDA #$06
 	JSR _банксвич_PRG
@@ -883,7 +919,7 @@ _loc_07_C786:
 	ASL
 	BPL bra_07_C79A
 	JSR _loc_07_C91A
-	JMP _loc_07_C7CD
+	RTS
 bra_07_C79A:
 	LDA таймер_катсцены
 	BNE bra_07_C7A5
@@ -909,7 +945,6 @@ bra_07_C7C2:
 	LDA #$00
 	STA $05E8
 	JSR _b07_C2E4_запись_номера_звука
-_loc_07_C7CD:
 bra_07_C7CD:
 	RTS
 
@@ -936,6 +971,7 @@ table_07_C51F_C7D0:
 	STA объект_камеры
 bra_07_C808:
 	RTS
+
 _loc_07_C80B:
 	LDY игрок_с_мячом
 	LDA флаг_видимости_мяча
@@ -951,7 +987,7 @@ bra_07_C81F:
 	LDA объект_камеры
 	AND #$7F
 	STA объект_камеры
-	JMP _loc_07_C872
+	RTS
 bra_07_C830:
 	LDA $F1
 	CMP #$00
@@ -985,7 +1021,6 @@ _loc_07_C85F:
 	LDA $F1
 	ADC table_07_C877 + 1,Y
 	STA $F1
-_loc_07_C872:
 bra_07_C872:
 	RTS
 
@@ -1011,6 +1046,7 @@ bra_07_C88D:
 	STA таймер_катсцены
 bra_07_C89B:
 	RTS
+
 _loc_07_C89C:
 	BIT режим_игры_на_поле
 	BVC bra_07_C919
@@ -1027,12 +1063,12 @@ _loc_07_C89C:
 	BEQ bra_07_C8BD
 	LDA #$03
 	STA тип_экрана
-	JMP _loc_07_C919
+	RTS
 bra_07_C8BD:
 	LDA #$06
 	STA тип_экрана
 	JSR _loc_07_C258
-	JMP _loc_07_C919
+	RTS
 bra_07_C8C8:
 	LDA #$8C
 	STA объект_камеры
@@ -1075,9 +1111,9 @@ bra_07_C910:
 	STA тип_экрана
 	LDA #$00
 	STA таймер_катсцены
-_loc_07_C919:
 bra_07_C919:
 	RTS
+
 _loc_07_C91A:
 	LDA #$00
 	STA вид_статусбара
@@ -1102,7 +1138,7 @@ _loc_07_C91A:
 	BNE bra_07_C94F
 	JMP _loc_07_CA14
 bra_07_C94F:
-	JMP _loc_07_CA1E
+	RTS
 bra_07_C952:
 	LDA опция_режим_сложность
 	AND #$20
@@ -1113,7 +1149,7 @@ bra_07_C952:
 	BNE bra_07_C97B
 	LDA #$00
 	STA тип_экрана
-	JMP _loc_07_CA1E
+	RTS
 bra_07_C968:
 	LDA режим_игры_на_поле
 	AND #$20
@@ -1121,7 +1157,7 @@ bra_07_C968:
 	LDA #$00
 bra_07_C970:
 	STA тип_экрана
-	JMP _loc_07_CA1E
+	RTS
 bra_07_C975:
 	LDA режим_игры_на_поле
 	AND #$0F
@@ -1146,7 +1182,7 @@ bra_07_C994:
 bra_07_C998:
 	LDA #$00
 	STA тип_экрана
-	JMP _loc_07_CA1E
+	RTS
 bra_07_C99F:
 	LDA #$02
 	STA $58
@@ -1161,7 +1197,7 @@ bra_07_C9AD:
 	STA $58
 	LDA #$01
 	STA тип_экрана
-	JMP _loc_07_CA1E
+	RTS
 bra_07_C9BC:
 	LDA $054A
 	BMI bra_07_C9EE
@@ -1186,7 +1222,7 @@ bra_07_C9DD:
 	STA $58
 	LDA #$00
 	STA тип_экрана
-	JMP _loc_07_CA1E
+	RTS
 bra_07_C9EB:
 	INC $054A
 bra_07_C9EE:
@@ -1209,16 +1245,16 @@ bra_07_CA00:
 	INX
 	CPX #$0C
 	BCC bra_07_CA00
-	JMP _loc_07_CA1E
+	RTS
 _loc_07_CA14:
 	LDA опция_режим_сложность
 	ORA #$20
 	STA опция_режим_сложность
 	LDA #$00
 	STA тип_экрана
-_loc_07_CA1E:
 bra_07_CA1E:
 	RTS
+
 _loc_07_CA1F:
 	LDA #$F0
 	STA ограничитель_Y_спрайтов
@@ -1371,14 +1407,14 @@ _loc_07_CB18:
 	STA тайл_статусбара + 1
 	JSR _loc_07_CB56
 	STA тайл_статусбара
-	JMP _loc_07_CB55
+	RTS
 bra_07_CB4A:
 	JSR _loc_07_CB56
 	STA тайл_статусбара + 1
 	LDA #$FF
 	STA тайл_статусбара
-_loc_07_CB55:
 	RTS
+
 _loc_07_CB56:
 	LDA счет_команды + 1
 	AND #$0F
@@ -1615,7 +1651,7 @@ table_07_CD29:
 _b07_CD2F:
 	LDA координата_Z_hi,X
 	BMI bra_07_CD37
-	JMP _loc_07_CDC6
+	RTS
 bra_07_CD37:
 	LDA $0130,X
 	BNE bra_07_CD3F
@@ -1636,8 +1672,8 @@ bra_07_CD58:
 	LDA #$00
 	STA координата_Z_hi,X
 	STA координата_Z_lo,X
-	STA $0373,X
-	JMP _loc_07_CDC6
+	STA координата_Z_sub,X
+	RTS
 bra_07_CD66:
 	LDY $0130,X
 	DEY
@@ -1677,7 +1713,6 @@ bra_07_CD79:
 	LDA координата_Z_hi,X
 	ADC #$00
 	STA координата_Z_hi,X
-_loc_07_CDC6:
 bra_07_CDC6:
 	RTS
 
@@ -1697,16 +1732,16 @@ _b07_CDCB:
 	STA гравитация_lo,X
 	LDA #$00
 	STA гравитация_hi,X
-	JMP _loc_07_CE2F
+	RTS
 bra_07_CDE2:
 	LDA $0130,X
 	CMP #$02
 	BCS bra_07_CDF7
 	LDA #$00
-	STA $0373,X
+	STA координата_Z_sub,X
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
-	JMP _loc_07_CE2F
+	RTS
 bra_07_CDF7:
 	LDA номер_движения,X
 	ASL
@@ -1737,7 +1772,6 @@ bra_07_CE27:
 	LDA #$00
 	STA скорость_Z_lo,X
 	STA скорость_Z_hi,X
-_loc_07_CE2F:
 bra_07_CE2F:
 	RTS
 
@@ -2768,22 +2802,22 @@ _b07_D5EF:
 	LDA номер_погодного_эффекта
 	AND #$7F
 	CMP #ПОГОДА_МОЛНИЯ
-	BEQ bra_07_D616
+	BEQ @RTS
 	LDY #$00
 	BIT таймер_мокрого_мяча
-	BMI bra_07_D603
+	BMI @чтение_таблицы
 	INY
-	BVS bra_07_D603
+	BVS @чтение_таблицы
 	INY
-bra_07_D603:
+@чтение_таблицы:
 	LDA table_07_D617,Y
 	CMP номер_палитры_спрайтов
-	BEQ bra_07_D616
+	BEQ @RTS
 	STA номер_палитры_спрайтов
 	JSR _b07_яркость_палитры_и_запись_в_буфер
 	LDA #$3F
 	STA байт_2006_hi_палитра
-bra_07_D616:
+@RTS:
 	RTS
 
 table_07_D617:
@@ -2792,23 +2826,23 @@ table_07_D617:
 _loc_07_D61A:
 	LDA тип_экрана
 	CMP копия_типа_экрана
-	BNE bra_07_D628
+	BNE @RTS
 	CMP #$02
-	BEQ bra_07_D629
+	BEQ @продолжить
 	CMP #$06
-	BEQ bra_07_D629
-bra_07_D628:
+	BEQ @продолжить
+@RTS:
 	RTS
-bra_07_D629:
+@продолжить:
 	LDA байт_для_2000
 	AND #$FB
 	STA байт_для_2000
 	STA $2000
 	LDA флаг_обновления_тайлов_экрана
 	AND #$20
-	BNE bra_07_D63C
-	JMP _loc_07_D67C
-bra_07_D63C:		; рожа в статусбаре слева
+	BNE @рожи_в_статусбаре_слева
+	JMP _loc_07_D67C_рожи_в_статусбаре_справа
+@рожи_в_статусбаре_слева:
 	LDA $2002
 	LDA #$2A
 	STA $2006
@@ -2821,25 +2855,25 @@ bra_07_D63C:		; рожа в статусбаре слева
 	LDA #$2A
 	STA $2006
 	LDA #$81
-	JSR _loc_07_D6CF
+	JSR _loc_07_D6CF_записать_из_буфера_в_видеопамять
 	LDA #$07
-	JSR _loc_07_D6CF
+	JSR _loc_07_D6CF_записать_из_буфера_в_видеопамять
 	LDA #$27
-	JSR _loc_07_D6CF
+	JSR _loc_07_D6CF_записать_из_буфера_в_видеопамять
 	LDA #$47
-	JSR _loc_07_D6CF
+	JSR _loc_07_D6CF_записать_из_буфера_в_видеопамять
 	LDA #$67
-	JSR _loc_07_D6CF
+	JSR _loc_07_D6CF_записать_из_буфера_в_видеопамять
 	LDA #$87
-	JSR _loc_07_D6CF
+	JSR _loc_07_D6CF_записать_из_буфера_в_видеопамять
 	LDA #$00
 	STA $2006
-_loc_07_D67C:
+_loc_07_D67C_рожи_в_статусбаре_справа:
 	LDA флаг_обновления_тайлов_экрана
 	AND #$10
-	BNE bra_07_D686
-	JMP _loc_07_D6C6
-bra_07_D686:		; рожа в статусбаре справа
+	BNE @обновить_рожи
+	JMP _loc_07_D6C6_очистить_флаг
+@обновить_рожи:
 	LDA $2002
 	LDA #$2A
 	STA $2006
@@ -2852,25 +2886,28 @@ bra_07_D686:		; рожа в статусбаре справа
 	LDA #$2A
 	STA $2006
 	LDA #$94
-	JSR _loc_07_D6CF
+	JSR _loc_07_D6CF_записать_из_буфера_в_видеопамять
 	LDA #$1A
-	JSR _loc_07_D6CF
+	JSR _loc_07_D6CF_записать_из_буфера_в_видеопамять
 	LDA #$3A
-	JSR _loc_07_D6CF
+	JSR _loc_07_D6CF_записать_из_буфера_в_видеопамять
 	LDA #$5A
-	JSR _loc_07_D6CF
+	JSR _loc_07_D6CF_записать_из_буфера_в_видеопамять
 	LDA #$7A
-	JSR _loc_07_D6CF
+	JSR _loc_07_D6CF_записать_из_буфера_в_видеопамять
 	LDA #$9A
-	JSR _loc_07_D6CF
+	JSR _loc_07_D6CF_записать_из_буфера_в_видеопамять
 	LDA #$00
 	STA $2006
-_loc_07_D6C6:
+_loc_07_D6C6_очистить_флаг:
 	LDA флаг_обновления_тайлов_экрана
 	AND #$CF
 	STA флаг_обновления_тайлов_экрана
 	RTS
-_loc_07_D6CF:
+
+_loc_07_D6CF_записать_из_буфера_в_видеопамять:
+; на вход подается младший байт для 2006, а старший пишется в самом конце для следующего раза
+; но в самый первый раз перед прыжком заранее пишется старший байт
 	STA $2006
 	LDY #$04
 bra_07_D6D4:
@@ -2883,6 +2920,7 @@ bra_07_D6D4:
 	LDA #$2A
 	STA $2006
 	RTS
+
 _loc_07_D6E7:
 	LDA опция_режим_сложность
 	AND #$20
@@ -2979,6 +3017,7 @@ _loc_07_D794:
 	JSR _b07_C2E4_запись_номера_звука
 bra_07_D7A3:
 	RTS
+
 _loc_07_D7A4:
 	INC loss_терции
 	LDA loss_терции
@@ -3004,7 +3043,7 @@ _loc_07_D7A4:
 	STA loss_секунды_единицы
 	LDA #$00
 	STA loss_терции
-	JMP _loc_07_D7F2
+	RTS
 bra_07_D7E3:
 	LDA #$00
 	STA loss_секунды_десятки
@@ -3014,7 +3053,6 @@ bra_07_D7E8:
 bra_07_D7ED:
 	LDA #$00
 	STA loss_терции
-_loc_07_D7F2:
 bra_07_D7F2:
 	RTS
 
@@ -3047,7 +3085,7 @@ bra_07_D827:
 	BCC bra_07_D831
 	JMP _loc_07_D834
 bra_07_D831:
-	JMP _loc_07_D890
+	RTS
 _loc_07_D834:
 	TXA
 	EOR счетчик_кадров
@@ -3095,7 +3133,6 @@ _loc_07_D875:
 	STA $05EC,X
 	INC $05F0
 	LDX $43
-_loc_07_D890:
 	RTS
 
 ; !!! здесь все выделено зеленым, таблицы какие-то непонятные
@@ -3357,7 +3394,7 @@ _loc_07_DA81:
 	BEQ bra_07_DA8F
 	CMP #ПОГОДА_ВЕТЕР
 	BEQ bra_07_DAD1
-	JMP _loc_07_DB77
+	RTS
 bra_07_DA8F:
 	LDY #$0B
 	LDA адрес_рандома
@@ -3479,9 +3516,9 @@ _loc_07_DB4E:
 	CPX #$30
 	BEQ bra_07_DB77
 	JMP _loc_07_DB3F
-_loc_07_DB77:
 bra_07_DB77:
 	RTS
+
 _loc_07_DB78:
 	LDA номер_погодного_эффекта
 	CMP #$83
@@ -3839,6 +3876,7 @@ _loc_07_DE43:
 	JSR _запись_банков_фона
 bra_07_DE46:
 	RTS
+
 _loc_07_DE47:
 	LDA $BFFF
 	PHA
@@ -4275,6 +4313,7 @@ bra_07_E164:
 	STA $28
 bra_07_E16F:
 	RTS
+
 _loc_07_E170:
 	LDA вид_статусбара
 	BMI bra_07_E176
@@ -4335,13 +4374,13 @@ bra_07_E1D2:
 	BEQ bra_07_E1EF
 	CMP #$02
 	BEQ bra_07_E1EF
-	JMP _loc_07_E1F7
+	RTS
 bra_07_E1EF:
 	LDA #$00
 	STA $05FA
 	STA $05F7
-_loc_07_E1F7:
 	RTS
+
 bra_07_E1F8:
 	LDA $2002
 	LDA #$2B
@@ -4571,6 +4610,7 @@ bra_07_E511:
 	JMP _loc_07_E4B3
 bra_07_E529:
 	RTS
+
 _loc_07_E52A:
 	LDA $2002
 	LDA $20
@@ -4578,6 +4618,7 @@ _loc_07_E52A:
 	LDA $1F
 	STA $2006
 	RTS
+
 _loc_07_E538:
 	LDA #$00
 	STA $1E
@@ -4638,6 +4679,7 @@ bra_07_E58E:
 	JMP _loc_07_E53C
 bra_07_E5A0:
 	RTS
+
 _loc_07_E5A1:
 	LDA $2002
 	LDA #$2A
@@ -5136,6 +5178,7 @@ bra_07_E9F0:
 	INC $2D
 bra_07_E9F8:
 	RTS
+
 _loc_07_E9F9:
 	LDA $2002
 	LDA $2F
@@ -5145,9 +5188,9 @@ _loc_07_E9F9:
 	LDA $1C
 	STA $2007
 	INC $2E
-	BNE bra_07_EA11
+	BNE @RTS
 	INC $2F
-bra_07_EA11:
+@RTS:
 	RTS
 
 table_07_EA12:
@@ -5289,6 +5332,7 @@ _loc_07_EBE7:
 	INC $F4
 bra_07_EBEC:
 	RTS
+
 _loc_07_EBED:
 	LDA флаг_прозрачного_мяча
 	BNE bra_07_EC13
@@ -5582,8 +5626,7 @@ bra_07_EDD0:
 	RTS
 
 _чтение_4016_4017:
-	LDX $48
-	INX
+	LDX #$01
 	STX $4016
 	DEX
 	STX $4016
@@ -5870,6 +5913,7 @@ bra_07_EFDB:
 	JMP _loc_07_D61A
 bra_07_EFE2:
 	JMP _loc_07_F340
+
 _loc_07_EFE5:
 bra_07_EFE5:
 	LDA байт_2006_hi_атрибуты
@@ -6308,6 +6352,7 @@ bra_07_F388:
 	STA $05F0
 bra_07_F3A4:
 	RTS
+
 _loc_07_F3A5:
 	LDA $05FA
 	BMI bra_07_F3D3
@@ -7379,7 +7424,7 @@ _loc_07_FB5F:
 	AND #$F0
 	ORA $1C
 	STA $057C,X
-	JMP _loc_07_FBA8
+	RTS
 bra_07_FB89:
 	LDA #$00
 	STA $0584,X
@@ -7387,15 +7432,14 @@ bra_07_FB89:
 	AND #$F0
 	ORA $1C
 	STA $0580,X
-	JMP _loc_07_FBA8
+	RTS
 bra_07_FB9B:
 	INC $0584,X
 	LDA $0584,X
-	BPL bra_07_FBA8
+	BPL @RTS
 	LDA #$7F
 	STA $0584,X
-_loc_07_FBA8:
-bra_07_FBA8:
+@RTS:
 	RTS
 
 _обработчик_NMI:
@@ -7631,73 +7675,6 @@ bra_07_FD7E:
 	INX
 	STX $8001
 	JMP _выход_из_NMI
-
-_обработчик_RESET:
-	SEI
-	CLD
-	LDA #$08
-	STA $2000
-	STA байт_для_2000
-	LDA #$06
-	STA $2001
-	STA байт_для_2001
-	LDX #$FF
-	TXS
-	LDX #$08
-bra_07_FDA4:
-	BIT $2002
-	BPL bra_07_FDA4
-bra_07_FDA9:
-	BIT $2002
-	BMI bra_07_FDA9
-	DEX
-	BNE bra_07_FDA4
-	STX байт_для_2005_X
-	STX $ED
-	STX байт_для_2005_Y
-	STX $EF
-	STX $48
-	STX $4016
-	LDA #$FF
-	STA $47
-	LDA #$40
-	STA $4017
-	LDA #$0F
-	STA $4015
-	LDA #$10
-	TAX
-bra_07_FDCF:
-	STA $2006
-	STA $2006
-	EOR #$00
-	DEX
-	BNE bra_07_FDCF
-	JSR _очистка_ppu_спрайтов
-	LDA #$06
-	JSR _банксвич_PRG
-	LDA #$C0
-	STA разновидность_NMI
-	LDA #$00
-	STA $A000
-	LDA #$00
-	LDY $0102
-	LDX #$00
-bra_07_FDF2:
-	INY
-	LDA $0100,Y
-	BNE bra_07_FDFF
-	CPY #$FF
-	BCC bra_07_FDF2
-	LDY спрайт_тайл + 20
-bra_07_FDFF:
-	LDA $0070,Y
-	ORA #$25
-	STA адрес_рандома,X
-	INY
-	INX
-	CPX #$02
-	BCC bra_07_FDF2
-	JMP _loc_07_C3D4
 
 .export _b07_деление_и_умножение_скоростей_16bit_на_3
 _b07_деление_и_умножение_скоростей_16bit_на_3:		; 60fps

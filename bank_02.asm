@@ -1099,7 +1099,7 @@ bra_02_B1A4:
 	BNE bra_02_B1CD
 bra_02_B1BA:
 	LDA #$00
-	STA $0373,X
+	STA координата_Z_sub,X
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
 	LDA #$2C
@@ -1476,9 +1476,9 @@ bra_02_B483:
 	STA скорость_Z_lo,X
 	STA гравитация_hi,X
 	STA гравитация_lo,X
-	STA $0301,X
-	STA $033A,X
-	STA $0373,X
+	STA координата_X_sub,X
+	STA координата_Y_sub,X
+	STA координата_Z_sub,X
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
 	TXA
@@ -1886,7 +1886,7 @@ bra_02_B83E:
 	BNE bra_02_B86A
 bra_02_B851:
 	LDA #$00
-	STA $0373,X
+	STA координата_Z_sub,X
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
 	JSR _loc_02_B86B
