@@ -2,7 +2,7 @@
 .include "ram_copy.inc"
 .include "val_copy.inc"
 
-.import _b07_C2E4
+.import _b07_C2E4_запись_номера_звука
 .import _b07_вращение_рандома
 .import _b07_запись_банков_спрайтов
 .import _b07_поставить_флаг_уменьшения_яркости
@@ -248,7 +248,7 @@ table_02_AA70_AB78:
 	STX номер_палитры_спрайтов + 3
 	JSR _loc_02_B033
 	LDA #$01
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	JSR _b07_поставить_флаг_увеличения_яркости
 	LDA #$04
 	STA скорость_яркости
@@ -392,7 +392,7 @@ bra_02_ACD7:
 	LDA #$00
 	STA флаг_демо
 	LDA #$33
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$02
 	STA $58
 	LDA #$00
@@ -1084,7 +1084,7 @@ table_02_B09D_B18A:
 	STA угол_движения,X
 _loc_02_B19A:
 	LDA #$2B
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$0A
 	JSR _loc_02_B2A1
 _loc_02_B1A4:
@@ -1103,7 +1103,7 @@ bra_02_B1BA:
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
 	LDA #$2C
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	JSR _loc_02_B24A
 bra_02_B1CD:
 	RTS
@@ -1872,7 +1872,7 @@ table_02_B6EF_B82C:
 	BMI bra_02_B83E
 	JSR _loc_02_B282
 	LDA #$2B
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$00
 _loc_02_B83B:
 	JSR _loc_02_B2A1
@@ -1894,7 +1894,7 @@ bra_02_B851:
 	CMP #$03
 	BEQ bra_02_B86A
 	LDA #$2C
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 bra_02_B86A:
 	RTS
 
@@ -2264,7 +2264,7 @@ table_02_BB62_BB78:
 	JSR _loc_02_AA1B
 	JSR _b07_поставить_флаг_увеличения_яркости
 	LDA #$0B
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 _loc_02_BBAE:
 	INC тип_экрана
 bra_02_BBB0:
@@ -2278,7 +2278,7 @@ table_02_BB62_BBB1:
 	AND #$02
 	BNE bra_02_BBB0
 	LDA #$44
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$10
 	JSR _loc_02_BEBF
 	JMP _loc_02_BBAE
@@ -2386,7 +2386,7 @@ bra_02_BC27:
 	JSR _loc_02_BED4
 	JSR _b07_поставить_флаг_увеличения_яркости
 	LDA #$0E
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$80
 	STA флаг_демо
 bra_02_BCCD:
@@ -2596,11 +2596,11 @@ _loc_02_BE9B:
 	LDA #$40
 	JSR _loc_02_BEBF
 	LDA #$4C
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	CLC
 	BCC bra_02_BEBE
 	LDA #$4E
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	SEC
 bra_02_BEBE:
 	RTS

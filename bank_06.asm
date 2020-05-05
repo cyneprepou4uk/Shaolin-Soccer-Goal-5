@@ -14,7 +14,7 @@
 .import _b07_C2C6
 .import _b07_C2CB
 .import _b07_C2D0
-.import _b07_C2E4
+.import _b07_C2E4_запись_номера_звука
 .import _b07_CBD6_отображение_циферок_на_экране
 .import _b07_CD2F
 .import _b07_CDCB
@@ -345,7 +345,7 @@ table_06_803F_8225:
 	JSR _loc_06_9CC9
 	JSR _loc_06_9FDA
 	LDA #$46
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 bra_06_8238:
 	JSR _loc_06_A5A7
 	LDA номер_погодного_эффекта
@@ -503,7 +503,7 @@ table_06_803F_8363:
 	JSR _loc_06_A1F7
 	JSR _loc_06_9B34
 	LDA #$3B
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 bra_06_8378:
 	LDA #$03
 	JMP _loc_06_810F
@@ -704,7 +704,7 @@ table_06_803F_84F5:
 _loc_06_8502:
 	JSR _loc_06_9927
 	LDA #$3B
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA смена_угла_движения,X
 	CMP #$FF
 	BEQ bra_06_851C
@@ -735,7 +735,7 @@ table_06_803F_853D:
 	JSR _loc_06_9927
 	JSR _loc_06_9CE4
 	LDA #$3B
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA смена_угла_движения,X
 	CMP #$FF
 	BNE bra_06_855E
@@ -797,7 +797,7 @@ bra_06_85BF:
 bra_06_85D3:
 	JSR _loc_06_9CC9
 	LDA #$3B
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 _loc_06_85DB:
 bra_06_85DB:
 	JMP _loc_06_8521
@@ -807,7 +807,7 @@ table_06_803F_85DE:
 	BMI bra_06_8605
 	JSR _loc_06_9927
 	LDA #$3C
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	JSR _loc_06_9D19
 	JSR _loc_06_8608
 	LDA #$01
@@ -964,7 +964,7 @@ table_06_803F_8721:
 	JSR _loc_06_A03F
 	JSR _loc_06_9927
 	LDA #$2B
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA направление_движения,X
 	ORA #$40
 	STA угол_движения,X
@@ -1009,7 +1009,7 @@ bra_06_878B:
 	STA координата_Z_hi,X
 _loc_06_8796:
 	LDA #$2C
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	JSR _loc_06_8B6C
 bra_06_879E:
 	RTS
@@ -1019,7 +1019,7 @@ table_06_803F_879F:
 	BMI bra_06_87B1
 	JSR _loc_06_9927
 	LDA #$2B
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$00
 	JSR _loc_06_9B60
 bra_06_87B1:
@@ -1037,7 +1037,7 @@ table_06_803F_87C2:
 	JSR _loc_06_A03F
 	JSR _loc_06_9927
 	LDA #$2B
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$06
 	JSR _loc_06_9B60
 bra_06_87D9:
@@ -1049,7 +1049,7 @@ table_06_803F_87DF:
 	BMI bra_06_87F9
 	JSR _loc_06_9927
 	LDA #$2B
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA направление_движения,X
 	ORA #$40
 	STA угол_движения,X
@@ -1109,7 +1109,7 @@ table_06_803F_884E:
 	JSR _loc_06_9B60
 	JSR _loc_06_9FDA
 	LDA #$39
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 bra_06_8868:
 	LDA скорость_Z_hi,X
 	BMI bra_06_88A4
@@ -1235,7 +1235,7 @@ table_06_803F_896C:
 	BMI bra_06_898C
 	JSR _loc_06_9927
 	LDA #$3C
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$00
 	STA скорость_Z_lo,X
 	STA скорость_Z_hi,X
@@ -1311,7 +1311,7 @@ table_06_803F_8A05:
 	JSR _loc_06_A03F
 	JSR _loc_06_9927
 	LDA #$3B
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$03
 	JSR _loc_06_9B60
 bra_06_8A1C:
@@ -1337,7 +1337,7 @@ table_06_803F_8A40:
 	JSR _loc_06_9927
 	JSR _loc_06_A00C
 	LDA #$38
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$04
 	JSR _loc_06_9B60
 bra_06_8A55:
@@ -1352,7 +1352,7 @@ table_06_803F_8A58:
 	JSR _loc_06_9CE4
 	JSR _loc_06_9D19
 	LDA #$38
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$07
 	JSR _loc_06_99EB
 	LDA #$09
@@ -1466,7 +1466,7 @@ _loc_06_8B44:
 	LDA #$05
 	JSR _loc_06_99EB
 	LDA #$38
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 bra_06_8B56:
 	JMP _loc_06_8A1F
 
@@ -1753,7 +1753,7 @@ bra_06_8DAD:
 	STA $2C
 	BNE bra_06_8DE4
 	LDA #$24
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 bra_06_8DE4:
 	LDA направление_движения,X
 	BPL bra_06_8DF5
@@ -1929,7 +1929,7 @@ bra_06_8F4A:
 	STA координата_Z_hi,X
 	JSR _b07_C2CB
 	LDA #$3E
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA $0130,X
 	CMP #$02
 	BCC bra_06_8F7A
@@ -2059,7 +2059,7 @@ table_06_8CAF_905F:
 	BMI bra_06_9071
 	JSR _loc_06_9927
 	LDA #$3D
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$01
 	JSR _loc_06_94D9
 bra_06_9071:
@@ -2207,6 +2207,7 @@ bra_06_9181:
 	INY
 	CPY #$03
 	BCC bra_06_9181
+	JSR _подправить_скорости_1C_1D		; 60fps
 	SEC
 	LDA скорость_X_lo,X
 	SBC $1C
@@ -2214,8 +2215,6 @@ bra_06_9181:
 	LDA скорость_X_hi,X
 	SBC $1D
 	STA скорость_X_hi,X
-	LDA #$20		; 60fps
-	JSR _b07_деление_и_умножение_скоростей_16bit_на_3
 	SEC
 	LDA $20
 	SBC координата_Y_lo,X
@@ -2231,6 +2230,7 @@ bra_06_91AC:
 	INY
 	CPY #$03
 	BCC bra_06_91AC
+	JSR _подправить_скорости_1C_1D		; 60fps
 	SEC
 	LDA скорость_Y_lo,X
 	SBC $1C
@@ -2238,8 +2238,6 @@ bra_06_91AC:
 	LDA скорость_Y_hi,X
 	SBC $1D
 	STA скорость_Y_hi,X
-	LDA #$21		; 60fps
-	JSR _b07_деление_и_умножение_скоростей_16bit_на_3
 	SEC
 	LDA $22
 	SBC координата_Z_lo,X
@@ -2257,15 +2255,14 @@ bra_06_91DA:
 	INY
 	CPY #$03
 	BCC bra_06_91DA
+	JSR _подправить_скорости_1C_1D		; 60fps
 	SEC
-	LDA #$00
+	LDA #$55		; 60fps
 	SBC $1C
 	STA скорость_Z_lo,X
-	LDA #$04
+	LDA #$01		; 60fps
 	SBC $1D
 	STA скорость_Z_hi,X
-	LDA #$22		; 60fps
-	JSR _b07_деление_и_умножение_скоростей_16bit_на_3
 	LDA #$00
 	STA гравитация_hi,X
 	LDA #$0E		; 60fps
@@ -2286,6 +2283,19 @@ _loc_06_921D:
 	JSR _loc_06_9642
 	JSR _loc_06_9B95
 	JMP _loc_06_8F97
+
+_подправить_скорости_1C_1D:		; 60fps корректировка скоростей когда игрок собирается бить по мячу и тот располагается относительно игрока
+	LDA $1C
+	STA $0192
+	LDA $1D
+	STA $0193
+	LDA #$23
+	JSR _b07_деление_и_умножение_скоростей_16bit_на_3
+	LDA $0193
+	STA $1D
+	LDA $0192
+	STA $1C
+	RTS
 
 table_06_8CAF_9226:
 	LDA #$0A
@@ -2870,26 +2880,27 @@ _loc_06_96DA_подкрутка_удара:
 	LSR
 	LSR
 	AND #$FE
-	TAY
-	LDA скорость_Y_hi_мяча		; 60fps переписан код, чтобы проверял старший и младший байт скорости, а не только младший
-	BPL @пропуск_eor_1
-	CLC
-	EOR #$FF
-	ADC #$01		; этот дополнительный +01 уменьшает возможность подкрутки вверх на 0100
- @пропуск_eor_1:
-	CMP #$02
+	TAY		; в Y одна из 8 сторон
+	LDA table_06_971F_скорость_Y,Y		; 60fps, изменен код проверки ограничения подкрутки, чтоб учитывался и младший байт
+	BEQ @RTS		; крутить не надо
+	BMI @подкрутка_вверх
+	LDA скорость_Y_hi_мяча		; значит сейчас подкрутка вниз
+	BMI @добавить_смещение
+	CMP #$01
 	BCC @добавить_смещение
+	LDA скорость_Y_lo_мяча
+	CMP #$80		; приблизительное ограничение относительно оригинала
+	BCS @RTS
+	JMP @добавить_смещение
+@подкрутка_вверх:
 	LDA скорость_Y_hi_мяча
-	BPL @пропуск_eor_2
-	LDA скорость_Y_lo_мяча
-	CLC
+	BPL @добавить_смещение
 	EOR #$FF
-	ADC #$01
-	JMP @сравнить_младший_байт
- @пропуск_eor_2:
+	CMP #$01
+	BCC @добавить_смещение
 	LDA скорость_Y_lo_мяча
- @сравнить_младший_байт:
-	CMP #$80
+	EOR #$FF
+	CMP #$20		; приблизительное ограничение относительно оригинала
 	BCS @RTS
 @добавить_смещение:
 	CLC
@@ -2905,6 +2916,7 @@ _loc_06_96DA_подкрутка_удара:
 ; 60fps подкрутка уменьшена в 9 раз
 table_06_971F_скорость_Y:
 ; ограничение подкрутки, интервал подкрутки
+; по первому байту определяется в какую сторону крутится, 00 если нет подкрутки
 .word $FFF2
 .word $FFF2
 .word $0000
@@ -3750,7 +3762,7 @@ bra_06_9DAC:
 	TAY
 	LDA table_06_9E9D + 3,Y
 	BMI bra_06_9DB9
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 bra_06_9DB9:
 	CLC
 	LDA сила_игрока,X
@@ -3777,7 +3789,7 @@ bra_06_9DE2:
 	AND #$08
 	BEQ bra_06_9E6A
 	LDA #$36
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$2D
 	JSR _loc_06_9E7C
 	JMP _loc_06_9E62
@@ -3820,7 +3832,7 @@ bra_06_9E2A:
 	ORA #$60
 	STA режим_игры_на_поле
 	LDA #$2D
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 bra_06_9E4A:
 	LDY $1D
 	LDA #$3C
@@ -5820,7 +5832,7 @@ _loc_06_AD8B:
 
 table_06_AD62_AD98:
 	LDA #$20
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDY $1D
 	JSR _loc_06_AF63
 	STY игрок_с_мячом
@@ -5829,7 +5841,7 @@ table_06_AD62_AD98:
 
 table_06_AD62_ADAA:
 	LDA #$23
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDY $1D
 	JSR _loc_06_AF63
 	STY игрок_с_мячом
@@ -5886,7 +5898,7 @@ bra_06_AE0E:
 	LDA скорость_Z_hi,Y
 	BPL bra_06_AE3A
 	LDA #$43
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$02
 	JSR _loc_06_B07B
 	LDA режим_игры_на_поле
@@ -5940,7 +5952,7 @@ bra_06_AE7F:
 	JSR _loc_06_B07B
 _loc_06_AE87:
 	LDA #$23
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$09
 	JMP _loc_06_AD8B
 bra_06_AE91:
@@ -5949,7 +5961,7 @@ bra_06_AE91:
 	BEQ bra_06_AE7A
 	JSR _loc_06_B05D
 	LDA #$23
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$26
 	JSR _loc_06_B07B
 	LDA #$15
@@ -5966,7 +5978,7 @@ table_06_AD62_AEAA:
 	JMP _loc_06_AD72
 bra_06_AEBE:
 	LDA #$26
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDY $1D
 	STY игрок_с_мячом
 	JSR _loc_06_B05D
@@ -6033,7 +6045,7 @@ table_06_AD62_AF36:
 bra_06_AF43:
 	STY игрок_с_мячом
 	LDA #$26
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$10
 	JMP _loc_06_AD8B
 _loc_06_AF50:
@@ -6132,7 +6144,7 @@ bra_06_AFF9:
 bra_06_B004:
 	LDY $1E
 	LDA table_06_B030 + 2,Y
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA table_06_B030 + 1,Y
 	LDY $1D
 	JSR _loc_06_B07B
@@ -7183,7 +7195,7 @@ bra_06_B8F6:
 	BEQ bra_06_B91A
 	JSR _loc_06_BCC8
 	LDA #$27
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA таймер_действия_мяча
 	LSR
 	AND #$1F
@@ -7234,7 +7246,7 @@ bra_06_B96F:
 	ORA скорость_X_lo,X
 	BEQ bra_06_B995
 	LDA #$27
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	JSR _loc_06_BBCA
 	JSR _loc_06_A187_ограничение_максимальной_скорости
 	LDA #$00
@@ -7274,7 +7286,7 @@ _loc_06_B9BB:
 	LDA #$00
 	JSR _loc_06_BD55
 	LDA #$2D
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA координата_X_lo,X
 	STA координата_подающего_X_lo
 	LDA координата_X_hi,X
@@ -7297,7 +7309,7 @@ _loc_06_B9F5:
 	LDA #$01
 	JSR _loc_06_BD55
 	LDA #$2D
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA координата_X_lo,X
 	STA координата_подающего_X_lo
 	LDA координата_X_hi,X
@@ -7380,7 +7392,7 @@ bra_06_BAA5:
 	LDA #$14
 	JSR _loc_06_9EB5
 	LDA #$2E
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 bra_06_BAB5:
 	RTS
 _loc_06_BAB6:
@@ -7716,7 +7728,7 @@ _loc_06_BD2B:
 	INY
 bra_06_BD37:
 	LDA #$27
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 	LDA #$02
 	ORA $1D
 	STA $1D
@@ -7920,7 +7932,7 @@ bra_06_BEBA:
 	BPL bra_06_BECB
 	LDA #$40
 bra_06_BEC8:
-	JSR _b07_C2E4
+	JSR _b07_C2E4_запись_номера_звука
 bra_06_BECB:
 	RTS
 
