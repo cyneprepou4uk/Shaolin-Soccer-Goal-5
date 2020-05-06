@@ -118,7 +118,7 @@ table_02_AA70:		; байты после JSR
 table_02_AA70_AA88:
 	LDA #$80
 	STA разновидность_NMI
-	JSR _loc_02_AE49
+	JSR _loc_02_AE49_очистить_оперативную_память
 	JSR _loc_02_AE3D_задержка
 	JSR _loc_02_AE3D_задержка
 
@@ -225,7 +225,7 @@ table_02_AB48:
 
 table_02_AA70_AB78:
 	JSR _loc_02_AE3D_задержка
-	JSR _loc_02_AE49
+	JSR _loc_02_AE49_очистить_оперативную_память
 	LDA #$0E
 	JSR _b07_E828
 	LDA #$59
@@ -290,7 +290,7 @@ bra_02_ABFD:
 	RTS
 
 table_02_AA70_ABFE:
-	LDA #$01
+	LDA #СЛОЖНОСТЬ_СРЕДНЕ
 	STA опция_режим_сложность
 	LDA #$00
 	STA номер_экрана
@@ -325,7 +325,7 @@ bra_02_AC27:
 
 table_02_AA70_AC43:
 	JSR _loc_02_AE3D_задержка
-	JSR _loc_02_AE49
+	JSR _loc_02_AE49_очистить_оперативную_память
 	LDA #$00
 	STA счетчик_кадров
 	LDA #$02
@@ -601,23 +601,24 @@ bra_02_AE41:
 	BNE bra_02_AE3F
 	RTS
 
-_loc_02_AE49:
+_loc_02_AE49_очистить_оперативную_память:
 	LDX #$61
 	JSR _b07_обнуление_ZP_с_X_до_F8
-	STA режим_игры_на_поле
+	STA режим_игры_на_поле		; пишется ПОЛЕ_НОРМАЛЬНАЯ_ИГРА
 	LDY #$06
 	STY $2D
 	STA $2C
 	LDY #$8E
 	LDX #$04
-bra_02_AE5A:
+@цикл_обнуления:
 	STA ($2C),Y
 	DEY
-	BNE bra_02_AE5A
+	BNE @цикл_обнуления
 	DEC $2D
 	DEX
-	BNE bra_02_AE5A
+	BNE @цикл_обнуления
 	RTS
+
 _loc_02_AE65:
 	LDA номер_экрана
 	CMP #$03
@@ -630,25 +631,27 @@ _loc_02_AE65:
 bra_02_AE79:
 	INC подтип_экрана
 	RTS
+
 _loc_02_AE7C:
 	LDA #$00
 	STA $1C
 	LDA одноразовые_кнопки
 	AND #(КНОПКА_СЕЛЕКТ + КНОПКА_СТАРТ)
-	BNE bra_02_AE94
+	BNE @кнопка_нажата
 	DEC таймер_демо_lo
 	BNE bra_02_AE98
 	DEC таймер_демо_hi
 	BNE bra_02_AE98
 	LDA #$40
 	BNE bra_02_AE96
-bra_02_AE94:
+@кнопка_нажата:
 	LDA #$80
 bra_02_AE96:
 	STA $1C
 bra_02_AE98:
 	BIT $1C
 	RTS
+
 _loc_02_AE9B:
 	LDA #$DA
 	STA $1C
