@@ -2,7 +2,7 @@
 .include "ram_copy.inc"
 .include "val_copy.inc"
 
-.import _b07_C2E4_запись_номера_звука
+.import _b07_C2E4_записать_и_воспроизвести_звук
 .import _b07_вращение_рандома
 .import _b07_C344
 .import _b07_EC8F
@@ -218,6 +218,7 @@ bra_00_8144:
 _loc_00_8165:
 bra_00_8165:
 	RTS
+
 _loc_00_8166:
 	LDA #$00
 	STA $4015
@@ -286,6 +287,7 @@ bra_00_81EC:
 	BPL bra_00_81E1
 bra_00_81EF:
 	RTS
+
 _loc_00_81F0:
 	LDA $0715,X
 	BNE bra_00_81F6
@@ -1139,6 +1141,7 @@ _loc_00_8755:
 	STA $07AC,X
 bra_00_875C:
 	RTS
+
 _loc_00_875D:
 	TXA
 	ASL
@@ -1147,6 +1150,7 @@ _loc_00_875D:
 	INY
 	LDA $07C1,Y
 	JMP _loc_00_88BB
+
 _loc_00_8768:
 	LDA $0715,X
 	AND #$7F
@@ -1167,12 +1171,14 @@ bra_00_8780:
 	LDA $07C1,Y
 	AND #$F0
 	JMP _loc_00_88BB
-	TXA
+
+	TXA		; не используется, удалить
 	ASL
 	ASL
 	TAY
 	LDA #$81
 	JMP _loc_00_88BB
+
 bra_00_8795:
 	JSR _loc_00_87CE
 	TXA
@@ -1207,6 +1213,7 @@ bra_00_87C6:
 	JSR _loc_00_87CE
 	LDA #$01
 	JMP _loc_00_8755
+
 _loc_00_87CE:
 	TXA
 	ASL
@@ -1219,6 +1226,7 @@ _loc_00_87CE:
 	INY
 	LDA $07C1,Y
 	JMP _loc_00_88BB
+
 _loc_00_87E1:
 	TXA
 	ASL
@@ -1229,6 +1237,7 @@ _loc_00_87E1:
 	INY
 	LDA $07C1,Y
 	JMP _loc_00_88BB
+
 _loc_00_87F2:
 	TXA
 	AND #$03
@@ -1269,6 +1278,7 @@ _loc_00_8820:
 	AND #$F0
 	ORA $02
 	JMP _loc_00_88BB
+
 _loc_00_8832:
 	TXA
 	AND #$03
@@ -1286,6 +1296,7 @@ bra_00_883C:
 	INY
 	PLA
 	JMP _loc_00_88BB
+
 _loc_00_884A:
 	CPX #$04
 	BCS bra_00_886F
@@ -1364,6 +1375,7 @@ bra_00_88D2:
 	JMP $07E1
 bra_00_88D8:
 	RTS
+
 _loc_00_88D9:
 	CPX #$03
 	BEQ bra_00_8934
@@ -1411,6 +1423,7 @@ bra_00_8926:
 	STA $070C,X
 bra_00_8934:
 	RTS
+
 _loc_00_8935:
 	LDA $07B6,X
 	STA $07B9,X
@@ -1426,6 +1439,7 @@ _loc_00_8935:
 	STA $070C,X
 bra_00_8955:
 	RTS
+
 _loc_00_8956:
 	TYA
 	CLC
@@ -1436,6 +1450,7 @@ _loc_00_8956:
 bra_00_8960:
 	LDY #$00
 	RTS
+
 _loc_00_8963:
 	LDA $02
 	BNE bra_00_8968
@@ -1859,7 +1874,7 @@ bra_00_AED0:
 	STA байт_2006_hi_атрибуты
 	RTS
 bra_00_AEE3:
-	LDA $58
+	LDA номер_экрана
 	BEQ bra_00_AEF8
 	CMP #$07
 	BCS bra_00_AEF8
@@ -1907,7 +1922,7 @@ _loc_00_AF3A:
 	STA $060A
 	LDA #$05
 	STA $060E
-	LDA $58
+	LDA номер_экрана
 	BEQ bra_00_AF59
 	CMP #$07
 	BCS bra_00_AF59
@@ -1920,7 +1935,7 @@ bra_00_AF59:
 _loc_00_AF61:
 	LDA $060E
 	STA $060C
-	LDA $58
+	LDA номер_экрана
 	BEQ bra_00_AF7C
 	CMP #$07
 	BCS bra_00_AF7C
@@ -1992,7 +2007,7 @@ bra_00_AFDA:
 _loc_00_AFE9:
 	LDA $060E
 	STA $060C
-	LDA $58
+	LDA номер_экрана
 	BEQ bra_00_B004
 	CMP #$07
 	BCS bra_00_B004
@@ -2041,10 +2056,11 @@ bra_00_B04C:
 	LDA буфер_графики
 	CMP #$FF
 	BEQ bra_00_B058
-	LDA #$35
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #ЗВУК_ВЫВОД_ТЕКСТА
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 bra_00_B058:
 	RTS
+
 _loc_00_B059:
 	SEC
 	SBC #$F0
@@ -2463,11 +2479,11 @@ bra_00_BB6C:
 	LDA #$20
 	STA режим_игры_на_поле
 	LDA #$01
-	STA тип_экрана
+	STA подтип_экрана
 	BNE bra_00_BBBA
 bra_00_BBB4:
 	LDA #$01
-	STA тип_экрана
+	STA подтип_экрана
 	STA режим_игры_на_поле
 bra_00_BBBA:
 	LDY #$00
@@ -2512,7 +2528,7 @@ bra_00_BC05:
 	LDA #$01
 	STA флаг_владения_мячом_команды,Y
 	LDA #$09
-	STA тип_экрана
+	STA подтип_экрана
 	LDA опция_режим_сложность
 	AND #$DF
 	STA опция_режим_сложность
@@ -2832,6 +2848,7 @@ bra_00_BF6E:
 	STA $1C
 bra_00_BF70:
 	RTS
+
 bra_00_BF71:
 	SEC
 	LDA $1C
@@ -2902,9 +2919,11 @@ bra_00_BFE8:
 	BPL bra_00_BFE8
 bra_00_BFF2:
 	RTS
+
 _loc_00_BFF3:
 	LDA #$19
 	JMP _b07_C344
+
 _loc_00_BFF8:
 	LDA #$1A
 	JMP _b07_C344

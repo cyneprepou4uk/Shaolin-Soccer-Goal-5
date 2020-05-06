@@ -2,7 +2,7 @@
 .include "ram_copy.inc"
 .include "val_copy.inc"
 
-.import _b07_C2E4_запись_номера_звука
+.import _b07_C2E4_записать_и_воспроизвести_звук
 .import _b07_вращение_рандома
 .import _b07_запись_банков_спрайтов
 .import _b07_поставить_флаг_уменьшения_яркости
@@ -19,6 +19,7 @@
 .import _b07_яркость_палитры_и_запись_в_буфер
 .import _b07_C317
 .import _b07_обнуление_ZP_с_X_до_F8
+.import _общий_RTS
 
 .export _loc_02_8000
 _loc_02_8000:
@@ -97,7 +98,7 @@ _loc_02_AA66:
 	LDA #$31
 	JMP _b07_C344
 _loc_02_AA6B:
-	LDA тип_экрана
+	LDA подтип_экрана
 	JSR _b07_EC8F
 
 table_02_AA70:		; байты после JSR
@@ -148,7 +149,7 @@ table_02_BB62_AA95:
 	JSR _b07_поставить_флаг_увеличения_яркости
 	LDA #$04
 	STA скорость_яркости
-	INC тип_экрана
+	INC подтип_экрана
 	RTS
 
 table_02_AA70_AAD9:
@@ -247,8 +248,8 @@ table_02_AA70_AB78:
 	INX
 	STX номер_палитры_спрайтов + 3
 	JSR _loc_02_B033
-	LDA #$01
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #МУЗЫКА_ЗАСТАВКА
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	JSR _b07_поставить_флаг_увеличения_яркости
 	LDA #$04
 	STA скорость_яркости
@@ -257,7 +258,7 @@ table_02_AA70_AB78:
 	LDA #$06
 	STA таймер_демо_hi
 	LDA #$0B
-	STA тип_экрана
+	STA подтип_экрана
 	RTS
 
 table_02_AA70_ABCE:
@@ -266,7 +267,7 @@ table_02_AA70_ABCE:
 	BIT флаг_яркости
 	BPL bra_02_ABDD
 	LDA #$03
-	STA тип_экрана
+	STA подтип_экрана
 bra_02_ABDD:
 	RTS
 
@@ -279,12 +280,12 @@ table_02_AA70_ABDE:
 	LDA #$04
 	STA скорость_яркости
 	JSR _b07_D062
-	INC тип_экрана
+	INC подтип_экрана
 	RTS
 bra_02_ABF6:
 	JSR _loc_02_AE65
 	LDA #$08
-	STA тип_экрана
+	STA подтип_экрана
 bra_02_ABFD:
 	RTS
 
@@ -292,8 +293,8 @@ table_02_AA70_ABFE:
 	LDA #$01
 	STA опция_режим_сложность
 	LDA #$00
-	STA $58
-	STA тип_экрана
+	STA номер_экрана
+	STA подтип_экрана
 	STA таймер_демо_lo
 	LDA #$03
 	STA таймер_демо_hi
@@ -330,7 +331,7 @@ table_02_AA70_AC43:
 	LDA #$02
 	STA таймер_демо_hi
 	LDY #$40
-	LDA тип_экрана
+	LDA подтип_экрана
 	CMP #$05
 	BEQ bra_02_AC5D
 	LDY #$80
@@ -363,7 +364,7 @@ bra_02_AC5D:
 	JSR _b07_EF54
 	JSR _loc_02_AA1B
 	JSR _b07_поставить_флаг_увеличения_яркости
-	INC тип_экрана
+	INC подтип_экрана
 	RTS
 
 table_02_AA70_ACA9:
@@ -373,7 +374,7 @@ table_02_AA70_ACA9:
 	JSR _b07_D073
 	BIT флаг_яркости
 	BPL bra_02_ACBC
-	INC тип_экрана
+	INC подтип_экрана
 bra_02_ACBC:
 	RTS
 
@@ -391,13 +392,13 @@ table_02_AA70_ACBD:
 bra_02_ACD7:
 	LDA #$00
 	STA флаг_демо
-	LDA #$33
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #ЗВУК_ПОЛОЖИТЕЛЬНЫЙ
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	LDA #$02
-	STA $58
+	STA номер_экрана
 	LDA #$00
 bra_02_ACE7:
-	STA тип_экрана
+	STA подтип_экрана
 	JSR _b07_поставить_флаг_уменьшения_яркости
 	LDA #$04
 	STA скорость_яркости
@@ -405,8 +406,9 @@ bra_02_ACE7:
 	JSR _loc_02_AE3D_задержка
 bra_02_ACF7:
 	RTS
+
 _loc_02_ACF8:
-	LDA тип_экрана
+	LDA подтип_экрана
 	CMP #$08
 	BCS bra_02_AD07
 	LDA одноразовые_кнопки
@@ -466,7 +468,7 @@ bra_02_AD5B:
 	LDA состояние_мяча
 	AND #$40
 	BNE bra_02_AD90
-	LDX #$00		; 60fps_мяч, отскок от стены
+	LDX #$00		; 60fps_мяч, отскок от стены на экране жми старт
 	LDY #$AB
 	LDA координата_X_hi_мяча
 	BNE bra_02_AD72
@@ -528,7 +530,7 @@ _loc_02_ADA5:
 	CPX #$00
 	BNE bra_02_ADEA
 	LDY #$00
-	LDA тип_экрана
+	LDA подтип_экрана
 	CMP #$08
 	BCS bra_02_ADE2
 	JSR _b07_вращение_рандома
@@ -617,7 +619,7 @@ bra_02_AE5A:
 	BNE bra_02_AE5A
 	RTS
 _loc_02_AE65:
-	LDA $58
+	LDA номер_экрана
 	CMP #$03
 	BEQ bra_02_AE79
 	JSR _b07_поставить_флаг_уменьшения_яркости
@@ -626,7 +628,7 @@ _loc_02_AE65:
 	JSR _b07_D062
 	JSR _loc_02_AE3D_задержка
 bra_02_AE79:
-	INC тип_экрана
+	INC подтип_экрана
 	RTS
 _loc_02_AE7C:
 	LDA #$00
@@ -954,7 +956,7 @@ _loc_02_B08B:
 	JMP ($002C)
 
 table_02_B09D:
-.word table_02_B09D_B0BB
+.word _общий_RTS
 .word table_02_B09D_B0BC
 .word table_02_B09D_B0D9
 .word table_02_B09D_B174
@@ -969,9 +971,6 @@ table_02_B09D:
 .word table_02_B09D_B0BC
 .word table_02_B09D_B0E9
 .word table_02_B09D_B1FB
-
-table_02_B09D_B0BB:
-	RTS
 
 table_02_B09D_B0BC:
 	LDA номер_движения,X
@@ -1021,7 +1020,6 @@ _loc_02_B10F:
 	JSR _loc_02_B33F
 	JSR _loc_02_AA43
 	JSR _loc_02_B2BC
-_loc_02_B11B:
 	RTS
 
 table_02_B09D_B11C:
@@ -1054,7 +1052,7 @@ _loc_02_B14C:
 	BPL bra_02_B159
 	LDA #$03
 	STA номер_движения,X
-	JMP _loc_02_B11B
+	RTS
 bra_02_B159:
 	LDA #$04
 	JSR _loc_02_B293
@@ -1083,8 +1081,8 @@ table_02_B09D_B18A:
 	ORA #$40
 	STA угол_движения,X
 _loc_02_B19A:
-	LDA #$2B
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #ЗВУК_ПРЫЖОК
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	LDA #$0A
 	JSR _loc_02_B2A1
 _loc_02_B1A4:
@@ -1102,8 +1100,8 @@ bra_02_B1BA:
 	STA координата_Z_sub,X
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
-	LDA #$2C
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #ЗВУК_ПРИЗЕМЛЕНИЕ
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	JSR _loc_02_B24A
 bra_02_B1CD:
 	RTS
@@ -1231,7 +1229,7 @@ bra_02_B2BB:
 
 _loc_02_B2BC:
 	LDY #$00
-	LDA $58
+	LDA номер_экрана
 	CMP #$03
 	BNE bra_02_B2C6
 	LDY #$04
@@ -1278,7 +1276,7 @@ bra_02_B318:
 	STA координата_X_lo,X
 	LDA table_02_B337 + 1,Y
 	STA координата_X_hi,X
-	LDA $58
+	LDA номер_экрана
 	CMP #$03
 	BNE bra_02_B332
 	LDA координата_X_lo,X
@@ -1298,7 +1296,7 @@ table_02_B337:
 
 _loc_02_B33F:
 	LDY #$00
-	LDA $58
+	LDA номер_экрана
 	CMP #$03
 	BNE bra_02_B350
 	LDA $061F
@@ -1457,10 +1455,10 @@ _loc_02_B45E:
 	STA $61,X
 	LDA table_02_B529,X
 	STA номер_движения,X
-	LDA $58
+	LDA номер_экрана
 	CMP #$03
 	BEQ bra_02_B483
-	LDA тип_экрана
+	LDA подтип_экрана
 	CMP #$04
 	BEQ bra_02_B483
 	LDA #$0C
@@ -1705,7 +1703,7 @@ _loc_02_B6DD:
 	JMP ($002C)
 
 table_02_B6EF:
-.word table_02_B6EF_B745
+.word _общий_RTS
 .word table_02_B6EF_B746
 .word table_02_B6EF_B746
 .word table_02_B6EF_B82C
@@ -1748,9 +1746,6 @@ table_02_B6EF:
 .word table_02_B6EF_B774
 .word table_02_B6EF_B746
 .word table_02_B6EF_B774
-
-table_02_B6EF_B745:
-	RTS
 
 table_02_B6EF_B746:
 	LDA номер_движения,X
@@ -1871,8 +1866,8 @@ table_02_B6EF_B82C:
 	LDA номер_движения,X
 	BMI bra_02_B83E
 	JSR _loc_02_B282
-	LDA #$2B
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #ЗВУК_ПРЫЖОК
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	LDA #$00
 _loc_02_B83B:
 	JSR _loc_02_B2A1
@@ -1890,11 +1885,11 @@ bra_02_B851:
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
 	JSR _loc_02_B86B
-	LDA $58
+	LDA номер_экрана
 	CMP #$03
 	BEQ bra_02_B86A
-	LDA #$2C
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #ЗВУК_ПРИЗЕМЛЕНИЕ
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 bra_02_B86A:
 	RTS
 
@@ -1912,7 +1907,7 @@ table_B902_B86B:
 	ASL
 	TAY
 	STX $1C
-	LDA $58
+	LDA номер_экрана
 	CMP #$03
 	BNE bra_02_B88C
 	LDX #$01
@@ -2225,7 +2220,7 @@ _loc_02_BB3C:
 	JSR _b07_EB8C
 	RTS
 _loc_02_BB5D:
-	LDA тип_экрана
+	LDA подтип_экрана
 	JSR _b07_EC8F
 
 table_02_BB62:		; байты после JSR
@@ -2263,10 +2258,10 @@ table_02_BB62_BB78:
 	JSR _loc_02_BB3C
 	JSR _loc_02_AA1B
 	JSR _b07_поставить_флаг_увеличения_яркости
-	LDA #$0B
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #МУЗЫКА_КУБОК
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 _loc_02_BBAE:
-	INC тип_экрана
+	INC подтип_экрана
 bra_02_BBB0:
 	RTS
 
@@ -2277,8 +2272,8 @@ table_02_BB62_BBB1:
 	LDA $07E5
 	AND #$02
 	BNE bra_02_BBB0
-	LDA #$44
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #ЗВУК_НЕИЗВЕСТНО_44
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	LDA #$10
 	JSR _loc_02_BEBF
 	JMP _loc_02_BBAE
@@ -2385,12 +2380,12 @@ bra_02_BC27:
 	INC таймер_демо_hi
 	JSR _loc_02_BED4
 	JSR _b07_поставить_флаг_увеличения_яркости
-	LDA #$0E
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #МУЗЫКА_ФИНАЛ
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	LDA #$80
 	STA флаг_демо
 bra_02_BCCD:
-	INC тип_экрана
+	INC подтип_экрана
 bra_02_BCCF:
 	RTS
 
@@ -2537,7 +2532,7 @@ table_02_BB62_BDC0:
 	INC таймер_демо_hi
 	JSR _b07_поставить_флаг_увеличения_яркости
 bra_02_BE3F:
-	INC тип_экрана
+	INC подтип_экрана
 bra_02_BE41:
 	RTS
 
@@ -2577,7 +2572,7 @@ table_02_BB62_BE76:
 	LDA #$00
 	STA скорость_игры
 	STA координата_Z_lo_мяча
-	INC тип_экрана
+	INC подтип_экрана
 bra_02_BE94:
 	RTS
 
@@ -2595,20 +2590,22 @@ _loc_02_BE9B:
 	BCS bra_02_BEBE
 	LDA #$40
 	JSR _loc_02_BEBF
-	LDA #$4C
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #ЗВУК_ТЕБЕ_ЗВОНЯТ
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	CLC
 	BCC bra_02_BEBE
-	LDA #$4E
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #ЗВУК_ТЫ_ПОДНИМАЕШЬ_ТРУБКУ
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	SEC
 bra_02_BEBE:
 	RTS
+
 _loc_02_BEBF:
 	STA таймер_демо_lo
 	LDA #$01
 	STA таймер_демо_hi
 	RTS
+
 _loc_02_BEC8:
 	LDA #$FF
 	LDX #$02

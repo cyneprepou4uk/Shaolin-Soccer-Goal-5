@@ -5,7 +5,7 @@
 ; !!! разрешено двигать код только начиная с _loc_01_B430
 ; поинтеры в таблице еще не закончены
 
-.import _b07_C2E4_запись_номера_звука
+.import _b07_C2E4_записать_и_воспроизвести_звук
 .import _b07_вращение_рандома
 .import _b07_ECA9
 .import _b07_выключить_NMI
@@ -30,7 +30,7 @@ _loc_01_8009:
 .export _loc_01_800C
 _loc_01_800C:
 	JMP _loc_01_BE88
-	JMP _loc_01_BE88
+	JMP _loc_01_BE88		; не используется, удалить
 
 ; 8012
 .word $8024
@@ -2280,12 +2280,11 @@ bra_01_B14C:
 	JMP _loc_01_B17C
 bra_01_B174:
 	STA $05EA
-	JMP _loc_01_B17F
+	RTS
 bra_01_B17A:
 	LDA #$24
 _loc_01_B17C:
 	STA $05EB
-_loc_01_B17F:
 bra_01_B17F:
 	RTS
 
@@ -2650,7 +2649,7 @@ table_01_B5F1:
 .byte $2A,$36
 
 _loc_01_B5F3:
-	LDA тип_экрана
+	LDA подтип_экрана
 	CMP #$07
 	BNE bra_01_B5FC
 	JMP _loc_01_B858
@@ -3057,29 +3056,29 @@ bra_01_B9E7:
 	RTS
 
 table_01_B9E8:
-.word table_01_B9E8_BA8A		; никогда не используется, так как 00 погода пропускается, надо удалить
+.word _общий_RTS		; никогда не используется, так как 00 погода пропускается, надо удалить
 .word table_01_B9E8_BA8B
 .word table_01_B9E8_BB3D
 .word table_01_B9E8_BB3E
-.word table_01_B9E8_BBCA
-.word table_01_B9E8_BBCA
-.word table_01_B9E8_BBCA
+.word _общий_RTS
+.word _общий_RTS
+.word _общий_RTS
 
 table_01_B9F6:
 .word _общий_RTS				; никогда не используется, так как 00 погода пропускается, надо удалить
 .word table_01_B9F6_BA05
 .word _общий_RTS
 .word table_01_B9F6_BA2E
-.word table_01_B9F6_BA8A
-.word table_01_B9F6_BA8A
-.word table_01_B9F6_BA8A
+.word _общий_RTS
+.word _общий_RTS
+.word _общий_RTS
 
 table_01_B9F6_BA05:
 	LDA #$00
 	STA сила_ветра
 	STA длительность_погоды_ХЗ
-	LDA #$45
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #ЗВУК_МОЛНИЯ
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	LDA адрес_рандома
 	AND #$07
 	STA $05E4
@@ -3092,8 +3091,8 @@ table_01_BA25:
 .byte $68,$68,$98,$98,$38,$38,$98,$98
 
 table_01_B9F6_BA2E:
-	LDA #$41
-	JSR _b07_C2E4_запись_номера_звука
+	LDA #ЗВУК_ВЕТЕР
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	LDA #$00
 	STA сила_ветра
 	LDA адрес_рандома
@@ -3133,10 +3132,6 @@ _loc_01_BA84:
 	STA скорость_Y_hi_погоды_ХЗ
 	JMP _loc_01_BB3E
 
-table_01_B9E8_BA8A:
-table_01_B9F6_BA8A:
-	RTS
-
 _loc_01_BA8B:
 table_01_B9E8_BA8B:
 	LDA $05E4
@@ -3167,7 +3162,7 @@ table_01_B9E8_BA8B:
 	CMP #$14
 	BCC bra_01_BAE8
 	JSR _loc_01_BFB2
-	LDA $05F4
+	LDA цвет_поля
 	STA номер_палитры_фона
 	LDA #ПОГОДА_НЕТ
 	STA номер_погодного_эффекта
@@ -3195,7 +3190,7 @@ bra_01_BAFA:
 _loc_01_BB06:
 	LDA table_01_BB35,Y
 	BNE bra_01_BB14
-	LDA $05F4
+	LDA цвет_поля
 	STA номер_палитры_фона
 	JMP _loc_01_BB17
 bra_01_BB14:
@@ -3273,13 +3268,12 @@ bra_01_BB8A:
 	LDA #$00
 	STA объем_дождя
 	STA $E6
-	JMP _loc_01_BBB9
+	RTS
 bra_01_BBAF:
 	LDA #$0C
 	STA объем_дождя
 	LDA #$01
 	STA $E6
-_loc_01_BBB9:
 	RTS
 bra_01_BBBA:
 	LDA #ПОГОДА_НЕТ
@@ -3290,8 +3284,6 @@ bra_01_BBBA:
 	STA $E6
 	RTS
 
-table_01_B9E8_BBCA:
-	RTS
 _loc_01_BBCB:
 	LDA $0321
 	SEC

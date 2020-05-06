@@ -2,7 +2,7 @@
 .include "ram_copy.inc"
 .include "val_copy.inc"
 
-.import _b07_C2E4_запись_номера_звука
+.import _b07_C2E4_записать_и_воспроизвести_звук
 .import _b07_F691
 .import _b07_FA6D
 .import _b07_C344
@@ -6882,8 +6882,8 @@ bra_04_BC07:
 	BCC @чтение_таблицы
 	INY
 @чтение_таблицы:
-	LDA table_04_BC5F_красный_супер,Y
-	JSR _b07_C2E4_запись_номера_звука
+	LDA table_04_BC5F_звук,Y
+	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	JSR _loc_04_8027
 	JSR _loc_04_8027
 bra_04_BC3D:
@@ -6904,8 +6904,10 @@ bra_04_BC4D:
 bra_04_BC5E:
 	RTS
 
-table_04_BC5F_красный_супер:
-.byte $29,$28,$2A
+table_04_BC5F_звук:
+.byte ЗВУК_УДАР
+.byte ЗВУК_КРАСНЫЙ_СУПЕР
+.byte ЗВУК_СУПЕР
 
 _loc_04_BC62:
 	LDY разновидность_супера
