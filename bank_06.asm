@@ -9,7 +9,7 @@
 .import _b07_C294
 .import _b07_C2B2
 .import _b07_C2B7
-.import _b07_C2BC
+.import _b07_C2BC_проверка_координат_для_возможности_сделать_супер
 .import _b07_C2C1
 .import _b07_C2C6
 .import _b07_C2CB
@@ -56,8 +56,8 @@ _loc_06_8012:
 .export _loc_06_8015
 _loc_06_8015:
 	JMP _loc_06_BDFC
-.export _loc_06_8018
-_loc_06_8018:
+.export _loc_06_8018_вычисление_скорости_удара
+_loc_06_8018_вычисление_скорости_удара:
 	JMP _loc_06_9867_вычисление_скорости_удара
 .export _loc_06_801B
 _loc_06_801B:
@@ -1877,7 +1877,7 @@ table_06_8CAF_8EE9:
 	LDA номер_движения,X
 	BMI bra_06_8EF4
 	JSR _loc_06_9927
-	JSR _b07_C2BC
+	JSR _b07_C2BC_проверка_координат_для_возможности_сделать_супер
 bra_06_8EF4:
 	LDA номер_супера
 	BMI bra_06_8F0A
