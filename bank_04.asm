@@ -5604,7 +5604,7 @@ bra_04_B20F:
 	TAY
 	SEC
 	LDA координата_Y_lo,Y
-	SBC байт_для_2005_Y
+	SBC камера_Y_lo
 	STA $C1,X
 	INX
 	CPX $F4
@@ -5653,7 +5653,7 @@ bra_04_B272:
 	STA флаг_видимости,X
 	DEX
 	BPL bra_04_B272
-	LDA $F3
+	LDA копия_камеры_Y_hi
 	BEQ bra_04_B27E
 	LDA #$10
 bra_04_B27E:
@@ -5669,10 +5669,10 @@ _loc_04_B28A:
 	TAY
 	LDA координата_X_lo,Y
 	SEC
-	SBC $F0
+	SBC копия_камеры_X_lo
 	STA $03AF,Y
 	LDA координата_X_hi,Y
-	SBC $F1
+	SBC копия_камеры_X_hi
 	BNE bra_04_B2FB
 	LDA $03AF,Y
 	CMP #$08
@@ -5686,11 +5686,11 @@ _loc_04_B28A:
 	STA $2D
 	SEC
 	LDA $2C
-	SBC $F2
+	SBC копия_камеры_Y_lo
 	STA $2C
 	STA $03D5,Y
 	LDA $2D
-	SBC $F3
+	SBC копия_камеры_Y_hi
 	STA $2D
 	SEC
 	LDA $2C

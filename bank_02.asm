@@ -1569,15 +1569,15 @@ bra_02_B53F:
 	DEX
 	BPL bra_02_B53F
 	LDA #$00
-	STA байт_для_2005_X
-	STA байт_для_2005_Y
-	STA $EF
-	STA $F0
-	STA $F2
-	STA $F3
+	STA камера_X_lo
+	STA камера_Y_lo
+	STA камера_Y_hi
+	STA копия_камеры_X_lo
+	STA копия_камеры_Y_lo
+	STA копия_камеры_Y_hi
 	LDA #$01
-	STA $ED
-	STA $F1
+	STA камера_X_hi
+	STA копия_камеры_X_hi
 	LDX #$01
 bra_02_B592:
 	LDA флаг_владения_мячом_команды,X
@@ -2248,15 +2248,15 @@ table_02_BB62_BB78:
 	LDA #$03
 	STA скорость_игры
 	LDA #$00
-	STA байт_для_2005_X
-	STA байт_для_2005_Y
-	STA $EF
-	STA $F0
-	STA $F2
-	STA $F3
+	STA камера_X_lo
+	STA камера_Y_lo
+	STA камера_Y_hi
+	STA копия_камеры_X_lo
+	STA копия_камеры_Y_lo
+	STA копия_камеры_Y_hi
 	LDA #$01
-	STA $ED
-	STA $F1
+	STA камера_X_hi
+	STA копия_камеры_X_hi
 	JSR _loc_02_BA66
 	JSR _loc_02_BB3C
 	JSR _loc_02_AA1B
@@ -2342,8 +2342,8 @@ bra_02_BC27:
 	STA координата_X_hi
 	STA координата_X_hi + 1
 	STA координата_X_hi_мяча
-	STA $F1
-	STA $ED
+	STA копия_камеры_X_hi
+	STA камера_X_hi
 	LDA #$1D
 	STA номер_палитры_спрайтов
 	LDA #$2B

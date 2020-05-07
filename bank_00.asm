@@ -2713,18 +2713,18 @@ bra_00_BD6E:
 	LDY #$10
 bra_00_BD7D:
 	LDA table_00_BDA7,Y
-	STA байт_для_2005_X,X
-	STA $F0,X
+	STA камера_X_lo,X
+	STA копия_камеры_X_lo,X
 	INY
 	INX
 	CPX #$02
 	BCC bra_00_BD7D
 	LDA #$48
-	STA байт_для_2005_Y
-	STA $F2
+	STA камера_Y_lo
+	STA копия_камеры_Y_lo
 	LDA #$00
-	STA $EF
-	STA $F3
+	STA камера_Y_hi
+	STA копия_камеры_Y_hi
 	LDY #$1B
 	LDA #$00
 bra_00_BDA0:

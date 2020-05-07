@@ -7706,9 +7706,9 @@ _loc_06_BCF6:
 	BEQ bra_06_BD07
 	DEC $0523
 bra_06_BD07:
-	LDA $ED
+	LDA камера_X_hi
 	BNE bra_06_BD17
-	LDA байт_для_2005_X
+	LDA камера_X_lo
 	CMP #$48
 	BCS bra_06_BD26
 	LDA #$80
@@ -7716,7 +7716,7 @@ bra_06_BD07:
 bra_06_BD17:
 	CMP #$02
 	BNE bra_06_BD26
-	LDA байт_для_2005_X
+	LDA камера_X_lo
 	CMP #$B8
 	BCC bra_06_BD26
 	LDA #$00

@@ -3098,16 +3098,16 @@ table_01_B9F6_BA2E:
 	LDA адрес_рандома
 	AND #$BF
 	CLC
-	ADC байт_для_2005_X
+	ADC камера_X_lo
 	STA $0321
-	LDA $ED
+	LDA камера_X_hi
 	ADC #$00
 	STA $0334
-	LDA байт_для_2005_Y
+	LDA камера_Y_lo
 	CLC
 	ADC адрес_рандома
 	STA $035A
-	LDA $EF
+	LDA камера_Y_hi
 	ADC #$00
 	STA $036D
 	LDA #$00
@@ -3140,18 +3140,18 @@ table_01_B9E8_BA8B:
 	STA $1C
 	LDA table_01_BA25,Y
 	STA $1D
-	LDA байт_для_2005_X
+	LDA камера_X_lo
 	CLC
 	ADC $1C
 	STA $0321
-	LDA $ED
+	LDA камера_X_hi
 	ADC #$00
 	STA $0334
-	LDA байт_для_2005_Y
+	LDA камера_Y_lo
 	CLC
 	ADC $1D
 	STA $035A
-	LDA $EF
+	LDA камера_Y_hi
 	ADC #$00
 	STA $036D
 	JSR _loc_01_BBCB
@@ -3287,16 +3287,16 @@ bra_01_BBBA:
 _loc_01_BBCB:
 	LDA $0321
 	SEC
-	SBC байт_для_2005_X
+	SBC камера_X_lo
 	LDA $0334
-	SBC $ED
+	SBC камера_X_hi
 	BNE bra_01_BBF6
 	LDA $035A
 	SEC
-	SBC байт_для_2005_Y
+	SBC камера_Y_lo
 	STA $1D
 	LDA $036D
-	SBC $EF
+	SBC камера_Y_hi
 	BNE bra_01_BBF6
 	LDA $1D
 	CMP #$F0
@@ -3309,11 +3309,11 @@ _loc_01_BBF8:
 	STA $1C
 	LDA $0321
 	SEC
-	SBC байт_для_2005_X
+	SBC камера_X_lo
 	STA $013D
 	LDA $035A
 	SEC
-	SBC байт_для_2005_Y
+	SBC камера_Y_lo
 	SEC
 	SBC #$08
 	STA $013E

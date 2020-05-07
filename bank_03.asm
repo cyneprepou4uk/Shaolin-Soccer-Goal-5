@@ -7926,11 +7926,11 @@ bra_03_BD51:
 	LDA #$00
 	STA смещение_камеры
 _loc_03_BD56:
-	LDA байт_для_2005_X
+	LDA камера_X_lo
 	SEC
 	SBC $1C
 	STA $1C
-	LDA $ED
+	LDA камера_X_hi
 	SBC $1D
 	STA $1D
 	BPL bra_03_BD8F
@@ -7983,13 +7983,13 @@ bra_03_BDA0:
 bra_03_BDAF:
 	STA $1C
 _loc_03_BDB1:
-	LDA байт_для_2005_X
+	LDA камера_X_lo
 	SEC
 	SBC $1C
-	STA $F0
-	LDA $ED
+	STA копия_камеры_X_lo
+	LDA камера_X_hi
 	SBC $1D
-	STA $F1
+	STA копия_камеры_X_hi
 _loc_03_BDC2:
 	LDA координата_Y_lo,Y
 	SEC
@@ -7998,11 +7998,11 @@ _loc_03_BDC2:
 	LDA координата_Y_hi,Y
 	SBC #$00
 	STA $1D
-	LDA байт_для_2005_Y
+	LDA камера_Y_lo
 	SEC
 	SBC $1C
 	STA $1C
-	LDA $EF
+	LDA камера_Y_hi
 	SBC $1D
 	STA $1D
 	BPL bra_03_BE0A
@@ -8052,84 +8052,84 @@ bra_03_BE1B:
 bra_03_BE2A:
 	STA $1C
 _loc_03_BE2C:
-	LDA байт_для_2005_Y
+	LDA камера_Y_lo
 	SEC
 	SBC $1C
-	STA $F2
-	LDA $EF
+	STA копия_камеры_Y_lo
+	LDA камера_Y_hi
 	SBC $1D
-	STA $F3
+	STA копия_камеры_Y_hi
 	LDA подтип_экрана
 	CMP #$05
 	BEQ bra_03_BE47
 	CMP #$08
 	BCC bra_03_BE7E
 bra_03_BE47:
-	LDA $F1
+	LDA копия_камеры_X_hi
 	CMP #$00
 	BNE bra_03_BE62
-	LDA $F0
+	LDA копия_камеры_X_lo
 	CMP #$30
 	BCS bra_03_BE73
 	LDA #$30
-	STA $F0
+	STA копия_камеры_X_lo
 	LDA #$00
-	STA $F1
+	STA копия_камеры_X_hi
 	JMP _loc_03_BE73
 bra_03_BE62:
-	LDA $F0
+	LDA копия_камеры_X_lo
 	CMP #$D0
 	BCC bra_03_BE73
 	LDA #$01
-	STA $F1
+	STA копия_камеры_X_hi
 	LDA #$D0
-	STA $F0
+	STA копия_камеры_X_lo
 _loc_03_BE73:
 bra_03_BE73:
 	LDA #$00
-	STA $F2
-	STA $F3
+	STA копия_камеры_Y_lo
+	STA копия_камеры_Y_hi
 	RTS
 bra_03_BE7E:
-	LDA $F1
+	LDA копия_камеры_X_hi
 	CMP #$01
 	BCS bra_03_BE96
-	LDA $F0
+	LDA копия_камеры_X_lo
 	CMP #$40
 	BCS bra_03_BE96
 	LDA #$40
-	STA $F0
+	STA копия_камеры_X_lo
 	LDA #$00
-	STA $F1
+	STA копия_камеры_X_hi
 bra_03_BE96:
-	LDA $F1
+	LDA копия_камеры_X_hi
 	CMP #$02
 	BCC bra_03_BEAE
-	LDA $F0
+	LDA копия_камеры_X_lo
 	CMP #$C0
 	BCC bra_03_BEAE
 	LDA #$02
-	STA $F1
+	STA копия_камеры_X_hi
 	LDA #$C0
-	STA $F0
+	STA копия_камеры_X_lo
 bra_03_BEAE:
-	LDA $F3
+	LDA копия_камеры_Y_hi
 	BPL bra_03_BEBB
 	LDA #$00
-	STA $F2
-	STA $F3
+	STA копия_камеры_Y_lo
+	STA копия_камеры_Y_hi
 bra_03_BEBB:
-	LDA $F3
+	LDA копия_камеры_Y_hi
 	CMP #$01
 	BCS bra_03_BEC9
-	LDA $F2
+	LDA копия_камеры_Y_lo
 	CMP #$AF
 	BCC bra_03_BED3
 bra_03_BEC9:
 	LDA #$AF
-	STA $F2
+	STA копия_камеры_Y_lo
 	LDA #$00
-	STA $F3
+	STA копия_камеры_Y_hi
 bra_03_BED3:
 	RTS
 

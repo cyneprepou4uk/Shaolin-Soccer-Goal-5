@@ -161,14 +161,14 @@ _loc_05_80DF:
 	LDA #$80
 	STA разновидность_NMI
 	LDA #$00		; сделать тут цикл для экономии байтов
-	STA байт_для_2005_X
-	STA $ED
-	STA байт_для_2005_Y
-	STA $EF
-	STA $F0
-	STA $F1
-	STA $F2
-	STA $F3
+	STA камера_X_lo
+	STA камера_X_hi
+	STA камера_Y_lo
+	STA камера_Y_hi
+	STA копия_камеры_X_lo
+	STA копия_камеры_X_hi
+	STA копия_камеры_Y_lo
+	STA копия_камеры_Y_hi
 	STA скорость_игры
 	STA счетчик_опций
 	STA $05CE
@@ -2114,14 +2114,14 @@ _loc_05_901C:
 	STA $62
 	STA $64
 	LDA #$00
-	STA байт_для_2005_X
-	STA $ED
-	STA байт_для_2005_Y
-	STA $EF
-	STA $F0
-	STA $F1
-	STA $F2
-	STA $F3
+	STA камера_X_lo
+	STA камера_X_hi
+	STA камера_Y_lo
+	STA камера_Y_hi
+	STA копия_камеры_X_lo
+	STA копия_камеры_X_hi
+	STA копия_камеры_Y_lo
+	STA копия_камеры_Y_hi
 	JSR _loc_05_9102
 	LDX #$26
 	STX банк_спрайтов
@@ -2521,14 +2521,14 @@ table_05_9313_9357:
 	JSR _loc_05_9396
 bra_05_9361:
 	JSR _loc_05_94C2
-	LDA $F0
-	STA байт_для_2005_X
-	LDA $F1
-	STA $ED
-	LDA $F2
-	STA байт_для_2005_Y
-	LDA $F3
-	STA $EF
+	LDA копия_камеры_X_lo
+	STA камера_X_lo
+	LDA копия_камеры_X_hi
+	STA камера_X_hi
+	LDA копия_камеры_Y_lo
+	STA камера_Y_lo
+	LDA копия_камеры_Y_hi
+	STA камера_Y_hi
 	LDA счетчик_опций
 	JSR _b07_EC8F
 
@@ -3040,14 +3040,14 @@ _loc_05_97F5:
 	JSR _loc_05_982C
 bra_05_97FF:
 	JSR _loc_05_9B1D
-	LDA $F0
-	STA байт_для_2005_X
-	LDA $F1
-	STA $ED
-	LDA $F2
-	STA байт_для_2005_Y
-	LDA $F3
-	STA $EF
+	LDA копия_камеры_X_lo
+	STA камера_X_lo
+	LDA копия_камеры_X_hi
+	STA камера_X_hi
+	LDA копия_камеры_Y_lo
+	STA камера_Y_lo
+	LDA копия_камеры_Y_hi
+	STA камера_Y_hi
 	LDA счетчик_опций
 	JSR _b07_EC8F
 
@@ -3508,51 +3508,51 @@ _loc_05_9C05:
 	LDA счетчик_опций
 	CMP #$05
 	BCC bra_05_9C32
-	LDA $F2
+	LDA копия_камеры_Y_lo
 	BNE bra_05_9C18
-	LDA $F3
+	LDA копия_камеры_Y_hi
 	CMP #$01
 	BEQ bra_05_9C6B
 bra_05_9C18:
 	CLC
-	LDA $F2
+	LDA копия_камеры_Y_lo
 	ADC #$04
-	STA $F2
+	STA копия_камеры_Y_lo
 	CMP #$F0
 	BCC bra_05_9C6B
 	LDA #$00
-	STA $F2
+	STA копия_камеры_Y_lo
 	LDA #$01
-	STA $F3
+	STA копия_камеры_Y_hi
 	RTS
 bra_05_9C32:
-	LDA $F2
+	LDA копия_камеры_Y_lo
 	BNE bra_05_9C3C
-	LDA $F3
+	LDA копия_камеры_Y_hi
 	BEQ bra_05_9C6B
 bra_05_9C3C:
 	SEC
-	LDA $F2
+	LDA копия_камеры_Y_lo
 	SBC #$04
-	STA $F2
+	STA копия_камеры_Y_lo
 	CMP #$F0
 	BCC bra_05_9C57
 	SBC #$10
-	STA $F2
+	STA копия_камеры_Y_lo
 	SEC
-	LDA $F3
+	LDA копия_камеры_Y_hi
 	SBC #$01
-	STA $F3
+	STA копия_камеры_Y_hi
 bra_05_9C57:
-	LDA $F3
+	LDA копия_камеры_Y_hi
 	BMI bra_05_9C63
 	BNE bra_05_9C6B
-	LDA $F2
+	LDA копия_камеры_Y_lo
 	BNE bra_05_9C6B
 bra_05_9C63:
 	LDA #$00
-	STA $F2
-	STA $F3
+	STA копия_камеры_Y_lo
+	STA копия_камеры_Y_hi
 bra_05_9C6B:
 	RTS
 

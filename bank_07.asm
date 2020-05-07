@@ -455,10 +455,10 @@ _обработчик_RESET:
 	BIT $2002
 	BPL @ожидание_vblank_2
 	LDA #$00
-	STA байт_для_2005_X
-	STA $ED
-	STA байт_для_2005_Y
-	STA $EF
+	STA камера_X_lo
+	STA камера_X_hi
+	STA камера_Y_lo
+	STA камера_Y_hi
 	STA $4016
 	LDA #$40
 	STA $4017
@@ -989,38 +989,38 @@ bra_07_C81F:
 	STA объект_камеры
 	RTS
 bra_07_C830:
-	LDA $F1
+	LDA копия_камеры_X_hi
 	CMP #$00
 	BEQ bra_07_C83C
 	BCC bra_07_C844
 	BCS bra_07_C849
 bra_07_C83C:
-	LDA $F0
+	LDA копия_камеры_X_lo
 	CMP #$80
 	BCS bra_07_C849
 bra_07_C844:
 	LDY #$00
 	JMP _loc_07_C85F
 bra_07_C849:
-	LDA $F1
+	LDA копия_камеры_X_hi
 	CMP #$02
 	BEQ bra_07_C855
 	BCS bra_07_C85D
 	BCC bra_07_C872
 bra_07_C855:
-	LDA $F0
+	LDA копия_камеры_X_lo
 	CMP #$80
 	BCC bra_07_C872
 bra_07_C85D:
 	LDY #$02
 _loc_07_C85F:
 	CLC
-	LDA $F0
+	LDA копия_камеры_X_lo
 	ADC table_07_C877,Y
-	STA $F0
-	LDA $F1
+	STA копия_камеры_X_lo
+	LDA копия_камеры_X_hi
 	ADC table_07_C877 + 1,Y
-	STA $F1
+	STA копия_камеры_X_hi
 bra_07_C872:
 	RTS
 
@@ -1263,15 +1263,15 @@ _loc_07_CA1F:
 	LDA #$66
 	STA банк_фона + 1
 	LDA #$00
-	STA байт_для_2005_X
-	STA байт_для_2005_Y
-	STA $EF
-	STA $F0
-	STA $F2
-	STA $F3
+	STA камера_X_lo
+	STA камера_Y_lo
+	STA камера_Y_hi
+	STA копия_камеры_X_lo
+	STA копия_камеры_Y_lo
+	STA копия_камеры_Y_hi
 	LDA #$01
-	STA $ED
-	STA $F1
+	STA камера_X_hi
+	STA копия_камеры_X_hi
 	LDA #$00
 	STA $A000
 	JSR _b07_ECA9
@@ -1363,14 +1363,14 @@ _loc_07_CAEA:
 	STA $0630
 	RTS
 _loc_07_CAEE:
-	LDA $F0
-	STA байт_для_2005_X
-	LDA $F1
-	STA $ED
-	LDA $F2
-	STA байт_для_2005_Y
-	LDA $F3
-	STA $EF
+	LDA копия_камеры_X_lo
+	STA камера_X_lo
+	LDA копия_камеры_X_hi
+	STA камера_X_hi
+	LDA копия_камеры_Y_lo
+	STA камера_Y_lo
+	LDA копия_камеры_Y_hi
+	STA камера_Y_hi
 	RTS
 _loc_07_CB07:
 	LDA счет_команды
@@ -1553,22 +1553,22 @@ bra_07_CC4A:
 	LDY $44
 	LDA координата_X_lo,Y
 	STA координата_X_lo_циферки - 14,X
-	SBC $F0
+	SBC копия_камеры_X_lo
 	STA $1C
 	LDA координата_X_hi,Y
 	STA координата_X_hi_циферки - 14,X
-	SBC $F1
+	SBC копия_камеры_X_hi
 	BNE _CC9C_вывести_циферку_на_миникарту
 	LDA $1C
 	CMP #$08
 	BCC _CC9C_вывести_циферку_на_миникарту
 	LDA координата_Y_lo,Y
 	STA координата_Y_lo_циферки - 14,X
-	SBC $F2
+	SBC копия_камеры_Y_lo
 	STA $1C
 	LDA координата_Y_hi,Y
 	STA координата_Y_hi_циферки - 14,X
-	SBC $F3
+	SBC копия_камеры_Y_hi
 	BNE _CC9C_вывести_циферку_на_миникарту
 	LDA $1C
 	CMP #$18
@@ -1609,10 +1609,10 @@ _CC9C_вывести_циферку_на_миникарту:
 	CPY #$04
 	BCC @цикл
 	CLC
-	LDA $F0
+	LDA копия_камеры_X_lo
 	ADC #$60
 	STA координата_X_lo_циферки - 14,X
-	LDA $F1
+	LDA копия_камеры_X_hi
 	ADC #$00
 	STA координата_X_hi_циферки - 14,X
 	CLC
@@ -1623,10 +1623,10 @@ _CC9C_вывести_циферку_на_миникарту:
 	ADC $2D
 	STA координата_X_hi_циферки - 14,X
 	CLC
-	LDA $F2
+	LDA копия_камеры_Y_lo
 	ADC #$CD
 	STA координата_Y_lo_циферки - 14,X
-	LDA $F3
+	LDA копия_камеры_Y_hi
 	ADC #$00
 	STA координата_Y_hi_циферки - 14,X
 	CLC
@@ -3703,7 +3703,7 @@ bra_07_DCCF:
 	LDA table_07_DDDB,Y
 	STA $0100,Y
 	LDA table_07_DDE7,Y
-	SBC байт_для_2005_Y
+	SBC камера_Y_lo
 	STA $010C,Y
 	STA $0118,Y
 	LDA table_07_DDF3,Y
@@ -3720,7 +3720,7 @@ bra_07_DCF2:
 	SBC #$07
 	STA $0100,Y
 	LDA table_07_DDE7,Y
-	SBC байт_для_2005_Y
+	SBC камера_Y_lo
 	STA $010C,Y
 	STA $0118,Y
 	LDA table_07_DDF3,Y
@@ -3851,7 +3851,7 @@ table_07_DDFF:
 _loc_07_DE0B:
 	LDA банк_для_поля
 	STA банк_фона
-	LDA $ED
+	LDA камера_X_hi
 	CMP #$02
 	BCS bra_07_DE2F
 	LDA банк_для_поля
@@ -3886,11 +3886,11 @@ _loc_07_DE47:
 	JSR _банксвич_PRG
 	LDA подтип_экрана
 	CMP #$02
-	BEQ bra_07_DE5E
+	BEQ @игра_на_поле_включая_нарушения
 	CMP #$06
-	BEQ bra_07_DE5E
+	BEQ @игра_на_поле_включая_нарушения
 	JMP _loc_07_DED3
-bra_07_DE5E:
+@игра_на_поле_включая_нарушения:
 	LDA сторона_ветра_дождя
 	LSR
 	LSR
@@ -3945,29 +3945,29 @@ bra_07_DEB3:
 	ADC #$80
 	STA тайл_статусбара
 _loc_07_DED3:
-	LDA байт_для_2005_X
+	LDA камера_X_lo
 	SEC
-	SBC $F0
-	LDA $ED
-	SBC $F1
+	SBC копия_камеры_X_lo
+	LDA камера_X_hi
+	SBC копия_камеры_X_hi
 	STA $1D
 	BMI bra_07_DEF8
-	LDA байт_для_2005_X
+	LDA камера_X_lo
 	AND #$F8
 	STA $27
-	LDA $F0
+	LDA копия_камеры_X_lo
 	ORA #$07
 	SEC
 	SBC $27
 	BMI bra_07_DF12
 	JMP _loc_07_E14E
 bra_07_DEF8:
-	LDA $F0
+	LDA копия_камеры_X_lo
 	SEC
 	SBC #$01
 	AND #$F8
 	STA $27
-	LDA байт_для_2005_X
+	LDA камера_X_lo
 	SEC
 	SBC #$01
 	ORA #$07
@@ -3976,20 +3976,20 @@ bra_07_DEF8:
 	BMI bra_07_DF24
 	JMP _loc_07_E14E
 bra_07_DF12:
-	LDA $F0
+	LDA копия_камеры_X_lo
 	CLC
 	ADC #$08
 	STA $1E
-	LDA $F1
+	LDA копия_камеры_X_hi
 	ADC #$00
 	STA $1F
 	JMP _loc_07_DF33
 bra_07_DF24:
-	LDA $F0
+	LDA копия_камеры_X_lo
 	CLC
 	ADC #$FF
 	STA $1E
-	LDA $F1
+	LDA копия_камеры_X_hi
 	ADC #$00
 	STA $1F
 _loc_07_DF33:
@@ -3997,11 +3997,11 @@ _loc_07_DF33:
 	LSR
 	LSR
 	LSR
-	STA $058E
+	STA байт_2006_lo_NMT_2
 	STA $1E
 	CLC
 	ADC #$80
-	STA $058D
+	STA байт_2006_lo_NMT_1
 	LDY $1F
 	JSR _loc_07_E15B
 	LDA $1F
@@ -4028,7 +4028,7 @@ bra_07_DF5A:
 	STA $2F
 	LDY $1E
 	LDA ($2E),Y
-	STA $0142,X
+	STA тайлы_поля_NMT_1,X
 	INX
 	CPX #$1A
 	BNE bra_07_DF5A
@@ -4060,23 +4060,23 @@ bra_07_DF93:
 	STA $2F
 	LDY $1E
 	LDA ($2E),Y
-	STA $015C,X
+	STA тайлы_поля_NMT_2,X
 	INX
 	CPX #$10
 	BNE bra_07_DF93
 	LDA флаг_обновления_тайлов_экрана
-	ORA #$80
+	ORA #$80		; флаг необходимости дорисовать поле при скроллинге
 	STA флаг_обновления_тайлов_экрана
-	LDA $058D
+	LDA байт_2006_lo_NMT_1
 	AND #$01
 	BNE bra_07_DFBD
 	JMP _loc_07_E14E
 bra_07_DFBD:
 	LDA $1D
 	BMI bra_07_DFE9
-	LDA $F0
+	LDA копия_камеры_X_lo
 	STA $1E
-	LDA $F1
+	LDA копия_камеры_X_hi
 	STA $1F
 	STA $21
 	LDA $1E
@@ -4088,7 +4088,7 @@ bra_07_DFBD:
 	STA $1E
 	STA $20
 	STA $22
-	LDA $058D
+	LDA байт_2006_lo_NMT_1
 	AND #$02
 	BNE bra_07_DFE4
 	JMP _loc_07_E01A
@@ -4096,11 +4096,11 @@ bra_07_DFE4:
 	INC $1F
 	JMP _loc_07_E01A
 bra_07_DFE9:
-	LDA $F0
+	LDA копия_камеры_X_lo
 	SEC
 	SBC #$01
 	STA $27
-	LDA $F1
+	LDA копия_камеры_X_hi
 	SBC #$00
 	STA $1F
 	STA $21
@@ -4113,7 +4113,7 @@ bra_07_DFE9:
 	STA $1E
 	STA $20
 	STA $22
-	LDA $058D
+	LDA байт_2006_lo_NMT_1
 	AND #$02
 	BNE bra_07_E013
 	INC $21
@@ -4123,7 +4123,7 @@ bra_07_E013:
 	INC $21
 	JMP _loc_07_E01A
 _loc_07_E01A:
-	LDA $058D
+	LDA байт_2006_lo_NMT_1
 	AND #$02
 	BNE bra_07_E02C
 	LDA #$CC
@@ -4448,13 +4448,13 @@ _loc_07_E3D9:
 	STA $2C
 	LDA $8015,Y
 	STA $2D
-	LDA байт_для_2005_X
+	LDA камера_X_lo
 	LSR
 	LSR
 	LSR
 	STA $1C
 	STA $1F
-	LDA $ED
+	LDA камера_X_hi
 	JSR _loc_07_E481
 	LDA #$1E
 	STA $1D
@@ -4462,7 +4462,7 @@ _loc_07_E3D9:
 	STA $20
 	LDY #$00
 	JSR _loc_07_E4AF
-	LDA $ED
+	LDA камера_X_hi
 	CLC
 	ADC #$04
 	JSR _loc_07_E481
@@ -4482,7 +4482,7 @@ _loc_07_E3D9:
 	STA $2C
 	LDA $801D,Y
 	STA $2D
-	LDA байт_для_2005_X
+	LDA камера_X_lo
 	LSR
 	LSR
 	LSR
@@ -4492,14 +4492,14 @@ _loc_07_E3D9:
 	ADC #$C0
 	STA $1C
 	STA $1F
-	LDA $ED
+	LDA камера_X_hi
 	JSR _loc_07_E481
 	LDA #$08
 	STA $1D
 	LDA #$23
 	STA $20
 	JSR _loc_07_E538
-	LDA $ED
+	LDA камера_X_hi
 	CLC
 	ADC #$04
 	JSR _loc_07_E481
@@ -6014,7 +6014,7 @@ bra_07_F0B3:
 _loc_07_F0B4_рисовка_поля_при_скроллинге:
 	LDA флаг_обновления_тайлов_экрана
 	AND #$80
-	BNE bra_07_F0CE
+	BNE @скролл_поля_требует_отрисовки
 	LDA флаг_гола
 	CMP #$FF
 	BEQ @гола_не_было
@@ -6028,20 +6028,20 @@ _loc_07_F0B4_рисовка_поля_при_скроллинге:
 	JMP _loc_07_E170
 @RTS:
 	RTS
-bra_07_F0CE:
+@скролл_поля_требует_отрисовки:
 	LDA байт_для_2000
-	ORA #$04
+	ORA #$04		; увеличивать 2006 на 32 после запис
 	STA байт_для_2000
 	STA $2000
 	LDA $2002
 	LDA #$20
 	STA $2006
-	LDA $058D
+	LDA байт_2006_lo_NMT_1
 	STA $2006
 	LDY #$1A
 	LDX #$00
 @цикл1:
-	LDA $0142,X
+	LDA тайлы_поля_NMT_1,X
 	STA $2007
 	INX
 	DEY
@@ -6049,18 +6049,18 @@ bra_07_F0CE:
 	LDA $2002
 	LDA #$28
 	STA $2006
-	LDA $058E
+	LDA байт_2006_lo_NMT_2
 	STA $2006
 	LDX #$00
 	LDY #$10
 @цикл2:
-	LDA $015C,X
+	LDA тайлы_поля_NMT_2,X
 	STA $2007
 	INX
 	DEY
 	BNE @цикл2
 	LDA флаг_обновления_тайлов_экрана
-	AND #$7F
+	AND #$7F		; очистить бит требования отрисовки поля при скролле
 	STA флаг_обновления_тайлов_экрана
 	LDA флаг_обновления_тайлов_экрана
 	AND #$40
@@ -7448,14 +7448,14 @@ _вид_NMI_80:
 	LDA банк_фона + 1
 	STA $8001
 	LDA $2002
-	LDA байт_для_2005_X
+	LDA камера_X_lo
 	STA $2005
-	LDA байт_для_2005_Y
+	LDA камера_Y_lo
 	STA $2005
-	LDA $ED
+	LDA камера_X_hi
 	AND #$01
 	STA $0C
-	LDA $EF
+	LDA камера_Y_hi
 	AND #$01
 	ASL
 	ORA $0C
@@ -7497,14 +7497,14 @@ _вид_NMI_C0:
 	LDA банк_спрайтов + 3
 	STA $8001
 	LDA $2002
-	LDA байт_для_2005_X
+	LDA камера_X_lo
 	STA $2005
-	LDA байт_для_2005_Y
+	LDA камера_Y_lo
 	STA $2005
-	LDA $ED
+	LDA камера_X_hi
 	AND #$01
 	STA $0C
-	LDA $EF
+	LDA камера_Y_hi
 	AND #$01
 	ASL
 	ORA $0C
