@@ -4,7 +4,7 @@
 
 .import _b07_C2E4_записать_и_воспроизвести_звук
 .import _b07_вращение_рандома
-.import _b07_C344
+.import _b07_C344_банксвич_80xx
 .import _b07_EC8F
 
 ; !!! разрешено двигать код можно только начиная с _loc_00_BB13
@@ -234,6 +234,7 @@ bra_00_816D:
 	LDA #$60
 	STA $07E4
 	RTS
+
 _loc_00_8183:
 	BIT $07E5
 	BPL bra_00_81EF
@@ -2925,11 +2926,11 @@ bra_00_BFF2:
 
 _loc_00_BFF3:
 	LDA #$19
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 
 _loc_00_BFF8:
 	LDA #$1A
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 
 .segment "BANK_00_ID"
 .byte $00

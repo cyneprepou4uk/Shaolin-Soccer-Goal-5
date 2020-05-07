@@ -10,7 +10,7 @@
 .import _b07_ECA9
 .import _b07_выключить_NMI
 .import _b07_выключить_рендеринг
-.import _b07_C344
+.import _b07_C344_банксвич_80xx
 .import _b07_E828
 .import _b07_яркость_палитры_и_запись_в_буфер
 .import _общий_RTS
@@ -3312,6 +3312,7 @@ _loc_01_BBF8:
 	SBC #$08
 	STA $013E
 	RTS
+
 _loc_01_BC12:
 	LDX #$00
 bra_01_BC14:
@@ -3723,13 +3724,13 @@ table_01_BFAE:
 
 _loc_01_BFB2:
 	LDA #$1A
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_01_BFB7:
 	LDA #$2A
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_01_BFBC:
 	LDA #$06
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 
 .segment "BANK_01_ID"
 .byte $01

@@ -5,7 +5,7 @@
 .import _b07_C2E4_записать_и_воспроизвести_звук
 .import _b07_F691
 .import _b07_FA6D
-.import _b07_C344
+.import _b07_C344_банксвич_80xx
 .import _b07_CEBD
 .import _b07_FAEE
 
@@ -49,10 +49,10 @@ _loc_04_8024:
 
 _loc_04_8027:
 	LDA #$06
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_04_802C_вычисление_скорости_удара:
 	LDA #$25
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_04_8031:
 	LDA режим_игры_на_поле
 	BPL bra_04_8036

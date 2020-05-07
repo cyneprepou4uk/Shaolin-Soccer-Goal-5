@@ -13,7 +13,7 @@
 .import _b07_выключить_рендеринг
 .import _b07_поставить_флаг_уменьшения_яркости
 .import _b07_D062
-.import _b07_C344
+.import _b07_C344_банксвич_80xx
 .import _b07_EC8F
 .import _b07_CEBD
 .import _b07_поставить_флаг_увеличения_яркости
@@ -45,36 +45,36 @@ _loc_05_800C:
 
 _loc_05_800F:
 	LDA #$1F
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_05_8014:
 	LDA #$14
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 	LDA #$17
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_05_801E:
 	LDA #$06
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 	LDA #$07
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 	LDA #$08
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 	LDA #$09
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 	LDA #$0A
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 	LDA #$0B
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 	LDA #$1C
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_05_8041:
 	LDA #$1D
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 	LDA #$26
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 	LDA #$27
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 	LDA #$28
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_05_8055:
 	LDA подтип_экрана
 	JSR _b07_EC8F
@@ -7392,6 +7392,7 @@ bra_05_BD99:
 	CPX #$0C
 	BCC bra_05_BD99
 	RTS
+
 _loc_05_BDB0:
 	LDA #$01
 	STA номер_палитры_спрайтов

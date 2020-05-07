@@ -8,7 +8,7 @@
 .import _b07_поставить_флаг_уменьшения_яркости
 .import _b07_D036
 .import _b07_D062
-.import _b07_C344
+.import _b07_C344_банксвич_80xx
 .import _b07_EC8F
 .import _b07_CEBD
 .import _b07_поставить_флаг_увеличения_яркости
@@ -45,58 +45,58 @@ _loc_02_800F:
 
 _loc_02_AA11:
 	LDA #$1F
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA16:
 	LDA #$0F
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA1B:
 	LDA #$14
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA20:
 	LDA #$17
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA25:
 	LDA #$2B
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA2A:
 	LDA #$2C
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA2F:
 	LDA #$1C
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA34:
 	LDA #$06
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA39:
 	LDA #$07
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA3E:
 	LDA #$08
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA43:
 	LDA #$09
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA48:
 	LDA #$0A
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA4D:
 	LDA #$0B
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA52:
 	LDA #$26
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA57:
 	LDA #$27
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA5C:
 	LDA #$28
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA61:
 	LDA #$30
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA66:
 	LDA #$31
-	JMP _b07_C344
+	JMP _b07_C344_банксвич_80xx
 _loc_02_AA6B:
 	LDA подтип_экрана
 	JSR _b07_EC8F
