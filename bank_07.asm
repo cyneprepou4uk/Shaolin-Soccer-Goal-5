@@ -449,23 +449,31 @@ _обработчик_RESET:
 	STA байт_для_2001
 	LDX #$FF
 	TXS
-@ожидание_vblank_1:
-	BIT $2002
-	BPL @ожидание_vblank_1
-@ожидание_vblank_2:
-	BIT $2002
-	BPL @ожидание_vblank_2
+	LDA #$07
+	STA $0D
+	TAX
 	LDA #$00
-	STA камера_X_lo
-	STA камера_X_hi
-	STA камера_Y_lo
-	STA камера_Y_hi
+	STA $0C
+	TAY
+@цикл_очистки:
+	STA ($0C),Y
+	INY
+	BNE @цикл_очистки
+	DEC $0D
+	DEX
+	BNE @цикл_очистки
 	STA $4016
 	STA $A000
 	LDA #$40
 	STA $4017
 	LDA #$0F
 	STA $4015
+@ожидание_vblank_1:
+	BIT $2002
+	BPL @ожидание_vblank_1
+@ожидание_vblank_2:
+	BIT $2002
+	BPL @ожидание_vblank_2
 	LDA #$06
 	JSR _главный_банксвич_PRG
 	JSR _очистка_ppu_и_спрайтов
@@ -478,14 +486,6 @@ _обработчик_RESET:
 	JSR _b07_EF54
 	LDX #$57
 	JSR _b07_обнуление_ZP_с_X_до_F8
-	LDA $0588
-	PHA
-	LDA #$00
-	LDX #$02
-	LDY #$07
-	JSR _loc_07_ED39
-	PLA
-	STA $0588
 	JSR _очистка_ppu_и_спрайтов
 	LDA #МУЗЫКА_ВЫКЛЮЧИТЬ
 	JSR _b07_C2E4_записать_и_воспроизвести_звук
@@ -5485,31 +5485,6 @@ _очистка_nametable_и_палитры:
 	BNE @цикл_очистки_палитры
 	RTS
 
-_loc_07_ED39:
-	PHA
-	TXA
-	STY $0D
-	CLC
-	SBC $0D
-	TAX
-	PLA
-	LDY #$00
-	STY $0C
-bra_07_ED46:
-	STA ($0C),Y
-	DEY
-	BNE bra_07_ED46
-	DEC $0D
-	INX
-	BNE bra_07_ED46
-	LDA #$00
-	LDX #$7F
-bra_07_ED54:
-	STA $0100,X
-	DEX
-	BPL bra_07_ED54
-	RTS
-
 
 
 _loc_07_EDCD_чтение_регистров_джойстиков:
@@ -5747,8 +5722,7 @@ _очистка_ppu_и_спрайтов:		; 2 прыжка
 	JSR _очистка_nametable_и_палитры
 	JSR _скрытие_всех_спрайтов
 	JSR _b07_ECA9
-	JSR _запись_2003_4014
-	RTS
+	JMP _запись_2003_4014
 
 .export _b07_EFAD
 _b07_EFAD:
