@@ -3033,47 +3033,46 @@ table_01_B9A8_B9BA:
 .byte $12,$22,$22,$22,$22,$22
 
 _loc_01_B9C0:
+; можно добавить проверку на 04 и выше, а лишние байты таблиц удалить, они все на RTS
 	LDA номер_погодного_эффекта
-	BEQ bra_01_B9E7
-	BMI bra_01_B9D6
+	BEQ @RTS		; погода 00 пропускается, таблицы смещены на 2
+	BMI @минус
 	ASL
 	TAY
-	LDA table_01_B9E8,Y
+	LDA table_01_B9E8 - 2,Y
 	STA $2C
-	LDA table_01_B9E8 + 1,Y
+	LDA table_01_B9E8 - 1,Y
 	STA $2D
 	JMP ($002C)
-bra_01_B9D6:
+@минус:
 	AND #$7F
 	ASL
 	TAY
-	LDA table_01_B9F6,Y
+	LDA table_01_B9F6 - 2,Y
 	STA $2C
-	LDA table_01_B9F6 + 1,Y
+	LDA table_01_B9F6 - 1,Y
 	STA $2D
 	JMP ($002C)
-bra_01_B9E7:
+@RTS:
 	RTS
 
 table_01_B9E8:
-.word _общий_RTS		; никогда не используется, так как 00 погода пропускается, надо удалить
-.word table_01_B9E8_BA8B
-.word table_01_B9E8_BB3D
-.word table_01_B9E8_BB3E
-.word _общий_RTS
-.word _общий_RTS
-.word _общий_RTS
+.word _loc_01_BA8B_молния		; $01
+.word _общий_RTS				; $02
+.word _loc_01_BB3E_смерч		; $03
+.word _общий_RTS				; $04
+.word _общий_RTS				; $05
+.word _общий_RTS				; $06
 
 table_01_B9F6:
-.word _общий_RTS				; никогда не используется, так как 00 погода пропускается, надо удалить
-.word table_01_B9F6_BA05
-.word _общий_RTS
-.word table_01_B9F6_BA2E
-.word _общий_RTS
-.word _общий_RTS
-.word _общий_RTS
+.word table_01_B9F6_молния		; $01
+.word _общий_RTS				; $02
+.word table_01_B9F6_смерч		; $03
+.word _общий_RTS				; $04
+.word _общий_RTS				; $05
+.word _общий_RTS				; $06
 
-table_01_B9F6_BA05:
+table_01_B9F6_молния:
 	LDA #$00
 	STA сила_ветра
 	STA длительность_погоды_ХЗ
@@ -3082,7 +3081,7 @@ table_01_B9F6_BA05:
 	LDA адрес_рандома
 	AND #$07
 	STA $05E4
-	JMP _loc_01_BA8B
+	JMP _loc_01_BA8B_молния
 
 table_01_BA1D:
 .byte $70,$70,$30,$B0,$30,$B0,$30,$B0
@@ -3090,7 +3089,7 @@ table_01_BA1D:
 table_01_BA25:
 .byte $68,$68,$98,$98,$38,$38,$98,$98
 
-table_01_B9F6_BA2E:
+table_01_B9F6_смерч:
 	LDA #ЗВУК_ВЕТЕР
 	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	LDA #$00
@@ -3130,10 +3129,9 @@ bra_01_BA82:
 	LDA #$FE
 _loc_01_BA84:
 	STA скорость_Y_hi_погоды_ХЗ
-	JMP _loc_01_BB3E
+	JMP _loc_01_BB3E_смерч
 
-_loc_01_BA8B:
-table_01_B9E8_BA8B:
+_loc_01_BA8B_молния:		; 2 прыжка, один из них из таблицы
 	LDA $05E4
 	TAY
 	LDA table_01_BA1D,Y
@@ -3212,11 +3210,7 @@ table_01_BB2D:
 table_01_BB35:
 .byte $05,$05,$06,$05,$06,$05,$06,$00
 
-table_01_B9E8_BB3D:
-	RTS
-
-_loc_01_BB3E:
-table_01_B9E8_BB3E:
+_loc_01_BB3E_смерч:		; 2 прыжка, один из них из таблицы
 	LDX #$0D
 	JSR _loc_01_BFBC
 	LDA $036D

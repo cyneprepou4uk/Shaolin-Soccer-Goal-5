@@ -3913,7 +3913,6 @@ table_06_9E9D:
 .byte $02,$00,$08,	ЗВУК_УБИЙСТВО
 .byte $02,$01,$12,	ЗВУК_ПРОШИБАНИЕ
 
-
 _loc_06_9EA5:
 	STA $21
 	SEC
@@ -3934,23 +3933,23 @@ _loc_06_9EB5_добавить_A_к_силе:
 
 _loc_06_9EBF:
 	BIT режим_игры_на_поле
-	BVS bra_06_9EE2
+	BVS @RTS		; это не должен быть аут/пенальти после матча
 	CPX #$0A
-	BCS bra_06_9EE2
+	BCS @RTS		; это не должен быть кипер
 	LDA позиция_управление,X
-	BMI bra_06_9EE2
+	BMI @RTS		; это не должен быть бот
 	LDA скорость_Z_hi,X
-	BPL bra_06_9EE2
+	BPL @RTS		; игрок не должен падать
 	LDA координата_Z_hi,X
-	BMI bra_06_9EE2
+	BMI @RTS		; игрок не должен летать в ебенях
 	LDA состояние_игрока,X
 	AND #$40
-	BNE bra_06_9EE2
+	BNE @RTS
 	JSR _loc_06_B19A
-	BCS bra_06_9EE5
-bra_06_9EE2:
+	BCS @продолжить
+@RTS:
 	RTS
-bra_06_9EE5:
+@продолжить:
 	CPY #$0A
 	BCS bra_06_9EF2
 	STX $1C
@@ -3962,7 +3961,7 @@ bra_06_9EF2:
 	JMP _loc_06_9F3C
 bra_06_9EF5:
 	LDA позиция_управление,Y
-	BPL bra_06_9F6F
+	BPL bra_06_9F6F		; это должен быть бот
 	LDA состояние_игрока,Y
 	BMI bra_06_9F6F
 	AND #$01
@@ -6273,6 +6272,7 @@ bra_06_B196:
 bra_06_B197:
 	LDX $43
 	RTS
+
 _loc_06_B19A:
 	STX $43
 	TXA
@@ -6306,6 +6306,7 @@ bra_06_B1CF:
 bra_06_B1D0:
 	LDX $43
 	RTS
+
 _loc_06_B1D3:
 	STX $43
 	LDY #$00
