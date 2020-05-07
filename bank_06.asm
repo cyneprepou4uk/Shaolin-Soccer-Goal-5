@@ -4830,7 +4830,7 @@ bra_06_A542:
 	LDA $2D
 	STA $2F
 
-.scope
+.SCOPE
 младший_байт = $2C
 старший_байт = $2D
 	TYA		; 60fps вычисление для паса
@@ -4851,7 +4851,7 @@ bra_06_A542:
 	STA старший_байт
 	PLA
 	TAY
-.endscope
+.ENDSCOPE
 
 	CLC
 	LDA $2C
@@ -7693,7 +7693,7 @@ bra_06_BCEB:
 	LDA флаг_видимости_мяча
 	BEQ bra_06_BCF5
 	LDA $1D
-	STA $05F5
+	STA флаг_гола
 bra_06_BCF5:
 	RTS
 
@@ -7743,7 +7743,7 @@ bra_06_BD37:
 	LDA table_06_BD53,Y
 	STA номер_погодного_эффекта
 	LDA $1D
-	STA $05F5
+	STA флаг_гола
 	LDA #$01
 	STA флаг_прозрачного_мяча
 bra_06_BD52:

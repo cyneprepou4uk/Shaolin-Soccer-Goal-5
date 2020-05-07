@@ -2906,7 +2906,7 @@ _loc_01_B8A1:
 	LDA #$18
 	STA $05EA
 	LDA #$FF
-	STA $05F5
+	STA флаг_гола
 	LDA $0630
 	AND #$03
 	CLC
