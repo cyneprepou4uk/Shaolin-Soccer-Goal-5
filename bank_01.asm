@@ -2189,7 +2189,7 @@ table_01_8014_8024_8174_B099:
 _loc_01_B0B9:
 	LDA режим_игры_на_поле
 	BMI bra_01_B0C9
-	LDA $05E8
+	LDA байт_2006_hi_след
 	BEQ bra_01_B0C9
 	CMP #$01
 	BEQ bra_01_B0CA
@@ -2202,7 +2202,7 @@ bra_01_B0CA:
 	STA байт_для_2000
 	STA $2000
 bra_01_B0D3:
-	LDA $05ED
+	LDA байт_2006_lo_след + 1
 	AND #$01
 	ASL
 	TAY
@@ -2210,7 +2210,7 @@ bra_01_B0D3:
 	STA $40
 	LDA table_01_B180 + 1,Y
 	STA $41
-	LDA $05E9
+	LDA байт_2006_hi_след + 1
 	ASL
 	TAY
 	LDA ($40),Y
@@ -2219,10 +2219,10 @@ bra_01_B0D3:
 	LDA ($40),Y
 	STA $0D
 	LDX #$11
-	LDA $05EB
+	LDA байт_2006_hi_след + 3
 	CMP #$24
 	BNE bra_01_B108
-	LDA $05EA
+	LDA байт_2006_hi_след + 2
 	CMP #$04
 	BCC bra_01_B108
 	CMP #$1C
@@ -2230,9 +2230,9 @@ bra_01_B0D3:
 	LDX #$03
 bra_01_B108:
 	LDA $2002
-	LDA $05EB
+	LDA байт_2006_hi_след + 3
 	STA $2006
-	LDA $05EA
+	LDA байт_2006_hi_след + 2
 	STA $2006
 	LDY #$00
 bra_01_B119:
@@ -2241,17 +2241,17 @@ bra_01_B119:
 	INY
 	DEX
 	BPL bra_01_B119
-	INC $05E9
-	INC $05EA
-	LDA $05EA
+	INC байт_2006_hi_след + 1
+	INC байт_2006_hi_след + 2
+	LDA байт_2006_hi_след + 2
 	AND #$01
 	BNE bra_01_B0D3
-	LDA $05EA
+	LDA байт_2006_hi_след + 2
 	CMP #$20
 	BCC bra_01_B14C
 	LDA #$00
-	STA $05EA
-	LDA $05EB
+	STA байт_2006_hi_след + 2
+	LDA байт_2006_hi_след + 3
 	CMP #$20
 	BEQ bra_01_B147
 	LDA #$20
@@ -2259,32 +2259,32 @@ bra_01_B119:
 bra_01_B147:
 	LDA #$24
 _loc_01_B149:
-	STA $05EB
+	STA байт_2006_hi_след + 3
 bra_01_B14C:
-	LDA $05E9
+	LDA байт_2006_hi_след + 1
 	CMP #$12
 	BCC bra_01_B17F
 	LDA #$00
-	STA $05E9
-	INC $05ED
-	LDA $05EA
+	STA байт_2006_hi_след + 1
+	INC байт_2006_lo_след + 1
+	LDA байт_2006_hi_след + 2
 	SEC
 	SBC #$14
 	BCS bra_01_B174
 	AND #$1F
-	STA $05EA
-	LDA $05EB
+	STA байт_2006_hi_след + 2
+	LDA байт_2006_hi_след + 3
 	CMP #$20
 	BEQ bra_01_B17A
 	LDA #$20
 	JMP _loc_01_B17C
 bra_01_B174:
-	STA $05EA
+	STA байт_2006_hi_след + 2
 	RTS
 bra_01_B17A:
 	LDA #$24
 _loc_01_B17C:
-	STA $05EB
+	STA байт_2006_hi_след + 3
 bra_01_B17F:
 	RTS
 
@@ -2439,7 +2439,7 @@ _loc_01_B430:
 	AND #$FB
 	STA байт_для_2000
 	STA $2000
-	LDA $05E9
+	LDA байт_2006_hi_след + 1
 	AND #$7F
 	ASL
 	TAY
@@ -2450,12 +2450,12 @@ _loc_01_B430:
 	LDY #$00
 bra_01_B44C:
 	LDX #$00
-	LDA $05E9
+	LDA байт_2006_hi_след + 1
 	BPL bra_01_B455
 	LDX #$08
 bra_01_B455:
 	LDA table_01_B4EC,Y
-	STA $05EB
+	STA байт_2006_hi_след + 3
 	LDA ($0C),Y
 	LSR
 	LSR
@@ -2471,25 +2471,25 @@ bra_01_B455:
 	INX
 bra_01_B46C:
 	LDA ($0C),Y
-	STA $05EA
+	STA байт_2006_hi_след + 2
 	INY
 	LDA $2002
-	LDA $05EB
+	LDA байт_2006_hi_след + 3
 	STA $2006
-	LDA $05EA
+	LDA байт_2006_hi_след + 2
 	STA $2006
 	LDA $0620,X
 	STA $2007
 	LDA $0621,X
 	STA $2007
-	LDA $05EA
+	LDA байт_2006_hi_след + 2
 	CLC
 	ADC #$20
-	STA $05EA
+	STA байт_2006_hi_след + 2
 	LDA $2002
-	LDA $05EB
+	LDA байт_2006_hi_след + 3
 	STA $2006
-	LDA $05EA
+	LDA байт_2006_hi_след + 2
 	STA $2006
 	LDA $0622,X
 	STA $2007
@@ -2497,18 +2497,18 @@ bra_01_B46C:
 	STA $2007
 	CPY #$08
 	BCC bra_01_B44C
-	INC $05E9
-	LDA $05E9
+	INC байт_2006_hi_след + 1
+	LDA байт_2006_hi_след + 1
 	AND #$7F
 	CMP #$0D
 	BCC bra_01_B4C9
-	LDA $05E9
+	LDA байт_2006_hi_след + 1
 	AND #$80
-	STA $05E9
+	STA байт_2006_hi_след + 1
 bra_01_B4C9:
-	LDA $05E9
+	LDA байт_2006_hi_след + 1
 	EOR #$80
-	STA $05E9
+	STA байт_2006_hi_след + 1
 	RTS
 
 table_01_B4D2:		; 13
@@ -2897,14 +2897,14 @@ table_01_B899:
 
 _loc_01_B8A1:
 	LDA #$00
-	STA $05E8
-	STA $05EC
-	STA $05E9
-	STA $05ED
+	STA байт_2006_hi_след
+	STA байт_2006_lo_след
+	STA байт_2006_hi_след + 1
+	STA байт_2006_lo_след + 1
 	LDA #$24
-	STA $05EB
+	STA байт_2006_hi_след + 3
 	LDA #$18
-	STA $05EA
+	STA байт_2006_hi_след + 2
 	LDA #$FF
 	STA флаг_гола
 	LDA $0630
@@ -2926,11 +2926,11 @@ _loc_01_B8A1:
 	JMP _loc_01_B905
 bra_01_B8E8:
 	LDA #$01
-	STA $05EC
+	STA байт_2006_lo_след
 	JMP _loc_01_B917
 bra_01_B8F0:
 	LDA #$02
-	STA $05EC
+	STA байт_2006_lo_след
 	LDX #$00
 bra_01_B8F7:
 	LDA table_01_B935,X
@@ -2941,7 +2941,7 @@ bra_01_B8F7:
 	JMP _loc_01_B917
 _loc_01_B905:
 	LDA #$03
-	STA $05EC
+	STA байт_2006_lo_след
 	LDX #$00
 bra_01_B90C:
 	LDA table_01_B945,X

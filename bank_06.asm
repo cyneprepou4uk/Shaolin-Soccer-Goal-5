@@ -7926,7 +7926,7 @@ bra_06_BE9A:
 	BPL bra_06_BEA7
 	JSR _b07_поставить_флаг_уменьшения_яркости
 	LDA #$00
-	STA $05E8
+	STA байт_2006_hi_след
 bra_06_BEA7:
 	DEX
 	BPL bra_06_BE44
