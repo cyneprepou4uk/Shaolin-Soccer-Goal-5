@@ -2569,22 +2569,22 @@ _подправить_скорости_2E_2F:		; 60fps !!! корректиро�
 
 ; 60fps скорости X Y	+++
 table_06_9435:
-.byte $00,$00,$A0,$FF
-.byte $49,$00,$A8,$FF
-.byte $87,$00,$BD,$FF
-.byte $B1,$00,$DC,$FF
-.byte $C0,$00,$00,$00
-.byte $B1,$00,$24,$00
-.byte $87,$00,$43,$00
-.byte $49,$00,$58,$00
-.byte $00,$00,$60,$00
-.byte $B7,$FF,$58,$00
-.byte $79,$FF,$43,$00
-.byte $4F,$FF,$24,$00
-.byte $40,$FF,$00,$00
-.byte $4F,$FF,$DC,$FF
-.byte $79,$FF,$BD,$FF
-.byte $B7,$FF,$A8,$FF
+.word $0000,	$FFA0
+.word $0049,	$FFA8
+.word $0087,	$FFBD
+.word $00B1,	$FFDC
+.word $00C0,	$0000
+.word $00B1,	$0024
+.word $0087,	$0043
+.word $0049,	$0058
+.word $0000,	$0060
+.word $FFB7,	$0058
+.word $FF79,	$0043
+.word $FF4F,	$0024
+.word $FF40,	$0000
+.word $FF4F,	$FFDC
+.word $FF79,	$FFBD
+.word $FFB7,	$FFA8
 
 _loc_06_9475:
 	LDA разновидность_супера
@@ -3111,17 +3111,17 @@ bra_06_982E:
 
 ; 60фпс возможно
 table_06_982F:
-.byte $0A,$00
-.byte $F6,$FF
-.byte $08,$00
-.byte $F8,$FF
+.word $000A
+.word $FFF6
+.word $0008
+.word $FFF8
 
 ; 60fps походу скорость X обычного удара	+++
 table_06_9837_скорость_X:
-.byte $80,$00
-.byte $80,$FF
-.byte $30,$00
-.byte $D0,$FF
+.word $0080
+.word $FF80
+.word $0030
+.word $FFD0
 
 _loc_06_983F:
 	LDA координата_Z_hi,X
@@ -7617,25 +7617,25 @@ bra_06_BC3B:
 
 ; 60fps скорость Z	+++
 table_06_BC3C_скорость_Z:
-.byte $00,$F8
-.byte $00,$F6
-.byte $00,$FC
-.byte $00,$00
-.byte $00,$01
-.byte $00,$02
-.byte $00,$08
-.byte $00,$08
+.word $F800
+.word $F600
+.word $FC00
+.word $0000
+.word $0100
+.word $0200
+.word $0800
+.word $0800
 
 ; 60fps скорость Y	+++
 table_06_BC4C_скорость_Y:
-.byte $00,$F8
-.byte $00,$F8
-.byte $00,$FC
-.byte $00,$00
-.byte $00,$00
-.byte $00,$04
-.byte $00,$08
-.byte $00,$08
+.word $F800
+.word $F800
+.word $FC00
+.word $0000
+.word $0000
+.word $0400
+.word $0800
+.word $0800
 
 table_06_BC5C:
 .byte $00,$81,$80,$80,$80,$80,$81,$00
