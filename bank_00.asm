@@ -2173,7 +2173,7 @@ table_00_B05F_B10F:
 	STA $0605
 	RTS
 
-table_00_B118:
+table_00_B118:		; читается 4 раза
 .byte $02,$23
 
 table_00_B11A:
