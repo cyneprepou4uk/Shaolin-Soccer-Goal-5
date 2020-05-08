@@ -1999,11 +1999,11 @@ bra_05_8F52:
 	JSR _loc_05_801E
 	RTS
 
-; 60fps скорость X
+; 60fps скорость X	+++
 table_05_8F6D_скорость_X:
-.word $FFD5
-.word $FFE0
-.word $FFEB
+.byte $80,$FF
+.byte $A0,$FF
+.byte $C0,$FF
 
 _loc_05_8F73:
 	LDA #$04
