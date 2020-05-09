@@ -80,82 +80,27 @@ _loc_05_8055:
 
 table_05_805A:		; байты после JSR
 .word table_05_805A_8083
-.word table_05_805A_808B
-.word table_05_805A_8091
-.word table_05_805A_8097
-.word table_05_805A_809D
-.word table_05_805A_80A3
-.word table_05_805A_80A9
-.word table_05_805A_80AF
-.word table_05_805A_80B5
-.word table_05_805A_80BB
-.word table_05_805A_80C1
-.word table_05_805A_80C7
-.word table_05_805A_80CD
-.word table_05_805A_80CD
-.word table_05_805A_80D3
-.word table_05_805A_80D9
+.word _loc_05_8338
+.word _loc_05_871A
+.word _loc_05_8DBC
+.word _loc_05_8FF9
+.word _loc_05_8ABE
+.word _loc_05_9357
+.word _loc_05_97F5
+.word _loc_05_A0E0
+.word _loc_05_8893
+.word _loc_05_A281
+.word _loc_05_A576
+.word _loc_05_A778
+.word _loc_05_A778
+.word _loc_05_B2B2
+.word _loc_05_B47C
 
 table_05_805A_8083:
 	LDA #$01
 	STA подтип_экрана
 	RTS
 
-table_05_805A_808B:
-	JSR _loc_05_8338
-	RTS
-
-table_05_805A_8091:
-	JSR _loc_05_871A
-	RTS
-
-table_05_805A_8097:
-	JSR _loc_05_8DBC
-	RTS
-
-table_05_805A_809D:
-	JSR _loc_05_8FF9
-	RTS
-
-table_05_805A_80A3:
-	JSR _loc_05_8ABE
-	RTS
-
-table_05_805A_80A9:
-	JSR _loc_05_9357
-	RTS
-
-table_05_805A_80AF:
-	JSR _loc_05_97F5
-	RTS
-
-table_05_805A_80B5:
-	JSR _loc_05_A0E0
-	RTS
-
-table_05_805A_80BB:
-	JSR _loc_05_8893
-	RTS
-
-table_05_805A_80C1:
-	JSR _loc_05_A281
-	RTS
-
-table_05_805A_80C7:
-	JSR _loc_05_A576
-	RTS
-
-table_05_805A_80CD:
-	JSR _loc_05_A778
-	RTS
-
-table_05_805A_80D3:
-	JSR _loc_05_B2B2
-	RTS
-
-table_05_805A_80D9:
-	JSR _loc_05_B47C
-	RTS
 _loc_05_80DF:
 	LDA #$80
 	STA разновидность_NMI
@@ -3026,6 +2971,7 @@ bra_05_97EF:
 bra_05_97F1:
 	STA подтип_экрана
 	RTS
+
 _loc_05_97F5:
 	LDA подтип_экрана
 	BMI bra_05_97FF
@@ -4782,6 +4728,7 @@ bra_05_A770:
 	LDA #МУЗЫКА_ВЫКЛЮЧИТЬ
 	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	RTS
+
 _loc_05_A778:
 	LDA подтип_экрана
 	BMI bra_05_A785
