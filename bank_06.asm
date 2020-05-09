@@ -6402,30 +6402,6 @@ bra_06_B273:
 	LDX $43
 	RTS
 
-	STX $43
-	LDY #$0C
-	STY $44
-	JSR _loc_06_B301
-	JSR _loc_06_B337
-	BPL bra_06_B2A0
-	JSR _loc_06_B38C
-	LDX $44
-	JSR _loc_06_B313
-	INY
-	JSR _loc_06_B337
-	BPL bra_06_B2A0
-	JSR _loc_06_B396
-	JSR _loc_06_B3A0
-	BCC bra_06_B2A0
-	JSR _loc_06_AD41
-	SEC
-	BCS bra_06_B2A1
-bra_06_B2A0:
-	CLC
-bra_06_B2A1:
-	LDX $43
-	RTS
-
 _loc_06_B2A4:
 	STX $43
 	LDY #$0D
@@ -6488,6 +6464,7 @@ _loc_06_B301:
 	ASL
 	TAY
 	RTS
+
 _loc_06_B313:
 	LDA #< table_06_B54D
 	STA $2C
@@ -6566,6 +6543,7 @@ _loc_06_B38C:
 	LDA ($2C),Y
 	STA $2F
 	RTS
+
 _loc_06_B396:
 	LDA ($2C),Y
 	STA $30
