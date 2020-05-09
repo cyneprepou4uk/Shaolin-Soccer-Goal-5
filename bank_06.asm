@@ -6743,6 +6743,7 @@ bra_06_B503:
 _loc_06_B505:
 	LDY $1C
 	RTS
+
 _loc_06_B508:
 	CPY #$0A
 	BCC bra_06_B516
@@ -7228,8 +7229,7 @@ bra_06_B94A:
 	JSR _loc_06_BC64
 	JSR _loc_06_A187_ограничение_максимальной_скорости
 	JSR _loc_06_9856
-	JSR _loc_06_BA31
-	RTS
+	JMP _loc_06_BA31
 bra_06_B965:
 	LDA флаг_прозрачного_мяча
 	BEQ bra_06_B8F6
@@ -7249,7 +7249,7 @@ bra_06_B96F:
 	LDA #$80
 	STA номер_супера
 	JSR _loc_06_B7BA
-	JSR _loc_06_B8AC
+	JMP _loc_06_B8AC
 bra_06_B995:
 	RTS
 bra_06_B998:
@@ -7270,6 +7270,7 @@ bra_06_B9B3:
 	STA флаг_прозрачного_мяча
 bra_06_B9B8:
 	RTS
+
 _loc_06_B9BB:
 	LDA режим_игры_на_поле
 	AND #$40
@@ -7294,6 +7295,7 @@ bra_06_B9EB:
 	AND #$7F
 	STA флаг_прозрачного_мяча
 	RTS
+
 _loc_06_B9F5:
 	LDA режим_игры_на_поле
 	AND #$40
@@ -7316,6 +7318,7 @@ bra_06_BA23:
 	LDA $1C
 	STA флаг_прозрачного_мяча
 	RTS
+
 _loc_06_BA2B:
 	LDA #$FF
 	STA флаг_прозрачного_мяча
@@ -7386,7 +7389,7 @@ bra_06_BAA5:
 	LDA #$14
 	JSR _loc_06_9EB5_добавить_A_к_силе
 	LDA #ЗВУК_ГОЛ
-	JSR _b07_C2E4_записать_и_воспроизвести_звук
+	JMP _b07_C2E4_записать_и_воспроизвести_звук
 bra_06_BAB5:
 	RTS
 
@@ -7522,8 +7525,7 @@ bra_06_BBC9:
 _loc_06_BBCA:
 	LDA таймер_действия_мяча
 	BNE bra_06_BBD5
-	JSR _loc_06_BC7E_EOR_16bit_скорость_X_и_смена_направления_движения
-	RTS
+	JMP _loc_06_BC7E_EOR_16bit_скорость_X_и_смена_направления_движения
 bra_06_BBD5:
 	LDA #$00
 	STA таймер_действия_мяча
@@ -7578,8 +7580,7 @@ _loc_06_BC2B:
 	JMP _loc_06_BC2B
 bra_06_BC3B:
 	LDA #$20		; 60fps !!! отскок мяча от перекладины
-	JSR _b07_деление_и_умножение_скоростей_16bit_на_3
-	RTS
+	JMP _b07_деление_и_умножение_скоростей_16bit_на_3
 
 ; 60fps !!! отскок мяча от перекладины
 table_06_BC3C_скорость_Z:
@@ -7619,7 +7620,7 @@ bra_06_BC6F:
 bra_06_BC76:
 	LSR $1D
 	BCC bra_06_BC7D
-	JSR _loc_06_BCB2_EOR_16bit_скорость_Z
+	JMP _loc_06_BCB2_EOR_16bit_скорость_Z
 bra_06_BC7D:
 	RTS
 
@@ -7801,8 +7802,7 @@ bra_06_BDB3:
 	JSR _b07_EB8C
 	JSR _b07_D5EF_обновить_палитру_мокрого_мяча
 	JSR _loc_06_B2A4
-	JSR _loc_06_ABDE
-	RTS
+	JMP _loc_06_ABDE
 bra_06_BDC3:
 	JSR _loc_06_ABB3
 	LDA счетчик_смен
@@ -7827,8 +7827,7 @@ _loc_06_BDDF:
 	JSR _loc_06_AB0B
 	JSR _loc_06_8C9D
 	JSR _loc_06_AB52
-	JSR _b07_EB8C
-	RTS
+	JMP _b07_EB8C
 
 _loc_06_BDFC:
 	INC таймер_катсцены
@@ -7854,16 +7853,14 @@ bra_06_BE11:
 	JSR _loc_06_8C9D
 	JSR _loc_06_AB52
 bra_06_BE2E:
-	JSR _b07_EB8C
-	RTS
+	JMP _b07_EB8C
 
 _loc_06_BE32:
 	JSR _loc_06_AA19
 	JSR _b07_C276
 	JSR _loc_06_802D
 	JSR _loc_06_B2A4
-	JSR _b07_EB8C
-	RTS
+	JMP _b07_EB8C
 
 .export _loc_06_BE42
 _loc_06_BE42:
@@ -7934,7 +7931,7 @@ bra_06_BEBA:
 	BPL bra_06_BECB
 	LDA #ЗВУК_ЗРИТЕЛИ_СВИСТ
 bra_06_BEC8:
-	JSR _b07_C2E4_записать_и_воспроизвести_звук
+	JMP _b07_C2E4_записать_и_воспроизвести_звук
 bra_06_BECB:
 	RTS
 
@@ -7956,8 +7953,6 @@ _loc_06_BECC:
 	BCC @цикл
 bra_06_BEE7:
 	RTS
-
-; BEE8 fill FF
 
 .segment "BANK_06_ID"
 .byte $06 
