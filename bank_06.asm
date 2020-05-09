@@ -1,6 +1,5 @@
 .segment "BANK_06"
-.include "ram_copy.inc"
-.include "val_copy.inc"
+.include "bank_ram_copy.inc"
 
 ; банк с гравитацией и скоростями
 

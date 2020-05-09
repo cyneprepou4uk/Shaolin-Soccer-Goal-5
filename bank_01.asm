@@ -1,6 +1,5 @@
 .segment "BANK_01"
-.include "ram_copy.inc"
-.include "val_copy.inc"
+.include "bank_ram_copy.inc"
 
 ; !!! разрешено двигать код только начиная с _loc_01_B430
 ; поинтеры в таблице еще не закончены

@@ -1,6 +1,5 @@
 .segment "BANK_07"
-.include "ram_copy.inc"
-.include "val_copy.inc"
+.include "bank_ram_copy.inc"
 
 .import _loc_00_8000
 .import _loc_00_8003
@@ -1422,11 +1421,11 @@ bra_07_CB92:
 	STA тайл_статусбара
 	LDA #$FF
 	STA номер_скилла
-	STA $04F3
-	STA $04F5
-	STA $04F7
-	STA $04F9
-	STA $04FB
+	STA номер_скилла + 2
+	STA номер_скилла + 4
+	STA номер_скилла + 6
+	STA номер_скилла + 8
+	STA номер_скилла + $0A
 	RTS
 
 table_07_CBC7:

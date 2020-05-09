@@ -1,3 +1,5 @@
+#by KOHR
+
 #!/usr/bin/perl
 use warnings;
 use strict;
@@ -16,8 +18,7 @@ my $mask=(
 	bank_05.asm
 	bank_06.asm
 	bank_07.asm
-	ram.inc
-	val.inc
+	bank_ram.inc
 	'
 );
 my %replace_table=(

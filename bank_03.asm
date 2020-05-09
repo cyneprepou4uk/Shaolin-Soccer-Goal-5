@@ -1,6 +1,5 @@
 .segment "BANK_03"
-.include "ram_copy.inc"
-.include "val_copy.inc"
+.include "bank_ram_copy.inc"
 
 .import table_07_C080_byte_8000_8001
 .import _b07_C2E4_записать_и_воспроизвести_звук
