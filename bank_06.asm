@@ -4,8 +4,7 @@
 ; банк с гравитацией и скоростями
 
 .import _b07_C344_банксвич_80xx
-.import _b07_C28F
-.import _b07_C294
+.import _b07_C28F_банксвич_0C
 .import _b07_C2B2
 .import _b07_C2B7
 .import _b07_C2BC_проверка_координат_для_возможности_сделать_супер
@@ -1678,7 +1677,7 @@ table_06_8CAF_8D43:
 	JSR _loc_06_9927
 	JSR _loc_06_9856
 bra_06_8D4E:
-	JSR _b07_C28F
+	JSR _b07_C28F_банксвич_0C
 	JMP _loc_06_9642
 
 table_06_8CAF_8D55:
@@ -1687,7 +1686,8 @@ table_06_8CAF_8D55:
 	JSR _loc_06_9927
 	JSR _loc_06_9856
 bra_06_8D60:
-	JSR _b07_C294
+	LDA #$0D
+	JSR _b07_C344_банксвич_80xx
 	LDA направление_движения,X
 	STA номер_анимации,X
 	RTS
@@ -1703,7 +1703,7 @@ bra_06_8D72:
 	STA $0513
 	LDA координата_Z_hi,X
 	STA $0514
-	JSR _b07_C28F
+	JSR _b07_C28F_банксвич_0C
 	LDA #$00
 	STA скорость_Z_lo,X
 	STA скорость_Z_hi,X
@@ -2177,7 +2177,7 @@ bra_06_914F:
 	STA $22
 	LDA координата_Z_hi,X
 	STA $23
-	JSR _b07_C28F
+	JSR _b07_C28F_банксвич_0C
 	SEC
 	LDA $1E
 	SBC координата_X_lo,X

@@ -216,25 +216,12 @@ _loc_07_C26C_банксвич_2F:
 _loc_07_C271_банксвич_00:
 	LDA #$00
 	JMP _b07_C344_банксвич_80xx
-_loc_07_C27B:
-	LDA #$03
-	JMP _b07_C344_банксвич_80xx
-_loc_07_C280:
-	LDA #$13
-	JMP _b07_C344_банксвич_80xx
-_loc_07_C285:
+_loc_07_C285_банксвич_1B:
 	LDA #$1B
 	JMP _b07_C344_банксвич_80xx
-_loc_07_C28A:
-	LDA #$01
-	JMP _b07_C344_банксвич_80xx
-.export _b07_C28F
-_b07_C28F:
+.export _b07_C28F_банксвич_0C
+_b07_C28F_банксвич_0C:
 	LDA #$0C
-	JMP _b07_C344_банксвич_80xx
-.export _b07_C294
-_b07_C294:
-	LDA #$0D
 	JMP _b07_C344_банксвич_80xx
 _loc_07_C299:
 	LDA #$11
@@ -522,7 +509,8 @@ _начало_игрового_скрипта:		; игра выполняет к
 	LDA подтип_экрана
 	STA копия_подтипа_экрана
 	INC счетчик_кадров
-	JSR _loc_07_C28A
+	LDA #$01
+	JSR _b07_C344_банксвич_80xx
 	JSR _b07_вращение_рандома
 	JSR _loc_07_EDCD_чтение_регистров_джойстиков
 	LDA номер_экрана
@@ -742,7 +730,7 @@ bra_07_C66B:
 	JSR _loc_07_C271_банксвич_00
 	JSR _loc_06_BD6A
 	JSR _loc_07_C2A3
-	JSR _loc_07_C285
+	JSR _loc_07_C285_банксвич_1B
 	JSR _loc_07_C89C
 	JSR _loc_06_BECC
 	JSR _loc_07_C29E
@@ -761,7 +749,7 @@ table_07_C51F_C699:
 	JSR _loc_07_C271_банксвич_00
 	JSR _loc_06_BD6A
 	JSR _loc_07_C2A3
-	JSR _loc_07_C285
+	JSR _loc_07_C285_банксвич_1B
 	JSR _loc_07_F3A5
 	JSR _loc_07_C29E
 	JSR _loc_07_C299
@@ -854,7 +842,7 @@ table_07_C51F_C777:
 table_07_C51F_C77D:
 	JSR _loc_07_CAEE
 	JSR _loc_06_BE42
-	JSR _loc_07_C285
+	JSR _loc_07_C285_банксвич_1B
 _loc_07_C786:
 	JSR _loc_07_C29E
 	JSR _b07_D073
@@ -902,7 +890,7 @@ table_07_C51F_C7D0:
 	JSR _loc_06_BD6A
 	JSR _loc_07_C2A3
 	JSR _loc_07_C80B
-	JSR _loc_07_C285
+	JSR _loc_07_C285_банксвич_1B
 	JSR _loc_06_BECC
 	JSR _loc_07_C29E
 	LDA режим_игры_на_поле
@@ -1904,7 +1892,8 @@ _loc_07_CF93:
 	JSR _b07_выключить_NMI
 	JSR _b07_выключить_рендеринг
 	JSR _loc_07_E3D9
-	JSR _loc_07_C27B
+	LDA #$03
+	JSR _b07_C344_банксвич_80xx
 	LDA опция_режим_сложность
 	AND #РЕЖИМ_ПК_ИЗ_МЕНЮ
 	BNE bra_07_CFF9
@@ -2883,7 +2872,8 @@ _loc_07_D6E7:
 	AND #$A0
 	CMP #$A0
 	BNE @пропустить_код_погоды
-	JSR _loc_07_C280
+	LDA #$13
+	JSR _b07_C344_банксвич_80xx
 @пропустить_код_погоды:
 	DEC время_тайма_секунды_единицы
 	BPL @записать_терции
