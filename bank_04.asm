@@ -5948,8 +5948,7 @@ _loc_04_B4B2:
 	LDA режим_игры_на_поле
 	AND #$01
 	BEQ bra_04_B4BE
-	JSR _loc_04_B850
-	RTS
+	JMP _loc_04_B850
 bra_04_B4BE:
 	LDX #$00
 bra_04_B4C0:
@@ -6721,7 +6720,7 @@ bra_04_BAF4:
 	CPY #$03
 	BCS @RTS
 	LDA table_04_BD0F_сила,Y
-	JSR _loc_04_BB02_добавить_A_к_силе_мяча
+	JMP _loc_04_BB02_добавить_A_к_силе_мяча
 @RTS:
 	RTS
 
@@ -7167,8 +7166,7 @@ _loc_04_BDE3:
 bra_04_BE01:
 	LDA номер_супера
 bra_04_BE04:
-	JSR _b07_CEBD
-	RTS
+	JMP _b07_CEBD
 
 table_04_BE08:
 .word off_04_BE64
