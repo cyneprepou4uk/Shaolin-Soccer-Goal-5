@@ -6093,68 +6093,6 @@ bra_07_F3DE:
 	LDA #$00
 	STA $05FA
 	RTS
-	LDA $2C
-	EOR #$FF
-	CLC
-	ADC #$01
-	STA $2C
-	LDA $2D
-	EOR #$FF
-	ADC #$00
-	STA $2D
-	RTS
-	LDA $30
-	EOR #$FF
-	CLC
-	ADC #$01
-	STA $30
-	LDA $31
-	EOR #$FF
-	ADC #$00
-	STA $31
-	RTS
-	LDA $1C
-	EOR #$FF
-	CLC
-	ADC #$01
-	STA $1C
-	LDA $2C
-	EOR #$FF
-	ADC #$00
-	STA $2C
-	LDA $2D
-	EOR #$FF
-	ADC #$00
-	STA $2D
-	RTS
-	LDA $1C
-	EOR #$FF
-	CLC
-	ADC #$01
-	STA $1C
-	LDA $1D
-	EOR #$FF
-	ADC #$00
-	STA $1D
-	LDA $1E
-	EOR #$FF
-	ADC #$00
-	STA $1E
-	RTS
-	LDA $20
-	EOR #$FF
-	CLC
-	ADC #$01
-	STA $20
-	LDA $21
-	EOR #$FF
-	ADC #$00
-	STA $21
-	LDA $22
-	EOR #$FF
-	ADC #$00
-	STA $22
-	RTS
 
 .export _b07_F469
 _b07_F469:
