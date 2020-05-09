@@ -3,7 +3,7 @@
 
 ; банк с гравитацией и скоростями
 
-.import _b07_C276
+.import _b07_C344_банксвич_80xx
 .import _b07_C28F
 .import _b07_C294
 .import _b07_C2B2
@@ -7857,7 +7857,8 @@ bra_06_BE2E:
 
 _loc_06_BE32:
 	JSR _loc_06_AA19
-	JSR _b07_C276
+	LDA #$02
+	JSR _b07_C344_банксвич_80xx
 	JSR _loc_06_802D
 	JSR _loc_06_B2A4
 	JMP _b07_EB8C

@@ -195,38 +195,26 @@ table_07_C080_C226:
 .byte $B1,$3B,$2D,$D3,$AE
 .byte $A5,$CF,$C9,$AB,$FF
 
-_loc_07_C244:
-	LDA #$04
-	JMP _b07_C344_банксвич_80xx
-_loc_07_C249:
+_loc_07_C249_банксвич_05:
 	LDA #$05
 	JMP _b07_C344_банксвич_80xx
-_loc_07_C24E:
+_loc_07_C24E_банксвич_1E:
 	LDA #$1E
 	JMP _b07_C344_банксвич_80xx
-	LDA #$1F
-	JMP _b07_C344_банксвич_80xx
-_loc_07_C258:
-	LDA #$29
-	JMP _b07_C344_банксвич_80xx
-_loc_07_C25D:
+_loc_07_C25D_банксвич_18:
 	LDA #$18
 	JMP _b07_C344_банксвич_80xx
-_loc_07_C262:
+_loc_07_C262_банксвич_2D:
 	LDA #$2D
 	JMP _b07_C344_банксвич_80xx
-_loc_07_C267:
+_loc_07_C267_банксвич_2E:
 	LDA #$2E
 	JMP _b07_C344_банксвич_80xx
-_loc_07_C26C:
+_loc_07_C26C_банксвич_2F:
 	LDA #$2F
 	JMP _b07_C344_банксвич_80xx
-_loc_07_C271:
+_loc_07_C271_банксвич_00:
 	LDA #$00
-	JMP _b07_C344_банксвич_80xx
-.export _b07_C276
-_b07_C276:
-	LDA #$02
 	JMP _b07_C344_банксвич_80xx
 _loc_07_C27B:
 	LDA #$03
@@ -551,9 +539,9 @@ _начало_игрового_скрипта:		; игра выполняет к
 
 table_07_C4A3:
 .word _loc_07_C506
-.word _loc_07_C25D
+.word _loc_07_C25D_банксвич_18
 .word _loc_07_C2DA
-.word _loc_07_C26C
+.word _loc_07_C26C_банксвич_2F
 
 _ручной_пропуск_демо_или_уменьшение_таймера:
 	LDY #$08
@@ -637,7 +625,7 @@ bra_07_C57A:
 	RTS
 
 table_07_C51F_C57D:
-	JSR _loc_07_C271
+	JSR _loc_07_C271_банксвич_00
 	JSR _loc_06_BD6A
 	JSR _loc_06_BECC
 	JSR _loc_07_F3A5
@@ -749,9 +737,9 @@ bra_07_C66B:
 	JSR _loc_07_D6E7
 	JSR _loc_07_DE47
 	JSR _loc_07_CAEE
-	JSR _loc_07_C24E
+	JSR _loc_07_C24E_банксвич_1E
 	JSR _loc_07_C2AD
-	JSR _loc_07_C271
+	JSR _loc_07_C271_банксвич_00
 	JSR _loc_06_BD6A
 	JSR _loc_07_C2A3
 	JSR _loc_07_C285
@@ -769,8 +757,8 @@ table_07_C51F_C699:
 	JSR _loc_07_DE47
 	JSR _loc_07_CAEE
 	JSR _loc_07_C2AD
-	JSR _loc_07_C24E
-	JSR _loc_07_C271
+	JSR _loc_07_C24E_банксвич_1E
+	JSR _loc_07_C271_банксвич_00
 	JSR _loc_06_BD6A
 	JSR _loc_07_C2A3
 	JSR _loc_07_C285
@@ -824,7 +812,7 @@ table_07_C51F_C71E:
 	JSR _loc_07_C2D5
 	JSR _loc_07_CA1F
 	JSR _loc_07_CA58
-	JSR _loc_07_C249
+	JSR _loc_07_C249_банксвич_05
 	JSR _b07_включить_рендеринг
 	JSR _b07_включить_NMI
 	LDA #МУЗЫКА_ЗРИТЕЛИ
@@ -841,7 +829,7 @@ table_07_C51F_C743:
 	JSR _loc_07_C2D5
 	JSR _loc_07_CA1F
 	JSR _loc_07_CA58
-	JSR _loc_07_C249
+	JSR _loc_07_C249_банксвич_05
 	JSR _b07_включить_рендеринг
 	JSR _b07_включить_NMI
 	LDA #МУЗЫКА_ЭКРАН_ТАБЛО
@@ -849,10 +837,10 @@ table_07_C51F_C743:
 	JMP _loc_07_C735
 
 table_07_C51F_C75D:
-	JSR _loc_07_C262
+	JSR _loc_07_C262_банксвич_2D
 	JSR _loc_07_CA1F
 	JSR _loc_07_CA58
-	JSR _loc_07_C249
+	JSR _loc_07_C249_банксвич_05
 	JSR _b07_включить_рендеринг
 	JSR _b07_включить_NMI
 	LDA #МУЗЫКА_ЭКРАН_ТАБЛО
@@ -860,7 +848,7 @@ table_07_C51F_C75D:
 	JMP _loc_07_C735
 
 table_07_C51F_C777:
-	JSR _loc_07_C267
+	JSR _loc_07_C267_банксвич_2E
 	JMP _loc_07_C786
 
 table_07_C51F_C77D:
@@ -908,8 +896,8 @@ table_07_C51F_C7D0:
 	JSR _loc_07_DE47
 	JSR _loc_07_CAEE
 	JSR _loc_07_C2AD
-	JSR _loc_07_C24E
-	JSR _loc_07_C271
+	JSR _loc_07_C24E_банксвич_1E
+	JSR _loc_07_C271_банксвич_00
 	JSR _loc_07_D6E7
 	JSR _loc_06_BD6A
 	JSR _loc_07_C2A3
@@ -1022,7 +1010,8 @@ _loc_07_C89C:
 bra_07_C8BD:
 	LDA #$06
 	STA подтип_экрана
-	JMP _loc_07_C258
+	LDA #$29
+	JMP _b07_C344_банксвич_80xx
 bra_07_C8C8:
 	LDA #$8C
 	STA объект_камеры
@@ -5667,7 +5656,8 @@ _b07_EFAD:
 bra_07_EFCC:
 	LDA байт_2006_hi_след
 	BEQ _loc_07_EFE5_запись_в_видеопамять_трех_буферов
-	JMP _loc_07_C244
+	LDA #$04
+	JMP _b07_C344_банксвич_80xx
 bra_07_EFD4:	; 60fps !!! любые отрисовки выполняются ежекадрово
 	LDA #$01
 	STA $401C
