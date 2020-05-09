@@ -287,28 +287,25 @@ _loc_03_81DD:
 	CMP #$15
 	BEQ bra_03_81FB
 bra_03_81F5:
-	JSR _loc_03_A59B
-	RTS
+	JMP _loc_03_A59B
 bra_03_81FB:
 	TXA
 	EOR игрок_с_мячом
 	AND #$01
 	BNE bra_03_81F5
-	JMP _loc_03_820E
+	JMP _loc_03_A106
 bra_03_8206:
 	TXA
 	EOR игрок_с_мячом
 	AND #$01
 	BNE bra_03_8214
-_loc_03_820E:
-	JSR _loc_03_A106
-	RTS
+	JMP _loc_03_A106
 bra_03_8214:
 	LDA состояние_мяча
 	AND #$40
-	BEQ bra_03_821E
-	JSR _loc_03_A39C
-bra_03_821E:
+	BEQ @RTS
+	JMP _loc_03_A39C
+@RTS:
 	RTS
 
 _loc_03_821F:
@@ -352,6 +349,7 @@ _loc_03_825E:
 	PLA
 	TAX
 	RTS
+
 _loc_03_8261:
 bra_03_8261:
 	STA интеллект_бота,Y
@@ -360,6 +358,7 @@ bra_03_8261:
 	CPY #$0B
 	BCC bra_03_8261
 	RTS
+
 _loc_03_826B:
 bra_03_826B:
 	LDA позиция_управление,Y
@@ -388,6 +387,7 @@ _loc_03_828E:
 	CPY #$0B
 	BCC bra_03_826B
 	RTS
+
 _loc_03_8298:
 	LDA #$FF
 	STA приказ_боту
@@ -444,6 +444,7 @@ bra_03_82EF:
 	ORA #$01
 	STA $0668,X
 	RTS
+
 _loc_03_8304:
 	LDA $068A
 	TAY
@@ -587,8 +588,8 @@ bra_03_83FC:
 	STA $062C,X
 _loc_03_8406:
 	JSR _loc_03_AE37
-	JSR _loc_03_985F
-	RTS
+	JMP _loc_03_985F
+
 _loc_03_840D:
 	CPX #$0A
 	BNE bra_03_843C
@@ -678,12 +679,10 @@ _логика_интеллекта_07_21:
 	CMP #$21
 	BNE bra_03_84C6
 	LDY table_03_84CD - 6,X
-	JMP _loc_03_84C9
+	JMP _loc_03_99B5
 bra_03_84C6:
 	LDY игрок_с_мячом
-_loc_03_84C9:
-	JSR _loc_03_99B5
-	RTS
+	JMP _loc_03_99B5
 
 table_03_84CD:		; ??? судя по логгеру читалось нормально
 					; видимо смещение рассчитано правильно заранее, вероятно для защитников
@@ -876,8 +875,7 @@ bra_03_862D:
 	JMP _логика_интеллекта_24
 bra_03_8630:
 	LDY #$0C
-	JSR _loc_03_99B5
-	RTS
+	JMP _loc_03_99B5
 
 ; 8636 есть несколько прыжков
 _логика_интеллекта_0A:
@@ -1078,8 +1076,7 @@ bra_03_87B6:
 	LDA $1F
 	STA $0638,X
 	JSR _loc_03_AE37
-	JSR _loc_03_985F
-	RTS
+	JMP _loc_03_985F
 
 _логика_интеллекта_0C:
 	TXA
@@ -1147,8 +1144,7 @@ bra_03_8847:
 	STA $0638,X
 _loc_03_8851:
 	JSR _loc_03_AE37
-	JSR _loc_03_985F
-	RTS
+	JMP _loc_03_985F
 
 ; 8858 есть несколько прыжков
 _логика_интеллекта_0D:		; кипер бежит на ворота если вне штрафной и соперник владеет мячом
@@ -1232,13 +1228,13 @@ bra_03_88AA:
 	JSR _loc_03_AE37
 	JSR _loc_03_985F
 	LDA координата_Z_hi,X
-	BPL bra_03_8900
+	BPL @RTS
 	LDA координата_Z_lo,X
 	CMP #$FB
-	BCS bra_03_8900
+	BCS @RTS
 	LDA #$30
 	STA номер_действия,X
-bra_03_8900:
+@RTS:
 	RTS
 
 table_03_8901:		; вероятно для каждой из двух команд
@@ -1393,6 +1389,7 @@ bra_03_8A96:
 _loc_03_8A98:
 	STA номер_действия,X
 	RTS
+
 _loc_03_8A9C:
 	JSR _loc_03_840D
 	LDA координата_Y_lo,X
@@ -1403,7 +1400,7 @@ _loc_03_8A9C:
 	SBC $22
 	STA $1D
 	STA $1E
-	BPL bra_03_8AC3
+	BPL @RTS
 	LDA $1C
 	EOR #$FF
 	CLC
@@ -1413,7 +1410,7 @@ _loc_03_8A9C:
 	EOR #$FF
 	ADC #$00
 	STA $1D
-bra_03_8AC3:
+@RTS:
 	RTS
 
 table_03_8AC4:
@@ -1833,6 +1830,7 @@ bra_03_8D9C:
 _loc_03_8D9E:
 	STA номер_действия,X
 	RTS
+
 _loc_03_8DA2:
 	LDA опция_режим_сложность
 	AND #$03
@@ -2103,6 +2101,7 @@ bra_03_8F6A:
 	LDA #$39
 	STA номер_действия,X
 	RTS
+
 _loc_03_8F70:
 	LDA $1C
 	AND $0689
@@ -2121,6 +2120,7 @@ bra_03_8F89:
 _loc_03_8F8C:
 	LDA #$00
 	RTS
+
 _loc_03_8F8F:
 	LDA позиция_управление,X
 	AND #$0F
@@ -2429,8 +2429,7 @@ _loc_03_9167:
 	LDA $31
 	STA $0644,X
 	JSR _loc_03_AE37
-	JSR _loc_03_985F
-	RTS
+	JMP _loc_03_985F
 
 table_03_91CB:
 .byte $00,$15,$1E,$27,$30,$27,$1E,$15,$00,$EB,$E2,$D9,$D0,$D9,$E2,$EB
@@ -2590,8 +2589,8 @@ bra_03_92FD:
 	STA $1C
 	JSR _loc_03_98D0
 	JSR _loc_03_AE4B
-	JSR _loc_03_985F
-	RTS
+	JMP _loc_03_985F
+
 _loc_03_930F:
 	JSR _получение_номера_поведения_игрока_в_Y
 	STA $1C
@@ -2610,8 +2609,7 @@ bra_03_9326:
 	JSR _loc_03_98D0
 	JSR _loc_03_9B75
 	JSR _loc_03_AE4B
-	JSR _loc_03_985F
-	RTS
+	JMP _loc_03_985F
 bra_03_9337:
 	JSR _b07_вращение_рандома
 	BPL bra_03_931C
@@ -2702,14 +2700,13 @@ _loc_03_93D7:
 	TAY
 	LDA приказ_боту,Y
 	CMP #$02
-	BNE bra_03_93EF
+	BNE @RTS
 	LDA #$FF
 	STA приказ_боту,Y
-bra_03_93EF:
+@RTS:
 	RTS
 bra_03_93F0:
-	JSR _loc_03_985F
-	RTS
+	JMP _loc_03_985F
 _loc_03_93F4:
 	JSR _получение_номера_поведения_игрока_в_Y
 	STA $1C
@@ -2728,8 +2725,7 @@ bra_03_940B:
 	JSR _loc_03_98D0
 	JSR _loc_03_9B75
 	JSR _loc_03_AE4B
-	JSR _loc_03_985F
-	RTS
+	JMP _loc_03_985F
 bra_03_941C:
 	LDY #$0C
 	JSR _b07_FA6D
@@ -2974,8 +2970,8 @@ bra_03_95DE:
 	LDA координата_X_hi,X
 	STA $062C,X
 	JSR _loc_03_AE37
-	JSR _loc_03_985F
-	RTS
+	JMP _loc_03_985F
+
 _loc_03_95FE:
 	JMP _логика_интеллекта_09
 	LDA $2B
@@ -3050,8 +3046,7 @@ _loc_03_968A:
 	STA $062C,X
 _loc_03_9696:
 	JSR _loc_03_AE37
-	JSR _loc_03_985F
-	RTS
+	JMP _loc_03_985F
 
 _логика_интеллекта_2A:
 	LDA игрок_с_мячом
@@ -3491,16 +3486,16 @@ bra_03_99CF:
 	STA $1C
 	JSR _loc_03_98D0
 	JSR _loc_03_AE4B
-	JSR _loc_03_985F
-	RTS
+	JMP _loc_03_985F
+
 _loc_03_99E2:
 	LDA $0524
 	STA $1C
 	JSR _loc_03_98D0
 	JSR _loc_03_9B75
 	JSR _loc_03_AE4B
-	JSR _loc_03_985F
-	RTS
+	JMP _loc_03_985F
+
 _loc_03_99F4:
 	TXA
 	EOR #$01
@@ -3638,6 +3633,7 @@ bra_03_9ADF:
 _loc_03_9AE1:
 	STA $2A
 	RTS
+
 _loc_03_9AE4:
 	LDA опция_режим_сложность
 	AND #$03
