@@ -6138,8 +6138,7 @@ _loc_05_B3D3:
 bra_05_B3D3:
 	LDA table_05_B3DC_экран,Y
 	STA подтип_экрана
-	JSR _loc_05_BB47
-	RTS
+	JMP _loc_05_BB47
 
 table_05_B3DC_экран:
 .byte $0F,$02
@@ -6246,8 +6245,7 @@ bra_05_B4A0:
 	JSR _b07_D073
 	LDX #$0C
 	JSR _b07_EB8C
-	JSR _loc_05_8014
-	RTS
+	JMP _loc_05_8014
 
 table_05_B494_B4AE:
 	LDX #$0C
@@ -6255,7 +6253,7 @@ table_05_B494_B4AE:
 	JSR _loc_05_8014
 	LDA одноразовые_кнопки
 	AND #(КНОПКА_СЕЛЕКТ + КНОПКА_СТАРТ + КНОПКА_А + КНОПКА_Б)
-	BEQ bra_05_B4D5
+	BEQ @RTS
 	LDA #ЗВУК_ПОЛОЖИТЕЛЬНЫЙ
 	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	JSR _b07_поставить_флаг_уменьшения_яркости
@@ -6266,7 +6264,7 @@ table_05_B494_B4AE:
 	STA опция_материка
 	LDA #МУЗЫКА_ПОЛЕ_06
 	STA номер_музыки
-bra_05_B4D5:
+@RTS:
 	RTS
 
 _loc_05_B4D6:
@@ -6357,8 +6355,8 @@ table_05_B501_B574:
 	STA $0554
 	LDX #$00
 	LDY #$09
-	JSR _loc_05_B588
-	RTS
+	JMP _loc_05_B588
+
 _loc_05_B588:
 	LDA $054B,X
 	BNE bra_05_B593
@@ -6510,8 +6508,8 @@ bra_05_B695:
 	JMP _loc_05_B679
 bra_05_B6AE:
 	JSR _b07_включить_рендеринг
-	JSR _b07_включить_NMI
-	RTS
+	JMP _b07_включить_NMI
+
 _loc_05_B6B5:
 	STA $1C
 	ASL
@@ -6541,6 +6539,7 @@ bra_05_B6DC:
 	DEY
 	BPL bra_05_B6DC
 	RTS
+
 _loc_05_B6EF:
 	STA $22
 	ASL
@@ -6576,8 +6575,7 @@ _loc_05_B6EF:
 bra_05_B73C:
 	LDA $22
 	STA $23
-	JSR _b07_EFAD
-	RTS
+	JMP _b07_EFAD
 
 table_05_B744:
 .word table_05_B744_B746
@@ -6745,8 +6743,8 @@ bra_05_B907:
 	DEX
 	BPL bra_05_B907
 	LDX #$09
-	JSR _loc_05_B9A1
-	RTS
+	JMP _loc_05_B9A1
+
 _loc_05_B913:
 	LDY #$09
 bra_05_B915:
@@ -6832,6 +6830,7 @@ bra_05_B991:
 	CPY #$08
 	BCC bra_05_B991
 	RTS
+
 _loc_05_B9A1:
 	JSR _loc_05_B9BD
 	CLC
@@ -6840,6 +6839,7 @@ _loc_05_B9A1:
 	AND #$0F
 	STA $2C,X
 	RTS
+
 _loc_05_B9AF:
 	JSR _loc_05_B9BD
 	SEC
@@ -6848,13 +6848,13 @@ _loc_05_B9AF:
 	AND #$0F
 	STA $2C,X
 	RTS
+
 _loc_05_B9BD:
 	TXA
 	AND #$07
 	ORA $1C
 	TAY
 	RTS
-
 
 _loc_05_B9C4:
 table_05_B9C4:		; баг, какая-то кривая таблица видимо, если читает байты кода
@@ -7441,6 +7441,7 @@ bra_05_BE74:
 	CPX $31
 	BCC bra_05_BE48
 	RTS
+
 _loc_05_BE9F:
 	LDX #$01
 	STX $2B
@@ -7468,8 +7469,7 @@ bra_05_BEA3:
 	JSR _loc_05_BE34
 	DEC $2B
 	BPL bra_05_BEA3
-	JSR _b07_запись_банков_спрайтов
-	RTS
+	JMP _b07_запись_банков_спрайтов
 
 table_05_BED6:
 .byte $E5,$20
@@ -7510,8 +7510,7 @@ _loc_05_BEFA:
 	LDA #$02
 	STA $31
 	JSR _loc_05_BE34
-	JSR _b07_запись_банков_спрайтов
-	RTS
+	JMP _b07_запись_банков_спрайтов
 
 table_05_BF20:
 .byte $33,$03
@@ -7541,8 +7540,7 @@ _loc_05_BF2A:
 	LDA #$03
 	STA $31
 	JSR _loc_05_BE34
-	JSR _b07_запись_банков_спрайтов
-	RTS
+	JMP _b07_запись_банков_спрайтов
 
 table_05_BF55:
 .byte $23,$04
@@ -7584,8 +7582,7 @@ bra_05_BF81:
 	LDA #$02
 	STA $31
 	JSR _loc_05_BE34
-	JSR _b07_запись_банков_спрайтов
-	RTS
+	JMP _b07_запись_банков_спрайтов
 
 table_05_BFA2:
 .byte $9D,$05
