@@ -5,13 +5,7 @@
 
 .import _b07_C344_банксвич_80xx
 .import _b07_C28F_банксвич_0C
-.import _b07_C2B2
-.import _b07_C2B7
-.import _b07_C2BC_проверка_координат_для_возможности_сделать_супер
-.import _b07_C2C1
-.import _b07_C2C6
-.import _b07_C2CB
-.import _b07_C2D0
+.import _b07_C2CB_банксвич_24
 .import _b07_C2E4_записать_и_воспроизвести_звук
 .import _b07_CBD6_отображение_циферок_на_экране
 .import _b07_CD2F
@@ -1873,22 +1867,26 @@ table_06_8CAF_8EE9:
 	LDA номер_движения,X
 	BMI bra_06_8EF4
 	JSR _loc_06_9927
-	JSR _b07_C2BC_проверка_координат_для_возможности_сделать_супер
+	LDA #$21		; проверка_координат_для_возможности_сделать_супер
+	JSR _b07_C344_банксвич_80xx
 bra_06_8EF4:
 	LDA номер_супера
 	BMI bra_06_8F0A
 	ORA #$80
 	STA номер_супера
-	JSR _b07_C2C1
+	LDA #$22
+	JSR _b07_C344_банксвич_80xx
 	JSR _loc_06_9CC9
-	JSR _b07_C2C6
+	LDA #$23
+	JSR _b07_C344_банксвич_80xx
 	JSR _loc_06_98D3
 bra_06_8F0A:
 	BIT режим_игры_на_поле
 	BVC bra_06_8F11
 	JSR _loc_06_9856
 bra_06_8F11:
-	JSR _b07_C2B7
+	LDA #$20
+	JSR _b07_C344_банксвич_80xx
 	JSR _loc_06_9D29
 	JSR _loc_06_96DA_подкрутка_удара
 	JSR _loc_06_9B95
@@ -1901,7 +1899,7 @@ bra_06_8F2A:
 	JSR _loc_06_B1D3
 	LDA таймер_действия_мяча
 	BNE bra_06_8F4A
-	JSR _b07_C2CB
+	JSR _b07_C2CB_банксвич_24
 	LDA сила_мяча
 	ORA разновидность_супера
 	BNE bra_06_8F4A
@@ -1917,7 +1915,7 @@ bra_06_8F4A:
 	LDA #$00
 	STA координата_Z_lo,X
 	STA координата_Z_hi,X
-	JSR _b07_C2CB
+	JSR _b07_C2CB_банксвич_24
 	LDA #ЗВУК_ОТСКОК_СУПЕРА_ОТ_ЗЕМЛИ
 	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	LDA $0130,X
@@ -7893,9 +7891,11 @@ bra_06_BE70:
 	ORA #$40
 	STA объект_камеры
 _loc_06_BE76:
-	JSR _b07_C2B2
+	LDA #$0F
+	JSR _b07_C344_банксвич_80xx
 	JSR _loc_06_AA14
-	JSR _b07_C2D0
+	LDA #$0E
+	JSR _b07_C344_банксвич_80xx
 	JSR _loc_06_AAC3
 	JSR _b07_EB8C
 	LDA координата_X_hi,X

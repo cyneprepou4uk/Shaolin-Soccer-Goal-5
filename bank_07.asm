@@ -43,7 +43,6 @@
 .import _loc_04_8024
 .import _loc_05_8000
 .import _loc_05_8003
-.import _loc_05_8006
 .import _loc_05_8009
 .import _loc_05_800C
 .import _loc_06_8000
@@ -223,56 +222,27 @@ _loc_07_C285_банксвич_1B:
 _b07_C28F_банксвич_0C:
 	LDA #$0C
 	JMP _b07_C344_банксвич_80xx
-_loc_07_C299:
+_loc_07_C299_банксвич_11:
 	LDA #$11
 	JMP _b07_C344_банксвич_80xx
-_loc_07_C29E:
+_loc_07_C29E_банксвич_14:
 	LDA #$14
 	JMP _b07_C344_банксвич_80xx
-_loc_07_C2A3:
+_loc_07_C2A3_банксвич_15:
 	LDA #$15
 	JMP _b07_C344_банксвич_80xx
-_loc_07_C2A8:
-	LDA #$16
-	JMP _b07_C344_банксвич_80xx
-_loc_07_C2AD:
+_loc_07_C2AD_банксвич_17:
 	LDA #$17
 	JMP _b07_C344_банксвич_80xx
-.export _b07_C2B2
-_b07_C2B2:
-	LDA #$0F
-	JMP _b07_C344_банксвич_80xx
-.export _b07_C2B7
-_b07_C2B7:
-	LDA #$20
-	JMP _b07_C344_банксвич_80xx
-.export _b07_C2BC_проверка_координат_для_возможности_сделать_супер
-_b07_C2BC_проверка_координат_для_возможности_сделать_супер:
-	LDA #$21
-	JMP _b07_C344_банксвич_80xx
-.export _b07_C2C1
-_b07_C2C1:
-	LDA #$22
-	JMP _b07_C344_банксвич_80xx
-.export _b07_C2C6
-_b07_C2C6:
-	LDA #$23
-	JMP _b07_C344_банксвич_80xx
-.export _b07_C2CB
-_b07_C2CB:
+.export _b07_C2CB_банксвич_24
+_b07_C2CB_банксвич_24:
 	LDA #$24
 	JMP _b07_C344_банксвич_80xx
-.export _b07_C2D0
-_b07_C2D0:
-	LDA #$0E
-	JMP _b07_C344_банксвич_80xx
-_loc_07_C2D5:
+_loc_07_C2D5_банксвич_10:
 	LDA #$10
 	JMP _b07_C344_банксвич_80xx
 _loc_07_C2DA:
 	LDA #$12
-	JMP _b07_C344_банксвич_80xx
-	LDA #$1A
 	JMP _b07_C344_банксвич_80xx
 
 .export _b07_C2E4_записать_и_воспроизвести_звук
@@ -385,7 +355,7 @@ table_07_C370_младший_байт_непрямого_прыжка:
 .byte $04, < _loc_04_8015		; $17
 .byte $02, < _loc_02_8000		; $18
 .byte $05, < _loc_05_8003		; $19
-.byte $05, < _loc_05_8006		; $1A		не используется
+.byte $00,$00					; $1A		не используется, импорт _loc_05_8006 удален
 .byte $03, < _loc_03_800C		; $1B
 .byte $06, < _loc_06_8012		; $1C
 .byte $06, < _loc_06_8015		; $1D
@@ -504,7 +474,8 @@ _конец_игрового_скрипта:
 _начало_игрового_скрипта:		; игра выполняет код на кадре и возвращается сюда, направление зависит от номера экрана
 	LDA #$00
 	STA задержка_кадра
-	JSR _loc_07_C2A8
+	LDA #$16
+	JSR _b07_C344_банксвич_80xx
 	JSR _loc_07_CEA0_пауза_на_селект
 	LDA подтип_экрана
 	STA копия_подтипа_экрана
@@ -608,7 +579,7 @@ table_07_C51F_C539:
 	STA $0685
 	JSR _loc_06_BD6A
 	JSR _loc_06_BECC
-	JSR _loc_07_C29E
+	JSR _loc_07_C29E_банксвич_14
 bra_07_C57A:
 	RTS
 
@@ -617,7 +588,7 @@ table_07_C51F_C57D:
 	JSR _loc_06_BD6A
 	JSR _loc_06_BECC
 	JSR _loc_07_F3A5
-	JSR _loc_07_C29E
+	JSR _loc_07_C29E_банксвич_14
 	JSR _b07_D073
 	LDA флаг_яркости
 	BPL bra_07_C57A
@@ -634,7 +605,7 @@ table_07_C51F_C57D:
 	STA $05FA
 	STA задержка_переливания_надписи
 bra_07_C5B0:
-	JSR _loc_07_C2AD
+	JSR _loc_07_C2AD_банксвич_17
 	LDA режим_игры_на_поле
 	AND #$20
 	BEQ bra_07_C5C4
@@ -726,15 +697,15 @@ bra_07_C66B:
 	JSR _loc_07_DE47
 	JSR _loc_07_CAEE
 	JSR _loc_07_C24E_банксвич_1E
-	JSR _loc_07_C2AD
+	JSR _loc_07_C2AD_банксвич_17
 	JSR _loc_07_C271_банксвич_00
 	JSR _loc_06_BD6A
-	JSR _loc_07_C2A3
+	JSR _loc_07_C2A3_банксвич_15
 	JSR _loc_07_C285_банксвич_1B
 	JSR _loc_07_C89C
 	JSR _loc_06_BECC
-	JSR _loc_07_C29E
-	JSR _loc_07_C299
+	JSR _loc_07_C29E_банксвич_14
+	JSR _loc_07_C299_банксвич_11
 	JMP _b07_D073
 
 table_07_C51F_C699:
@@ -744,15 +715,15 @@ table_07_C51F_C699:
 	JSR _loc_07_DE0B_смена_банка_поля_при_скроллинге
 	JSR _loc_07_DE47
 	JSR _loc_07_CAEE
-	JSR _loc_07_C2AD
+	JSR _loc_07_C2AD_банксвич_17
 	JSR _loc_07_C24E_банксвич_1E
 	JSR _loc_07_C271_банксвич_00
 	JSR _loc_06_BD6A
-	JSR _loc_07_C2A3
+	JSR _loc_07_C2A3_банксвич_15
 	JSR _loc_07_C285_банксвич_1B
 	JSR _loc_07_F3A5
-	JSR _loc_07_C29E
-	JSR _loc_07_C299
+	JSR _loc_07_C29E_банксвич_14
+	JSR _loc_07_C299_банксвич_11
 	LDA таймер_катсцены
 	CMP #$20
 	BCC bra_07_C6DC
@@ -797,7 +768,7 @@ bra_07_C71B:
 	RTS
 
 table_07_C51F_C71E:
-	JSR _loc_07_C2D5
+	JSR _loc_07_C2D5_банксвич_10
 	JSR _loc_07_CA1F
 	JSR _loc_07_CA58
 	JSR _loc_07_C249_банксвич_05
@@ -814,7 +785,7 @@ _loc_07_C735:
 	RTS
 
 table_07_C51F_C743:
-	JSR _loc_07_C2D5
+	JSR _loc_07_C2D5_банксвич_10
 	JSR _loc_07_CA1F
 	JSR _loc_07_CA58
 	JSR _loc_07_C249_банксвич_05
@@ -844,7 +815,7 @@ table_07_C51F_C77D:
 	JSR _loc_06_BE42
 	JSR _loc_07_C285_банксвич_1B
 _loc_07_C786:
-	JSR _loc_07_C29E
+	JSR _loc_07_C29E_банксвич_14
 	JSR _b07_D073
 	LDA флаг_яркости
 	BPL bra_07_C7CD
@@ -883,16 +854,16 @@ table_07_C51F_C7D0:
 	JSR _loc_07_DE0B_смена_банка_поля_при_скроллинге
 	JSR _loc_07_DE47
 	JSR _loc_07_CAEE
-	JSR _loc_07_C2AD
+	JSR _loc_07_C2AD_банксвич_17
 	JSR _loc_07_C24E_банксвич_1E
 	JSR _loc_07_C271_банксвич_00
 	JSR _loc_07_D6E7
 	JSR _loc_06_BD6A
-	JSR _loc_07_C2A3
+	JSR _loc_07_C2A3_банксвич_15
 	JSR _loc_07_C80B
 	JSR _loc_07_C285_банксвич_1B
 	JSR _loc_06_BECC
-	JSR _loc_07_C29E
+	JSR _loc_07_C29E_банксвич_14
 	LDA режим_игры_на_поле
 	BNE bra_07_C808
 	LDA #$02

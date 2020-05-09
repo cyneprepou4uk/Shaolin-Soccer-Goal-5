@@ -32,9 +32,6 @@ _loc_05_8000:
 .export _loc_05_8003
 _loc_05_8003:
 	JMP _loc_05_BD38
-.export _loc_05_8006
-_loc_05_8006:
-	JMP _loc_05_BDB0
 .export _loc_05_8009
 _loc_05_8009:
 	JMP _loc_05_BB47

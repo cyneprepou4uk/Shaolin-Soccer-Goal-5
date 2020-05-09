@@ -23,7 +23,7 @@ _loc_01_8003:
 .export _loc_01_8006
 _loc_01_8006:
 	JMP _loc_01_B9C0
-.export _loc_01_8009
+.export _loc_01_8009		; не используется, удалить
 _loc_01_8009:
 	JMP _loc_01_BC12
 .export _loc_01_800C
