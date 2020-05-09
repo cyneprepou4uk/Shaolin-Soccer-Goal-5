@@ -17,10 +17,9 @@ _loc_04_8003:
 .export _loc_04_8006
 _loc_04_8006:
 	JMP _loc_04_AF8D
-	JMP _loc_04_B204
 .export _loc_04_800C
 _loc_04_800C:
-	JMP _loc_04_B204		; копия предыдущего, который не используется
+	JMP _loc_04_B204
 .export _loc_04_800F
 _loc_04_800F:
 	JMP _loc_04_B316
@@ -5593,33 +5592,30 @@ table_04_B0EF_B1D4:
 
 _loc_04_B204:
 	JSR _loc_04_B26E
-	JMP _loc_04_B20D
-	JMP _loc_04_B26E		; прыжок не используется, верхний JSR можно переписать
-_loc_04_B20D:
 	LDX #$00
-bra_04_B20F:
+@цикл_вычисления_разницы:
 	LDA приоритет_отрисовки_спрайта,X
 	AND #$1F
 	TAY
 	SEC
 	LDA координата_Y_lo,Y
 	SBC камера_Y_lo
-	STA $C1,X
+	STA рзница_координат_и_камеры,X
 	INX
 	CPX $F4
-	BCC bra_04_B20F
+	BCC @цикл_вычисления_разницы
 	LDA $F4
 	STA $2B
-	BEQ bra_04_B26D
+	BEQ bra_04_B26D___RTS
 	DEC $2B
 _loc_04_B22D:
 	LDA $2B
-	BEQ bra_04_B26D
+	BEQ bra_04_B26D___RTS
 	LDX #$00
 	STX $1C
 bra_04_B235:
-	LDA $C1,X
-	CMP $C2,X
+	LDA рзница_координат_и_камеры,X
+	CMP рзница_координат_и_камеры + 1,X
 	BCS bra_04_B25F
 	LDA приоритет_отрисовки_спрайта + 1,X
 	STA $1F
@@ -5627,22 +5623,22 @@ bra_04_B235:
 	STA приоритет_отрисовки_спрайта + 1,X
 	LDA $1F
 	STA приоритет_отрисовки_спрайта,X
-	LDA $C2,X
+	LDA рзница_координат_и_камеры + 1,X
 	STA $1F
-	LDA $C1,X
-	STA $C2,X
+	LDA рзница_координат_и_камеры,X
+	STA рзница_координат_и_камеры + 1,X
 	LDA $1F
-	STA $C1,X
+	STA рзница_координат_и_камеры,X
 	INC $1C
 bra_04_B25F:
 	INX
 	CPX $2B
 	BCC bra_04_B235
 	LDA $1C
-	BEQ bra_04_B26D
+	BEQ bra_04_B26D___RTS
 	DEC $2B
 	JMP _loc_04_B22D
-bra_04_B26D:
+bra_04_B26D___RTS:
 	RTS
 
 _loc_04_B26E:
