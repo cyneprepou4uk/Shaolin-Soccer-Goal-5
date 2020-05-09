@@ -2654,7 +2654,5 @@ table_02_BEEC_BF77:
 table_02_BEEC_BF90:
 .byte $C8,$1C,$11,$32,$33,$C2,$8C,$6C,$00,$00,$43,$58,$8C,$00,$12,$C1,$A8,$94,$00,$01
 
-; BFA4 fill FF
-
 .segment "BANK_02_ID"
-.byte $02 
+.byte $02

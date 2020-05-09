@@ -7606,7 +7606,5 @@ table_05_BFA2:
 .byte $41,$07
 .byte $5D,$07
 
-; BFCA fill FF
-
 .segment "BANK_05_ID"
-.byte $05 
+.byte $05

@@ -7955,4 +7955,4 @@ bra_06_BEE7:
 	RTS
 
 .segment "BANK_06_ID"
-.byte $06 
+.byte $06

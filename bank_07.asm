@@ -7421,4 +7421,4 @@ _общий_RTS:
 .segment "VECTORS"
 .word _обработчик_NMI
 .word _обработчик_RESET
-.word _обработчик_IRQ 
+.word _обработчик_IRQ

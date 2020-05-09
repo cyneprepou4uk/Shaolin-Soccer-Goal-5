@@ -7356,7 +7356,5 @@ off_04_BF70:
 .byte $01,$42,$01,$43,$01,$44,$01,$C3
 .byte $FE
 
-; BF79 fill FF
-
 .segment "BANK_04_ID"
-.byte $04 
+.byte $04
