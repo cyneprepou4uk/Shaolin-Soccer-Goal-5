@@ -378,8 +378,7 @@ _b07_C344_банксвич_80xx:
 	LDA $F6
 _восстановление_банка_PRG:		; для кодов, которые не используют таблицу
 	PLA
-	JSR _главный_банксвич_PRG
-	RTS
+	JMP _главный_банксвич_PRG
 _loc_07_C36D_непрямой_прыжок:
 	JMP ($00F6)
 
@@ -6564,7 +6563,6 @@ bra_07_F7DC:
 	LDA #$00
 	SEC
 	SBC $2A
-	JMP _loc_07_F7ED
 _loc_07_F7ED:
 	STA $42
 	PLA
@@ -6573,6 +6571,7 @@ _loc_07_F7ED:
 	STA $2A
 	LDA $42
 	RTS
+
 _loc_07_F7F8:
 	LDA $39
 	CMP $3B
@@ -6592,6 +6591,7 @@ bra_07_F80F:
 	LDA #$01
 	SEC
 	RTS
+
 _loc_07_F813:
 	LDA $3B
 	STA $1E
@@ -6640,6 +6640,7 @@ _loc_07_F866:
 	LDY $2B
 	LDA $2A
 	RTS
+
 _loc_07_F86B:
 	LDA $39
 	STA $1E
@@ -6688,6 +6689,7 @@ _loc_07_F8BE:
 	LDY $2B
 	LDA $2A
 	RTS
+
 _loc_07_F8C3:
 	LDA $2E
 	EOR #$FF
@@ -6699,6 +6701,7 @@ _loc_07_F8C3:
 	ADC #$00
 	STA $2F
 	RTS
+
 _loc_07_F8D5:
 	LDA $30
 	EOR #$FF
@@ -6976,10 +6979,8 @@ bra_07_FB09:
 	STA $0578,X
 	STA $056C,X
 	STA $0570,X
-_loc_07_FB15:
 bra_07_FB15:
-	JSR _loc_07_FB5F
-	RTS
+	JMP _loc_07_FB5F
 bra_07_FB19:
 	ASL
 	ASL
@@ -6994,7 +6995,7 @@ _loc_07_FB26:
 	STA $0570,X
 	LDA $1C
 	STA $056C,X
-	JMP _loc_07_FB15
+	JMP _loc_07_FB5F
 bra_07_FB36:
 	LDA $1C
 	AND $0574,X
@@ -7012,7 +7013,6 @@ bra_07_FB52:
 	STA $0574,X
 	LDA #$00
 	STA $0578,X
-	JMP _loc_07_FB15
 _loc_07_FB5F:
 	LDA #$00
 	STA $057C,X
@@ -7057,6 +7057,7 @@ _обработчик_NMI:
 	JMP _вид_NMI_80
 @C0:
 	JMP _вид_NMI_C0
+
 _вид_NMI_00:
 	LDA байт_для_2000
 	AND #$7F
