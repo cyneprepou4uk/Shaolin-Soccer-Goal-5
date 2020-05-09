@@ -6363,7 +6363,7 @@ bra_07_F61D:
 	ROL $24
 	ROL $25
 	BCC bra_07_F5FC
-bra_07_F625:
+bra_07_F625:	; логгер пока не зафиксировал
 	PLA
 	TAY
 	PLA
@@ -6377,41 +6377,8 @@ bra_07_F62B:
 	TAX
 	CLC
 	RTS
-	STA $2C
-	STA $2E
-	LDA #$00
-	STA $2D
-	STA $2F
-	JSR _b07_F564
-	RTS
-	LDA $1C
-	PHA
-	LDA $1D
-	PHA
-	STY $1D
-	STX $1C
-	LDX #$08
-	LDA #$00
-	ASL $1C
-bra_07_F64F:
-	ROL
-	CMP $1D
-	BCC bra_07_F656
-	SBC $1D
-bra_07_F656:
-	ROL $1C
-	DEX
-	BNE bra_07_F64F
-	TAX
-	LDY $1C
-	PLA
-	STA $1D
-	PLA
-	STA $1C
-	TYA
-	RTS
 
-.export _b07_F67D
+.export _b07_F67D		; логгер пока не зафиксировал
 _b07_F67D:
 	LDA координата_X_lo,Y
 	STA $2E
