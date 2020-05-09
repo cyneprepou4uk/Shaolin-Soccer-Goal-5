@@ -210,6 +210,7 @@ bra_05_81CD:
 _loc_05_81CF:
 	STA номер_кнопки_опций
 	RTS
+
 _loc_05_81D3:
 	LDA номер_кнопки_опций
 	CMP #$05
@@ -413,6 +414,7 @@ bra_05_8321:
 	ADC $31
 	STA $31
 	RTS
+
 _loc_05_8338:
 	LDA подтип_экрана
 	BMI bra_05_8342
@@ -486,8 +488,7 @@ table_05_834B_83CA:
 bra_05_83D2:
 	JSR _b07_D073
 	JSR _loc_05_8041
-	JSR _loc_05_8014
-	RTS
+	JMP _loc_05_8014
 
 table_05_834B_83DE:
 	LDX #$02
@@ -573,8 +574,7 @@ bra_05_8468:
 	JSR _b07_EB8C
 bra_05_846E:
 	JSR _loc_05_8041
-	JSR _loc_05_8014
-	RTS
+	JMP _loc_05_8014
 
 table_05_834B_8475:
 	LDX #$02
@@ -940,16 +940,14 @@ _loc_05_8731:
 	JSR _b07_запись_банков_спрайтов
 	JSR _loc_05_8953
 	LDA #МУЗЫКА_ПРОХОЖДЕНИЕ
-	JSR _b07_C2E4_записать_и_воспроизвести_звук
-	RTS
+	JMP _b07_C2E4_записать_и_воспроизвести_звук
 
 table_05_872D_875D:
 	LDA флаг_яркости
 	BPL bra_05_8765
 	INC счетчик_опций
 bra_05_8765:
-	JSR _b07_D073
-	RTS
+	JMP _b07_D073
 
 table_05_872D_876B:
 	LDX #$00
@@ -1010,8 +1008,7 @@ table_05_8780_87CB:
 	LDA #$00
 	JSR _loc_05_828D
 	JSR _b07_EB8C
-	JSR _loc_05_8014
-	RTS
+	JMP _loc_05_8014
 
 _loc_05_87DC:
 	JSR _loc_05_8205
@@ -1048,6 +1045,7 @@ bra_05_8849:
 	LSR
 	STA номер_опции
 	RTS
+
 _loc_05_884F:
 	LDA номер_опции
 	ASL
@@ -1062,6 +1060,7 @@ _loc_05_884F:
 	LDA table_05_A6D1_музыка_материка,Y
 	STA номер_музыки
 	RTS
+
 _loc_05_8868:
 	LDA номер_опции
 	ASL
@@ -1087,6 +1086,7 @@ _loc_05_8885:
 	LDA #$03
 	STA подтип_экрана
 	RTS
+
 _loc_05_8893:
 	LDA подтип_экрана
 	BMI bra_05_88A2
@@ -1107,8 +1107,7 @@ table_05_88A8_88AC:
 	BPL bra_05_88B4
 	INC счетчик_опций
 bra_05_88B4:
-	JSR _b07_D073
-	RTS
+	JMP _b07_D073
 
 table_05_88A8_88BA:
 	LDA одноразовые_кнопки
@@ -1151,6 +1150,7 @@ bra_05_88F6:
 	DEY
 	BPL bra_05_88F6
 	RTS
+
 _loc_05_88FF:
 	STY $44
 	LDA номер_опции
@@ -1269,8 +1269,7 @@ _loc_05_899E:
 	STA байт_2006_hi_атрибуты
 	JSR _b07_EFAD
 	JSR _b07_включить_рендеринг
-	JSR _b07_включить_NMI
-	RTS
+	JMP _b07_включить_NMI
 
 table_05_89E1:		; байты для 2006
 .byte $EE,$20
@@ -1364,6 +1363,7 @@ bra_05_8A6F:
 	DEY
 	BPL bra_05_8A6F
 	RTS
+
 _loc_05_8A79:
 	LDX #$00
 	LDY #$00
@@ -1385,6 +1385,7 @@ _loc_05_8A79:
 	LDA #$23
 	STA байт_2006_hi_атрибуты
 	RTS
+
 _loc_05_8AA8:
 bra_05_8AA8:
 	LDA $046E,Y
@@ -1395,11 +1396,13 @@ bra_05_8AA8:
 	CPY $1C
 	BCC bra_05_8AA8
 	RTS
+
 _loc_05_8AB7:
 	LDA #$FF
 	STA буфер_атрибутов,X
 	INX
 	RTS
+
 _loc_05_8ABE:
 	LDA подтип_экрана
 	BMI bra_05_8AC8
@@ -1474,8 +1477,7 @@ bra_05_8B06:
 	STA координата_Y_hi_мяча
 	STA координата_Z_lo_мяча
 	STA координата_Z_hi_мяча
-	JSR _loc_05_8D0A
-	RTS
+	JMP _loc_05_8D0A
 
 table_05_8AD1_8B6E:
 	LDA флаг_яркости
@@ -1604,6 +1606,7 @@ _loc_05_8C2D:		; сюда 2 прыжка и 1 переход
 	LDA #$3F
 	STA байт_2006_hi_палитра
 	RTS
+
 _loc_05_8C73:
 	JSR _loc_05_8205
 
@@ -1697,8 +1700,7 @@ bra_05_8D4A:
 	JSR _b07_включить_рендеринг
 	JSR _b07_включить_NMI
 	LDA #МУЗЫКА_МЕНЮ
-	JSR _b07_C2E4_записать_и_воспроизвести_звук
-	RTS
+	JMP _b07_C2E4_записать_и_воспроизвести_звук
 
 table_05_8D61:
 .byte $20,$6A,$02,$9D,$9F
@@ -1756,8 +1758,7 @@ _loc_05_8DD0:
 	JSR _loc_05_8E3C
 	JSR _loc_05_8F79
 	LDA #МУЗЫКА_ЭКРАН_VS
-	JSR _b07_C2E4_записать_и_воспроизвести_звук
-	RTS
+	JMP _b07_C2E4_записать_и_воспроизвести_звук
 
 table_05_8DCC_8DFD:
 	LDA флаг_яркости
@@ -1770,8 +1771,7 @@ table_05_8DCC_8E08:
 	BIT флаг_яркости
 	BPL bra_05_8E32
 	BVC bra_05_8E15
-	JSR _loc_05_8F73
-	RTS
+	JMP _loc_05_8F73
 bra_05_8E15:
 	LDA одноразовые_кнопки
 	AND #(КНОПКА_СТАРТ)
@@ -1791,8 +1791,7 @@ _loc_05_8E32:
 bra_05_8E32:
 	JSR _loc_05_8EE5
 	JSR _loc_05_8014
-	JSR _b07_D073
-	RTS
+	JMP _b07_D073
 
 _loc_05_8E3C:
 	LDX #$00
@@ -1934,8 +1933,7 @@ bra_05_8F52:
 	STA скорость_X_lo,X
 	LDA table_05_8F6D_скорость_X + 1,Y
 	STA скорость_X_hi,X
-	JSR _loc_05_801E
-	RTS
+	JMP _loc_05_801E
 
 ; 60fps скорость X	+++
 table_05_8F6D_скорость_X:
@@ -1947,6 +1945,7 @@ _loc_05_8F73:
 	LDA #$04
 	STA подтип_экрана
 	RTS
+
 _loc_05_8F79:
 	JSR _b07_ECA9
 	JSR _b07_выключить_NMI
@@ -1968,8 +1967,7 @@ bra_05_8F86:
 	JSR _loc_05_BE9F
 	JSR _loc_05_BEFA
 	JSR _b07_включить_рендеринг
-	JSR _b07_включить_NMI
-	RTS
+	JMP _b07_включить_NMI
 
 table_05_8FAB:		; вероятно первые 4 байта не нужны
 .byte $E6,$20
@@ -1997,8 +1995,7 @@ _loc_05_8FCF:
 	LDA table_05_8FE0 + 1
 	STA $31
 	LDA номер_движения,X
-	JSR _b07_CEBD
-	RTS
+	JMP _b07_CEBD
 
 table_05_8FE0:
 .word table_05_8FE0_8FE2
@@ -2069,8 +2066,7 @@ _loc_05_901C:
 	STA банк_спрайтов + 3
 	JSR _b07_запись_банков_спрайтов
 	LDA #МУЗЫКА_МЕНЮ
-	JSR _b07_C2E4_записать_и_воспроизвести_звук
-	RTS
+	JMP _b07_C2E4_записать_и_воспроизвести_звук
 
 table_05_9018_9060:
 	LDA флаг_яркости
@@ -2130,8 +2126,8 @@ bra_05_90B7:
 	INX
 	CPX #$04
 	BCC bra_05_90B7
-	JSR _loc_05_8014
-	RTS
+	JMP _loc_05_8014
+
 _loc_05_90C7:
 	JSR _loc_05_8205
 
@@ -2151,6 +2147,7 @@ _loc_05_90FC:
 	LDA #$02
 	STA номер_опции
 	RTS
+
 _loc_05_9102:
 	LDX счетчик_смен
 	LDA номер_команды,X
@@ -2228,7 +2225,7 @@ _loc_05_9194:
 	JSR _b07_EC8F
 
 table_05_919A:		; байты после JSR
-.word table_05_919A_91AE
+.word _общий_RTS
 .word table_05_919A_91AF
 .word table_05_919A_91AF
 .word table_05_919A_91AF
@@ -2238,17 +2235,14 @@ table_05_919A:		; байты после JSR
 .word table_05_919A_91AF
 .word table_05_919A_91AF
 .word table_05_919A_91AF
-
-table_05_919A_91AE:
-	RTS
 
 table_05_919A_91AF:
 	LDA номер_движения,X
 	BMI bra_05_91B7
 	JSR _loc_05_91BB
 bra_05_91B7:
-	JSR _loc_05_91D5
-	RTS
+	JMP _loc_05_91D5
+
 _loc_05_91BB:
 	ORA #$80
 	STA номер_движения,X
