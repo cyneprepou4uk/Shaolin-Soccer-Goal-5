@@ -4738,47 +4738,41 @@ bra_07_E75F:
 	CMP #$40
 	BCC bra_07_E798
 	CMP #$6C
-	BCC bra_07_E7B8
+	BCC bra_07_E7C8
 	JMP _loc_07_E7BD
 bra_07_E78D:
 	CMP #$95
 	BCC bra_07_E798
 	CMP #$E8
-	BCC bra_07_E7B8
+	BCC bra_07_E7C8
 	JMP _loc_07_E7BD
 bra_07_E798:
 	LDA цвет_поля
 	CMP #$04
 	BEQ bra_07_E7B3
 	AND #$01
-	BEQ bra_07_E7AE
+	BEQ bra_07_E7C8
 	LDA опция_поверхность_влажность
 	AND #$0F
 	CLC
 	ADC #$01
-	JMP _loc_07_E7B0
-bra_07_E7AE:
-	LDA #$00
-_loc_07_E7B0:
-	JMP _loc_07_E7D1
+	BNE _loc_07_E7D1_запись_в_013x
 bra_07_E7B3:
 	LDA #$03
-	JMP _loc_07_E7D1
-bra_07_E7B8:
-	LDA #$00
-	JMP _loc_07_E7D1
+	BNE _loc_07_E7D1_запись_в_013x
 _loc_07_E7BD:
 	LDA цвет_поля
 	AND #$01
 	BEQ bra_07_E7C9
+bra_07_E7C8:
 	LDA #$00
-	JMP _loc_07_E7D1
+	JMP _loc_07_E7D1_запись_в_013x
 bra_07_E7C9:
 	LDA опция_поверхность_влажность
 	AND #$0F
 	CLC
 	ADC #$01
-_loc_07_E7D1:
+_loc_07_E7D1_запись_в_013x:
 	STA $0130,X
 	PLA
 	JMP _главный_банксвич_PRG
