@@ -1344,13 +1344,12 @@ _loc_07_CB5F:
 	LDA #ЗВУК_ГВИНЕЙСКАЯ_КРУТИЛКА
 	JSR _b07_C2E4_записать_и_воспроизвести_звук
 bra_07_CB82:
-	JMP _loc_07_CB8F
+	JMP _loc_07_C647
 bra_07_CB85:
 	LDA одноразовые_кнопки
 	BEQ bra_07_CB8F
 	LDA #$00
 	STA $06FD
-_loc_07_CB8F:
 bra_07_CB8F:
 	JMP _loc_07_C647
 bra_07_CB92:
