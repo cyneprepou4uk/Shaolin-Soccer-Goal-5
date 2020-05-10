@@ -17,7 +17,7 @@
 .import _b07_E6F0
 .import _b07_EB8C
 .import _b07_EC8F
-.import _b07_вращение_рандома
+.import _b07_вращение_колеса_фортуны
 .import _b07_F4C1
 .import _b07_F691
 .import _b07_F96A
@@ -5999,7 +5999,7 @@ bra_06_AEBE:
 	LDA защита_поведение,Y
 	AND #$03
 	TAY
-	JSR _b07_вращение_рандома
+	JSR _b07_вращение_колеса_фортуны
 	CMP table_06_B040,Y
 	BCC bra_06_AF25
 bra_06_AEE0:
@@ -7929,7 +7929,7 @@ bra_06_BEBA:
 	LDA счетчик_кадров
 	AND #$07
 	BNE bra_06_BECB
-	JSR _b07_вращение_рандома
+	JSR _b07_вращение_колеса_фортуны
 	BPL bra_06_BECB
 	LDA #ЗВУК_ЗРИТЕЛИ_СВИСТ
 bra_06_BEC8:

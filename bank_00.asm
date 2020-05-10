@@ -2,7 +2,7 @@
 .include "bank_ram_copy.inc"
 
 .import _b07_C2E4_записать_и_воспроизвести_звук
-.import _b07_вращение_рандома
+.import _b07_вращение_колеса_фортуны
 .import _b07_C344_банксвич_80xx
 .import _b07_EC8F
 
@@ -2591,7 +2591,7 @@ bra_00_BC6A:
 	BPL bra_00_BC6A
 	LDA #$00
 	STA $068E
-	JSR _b07_вращение_рандома
+	JSR _b07_вращение_колеса_фортуны
 	STA $068F
 	LDA #< table_00_BDF8
 	STA $2E
@@ -2907,7 +2907,7 @@ _loc_00_BFD2:
 	BCC bra_00_BF70
 	BCS bra_00_BF63
 _loc_00_BFDE:
-	JSR _b07_вращение_рандома
+	JSR _b07_вращение_колеса_фортуны
 	BPL bra_00_BF63
 	BMI bra_00_BF71
 	RTS
