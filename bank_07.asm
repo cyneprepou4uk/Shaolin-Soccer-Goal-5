@@ -6999,17 +6999,10 @@ bra_07_FB9B:
 	RTS
 
 _обработчик_NMI:
+.SCOPE
 	BIT флаг_NMI
-	BMI @80_или_C0
-	BVC _вид_NMI_00
-@80_или_C0:
-	BVS @C0
-	JMP _вид_NMI_80
-@C0:
-	JMP _вид_NMI_C0
-
-_вид_NMI_00:
-	LDA байт_для_2000
+	BMI _флаг_80_C0
+	LDA байт_для_2000		; флаг NMI 00
 	AND #$7F
 	STA байт_для_2000
 	STA $2000
@@ -7022,7 +7015,7 @@ _вид_NMI_00:
 	PLA
 	RTS
 
-_вид_NMI_80:
+_флаг_80_C0:
 	PHA
 	TXA
 	PHA
@@ -7064,55 +7057,12 @@ _вид_NMI_80:
 	ORA $0C
 	STA байт_для_2000
 	STA $2000
-	JSR _loc_07_C308
-	JMP _loc_07_C478_увеличить_задержку_и_выйти
-
-_вид_NMI_C0:
-	PHA
-	TXA
-	PHA
-	TYA
-	PHA
-	LDA байт_для_8000
-	PHA
-	LDA $BFFF
-	PHA
-	LDA $0C
-	PHA
-	LDA $0D
-	PHA
-	JSR _запись_2003_4014
-	JSR _b07_EFAD
-	LDX #$00
-	STX $8000
-	LDA банк_фона
-	STA $8001
-	INX
-	STX $8000
-	LDA банк_фона + 1
-	STA $8001
+	BIT флаг_NMI
+	BVC @общее_для_NMI
 	LDX #$05
 	STX $8000
 	LDA банк_спрайтов + 3
 	STA $8001
-	LDA $2002
-	LDA камера_X_lo
-	STA $2005
-	LDA камера_Y_lo
-	STA $2005
-	LDA камера_X_hi
-	AND #$01
-	STA $0C
-	LDA камера_Y_hi
-	AND #$01
-	ASL
-	ORA $0C
-	STA $0C
-	LDA байт_для_2000
-	AND #$FC
-	ORA $0C
-	STA байт_для_2000
-	STA $2000
 	LDA #$B8
 	STA $C000
 	STA $C001
@@ -7122,9 +7072,12 @@ _вид_NMI_C0:
 	JSR _loc_07_DB78
 	JSR _loc_07_DA81
 	JSR _loc_07_DCB1
+@общее_для_NMI:
 	JSR _loc_07_C308
-_loc_07_C478_увеличить_задержку_и_выйти:
 	INC задержка_кадра
+.ENDSCOPE
+
+; продолжение NMI
 _выход_из_NMI_и_IRQ:
 	PLA
 	STA $0D
