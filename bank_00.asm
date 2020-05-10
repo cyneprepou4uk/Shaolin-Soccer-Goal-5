@@ -2728,7 +2728,7 @@ bra_00_BD7D:
 	LDY #$1B
 	LDA #$00
 bra_00_BDA0:
-	STA $056C,Y
+	STA сумма_удержанных_кнопок,Y
 	DEY
 	BPL bra_00_BDA0
 	RTS
