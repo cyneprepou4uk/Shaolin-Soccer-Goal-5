@@ -115,8 +115,8 @@ table_02_AA70:		; байты после JSR
 .word table_02_AA70_ABCE
 
 table_02_AA70_AA88:
-	LDA #$80
-	STA разновидность_NMI
+	LDA #NMI_ВЫКЛ_IRQ
+	STA флаг_NMI
 	JSR _loc_02_AE49_очистить_оперативную_память
 	JSR _loc_02_AE3D_задержка
 	JSR _loc_02_AE3D_задержка
@@ -318,8 +318,8 @@ bra_02_AC27:
 	JSR _loc_02_AA25
 	JSR _loc_02_AA2A
 	JSR _loc_02_AA11
-	LDA #$C0
-	STA разновидность_NMI
+	LDA #NMI_ВКЛ_IRQ
+	STA флаг_NMI
 	RTS
 
 table_02_AA70_AC43:
@@ -2240,8 +2240,8 @@ table_02_BB62_BB78:
 	JSR _b07_EF54_отобразить_спрайты_слева_8_пикселей
 	LDA #$F0
 	STA ограничитель_Y_спрайтов
-	LDA #$80
-	STA разновидность_NMI
+	LDA #NMI_ВЫКЛ_IRQ
+	STA флаг_NMI
 	LDA #$00
 	STA камера_X_lo
 	STA камера_Y_lo

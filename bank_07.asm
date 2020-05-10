@@ -421,8 +421,8 @@ _обработчик_RESET:
 	LDA #$06
 	JSR _главный_банксвич_PRG
 	JSR _очистка_ppu_и_спрайтов
-	LDA #$C0
-	STA разновидность_NMI
+	LDA #NMI_ВКЛ_IRQ
+	STA флаг_NMI
 	LDA #$25
 	STA адрес_рандома
 	STA адрес_рандома + 1
@@ -435,8 +435,8 @@ _обработчик_RESET:
 	JSR _b07_C2E4_записать_и_воспроизвести_звук
 	LDA #$00
 	STA $52
-	LDA #$C0
-	STA разновидность_NMI
+	LDA #NMI_ВКЛ_IRQ
+	STA флаг_NMI
 	LDA #$8C
 	STA байт_для_2000
 	STA $2000
@@ -520,8 +520,8 @@ _ручной_пропуск_демо_или_уменьшение_таймера
 	JSR _b07_D062
 	LDA $2B
 	STA подтип_экрана
-	LDA #$80
-	STA разновидность_NMI
+	LDA #NMI_ВЫКЛ_IRQ
+	STA флаг_NMI
 	LDA #$01
 	STA номер_экрана
 	PLA
@@ -559,8 +559,8 @@ table_07_C51F:
 .word table_07_C51F_C77D
 
 table_07_C51F_C539:
-	LDA #$C0
-	STA разновидность_NMI
+	LDA #NMI_ВКЛ_IRQ
+	STA флаг_NMI
 	JSR _loc_07_EF5A_скрыть_спрайты_и_фон_слева_8_пикселей
 	JSR _loc_07_CF93
 	JSR _loc_07_DE0B_смена_банка_поля_при_скроллинге
@@ -5310,10 +5310,10 @@ _b07_EC8F:
 .export _b07_ECA9
 _b07_ECA9:
 	PHA
-	LDA разновидность_NMI
+	LDA флаг_NMI
 	PHA
-	LDA #$00
-	STA разновидность_NMI
+	LDA #NMI_ОТКЛЮЧИТЬ
+	STA флаг_NMI
 	LDA байт_для_2000		; тут лучше сделать jsr на _b07_включить_NMI
 	ORA #$80
 	STA байт_для_2000
@@ -5773,9 +5773,7 @@ _loc_07_F123:
 	STA $2007
 	INX
 	CPX #$07
-	BEQ bra_07_F13F
-	JMP _loc_07_F123
-bra_07_F13F:
+	BNE _loc_07_F123
 	LDX #$00
 _loc_07_F141:
 	LDA $2002
@@ -5787,8 +5785,7 @@ _loc_07_F141:
 	STA $2007
 	INX
 	CPX #$04
-	BEQ _loc_07_F15D
-	JMP _loc_07_F141
+	BNE _loc_07_F141
 _loc_07_F15D:
 	LDA флаг_обновления_тайлов_экрана
 	AND #$BF
@@ -6007,7 +6004,7 @@ _loc_07_F340_нарисовать_таймер_и_следы:
 
 _loc_07_F3A5:
 	LDA $05FA
-	BMI bra_07_F3D3
+	BMI @RTS_1
 	CMP #$07
 	BEQ bra_07_F3D4
 	LDA #$AA
@@ -6025,7 +6022,7 @@ _loc_07_F3A5:
 	LDA #$2B
 	STA байт_2006_hi_графика
 	INC $05FA
-bra_07_F3D3:
+@RTS_1:
 	RTS
 bra_07_F3D4:
 	LDA счетчик_кадров
@@ -6035,14 +6032,15 @@ bra_07_F3D4:
 bra_07_F3DE:
 	LDA задержка_переливания_надписи
 	CMP #$FF
-	BNE bra_07_F3D3
+	BNE @RTS_2
 	LDA #$FE
 	STA задержка_переливания_надписи
 	LDA $05FA
 	CMP #$07
-	BNE bra_07_F3D3
+	BNE @RTS_2
 	LDA #$00
 	STA $05FA
+@RTS_2:
 	RTS
 
 .export _b07_F469
@@ -7001,7 +6999,7 @@ bra_07_FB9B:
 	RTS
 
 _обработчик_NMI:
-	BIT разновидность_NMI
+	BIT флаг_NMI
 	BMI @80_или_C0
 	BVC _вид_NMI_00
 @80_или_C0:
@@ -7020,7 +7018,7 @@ _вид_NMI_00:
 	PLA
 	PLA
 	PLA
-	STA разновидность_NMI
+	STA флаг_NMI
 	PLA
 	RTS
 

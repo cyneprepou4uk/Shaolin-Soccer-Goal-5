@@ -82,8 +82,8 @@ table_05_805A_8083:
 	RTS
 
 _loc_05_80DF:
-	LDA #$80
-	STA разновидность_NMI
+	LDA #NMI_ВЫКЛ_IRQ
+	STA флаг_NMI
 	LDA #$00		; сделать тут цикл для экономии байтов
 	STA камера_X_lo
 	STA камера_X_hi
