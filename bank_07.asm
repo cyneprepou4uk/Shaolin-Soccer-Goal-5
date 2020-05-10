@@ -1167,6 +1167,7 @@ _loc_07_CA1F:
 	LDA #$66
 	STA банк_фона + 1
 	LDA #$00
+	STA $A000
 	STA камера_X_lo
 	STA камера_Y_lo
 	STA камера_Y_hi
@@ -1176,8 +1177,6 @@ _loc_07_CA1F:
 	LDA #$01
 	STA камера_X_hi
 	STA копия_камеры_X_hi
-	LDA #$00
-	STA $A000
 	JSR _b07_ECA9
 	JSR _b07_выключить_NMI
 	JMP _b07_выключить_рендеринг
