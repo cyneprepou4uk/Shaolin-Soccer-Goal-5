@@ -1558,11 +1558,11 @@ _b07_CD2F:
 	BMI bra_07_CD37
 	RTS
 bra_07_CD37:
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	BNE bra_07_CD3F
 	JSR _b07_E6F0
 bra_07_CD3F:
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	BEQ bra_07_CD4A
 	CMP #$02
 	BCS bra_07_CD66
@@ -1580,7 +1580,7 @@ bra_07_CD58:
 	STA координата_Z_sub,X
 	RTS
 bra_07_CD66:
-	LDY $0130,X
+	LDY игрок_на_поверхности,X
 	DEY
 	DEY
 	LDA координата_Z_lo,X
@@ -1589,7 +1589,7 @@ bra_07_CD66:
 	LDA table_07_CDC9,Y
 	STA координата_Z_lo,X
 bra_07_CD79:
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	CMP #$02
 	BNE bra_07_CDC6
 	LDA скорость_X_hi,X
@@ -1598,11 +1598,11 @@ bra_07_CD79:
 	ORA скорость_Y_lo,X
 	BEQ bra_07_CDC6
 	JSR _b07_E6F0
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	CMP #$02
 	BEQ bra_07_CDC6
 	LDA #$02
-	STA $0130,X
+	STA игрок_на_поверхности,X
 	LDA $0513
 	STA координата_X_lo,X
 	LDA $0514
@@ -1639,7 +1639,7 @@ _b07_CDCB:
 	STA гравитация_hi,X
 	RTS
 bra_07_CDE2:
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	CMP #$02
 	BCS bra_07_CDF7
 	LDA #$00
@@ -1651,7 +1651,7 @@ bra_07_CDF7:
 	LDA номер_движения,X
 	ASL
 	TAY
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	AND #$01
 	BEQ bra_07_CE04
 	INY
@@ -4773,7 +4773,7 @@ bra_07_E7C9:
 	CLC
 	ADC #$01
 _loc_07_E7D1_запись_в_013x:
-	STA $0130,X
+	STA игрок_на_поверхности,X
 	PLA
 	JMP _главный_банксвич_PRG
 

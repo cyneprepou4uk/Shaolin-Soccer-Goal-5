@@ -980,7 +980,7 @@ bra_06_8772:
 	BNE bra_06_879E
 bra_06_8773:
 	JSR _loc_06_A021
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	CMP #$02
 	BCC bra_06_878B
 	LDA скорость_Z_hi,X
@@ -1757,7 +1757,7 @@ bra_06_8DF5:
 	LDA $2D
 	ADC координата_X_hi,X
 	STA координата_X_hi,X
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	CMP #$02
 	BEQ bra_06_8E1D
 	LDA координата_Z_hi,X
@@ -1918,7 +1918,7 @@ bra_06_8F4A:
 	JSR _b07_C2CB_банксвич_24
 	LDA #ЗВУК_ОТСКОК_СУПЕРА_ОТ_ЗЕМЛИ
 	JSR _b07_C2E4_записать_и_воспроизвести_звук
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	CMP #$02
 	BCC bra_06_8F7A
 	LDA номер_супера
@@ -1950,7 +1950,7 @@ bra_06_8F97:
 	JSR _loc_06_977B
 	JSR _loc_06_97B1
 	LDY #$00
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	CMP #$02
 	BCC bra_06_8FB2
 	JSR _loc_06_983F
@@ -1982,7 +1982,7 @@ table_06_8CAF_8FC8:
 	STA гравитация_hi,X
 	STA гравитация_lo,X
 bra_06_8FE1:
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	CMP #$02
 	BCC bra_06_900F
 	JSR _loc_06_9CC9
@@ -2050,7 +2050,7 @@ table_06_8CAF_905F:
 	LDA #$01
 	JSR _loc_06_94D9
 bra_06_9071:
-	LDA $013C
+	LDA мяч_на_поверхности
 	ASL
 	ASL
 	TAY
@@ -2624,7 +2624,7 @@ _loc_06_94D9:
 	ASL
 	CLC
 	ADC $1E
-	ADC $013C
+	ADC мяч_на_поверхности
 	STA $1E
 	LDA #$00
 	STA $2C
@@ -2958,7 +2958,7 @@ table_06_971F_скорость_Y:
 
 _loc_06_972F:
 	JSR _loc_06_977B
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	BNE bra_06_9742
 	LDA #$00
 	STA координата_Z_sub,X
@@ -2991,13 +2991,13 @@ _loc_06_977B:
 	LDA флаг_видимости,X
 	BNE bra_06_9787
 	LDA #$00
-	STA $0130,X
+	STA игрок_на_поверхности,X
 	BEQ bra_06_97B0
 bra_06_9787:
 	LDA номер_экрана
 	BNE bra_06_97B0
 	JSR _b07_E6F0
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	BEQ bra_06_97B0
 	LDA состояние_мяча
 	AND #$10
@@ -3016,7 +3016,7 @@ bra_06_97B0:
 	RTS
 
 _loc_06_97B1:
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	CMP #$01
 	BNE bra_06_97C5
 	CLC
@@ -3252,7 +3252,7 @@ _loc_06_994C:
 	LDY #$00
 	LDA тип_скорости,X
 	BMI bra_06_998B
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	AND #$03
 	TAY
 	JMP _loc_06_998B
@@ -3402,7 +3402,7 @@ _loc_06_9A7A:
 	LDY тип_скорости,X
 	BMI bra_06_9A87
 	CLC
-	ADC $0130,X
+	ADC игрок_на_поверхности,X
 bra_06_9A87:
 	ASL
 	TAY
@@ -4046,7 +4046,7 @@ _loc_06_9F9B:
 	AND #$10
 	BEQ bra_06_9FD5
 	LDA #$00
-	STA $0130,X
+	STA игрок_на_поверхности,X
 	LDY #$00
 	LDA номер_движения_мяча
 	AND #$7F
@@ -4120,14 +4120,14 @@ table_06_A01F:
 
 _loc_06_A021:
 	LDA #$00
-	STA $0130,X
+	STA игрок_на_поверхности,X
 	LDA номер_экрана
 	BNE bra_06_A03E
 	LDA флаг_видимости,X
 	BEQ bra_06_A031
 	JSR _b07_E6F0
 bra_06_A031:
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	BEQ bra_06_A03E
 	LDA состояние_игрока,X
 	BMI bra_06_A03E
@@ -5501,7 +5501,7 @@ _loc_06_AA1B:
 	LDA номер_скилла,X
 	LSR
 	BCS bra_06_AA47
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	BEQ bra_06_AA47
 	CMP #$03
 	BCS bra_06_AA47
@@ -5629,7 +5629,7 @@ _loc_06_AB0B:
 	JSR _loc_06_9856
 	LDA состояние_мяча
 	BMI bra_06_AB2A
-	LDA $0130,X
+	LDA игрок_на_поверхности,X
 	BEQ bra_06_AB2A
 	CMP #$03
 	BCS bra_06_AB2A
