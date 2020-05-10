@@ -1247,23 +1247,23 @@ bra_07_CACC:
 	JMP _loc_07_CAA7
 _loc_07_CACF:
 	LDA #$80
-	JMP _loc_07_CAEA
+	BNE _loc_07_CAEA_запись_в_0630
 bra_07_CAD4:
 	LDA #$81
-	JMP _loc_07_CAEA
+	BNE _loc_07_CAEA_запись_в_0630
 bra_07_CAD9:
 	LDA #$01
-	JMP _loc_07_CAEA
+	BNE _loc_07_CAEA_запись_в_0630
 _loc_07_CADE:
 bra_07_CADE:
 	LDA #$00
-	JMP _loc_07_CAEA
+	BEQ _loc_07_CAEA_запись_в_0630
 bra_07_CAE3:
 	LDA #$02
-	JMP _loc_07_CAEA
+	BNE _loc_07_CAEA_запись_в_0630
 bra_07_CAE8:
 	LDA #$82
-_loc_07_CAEA:
+_loc_07_CAEA_запись_в_0630:
 	STA $0630
 	RTS
 
