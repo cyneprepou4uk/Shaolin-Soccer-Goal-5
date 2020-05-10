@@ -5606,9 +5606,8 @@ _b07_EFAD:
 	LDA подтип_экрана
 	BEQ _loc_07_EFE5_запись_в_видеопамять_трех_буферов
 	CMP #$05
-	BCC bra_07_EFD4
-	CMP #$05
-	BEQ bra_07_EFCC
+	BCC bra_07_EFD4		; проверка на 00-04
+	BEQ bra_07_EFCC		; проверка на 05
 	CMP #$06
 	BEQ bra_07_EFD4
 	CMP #$08
