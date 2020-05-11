@@ -5758,10 +5758,10 @@ bra_04_B32C:
 	LDA table_04_B492 + 3,Y
 	STA $2F
 	LDA #$00
-	STA $0600
-	STA $05FF
-	STA $0602
-	STA $0601
+	STA скорость_X_lo_ветер
+	STA скорость_X_hi_ветер
+	STA скорость_Y_lo_ветер
+	STA скорость_Y_hi_ветер
 	LDA сила_ветра
 	BEQ bra_04_B396
 	STA $1C
@@ -5770,18 +5770,18 @@ bra_04_B35E:
 	BCC bra_04_B384
 	CLC
 	LDA $2C
-	ADC $0600
-	STA $0600
+	ADC скорость_X_lo_ветер
+	STA скорость_X_lo_ветер
 	LDA $2D
-	ADC $05FF
-	STA $05FF
+	ADC скорость_X_hi_ветер
+	STA скорость_X_hi_ветер
 	CLC
 	LDA $2E
-	ADC $0602
-	STA $0602
+	ADC скорость_Y_lo_ветер
+	STA скорость_Y_lo_ветер
 	LDA $2F
-	ADC $0601
-	STA $0601
+	ADC скорость_Y_hi_ветер
+	STA скорость_Y_hi_ветер
 bra_04_B384:
 	LDA $2D
 	ASL
@@ -5797,10 +5797,10 @@ bra_04_B396:
 	LDX #$00
 	LDA номер_погодного_эффекта
 	CMP #ПОГОДА_СМЕРЧ
-	BEQ bra_04_B3A2
+	BEQ _loc_04_B3A2
 	RTS
+
 _loc_04_B3A2:
-bra_04_B3A2:
 	LDY #$0D
 	JSR _b07_FA6D
 	CMP #$80

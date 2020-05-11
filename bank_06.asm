@@ -3663,10 +3663,10 @@ bra_06_9C7E:
 	BNE bra_06_9CC8
 	LDA таймер_мокрого_мяча
 	BPL bra_06_9C9A
-	ASL $0600
-	ROL $05FF
-	ASL $0602
-	ROL $0601
+	ASL скорость_X_lo_ветер
+	ROL скорость_X_hi_ветер
+	ASL скорость_Y_lo_ветер
+	ROL скорость_Y_hi_ветер
 bra_06_9C9A:
 	JMP _loc_06_9CA2
 bra_06_9C9D:
@@ -3675,17 +3675,17 @@ bra_06_9C9D:
 _loc_06_9CA2:
 	CLC
 	LDA скорость_X_lo,X
-	ADC $0600
+	ADC скорость_X_lo_ветер
 	STA скорость_X_lo,X
 	LDA скорость_X_hi,X
-	ADC $05FF
+	ADC скорость_X_hi_ветер
 	STA скорость_X_hi,X
 	CLC
 	LDA скорость_Y_lo,X
-	ADC $0602
+	ADC скорость_Y_lo_ветер
 	STA скорость_Y_lo,X
 	LDA скорость_Y_hi,X
-	ADC $0601
+	ADC скорость_Y_hi_ветер
 	STA скорость_Y_hi,X
 bra_06_9CC8:
 	RTS
