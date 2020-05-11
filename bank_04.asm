@@ -5857,13 +5857,13 @@ bra_04_B3C2:
 	STA $2D
 	STA $2F
 	LDA координата_X_hi,X
-	CMP $0334
+	CMP координата_X_hi_погоды
 	BEQ bra_04_B3E0
 	BCC bra_04_B3FB
 	JMP _loc_04_B3EA
 bra_04_B3E0:
 	LDA координата_X_lo,X
-	CMP $0321
+	CMP координата_X_lo_погоды
 	BEQ bra_04_B40C
 	BCC bra_04_B3FB
 _loc_04_B3EA:
@@ -5887,13 +5887,13 @@ bra_04_B3FB:
 	STA скорость_X_hi,X
 bra_04_B40C:
 	LDA координата_Y_hi,X
-	CMP $036D
+	CMP координата_Y_hi_погоды
 	BEQ bra_04_B419
 	BCC bra_04_B434
 	JMP _loc_04_B423
 bra_04_B419:
 	LDA координата_Y_lo,X
-	CMP $035A
+	CMP координата_Y_lo_погоды
 	BEQ bra_04_B445
 	BCC bra_04_B434
 _loc_04_B423:

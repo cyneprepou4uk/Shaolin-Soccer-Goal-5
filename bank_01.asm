@@ -3097,17 +3097,17 @@ table_01_B9F6_смерч:
 	AND #$BF
 	CLC
 	ADC камера_X_lo
-	STA $0321
+	STA координата_X_lo_погоды
 	LDA камера_X_hi
 	ADC #$00
-	STA $0334
+	STA координата_X_hi_погоды
 	LDA камера_Y_lo
 	CLC
 	ADC адрес_рандома
-	STA $035A
+	STA координата_Y_lo_погоды
 	LDA камера_Y_hi
 	ADC #$00
-	STA $036D
+	STA координата_Y_hi_погоды
 	LDA #$00
 	STA длительность_погоды_ХЗ
 	STA скорость_X_lo_погоды_ХЗ
@@ -3140,17 +3140,17 @@ _loc_01_BA8B_молния:		; 2 прыжка, один из них из табл
 	LDA камера_X_lo
 	CLC
 	ADC $1C
-	STA $0321
+	STA координата_X_lo_погоды
 	LDA камера_X_hi
 	ADC #$00
-	STA $0334
+	STA координата_X_hi_погоды
 	LDA камера_Y_lo
 	CLC
 	ADC $1D
-	STA $035A
+	STA координата_Y_lo_погоды
 	LDA камера_Y_hi
 	ADC #$00
-	STA $036D
+	STA координата_Y_hi_погоды
 	JSR _loc_01_BBCB
 	LDA #$01
 	STA $E6
@@ -3212,29 +3212,29 @@ table_01_BB35:
 _loc_01_BB3E_смерч:		; 2 прыжка, один из них из таблицы
 	LDX #$0D
 	JSR _loc_01_BFBC
-	LDA $036D
+	LDA координата_Y_hi_погоды
 	CMP #$01
 	BEQ bra_01_BB54
-	LDA $035A
+	LDA координата_Y_lo_погоды
 	CMP #$30
 	BCC bra_01_BB5E
 	JMP _loc_01_BB8A
 bra_01_BB54:
-	LDA $035A
+	LDA координата_Y_lo_погоды
 	CMP #$68
 	BCC bra_01_BB8A
 	JMP _loc_01_BB6B
 bra_01_BB5E:
 	LDA #$32
-	STA $035A
+	STA координата_Y_lo_погоды
 	LDA #$00
-	STA $036D
+	STA координата_Y_hi_погоды
 	JMP _loc_01_BB75
 _loc_01_BB6B:
 	LDA #$01
-	STA $036D
+	STA координата_Y_hi_погоды
 	LDA #$65
-	STA $035A
+	STA координата_Y_lo_погоды
 _loc_01_BB75:
 	LDA скорость_Y_lo_погоды_ХЗ
 	EOR #$FF
@@ -3251,7 +3251,7 @@ bra_01_BB8A:
 	LDA длительность_погоды_ХЗ
 	CMP #$FF
 	BEQ bra_01_BBBA
-	LDA $0334
+	LDA координата_X_hi_погоды
 	BMI bra_01_BBBA
 	CMP #$04
 	BCS bra_01_BBBA
@@ -3278,17 +3278,17 @@ bra_01_BBBA:
 	RTS
 
 _loc_01_BBCB:
-	LDA $0321
+	LDA координата_X_lo_погоды
 	SEC
 	SBC камера_X_lo
-	LDA $0334
+	LDA координата_X_hi_погоды
 	SBC камера_X_hi
 	BNE bra_01_BBF6
-	LDA $035A
+	LDA координата_Y_lo_погоды
 	SEC
 	SBC камера_Y_lo
 	STA $1D
-	LDA $036D
+	LDA координата_Y_hi_погоды
 	SBC камера_Y_hi
 	BNE bra_01_BBF6
 	LDA $1D
@@ -3300,11 +3300,11 @@ bra_01_BBF6:
 	LDA #$00
 _loc_01_BBF8:
 	STA $1C
-	LDA $0321
+	LDA координата_X_lo_погоды
 	SEC
 	SBC камера_X_lo
 	STA $013D
-	LDA $035A
+	LDA координата_Y_lo_погоды
 	SEC
 	SBC камера_Y_lo
 	SEC
