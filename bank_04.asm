@@ -5749,13 +5749,13 @@ bra_04_B32C:
 	LSR
 	LSR
 	TAY
-	LDA table_04_B492,Y
+	LDA table_04_B492_скор_ветра,Y
 	STA $2C
-	LDA table_04_B492 + 1,Y
+	LDA table_04_B492_скор_ветра + 1,Y
 	STA $2D
-	LDA table_04_B492 + 2,Y
+	LDA table_04_B492_скор_ветра + 2,Y
 	STA $2E
-	LDA table_04_B492 + 3,Y
+	LDA table_04_B492_скор_ветра + 3,Y
 	STA $2F
 	LDA #$00
 	STA скорость_X_lo_ветер
@@ -5934,7 +5934,7 @@ table_04_B44E:
 table_04_B48E:
 .byte $00,$03,$05,$80
 
-table_04_B492:
+table_04_B492_скор_ветра:
 .byte $00,$00,$80,$FF
 .byte $A6,$00,$AD,$FF
 .byte $00,$01,$00,$00
