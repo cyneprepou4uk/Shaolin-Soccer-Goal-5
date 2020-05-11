@@ -549,7 +549,7 @@ table_07_C51F:
 .word table_07_C51F_C699
 .word table_07_C51F_C71E
 .word table_07_C51F_C77D
-.word table_07_C51F_C7D0
+.word table_07_C51F_C7D0_мячВнеИгры
 .word table_07_C51F_C743
 .word table_07_C51F_C77D
 .word table_07_C51F_C75D
@@ -851,8 +851,7 @@ bra_07_C7C2:
 bra_07_C7CD:
 	RTS
 
-table_07_C51F_C7D0:
-	JSR _loc_07_0001_переключение_игроков_на_селект
+table_07_C51F_C7D0_мячВнеИгры:
 	JSR _loc_07_DE0B_смена_банка_поля_при_скроллинге
 	JSR _loc_07_DE47
 	JSR _loc_07_CAEE
