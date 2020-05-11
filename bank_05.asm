@@ -1911,7 +1911,6 @@ bra_05_8F52:
 	STA скорость_X_hi,X
 	JMP _loc_05_801E
 
-; 60fps скорость X	+++
 table_05_8F6D_скорость_X:
 .byte $80,$FF
 .byte $A0,$FF

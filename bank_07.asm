@@ -1633,7 +1633,7 @@ _b07_CDCB:
 	BMI bra_07_CDE2
 	ORA координата_Z_lo,X
 	BEQ bra_07_CDE2
-	LDA #$80		; 60fps гравитация		+++
+	LDA #$80
 	STA гравитация_lo,X
 	LDA #$00
 	STA гравитация_hi,X
