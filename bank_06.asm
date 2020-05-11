@@ -1109,17 +1109,17 @@ bra_06_8868:
 	LDA #$04
 	JSR _loc_06_99EB
 	CLC
-	LDA скорость_X_lo_погоды_ХЗ
+	LDA скорость_X_lo_погоды
 	ADC скорость_X_lo,X
 	STA скорость_X_lo,X
-	LDA скорость_X_hi_погоды_ХЗ
+	LDA скорость_X_hi_погоды
 	ADC скорость_X_hi,X
 	STA скорость_X_hi,X
 	CLC
-	LDA скорость_Y_lo_погоды_ХЗ
+	LDA скорость_Y_lo_погоды
 	ADC скорость_Y_lo,X
 	STA скорость_Y_lo,X
-	LDA скорость_Y_hi_погоды_ХЗ
+	LDA скорость_Y_hi_погоды
 	ADC скорость_Y_hi,X
 	STA скорость_Y_hi,X
 bra_06_88A4:
@@ -1641,17 +1641,17 @@ bra_06_8CF4:
 	LDA #$02
 	JSR _loc_06_93D1
 	CLC
-	LDA скорость_X_lo_погоды_ХЗ
+	LDA скорость_X_lo_погоды
 	ADC скорость_X_lo,X
 	STA скорость_X_lo,X
-	LDA скорость_X_hi_погоды_ХЗ
+	LDA скорость_X_hi_погоды
 	ADC скорость_X_hi,X
 	STA скорость_X_hi,X
 	CLC
-	LDA скорость_Y_lo_погоды_ХЗ
+	LDA скорость_Y_lo_погоды
 	ADC скорость_Y_lo,X
 	STA скорость_Y_lo,X
-	LDA скорость_Y_hi_погоды_ХЗ
+	LDA скорость_Y_hi_погоды
 	ADC скорость_Y_hi,X
 	STA скорость_Y_hi,X
 bra_06_8D30:
