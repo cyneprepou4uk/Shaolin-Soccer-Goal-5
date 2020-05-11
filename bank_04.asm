@@ -5736,7 +5736,7 @@ _loc_04_B316:
 	STY $05FC
 	LDA сила_ветра
 _loc_04_B31E:
-	CMP table_04_B48E,Y
+	CMP table_04_B48E_сил_ветра,Y
 	BEQ bra_04_B32C
 	BCC bra_04_B32C
 	INC $05FC
@@ -5931,7 +5931,7 @@ table_04_B44E:
 .byte $04,$00
 .byte $04,$00
 
-table_04_B48E:
+table_04_B48E_сил_ветра:
 .byte $00,$03,$05,$80
 
 table_04_B492_скор_ветра:
