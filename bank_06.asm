@@ -4419,15 +4419,13 @@ _loc_06_A1E9:
 	RTS
 
 _loc_06_A1F7:
-	STY $44
-	AND #$03
+	STY $44		; сохранить Y, иногда он выбирается предварительно
 	JSR _b07_EC8F
 
 table_06_A1FE:		; байты после JSR
 .word table_06_A1FE_A206
 .word table_06_A1FE_A274
 .word table_06_A1FE_A28F
-.word table_06_A1FE_A206
 
 table_06_A1FE_A206:
 	LDA режим_игры_на_поле
