@@ -8,7 +8,7 @@
 .import _b07_D036_изменение_яркости_на_логотипе
 .import _b07_D062
 .import _b07_C344_банксвич_80xx
-.import _b07_EC8F
+.import _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 .import _b07_CEBD
 .import _b07_поставить_флаг_увеличения_яркости
 .import _b07_D073
@@ -98,7 +98,7 @@ _loc_02_AA66:
 	JMP _b07_C344_банксвич_80xx
 _loc_02_AA6B:
 	LDA подтип_экрана
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_02_AA70:		; байты после JSR
 .word table_02_AA70_AA88
@@ -416,7 +416,7 @@ bra_02_AD07:
 	LDA #$80
 	STA таймер_демо_lo
 	LDA номер_кадра_анимации + 1
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_02_AD11:		; байты после JSR
 .word table_02_AD11_AD17
@@ -693,7 +693,7 @@ table_02_AEE5:
 
 _loc_02_AEF7:
 	LDA сценка_кунио
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_02_AEFC:		; байты после JSR
 .word table_02_AEFC_AF04
@@ -703,7 +703,7 @@ table_02_AEFC:		; байты после JSR
 
 table_02_AEFC_AF04:
 	LDA номер_кадра_анимации + 1
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_02_AF09:		; байты после JSR
 .word table_02_AF09_AF17
@@ -796,7 +796,7 @@ table_02_AF09_AF8A:
 
 table_02_AEFC_AF96:
 	LDA номер_кадра_анимации + 1
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_02_AF9B:		; байты после JSR
 .word table_02_AF9B_AFA5
@@ -856,7 +856,7 @@ table_02_AF9B_AFE2:
 
 table_02_AEFC_AFF4:
 	LDA номер_кадра_анимации + 1
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_02_AFF9:		; байты после JSR
 .word table_02_AFF9_AFFF
@@ -2221,7 +2221,7 @@ _loc_02_BB3C:
 	RTS
 _loc_02_BB5D:
 	LDA подтип_экрана
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_02_BB62:		; байты после JSR
 .word table_02_BB62_BB78

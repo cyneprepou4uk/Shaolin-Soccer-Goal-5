@@ -16,7 +16,7 @@
 .import _b07_D7F3_вычисление_следов_на_поле
 .import _b07_E6F0
 .import _b07_EB8C
-.import _b07_EC8F
+.import _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 .import _b07_вращение_колеса_фортуны
 .import _b07_F4C1
 .import _b07_F691
@@ -4183,7 +4183,7 @@ bra_06_A04D:
 	BEQ bra_06_A080
 bra_06_A068:
 	LDA $1D
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_06_A06D:		; байты после JSR
 .word table_06_A06D_A083
@@ -4420,7 +4420,7 @@ _loc_06_A1E9:
 
 _loc_06_A1F7:
 	STY $44		; сохранить Y, иногда он выбирается предварительно
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_06_A1FE:		; байты после JSR
 .word table_06_A1FE_A206
@@ -5836,7 +5836,7 @@ bra_06_AD52:
 	TAY
 	LDA table_06_B097,Y
 	BMI bra_06_AD72
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_06_AD62:		; байты после JSR
 .word table_06_AD62_AD73

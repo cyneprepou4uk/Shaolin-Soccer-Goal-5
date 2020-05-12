@@ -13,7 +13,7 @@
 .import _b07_поставить_флаг_уменьшения_яркости
 .import _b07_D062
 .import _b07_C344_банксвич_80xx
-.import _b07_EC8F
+.import _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 .import _b07_CEBD
 .import _b07_поставить_флаг_увеличения_яркости
 .import _b07_D073
@@ -56,7 +56,7 @@ _loc_05_8041:
 	JMP _b07_C344_банксвич_80xx
 _loc_05_8055:
 	LDA подтип_экрана
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_805A:		; байты после JSR
 .word table_05_805A_8083
@@ -403,7 +403,7 @@ _loc_05_8338:
 bra_05_8342:
 	JSR _loc_05_8593
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_834B:		; байты после JSR
 .word table_05_834B_83CA
@@ -480,7 +480,7 @@ table_05_834B_83DE:
 bra_05_83EE:
 	JSR _loc_05_817E
 	JSR _loc_05_81D3
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_83F7:		; байты после JSR
 .word table_05_83F7_8455
@@ -566,7 +566,7 @@ table_05_834B_8475:
 bra_05_8485:
 	JSR _loc_05_817E
 	JSR _loc_05_81D3
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_848E:		; байты после JSR
 .word table_05_848E_8455
@@ -601,7 +601,7 @@ table_05_834B_84B8:
 bra_05_84C8:
 	JSR _loc_05_817E
 	JSR _loc_05_81D3
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_84D1:		; байты после JSR
 .word table_05_84D1_8455
@@ -635,7 +635,7 @@ table_05_834B_84FD:
 	STA номер_опции
 bra_05_8509:
 	JSR _loc_05_817E
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_850F:		; байты после JSR
 .word table_05_850F_8455
@@ -893,7 +893,7 @@ _loc_05_871A:
 @пропустить:
 	JSR _loc_05_87DC
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_872D:		; байты после JSR
 .word table_05_872D_875D
@@ -934,7 +934,7 @@ table_05_872D_876B:
 	LDX #$00
 bra_05_877A:
 	JSR _loc_05_817E
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_8780:		; байты после JSR
 .word table_05_8780_87CB
@@ -1072,7 +1072,7 @@ _loc_05_8893:
 	JSR _b07_C2E4_записать_и_воспроизвести_звук
 bra_05_88A2:
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_88A8:		; байты после JSR
 .word table_05_88A8_88AC
@@ -1387,7 +1387,7 @@ _loc_05_8ABE:
 bra_05_8AC8:
 	JSR _loc_05_8C73
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_8AD1:		; байты после JSR
 .word table_05_8AD1_8B6E
@@ -1489,7 +1489,7 @@ _loc_05_8B9D:
 	AND номер_опции + 1
 	BMI bra_05_8BC5
 	JSR _loc_05_817E
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_8BAE:		; байты после JSR
 .word table_05_8BAE_8C16
@@ -1710,7 +1710,7 @@ _loc_05_8DBC:
 	JSR _loc_05_8DD0
 bra_05_8DC6:
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_8DCC:		; байты после JSR
 .word table_05_8DCC_8DFD
@@ -1859,7 +1859,7 @@ table_05_8EFB:		; читается из 3х мест
 
 _loc_05_8EFF:
 	LDA номер_движения,X
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_8F05:		; байты после JSR
 .word _общий_RTS
@@ -2010,7 +2010,7 @@ bra_05_900C:
 bra_05_900F:
 	JSR _loc_05_90C7
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_9018:		; байты после JSR
 .word table_05_9018_9060
@@ -2058,7 +2058,7 @@ table_05_9018_906E:
 	JSR _loc_05_90FC
 bra_05_9078:
 	JSR _loc_05_817E
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_907E:		; байты после JSR
 .word table_05_907E_90A9
@@ -2197,7 +2197,7 @@ table_05_9190:
 
 _loc_05_9194:
 	LDA номер_движения,X
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_919A:		; байты после JSR
 .word _общий_RTS
@@ -2434,7 +2434,7 @@ bra_05_9361:
 	LDA копия_камеры_Y_hi
 	STA камера_Y_hi
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_9382:		; байты после JSR
 .word table_05_9382_9403
@@ -2509,7 +2509,7 @@ table_05_9382_9414:
 	STA номер_опции
 bra_05_9420:
 	JSR _loc_05_817E
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_9426:		; байты после JSR
 .word table_05_9426_949A
@@ -2649,7 +2649,7 @@ table_05_94C5_9555:
 
 _loc_05_955D:
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_9563:		; байты после JSR
 .word _общий_RTS
@@ -2731,7 +2731,7 @@ table_05_9563_95D7:
 
 _loc_05_95E6:
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_95EC:		; байты после JSR
 .word _общий_RTS
@@ -2945,7 +2945,7 @@ bra_05_97FF:
 	LDA копия_камеры_Y_hi
 	STA камера_Y_hi
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_9820:		; байты после JSR
 .word table_05_9820_98B8
@@ -3033,7 +3033,7 @@ bra_05_98D6:
 	LDX #$0C
 	JSR _loc_05_817E
 	JSR _loc_05_81D3
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_98E1:		; байты после JSR
 .word table_05_98E1_992D
@@ -3096,7 +3096,7 @@ table_05_9820_9934:
 bra_05_9941:
 	JSR _loc_05_817E
 	JSR _loc_05_81D3
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_994A:		; байты после JSR
 .word table_05_994A_992D
@@ -3146,7 +3146,7 @@ table_05_9820_9996:
 bra_05_99A6:
 	JSR _loc_05_817E
 	JSR _loc_05_81D3
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_99AF:		; байты после JSR
 .word table_05_99AF_992D
@@ -3191,7 +3191,7 @@ table_05_9820_99F5:
 bra_05_9A00:
 	LDX #$0C
 	JSR _loc_05_817E
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_9A08:		; байты после JSR
 .word table_05_9A08_992D
@@ -3286,7 +3286,7 @@ table_05_9820_9AAD:
 	JSR _loc_05_9CB3
 bra_05_9ABC:
 	JSR _loc_05_817E
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_9AC2:		; байты после JSR
 .word table_05_9AC2_992D
@@ -4004,7 +4004,7 @@ _loc_05_A0E0:
 	JSR _loc_05_A0F4
 bra_05_A0EA:
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_A0F0:		; байты после JSR
 .word table_05_A0F0_A134
@@ -4197,7 +4197,7 @@ _loc_05_A281:
 	JSR _loc_05_A295
 bra_05_A28B:
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_A291:		; байты после JSR
 .word table_05_A291_A2C5
@@ -4434,7 +4434,7 @@ _loc_05_A576:
 bra_05_A580:
 	JSR _loc_05_A670
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_A589:		; байты после JSR
 .word table_05_A589_A5D0
@@ -4508,7 +4508,7 @@ bra_05_A608:
 bra_05_A61B:
 	LDX #$02
 	JSR _loc_05_817E
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_A623:		; байты после JSR
 .word table_05_A623_A657
@@ -4695,7 +4695,7 @@ _loc_05_A778:
 bra_05_A785:
 	JSR _loc_05_ABEE
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_A78E:		; байты после JSR
 .word table_05_A78E_A84E
@@ -4808,7 +4808,7 @@ table_05_A78E_A861:
 bra_05_A86B:
 	JSR _loc_05_817E
 	JSR _loc_05_81D3
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_A874:		; байты после JSR
 .word table_05_A874_A8C5
@@ -4892,7 +4892,7 @@ table_05_A78E_A8ED:
 bra_05_A8FA:
 	JSR _loc_05_817E
 	JSR _loc_05_81D3
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_A903:		; байты после JSR
 .word table_05_A903_A97C
@@ -4985,7 +4985,7 @@ table_05_A78E_A99B:
 bra_05_A9A8:
 	JSR _loc_05_817E
 	JSR _loc_05_81D3
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_A9B1:		; байты после JSR
 .word table_05_A9B1_A97C
@@ -5016,7 +5016,7 @@ bra_05_A9DE:
 	BVS bra_05_A9F8
 	JSR _loc_05_817E
 	JSR _loc_05_81D3
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_A9EC:		; байты после JSR
 .word table_05_A9EC_A8C5
@@ -5087,7 +5087,7 @@ table_05_A78E_AA5B:
 bra_05_AA68:
 	JSR _loc_05_817E
 	JSR _loc_05_81D3
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_AA71:		; байты после JSR
 .word table_05_AA71_A97C
@@ -5117,7 +5117,7 @@ table_05_A78E_AA93:
 	JSR _loc_05_AD53
 bra_05_AAA3:
 	JSR _loc_05_817E
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_AAA9:		; байты после JSR
 .word table_05_AAA9_A97C
@@ -5545,7 +5545,7 @@ _loc_05_AF5F:
 	LDA номер_опции
 	CMP #$05
 	BCS bra_05_AF8C
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_AF7F:		; байты после JSR
 .word table_05_AF7F_AF8D
@@ -5592,7 +5592,7 @@ table_05_AF7F_AFB7:
 	BNE bra_05_AFA5
 _loc_05_AFBD:
 	LDA $05D0
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_AFC3:		; байты после JSR
 .word table_05_AFC3_AFCF
@@ -5983,7 +5983,7 @@ bra_05_B2DD:
 bra_05_B2E3:
 	JSR _loc_05_B3A3
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_B2EC:		; байты после JSR
 .word table_05_B2EC_B32F
@@ -6036,7 +6036,7 @@ table_05_B2EC_B345:
 bra_05_B353:
 	JSR _loc_05_817E
 	JSR _loc_05_81D3
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_B35C:		; байты после JSR
 .word table_05_B35C_B38D
@@ -6203,7 +6203,7 @@ _loc_05_B47C:
 	JSR _b07_C2E4_записать_и_воспроизвести_звук
 bra_05_B48E:
 	LDA счетчик_опций
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_B494:		; байты после JSR
 .word table_05_B494_B498
@@ -6256,7 +6256,7 @@ _loc_05_B4D6:
 	CMP #$04
 	BEQ bra_05_B509
 	LDA $054A
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_05_B501:		; байты после JSR
 .word table_05_B501_B50A

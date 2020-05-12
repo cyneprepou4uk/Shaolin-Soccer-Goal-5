@@ -4953,7 +4953,7 @@ _loc_07_E946:
 	ASL
 	ROL
 	ROL
-	JSR _b07_EC8F
+	JSR _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
 
 table_07_E955:		; байты после JSR
 .word table_07_E955_E95E
@@ -5280,8 +5280,8 @@ bra_07_EC82:
 bra_07_EC84:
 	RTS
 
-.export _b07_EC8F
-_b07_EC8F:
+.export _b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR
+_b07_EC8F_прыгнуть_на_поинтер_таблицы_после_JSR:
 	ASL
 	TAY
 	INY
