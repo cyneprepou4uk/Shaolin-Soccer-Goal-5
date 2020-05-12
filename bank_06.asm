@@ -4492,7 +4492,9 @@ bra_06_A26F:
 table_06_A1FE_A274:
 	LDA смена_угла_движения,X
 	CMP #$FF
-	BEQ bra_06_A2D6
+	BNE @продолжить
+	RTS
+@продолжить:
 	LSR
 	LSR
 	LSR
