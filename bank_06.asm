@@ -4450,7 +4450,7 @@ bra_06_A220:
 	AND #$01
 	BEQ bra_06_A230
 	LDA #$04
-	JMP _loc_06_A2D1
+	JMP _loc_06_A2D1_запись_в_подтипАнимации_если_N_00
 bra_06_A230:
 	LDA номер_команды,Y
 	AND #$0F
@@ -4460,7 +4460,7 @@ bra_06_A230:
 	LSR
 	TAY
 	LDA table_06_A242,Y
-	JMP _loc_06_A2D1
+	JMP _loc_06_A2D1_запись_в_подтипАнимации_если_N_00
 
 table_06_A242:
 .byte $05,$06,$07,$07,$06,$05
@@ -4473,7 +4473,7 @@ bra_06_A248:
 	BIT режим_игры_на_поле
 	BVS bra_06_A25A
 	LDA #$01
-	JMP _loc_06_A2D1
+	JMP _loc_06_A2D1_запись_в_подтипАнимации_если_N_00
 bra_06_A25A:
 	LDA состояние_игрока,X
 	AND #$11
@@ -4481,13 +4481,13 @@ bra_06_A25A:
 	AND #$01
 	BEQ bra_06_A26A
 	LDA #$02
-	JMP _loc_06_A2D1
+	JMP _loc_06_A2D1_запись_в_подтипАнимации_если_N_00
 bra_06_A26A:
 	LDA #$03
-	JMP _loc_06_A2D1
+	JMP _loc_06_A2D1_запись_в_подтипАнимации_если_N_00
 bra_06_A26F:
 	LDA #$00
-	JMP _loc_06_A2D1
+	JMP _loc_06_A2D1_запись_в_подтипАнимации_если_N_00
 
 table_06_A1FE_A274:
 	LDA смена_угла_движения,X
@@ -4500,7 +4500,7 @@ table_06_A1FE_A274:
 	LSR
 	TAY
 	LDA table_06_A287,Y
-	JMP _loc_06_A2D1
+	JMP _loc_06_A2D1_запись_в_подтипАнимации_если_N_00
 
 table_06_A287:
 .byte $00,$00,$FF,$01,$01,$01,$FF,$00
@@ -4519,10 +4519,10 @@ bra_06_A29A:
 	STA $1C
 	LDA координата_Z_hi_мяча
 	SBC координата_Z_hi,X
-	BMI bra_06_A2D6
+	BMI @RTS
 	LDA $1C
 	CMP table_06_A2CD,Y
-	BCS bra_06_A2D6
+	BCS @RTS
 	INC подтип_анимации,X
 	SEC
 	LDA координата_X_lo,X
@@ -4530,17 +4530,18 @@ bra_06_A29A:
 	LDA координата_X_hi,X
 	SBC координата_X_hi_мяча
 	EOR направление_движения,X
-	BMI bra_06_A2D6
+	BMI @RTS
 	INC подтип_анимации,X
+@RTS:
 	RTS
 
 table_06_A2CD:
 .byte $10,$20,$30,$08
 
-_loc_06_A2D1:
-	BMI bra_06_A2D6
+_loc_06_A2D1_запись_в_подтипАнимации_если_N_00:
+	BMI @не_записывать
 	STA подтип_анимации,X
-bra_06_A2D6:
+@не_записывать:
 	RTS
 
 _loc_06_A2D7:
