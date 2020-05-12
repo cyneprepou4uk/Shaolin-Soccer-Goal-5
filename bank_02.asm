@@ -1202,18 +1202,15 @@ _loc_02_B282:
 
 _loc_02_B293:
 	STA $0493
-	JSR _loc_02_AA52
-	RTS
+	JMP _loc_02_AA52
 
 _loc_02_B29A:
 	STA $0493
-	JSR _loc_02_AA57
-	RTS
+	JMP _loc_02_AA57
 
 _loc_02_B2A1:
 	STA $0493
-	JSR _loc_02_AA5C
-	RTS
+	JMP _loc_02_AA5C
 
 _loc_02_B2A8:
 	LDA скорость_X_hi,X
