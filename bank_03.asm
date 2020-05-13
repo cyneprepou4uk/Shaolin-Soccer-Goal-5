@@ -7900,7 +7900,7 @@ bra_03_BCFF:
 	CMP #$D0
 	BEQ bra_03_BD39
 	SEC
-	SBC #$03		; 60fps скорость камеры X
+	SBC #$02		; 60fps скорость камеры X
 	STA смещение_камеры
 	JMP _loc_03_BD39
 bra_03_BD2C:
@@ -7908,7 +7908,7 @@ bra_03_BD2C:
 	CMP #$30
 	BEQ bra_03_BD39
 	CLC
-	ADC #$03		; 60fps скорость камеры X
+	ADC #$02		; 60fps скорость камеры X
 	STA смещение_камеры
 _loc_03_BD39:
 bra_03_BD39:
@@ -7956,9 +7956,9 @@ bra_03_BD78:
 	ROR
 	SEC		; 60fps скорость камеры X
 	ROR		; 60fps скорость камеры X
-	CMP #$FD
+	CMP #$FE
 	BCS bra_03_BD8A
-	LDA #$FD
+	LDA #$FE
 bra_03_BD8A:
 	STA $1C
 	JMP _loc_03_BDB1
@@ -7979,9 +7979,9 @@ bra_03_BDA0:
 	LSR
 	LSR
 	LSR		; 60fps скорость камеры X
-	CMP #$03
+	CMP #$02
 	BCC bra_03_BDAF
-	LDA #$03
+	LDA #$02
 bra_03_BDAF:
 	STA $1C
 _loc_03_BDB1:
